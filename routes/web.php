@@ -3,12 +3,18 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',function(){
-    $name="<h1>Siti Nurlatipah</h1>";
-    return view('welcome',['nama'=> $name]);
+    return view('pages.dashboard');
 });
-Route::view('contact','contact');
-Route::get('/',function(){
-    $ii="aku adalah ii";
-    return view('contact',['aa'=> $ii]);
-});
+Route::view('welcomes','welcome');
+ 
+Route::get('/locater',function(){
+        return view('pages.locater.index');
+    });
 
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::get('/user', 'UserController@index')->name('user');
+
+Route::get('/locater', 'LocaterController@index')->name('locater');
+Route::get('/history', 'HistoryController@index')->name('history');
+Route::get('/module', 'ModuleController@index')->name('module');
