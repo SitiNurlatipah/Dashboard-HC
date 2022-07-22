@@ -13,10 +13,45 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="panel-wrapper collapse in">
-                        <div class="panel-body">
-                            <button class="btn btn-sm btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
-                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-user" data-whatever="@mdo">Add User</button> --}}
-                            <div class="table-wrap">
+                    <div class="panel-body">
+									<div  class="tab-struct custom-tab-2 mt-5">
+										<ul role="tablist" class="nav nav-tabs" id="myTabs_15">
+											<li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Form Employee</a></li>
+											<li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">GETO</a></li>
+											<li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">TO</a></li>
+											<li class="dropdown" role="presentation">
+												<a data-toggle="dropdown" class="dropdown-toggle" id="myTabDrop_15" href="#" aria-expanded="false">Tahun<span class="caret"></span></a>
+												<ul id="myTabDrop_15_contents"  class="dropdown-menu">
+													<li class=""><a data-toggle="tab" id="dropdown_29_tab" role="tab" href="#dropdown_29" aria-expanded="true">2022</a></li>
+													<li class=""><a data-toggle="tab" id="dropdown_30_tab" role="tab" href="#dropdown_30" aria-expanded="false">2021</a></li>
+													<li class=""><a data-toggle="tab" id="dropdown_30_tab" role="tab" href="#dropdown_30" aria-expanded="false">2020</a></li>
+												</ul>
+											</li>
+										</ul>
+                                        
+                    
+                        
+                            <form class="form-inline mb-30 mt-30">
+                                    <label class="control-label mr-10 text-left">Dari tanggal</label>
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        
+                                    </div>
+                                    <label class="control-label mr-10 text-left">Sampai tanggal</label>
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                    
+                                
+</form>
+                    
+                    <div class="tab-content" id="myTabContent_15">
+                        <div class="table-wrap">
                                 <div class="table-responsive">
                                     <table id="tbl_user" class="table table-hover display pb-30">
                                         <thead>
