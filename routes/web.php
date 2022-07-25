@@ -18,3 +18,7 @@ Route::get('/user', 'UserController@index')->name('user');
 Route::get('/locater', 'LocaterController@index')->name('locater');
 Route::get('/history', 'HistoryController@index')->name('history');
 Route::get('/module', 'ModuleController@index')->name('module');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', 'AuthController@getLogin')->name('login');
+    Route::post('/login', 'AuthController@postLogin')->name('login.post');
+});

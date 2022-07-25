@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Management Power Energy</title>
+    <title>login</title>
     <meta name="description" content="Management Power Energy is aplication web base" />
     <meta name="keywords" content="admin, admin dashboard" />
     <meta name="author" content="hencework"/>
@@ -36,7 +36,7 @@
             <div class="sp-logo-wrap pull-left">
                 <a href="index.html">
                     <img class="brand-img mr-10" src="{{ asset('img/logo.png') }}" alt="brand"/>
-                    <span class="brand-text">Droopy</span>
+                    <span class="brand-text">HUMAN CAPITAL</span>
                 </a>
             </div>
             <div class="form-group mb-0 pull-right">
@@ -56,8 +56,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-xs-12">
                                     <div class="mb-30">
-                                        <h3 class="text-center txt-dark mb-10">Sign in to Droopy</h3>
-                                        <h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
+                                        <h3 class="text-center txt-dark mb-10">Sign in to Dashboard HC</h3>
                                     </div>	
                                     <div class="form-wrap">
                                         @if ($message = Session::get('failed'))

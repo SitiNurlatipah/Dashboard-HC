@@ -15,15 +15,15 @@ class CreateUserTable extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->id();
-            $table->string('nik');
-            $table->string('employee_name');
-            $table->string('job_title');
-            $table->string('department');
-            $table->string('email');
-            $table->string('status_employee');
-            $table->string('employee_type');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('txtNik');
+            $table->string('txtEmployee_name');
+            $table->string('txtJob_title');
+            $table->string('txtDepartment');
+            $table->string('txtEmail');
+            $table->string('txtStatus_employee');
+            $table->string('txtEmployee_type');
+            $table->date('dtmStart_date');
+            $table->date('dtmEnd_date');
             $table->timestamps();
         });
     }
