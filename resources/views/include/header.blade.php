@@ -4,7 +4,7 @@
         <div class="nav-header pull-left">
             <div class="logo-wrap">
                 <a href="{{ route('dashboard') }}">
-                    <img class="brand-img" src="../img/logo.png" alt="brand"/>
+                    <img class="brand-img" src="{{ asset('img/logo.png') }}" alt="brand"/>
                     <span class="brand-text">DASHBOARD HC</span>
                 </a>
             </div>
@@ -81,7 +81,7 @@
             </li>
             
             <li class="dropdown auth-drp">
-                <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="../img/user1.png" alt="user_auth" class="user-auth-img img-circle" style="margin-left: 10px;"/><span class="user-online-status"></span></a>
+                <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="{{asset('img/user1.png')}}" alt="user_auth" class="user-auth-img img-circle" style="margin-left: 10px;"/><span class="user-online-status"></span></a>
                 <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
                     <li>
                         <a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
@@ -112,7 +112,8 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="{{ route('login') }}"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
+                        <a href="{{ route('logout') }}"><i class="zmdi zmdi-log"></i><span>Log In</span></a>
+                        <!-- <a href="{{ route('login') }}"><i class="zmdi zmdi-power"></i><span>Log Out</span></a> -->
                     </li>
                 </ul>
             </li>

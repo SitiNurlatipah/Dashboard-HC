@@ -1,159 +1,159 @@
 @extends('layouts.master')
 
-@section('title', 'Management User')
+@section('title', 'Manajement User')
 
 @section('content')
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default card-view">
-                    <div class="panel-heading">
-                        <div class="pull-left">
-                            <h6 class="panel-title txt-dark">Management User</h6>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="panel-wrapper collapse in">
-                    <div class="panel-body">
-									<div  class="tab-struct custom-tab-2 mt-5">
-										<ul role="tablist" class="nav nav-tabs" id="myTabs_15">
-											<li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Form Employee</a></li>
-											<li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">GETO</a></li>
-											<li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">TO</a></li>
-											<li class="dropdown" role="presentation">
-												<a data-toggle="dropdown" class="dropdown-toggle" id="myTabDrop_15" href="#" aria-expanded="false">Tahun<span class="caret"></span></a>
-												<ul id="myTabDrop_15_contents"  class="dropdown-menu">
-													<li class=""><a data-toggle="tab" id="dropdown_29_tab" role="tab" href="#dropdown_29" aria-expanded="true">2022</a></li>
-													<li class=""><a data-toggle="tab" id="dropdown_30_tab" role="tab" href="#dropdown_30" aria-expanded="false">2021</a></li>
-													<li class=""><a data-toggle="tab" id="dropdown_30_tab" role="tab" href="#dropdown_30" aria-expanded="false">2020</a></li>
-												</ul>
-											</li>
-										</ul>
-                                        
-                    
-                        
-                            <form class="form-inline mb-30 mt-30">
-                                    <label class="control-label mr-10 text-left">Dari tanggal</label>
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar"></span>
-                                        
-                                    </div>
-                                    <label class="control-label mr-10 text-left">Sampai tanggal</label>
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar"></span>
-                                        </span>
-                                    </div>
-                                    
-                                
-</form>
-                    
-                    <div class="tab-content" id="myTabContent_15">
-                        <div class="table-wrap">
-                                <div class="table-responsive">
-                                    <table id="tbl_user" class="table table-hover display pb-30">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Name</th>
-                                                <th>Username</th>
-                                                <th>Password</th>
-                                                <th>Active</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>	
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default card-view">
+            <div class="panel-heading">
+                <div class="pull-left">
+                    <h6 class="panel-title txt-dark">Manajemen User</h6>
+                </div>
+                <div class="clearfix"></div>
             </div>
-        </div>
-        <!-- /Row -->
-        
-        <div class="modal fade" id="add-user" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h5 class="modal-title" id="add-userLabel1">New message</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="txtfullname" class="control-label mb-10">Name</label>
-                                <input type="text" class="form-control" id="txtfullname" name="txtfullname">
-                            </div>
-                            <div class="form-group">
-                                <label for="txtusername" class="control-label mb-10">Username</label>
-                                <input type="text" class="form-control" id="txtusername" name="txtusername">
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="control-label mb-10">Password</label>
-                                <input type="password" class="form-control" id="password" name="password">
-                            </div>
-                            <div class="form-group">
-                                <label for="bitActive" class="control-label mb-10">Active</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
+            <div class="panel-wrapper collapse in">
+                <div class="panel-body">
+                    <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
+                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-user" data-whatever="@mdo">Add User</button> --}}
+                    <div class="table-wrap">
+                        <div class="table-responsive text-center">
+                            <table id="tbl_log_history" class="table table-hover display  pb-30" >
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NIK</th>
+                                        <th>Nama</th>
+                                        <th>Jabatan</th>
+                                        <th>Departement</th>
+                                        <th>Email</th>
+                                        <th>Status Karyawan</th>
+                                        <th>Type Karyawan</th>
+                                        <th>Start Date</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($users as $data): ?>
+                                    <tr>
+                                        <td>{{$data->id}}</td>
+                                        <td>{{ $data->txtNik }}</td> 
+                                        <td>{{ $data->txtEmployeeName }}</td>
+                                        <td>{{ $data->txtJobTitle }}</td>
+                                        <td>{{ $data->txtDepartment }}</td>
+                                        <td>{{ $data->txtEmail }}</td>
+                                        <td>{{ $data->txtStatus }}</td>
+                                        <td>{{ $data->txtType }}</td>
+                                        <td>{{ $data->dtmStartDate }}</td>
+                                        <td>{{ $data->txtGender }}</td>
+                                        <td>
+                                        <form action="/user/{{$data->id}}" method="POST">
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm" href="{{ route('user.edit',$data->id) }}"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit" class="btn btn-info btn-icon-anim btn-square btn-sm"><i class="icon-trash"></i></button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>	
+    </div>
+</div>
+<!-- /Row -->
+
+<div class="modal fade" id="add-user" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title" id="add-userLabel1">Tambah User</h5>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('user.post') }}" method="POST">
+                @csrf 
+                    <div class="form-group">
+                        <label for="txtEmployeeName" class="control-label mb-10">Name</label>
+                        <input type="text" class="form-control" id="txtEmployee_name" name="txtEmployeeName">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtUsername" class="control-label mb-10">Username</label>
+                        <input type="text" class="form-control" id="txtUsername" name="txtUsername">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label mb-10">Password</label>
+                        <input type="password" class="form-control" id="password" name="txtPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtNik" class="control-label mb-10">Nomor Induk Karyawan(NIK)</label>
+                        <input type="text" class="form-control" id="txtNik" name="txtNik">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtJob_title" class="control-label mb-10">Posisi</label>
+                        <input type="text" class="form-control" id="txtJob_title" name="txtJobTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDepartment" class="control-label mb-10">Department</label>
+                        <input type="text" class="form-control" id="txtDepartment" name="txtDepartment">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtEmail" class="control-label mb-10">Email</label>
+                        <input type="text" class="form-control" id="txtEmail" name="txtEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtStatus" class="control-label mb-10">Status</label>
+                        <select name="txtStatus" class="form-control">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Resign">Resign</option>
+                        </select>  
+                    </div>
+                    <div class="form-group">
+                        <label for="txtType" class="control-label mb-10">Tipe</label>
+                        <select name="txtType" class="form-control">
+                            <option value="Karyawan Tetap">Karyawan Tetap</option>
+                            <option value="Kontrak">Kontrak</option>
+                            <option value="Outsource">Outsource</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtGender" class="control-label mb-10">Jenis Kelamin</label>
+                        <select name="txtGender" class="form-control">
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dtmStartDate" class="control-label mb-10">Tanggal Masuk</label>
+                            <input type='date' class="form-control" name="dtmStartDate">
+                            
+                    </div>
+                    <div class="form-group">
+                        <label for="dtmEndDate" class="control-label mb-10">Tanggal Keluar</label>
+                            <input type='date' class="form-control" name="dtmEndDate">
+                            
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            
         </div>
+    </div>
+</div>
+
 @endsection
 
 
 @push('script')
-<script type="text/javascript">
-                var dtJson = $('#tbl_user').DataTable({
-                    
-                    autoWidth: false,
-                    serverSide: true,
-                    processing: true,
-                    // aSorting: [
-                    //     [0, "desc"]
-                    // ],
-                    searching: true,
-                    displayLength: 10,
-                    lengthMenu: [10, 25, 50, 100],
-                    language: {
-                        paginate: {
-                            previous: '&nbsp;',
-                            next: '&nbsp;'
-                        }
-                    },
-                    columns: [
-                        {
-                            data: 'DT_RowIndex', name: 'DT_RowIndex'
-                        },
-                        {
-                            data: 'txtfullname'
-                        },
-                        {
-                            data: 'txtusername'
-                        },
-                        {
-                            data: 'password'
-                        },
-                        {
-                            data: 'bitActive'
-                        },
-                        {
-                            data: 'action'
-                        }
-                    ],
-                });
-        
-</script>
 
 
 @endpush

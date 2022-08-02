@@ -3,138 +3,131 @@
 <!-- BEGIN: Head-->
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Register Page - Vuexy - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="../../theme/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../theme/images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
-
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../../theme/vendors/css/vendors.min.css">
-    <!-- END: Vendor CSS-->
-
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../theme/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/components.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/themes/bordered-layout.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/themes/semi-dark-layout.css">
-
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../../theme/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/plugins/forms/form-validation.css">
-    <link rel="stylesheet" type="text/css" href="../../theme/css/pages/page-auth.css">
-    <!-- END: Page CSS-->
-
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <!-- END: Custom CSS-->
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>register</title>
+    <meta name="description" content="Management Power Energy is aplication web base" />
+    <meta name="keywords" content="admin, admin dashboard" />
+    <meta name="author" content="hencework"/>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- vector map CSS -->
+    <link href="{{ asset('droopy/vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    
+    <!-- Custom CSS -->
+    <link href="{{ asset('droopy/dist/css/style.css') }}" rel="stylesheet" type="text/css">
 </head>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static   menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
-    <!-- BEGIN: Content-->
-    <div class="app-content content ">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
+<body>
+  	<!--Preloader-->
+      <div class="preloader-it">
+        <div class="la-anim-1"></div>
+    </div>
+    <!--/Preloader-->
+    
+    <div class="wrapper  pa-0">
+        <header class="sp-header">
+            <div class="sp-logo-wrap pull-left">
+                <a href="index.html">
+                    <img class="brand-img mr-10" src="{{ asset('img/logo.png') }}" alt="brand"/>
+                    <span class="brand-text">HUMAN CAPITAL</span>
+                </a>
             </div>
-            <div class="content-body">
-                <div class="auth-wrapper auth-v2">
-                    <div class="auth-inner row m-0">
-                        <!-- Brand logo-->
-                        <a class="brand-logo" href="javascript:void(0);">
-                        </a>
-                        <!-- /Brand logo-->
-                        <!-- Left Text-->
-                        <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-                            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="../../theme/images/pages/register-v2.svg" alt="Register V2" /></div>
-                        </div>
-                        <!-- /Left Text-->
-                        <!-- Register-->
-                        <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
-                            <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                                <h2 class="card-title font-weight-bold mb-1">Register dimulai disini 🚀</h2>
-                                <p class="card-text mb-2">Make your app management easy and fun!</p>
-                                <form class="auth-register-form mt-2" action="{{ route('postregister') }}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label class="form-label" for="register-username">Username</label>
-                                        <input class="form-control" id="register-username" type="text" name="username" placeholder="johndoe" aria-describedby="register-username" autofocus="" tabindex="1" />
+            <div class="form-group mb-0 pull-right">
+                <span class="inline-block pr-10">Sudah memiliki akun?</span>
+                <a class="inline-block btn btn-success  btn-rounded btn-outline" href="{{ route('login') }}">Sign In</a>
+            </div>
+            <div class="clearfix"></div>  
+        </header>
+        
+        <!-- Main Content -->
+        <div class="page-wrapper pa-0 ma-0 auth-page">
+            <div class="container-fluid">
+                <!-- Row -->
+                <div class="table-struct full-width full-height">
+                    <div class="table-cell vertical-align-middle auth-form-wrap">
+                        <div class="auth-form  ml-auto mr-auto no-float">
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="mb-30">
+                                        <h3 class="text-center txt-dark mb-10">REGISTRASI AKUN</h3>
+                                    </div>	
+                                    <div class="form-wrap">
+                                        @if ($message = Session::get('failed'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Perhatian !</h4>
+    <div class="alert-body">
+        {{ $message }}
+    </div>
+    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+</div>
+@endif
+                                        <form action="{{ route('register.post') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="exampleInputEmail_2">Fullname</label>
+                                                <input type="text" class="form-control" required="" name="txtFullname" id="txtFullname" placeholder="Enter fullname">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="exampleInputEmail_2">Nomor Induk Karyawan (NIK)</label>
+                                                <input type="text" class="form-control" required="" name="txtNik" id="txtNik" placeholder="Enter nik ">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="exampleInputEmail_2">Username</label>
+                                                <input type="text" class="form-control" required="" name="txtUsername" id="txtUsername" placeholder="Enter email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="pull-left control-label mb-10" for="txtPassword">Password</label>
+                                                {{-- <a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="{{ route('login') }}">sudah memiliki akun?</a>
+                                                <div class="clearfix"></div> --}}
+                                                <input type="password" class="form-control" required="" name="txtPassword" id="txtPassword" placeholder="Enter Password">
+                                            </div>
+                                            {{-- <div class="form-group">
+                                                <div class="checkbox checkbox-primary pr-10 pull-left">
+                                                    <input id="checkbox_2" required="" type="checkbox">
+                                                    <label for="checkbox_2"> Keep me logged in</label>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div> --}}
+                                            <div class="form-group text-center">
+                                                <button class="btn btn-success btn-rounded">sign up</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="form-group mt-2">
-                                        <label class="form-label" for="register-email">Email</label>
-                                        <input class="form-control" id="register-email" type="text" name="email" placeholder="email@example.com" aria-describedby="register-email" tabindex="2" />
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label class="form-label" for="register-password">Password</label>
-                                        <div class="input-group input-group-merge form-password-toggle">
-                                            <input class="form-control form-control-merge" id="register-password" type="password" name="password" placeholder="············" aria-describedby="register-password" tabindex="3" />
-                                            <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
-                                            <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:void(0);">&nbsp;privacy policy & terms</a></label>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary btn-block mt-1" tabindex="5">Sign up</button>
-                                </form>
-                                <p class="text-center mt-2"><span>Sudah punya akun?</span><a href="{{ route('login') }}"><span>&nbsp;Sign in instead</span></a></p>
-                                <div class="divider my-2">
-                                    <div class="divider-text">or</div>
-                                </div>
-                                <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a></div>
+                                </div>	
                             </div>
                         </div>
-                        <!-- /Register-->
                     </div>
                 </div>
+                <!-- /Row -->	
             </div>
+            
         </div>
+        <!-- /Main Content -->
+    
     </div>
-    <!-- END: Content-->
-
-
-    <!-- BEGIN: Vendor JS-->
-    <script src="../../theme/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="../../theme/vendors/js/forms/validation/jquery.validate.min.js"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
-    <script src="../../theme/js/core/app-menu.js"></script>
-    <script src="../../theme/js/core/app.js"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <script src="../../theme/js/scripts/pages/page-auth-register.js"></script>
-    <!-- END: Page JS-->
-
-    <script>
-        $(window).on('load', function() {
-            if (feather) {
-                feather.replace({
-                    width: 14,
-                    height: 14
-                });
-            }
-        })
-    </script>
+    <!-- /#wrapper -->
+    
+    <!-- JavaScript -->
+    
+    <!-- jQuery -->
+    <script src="{{ asset('droopy/vendors/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('droopy/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('droopy/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script>
+    
+    <!-- Slimscroll JavaScript -->
+    <script src="{{ asset('droopy/dist/js/jquery.slimscroll.js') }}"></script>
+    
+    <!-- Init JavaScript -->
+    <script src="{{ asset('droopy/dist/js/init.js') }}"></script>
 </body>
 <!-- END: Body-->
 

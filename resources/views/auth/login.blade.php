@@ -41,7 +41,7 @@
             </div>
             <div class="form-group mb-0 pull-right">
                 <span class="inline-block pr-10">Don't have an account?</span>
-                <a class="inline-block btn btn-success  btn-rounded btn-outline" href="signup.html">Sign Up</a>
+                <a class="inline-block btn btn-success  btn-rounded btn-outline" href="{{ route('register') }}">Sign Up</a>
             </div>
             <div class="clearfix"></div>
         </header>
@@ -60,14 +60,14 @@
                                     </div>	
                                     <div class="form-wrap">
                                         @if ($message = Session::get('failed'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <h4 class="alert-heading">Perhatian !</h4>
-    <div class="alert-body">
-        {{ $message }}
-    </div>
-    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
-</div>
-@endif
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <h4 class="alert-heading">Perhatian !</h4>
+                                                <div class="alert-body">
+                                                    {{ $message }}
+                                                </div>
+                                                <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                                            </div>
+                                        @endif
                                         <form action="{{ route('login.post') }}" method="POST">
                                             @csrf
                                             <div class="form-group">

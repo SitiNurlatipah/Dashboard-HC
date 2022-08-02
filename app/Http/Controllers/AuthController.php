@@ -20,4 +20,20 @@ class AuthController extends Controller
             return Redirect()->back()->with('failed','Your Email or Password are incorrect!');
         }
     }
+    public function getRegister()
+    {
+        return view('auth.register');
+    }
+    public function postRegister(Request $request)
+    {
+        $txtUsername = $request->input('txtUsername');
+        $password = $request->input('txtPassword');
+        return view('auth.register');
+        
+    }
+    public function getLogout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }

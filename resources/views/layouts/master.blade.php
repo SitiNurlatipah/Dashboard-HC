@@ -9,7 +9,7 @@
   <meta name="description" content="Droopy is a Dashboard & Admin Site Responsive Template by hencework." />
 	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Droopy Admin, Droopyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
 	<meta name="author" content="hencework"/>
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/logo-mini.png')}}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/logo.png')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   @include('include.style')
@@ -33,18 +33,13 @@
       <div class="page-wrapper">
         <div class="container-fluid pt-25">
           @yield('content')
+          
         </div>
           @include('include.footer')
       </div>
   </div>
 
   @include('include.script')
-  
-
-
-
-
-
 
   {{-- <div class="container-scroller">
 
