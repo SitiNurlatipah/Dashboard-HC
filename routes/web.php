@@ -29,9 +29,9 @@ Route::group(['middleware' => 'guest'], function () {
     //user
     Route::get('/user', 'UserController@index')->name('user');
     Route::post('/user', 'UserController@store')->name('user.post');
-    Route::get('/user/{data:id}/edit', 'UserController@edit')->name('user.edit');
-    Route::post('/user/($data:slug)/edit', 'UserController@update')->name('user.update');
-    Route::delete('/user/{data:id}', 'UserController@destroy');    
+    Route::put('/user/{UserModel}', 'UserController@update');
+    // Route::patch('/user', 'UserController@update')->name('user.update');
+    Route::delete('/user/{id}', 'UserController@destroy')->name('user.delete');    
     //module
     Route::get('/module', 'ModuleController@index')->name('module');
 
