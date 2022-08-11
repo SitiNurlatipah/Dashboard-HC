@@ -9,10 +9,7 @@ use App\UserModel;
 class UserController extends Controller
 {
     public function index(){
-        // $users = UserModel::latest()->paginate(5);
-  
-        // return view('pages.management-user.index',compact('users'))
-        //     ->with('i', (request()->input('page', 1) - 1) * 5);
+        
         $data = UserModel::all();
         return view('pages.management-user.index', [
             'users' => $data
@@ -56,11 +53,16 @@ class UserController extends Controller
         return redirect()->route('user')->with('message','User added successfully.');
        
     }
-    
+    // public function edit($id){
+    //     $data = UserModel::find($id);
+	//     return response()->json([
+	//       'users' => $data
+	//     ]);
+    // }
     public function update(Request $request, $id){
         $data = UserModel::find($id);
         $data->txtUsername = $request->txtUsername;
-        $data->txtPassword = $request->txtPassword;
+        $data->txtPassword = bcrypt($request->txtPassword);
         $data->txtNik = $request->txtNik;
         $data->txtEmployeeName = $request->txtEmployeeName;
         $data->txtJobTitle = $request->txtJobTitle;
@@ -107,6 +109,6 @@ class UserController extends Controller
     {
         UserModel::find($id)->delete();
         // $data->delete();
-        return redirect()->route('user')->with('message','Product deleted successfully');
+        return redirect()->route('user')->with('message','User deleted successfully');
     }
 }

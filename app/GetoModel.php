@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EmployeeModel extends Model
+class GetoModel extends Model
 {
-    protected $table = 'employees';
+    protected $table = 'getos';
 	public $timestamps = true;
 	/**
 	 * The attributes that are mass assignable.
@@ -15,6 +15,7 @@ class EmployeeModel extends Model
 	 */
 	protected $guarded = ['id'];
 	protected $fillable = [
-		'intJumlahEmployee', 'intKaryawan','intContract', 'intOutsource', 'dateTglInput','txtBulanInput',
+		'intTotal', 'intGetoKaryawan','intGetoKontark', 
+        'intGetoOutsource','txtBulanInput', 'dateTglInput', 
 	];
 }

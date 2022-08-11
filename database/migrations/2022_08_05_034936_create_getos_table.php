@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeeTable extends Migration
+class CreateGetosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateEmployeeTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee', function (Blueprint $table) {
+        Schema::create('getos', function (Blueprint $table) {
             $table->id();
-            $table->integer('intJumlahEmployee');
-            $table->integer('intKaryawan');
-            $table->integer('intContract');
-            $table->integer('intOutsource');
-            $table->date('dateStartDate');
-            $table->date('dateEndDate');
+            $table->integer('intTotal');
+            $table->integer('intGetoKaryawan');
+            $table->integer('intGetoKontrak');
+            $table->integer('intGetoOutsource');
+            $table->string('txtBulanInput');
+            $table->date('dateTglInput');
+            
+
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ class CreateEmployeeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee');
+        Schema::dropIfExists('getos');
     }
 }

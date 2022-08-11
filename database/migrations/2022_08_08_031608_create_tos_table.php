@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthTable extends Migration
+class CreateTosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateAuthTable extends Migration
      */
     public function up()
     {
-        Schema::create('auth', function (Blueprint $table) {
+        Schema::create('tos', function (Blueprint $table) {
             $table->id();
-            $table->string('txtUsername');
-            $table->string('password');
+            $table->integer('intTotal');
+            $table->integer('intToKaryawan');
+            $table->integer('intToKontrak');
+            $table->integer('intToOutsource');
+            $table->string('txtBulanInput');
+            $table->date('dateTglInput');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateAuthTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auth');
+        Schema::dropIfExists('tos');
     }
 }

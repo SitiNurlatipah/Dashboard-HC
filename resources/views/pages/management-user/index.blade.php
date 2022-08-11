@@ -13,36 +13,31 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            
-            <div class="panel-wrapper collapse in">
             @if(session()->has('message'))
             <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
             @endif
+            <div class="panel-wrapper collapse in">
+            
                 <div class="panel-body">
                     <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
-                        <!-- {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-user" data-whatever="@mdo">Add User</button> --}} -->
                     <div class="table-wrap">
                         <div class="table-responsive text-center">
-                        <!-- @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                         @endif -->
-                            <table id="tbl_log_history" class="table table-hover display  pb-30" >
+                        
+                            <table id="tbl_log_history" class="table table-hover display  pb-30 text-center" >
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th class="text-center">No</th>
                                         
-                                        <th>NIK</th>
-                                        <th>Nama</th>
-                                        <th>Jabatan</th>
-                                        <th>Departement</th>
-                                        <th>Email</th>
-                                        <th>Status Karyawan</th>
-                                        <th>Type Karyawan</th>
-                                        <th>Start Date</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Action</th>
+                                        <th class="text-center">NIK</th>
+                                        <th class="text-center">Nama</th>
+                                        <th class="text-center">Jabatan</th>
+                                        <th class="text-center">Departement</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">Status Karyawan</th>
+                                        <th class="text-center">Type Karyawan</th>
+                                        <th class="text-center">Start Date</th>
+                                        <th class="text-center">Jenis Kelamin</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,8 +56,7 @@
                                         <td>{{ $data->dtmStartDate }}</td>
                                         <td>{{ $data->txtGender }}</td>
                                         <td>
-                                        
-                                        <button class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update-user{{$data->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></button>
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  id="editUser" data-toggle="modal" data-target="#updateUser-{{$data->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         <form action="{{route('user.delete', $data->id)}}" method="POST">
                                         @csrf 
                                         @method("delete")
@@ -94,31 +88,31 @@
                 @csrf 
                     <div class="form-group">
                         <label for="txtEmployeeName" class="control-label mb-10">Name</label>
-                        <input type="text" class="form-control" id="txtEmployee_name" name="txtEmployeeName">
+                        <input type="text" class="form-control" id="txtEmployee_name" name="txtEmployeeName" required>
                     </div>
                     <div class="form-group">
                         <label for="txtUsername" class="control-label mb-10">Username</label>
-                        <input type="text" class="form-control" id="txtUsername" name="txtUsername">
+                        <input type="text" class="form-control" id="txtUsername" name="txtUsername" required>
                     </div>
                     <div class="form-group">
                         <label for="password" class="control-label mb-10">Password</label>
-                        <input type="password" class="form-control" id="password" name="txtPassword">
+                        <input type="password" class="form-control" id="password" name="txtPassword" required>
                     </div>
                     <div class="form-group">
                         <label for="txtNik" class="control-label mb-10">Nomor Induk Karyawan(NIK)</label>
-                        <input type="text" class="form-control" id="txtNik" name="txtNik">
+                        <input type="text" class="form-control" id="txtNik" name="txtNik" required>
                     </div>
                     <div class="form-group">
                         <label for="txtJob_title" class="control-label mb-10">Posisi</label>
-                        <input type="text" class="form-control" id="txtJob_title" name="txtJobTitle">
+                        <input type="text" class="form-control" id="txtJob_title" name="txtJobTitle" required>
                     </div>
                     <div class="form-group">
                         <label for="txtDepartment" class="control-label mb-10">Department</label>
-                        <input type="text" class="form-control" id="txtDepartment" name="txtDepartment">
+                        <input type="text" class="form-control" id="txtDepartment" name="txtDepartment" required>
                     </div>
                     <div class="form-group">
                         <label for="txtEmail" class="control-label mb-10">Email</label>
-                        <input type="email" class="form-control" id="txtEmail" name="txtEmail">
+                        <input type="email" class="form-control" id="txtEmail" name="txtEmail" required>
                     </div>
                     <div class="form-group">
                         <label for="txtStatus" class="control-label mb-10">Status</label>
@@ -145,18 +139,18 @@
                     </div>
                     <div class="form-group">
                         <label for="dtmStartDate" class="control-label mb-10">Tanggal Masuk</label>
-                            <input type='date' class="form-control" name="dtmStartDate">
+                            <input type='date' class="form-control" name="dtmStartDate" required>
                             
                     </div>
                     <div class="form-group">
                         <label for="dtmEndDate" class="control-label mb-10">Tanggal Keluar</label>
-                            <input type='date' class="form-control" name="dtmEndDate">
+                            <input type='date' class="form-control" name="dtmEndDate" required>
                             
                     </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Add Data Employee</button>
                     </div>
                 </form>
             
@@ -166,7 +160,8 @@
 <!-- end modal add user -->
 
 <!-- modal update user -->
-<div class="modal fade" id="update-user{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+@foreach($users as $data)
+<div class="modal fade" id="updateUser-{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="update-user">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -174,7 +169,7 @@
                 <h5 class="modal-title" id="add-userLabel1">Update User</h5>
             </div>
             <div class="modal-body">
-                <form action="/user/{{ $data->id }}" method="POST">
+                <form action="/user/{{$data->id}}" method="POST">
                 @csrf
                 @method('put')
                     <div class="form-group">
@@ -207,16 +202,16 @@
                     </div>
                     <div class="form-group">
                         <label for="txtStatus" class="control-label mb-10">Status</label>
-                        <select name="txtStatus" class="form-control" >
-                            <option value="{{$data->txtStatus}}"></option>
+                        <select name="txtStatus" class="form-control" value="{{$data->txtStatus}}">
+                            <!-- <option value="{{$data->txtStatus}}">{{$data->txtStatus}}</option> -->
                             <option value="Aktif">Aktif</option>
                             <option value="Resign">Resign</option>
                         </select>  
                     </div>
                     <div class="form-group">
                         <label for="txtType" class="control-label mb-10">Tipe</label>
-                        <select name="txtType" class="form-control" >
-                            <option value="{{$data->txtType}}"></option>
+                        <select name="txtType" class="form-control" value="{{$data->txtType}}">
+                            <option value="{{$data->txtType}}">{{$data->txtType}}</option>
                             <option value="Karyawan Tetap">Karyawan Tetap</option>
                             <option value="Kontrak">Kontrak</option>
                             <option value="Outsource">Outsource</option>
@@ -224,8 +219,8 @@
                     </div>
                     <div class="form-group">
                         <label for="txtGender" class="control-label mb-10">Jenis Kelamin</label>
-                        <select name="txtGender" class="form-control" >
-                            <option value="{{$data->txtGender}}"></option>
+                        <select name="txtGender" class="form-control" value="{{$data->txtGender}}" >
+                            <!-- <option value="{{$data->txtGender}}">{{$data->txtGender}}</option> -->
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                             
@@ -244,14 +239,14 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             
         </div>
     </div>
 </div>
-
+@endforeach
 <!-- end modal update user -->
 
 @endsection
@@ -277,6 +272,6 @@
             }
           });
       });
-  
+      
 </script>
 @endpush
