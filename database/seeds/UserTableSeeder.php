@@ -11,7 +11,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create(['txtUsername'=>'ai', 'password'=>bcrypt(12345),
-    ]);
+        $users = factory(App\UserModel::class, 10)->create();
     }
 }

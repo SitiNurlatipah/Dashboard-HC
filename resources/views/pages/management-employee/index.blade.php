@@ -26,7 +26,7 @@
                         </ul>
                 <div class="tab-content" id="myTabContent_15">
                     <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-                    <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Employee</span></button>
+                    <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Employee</span></button>
                     <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
                     @csrf
                             <div class="form-group row">  
@@ -34,7 +34,7 @@
                                 <input type='date' class="form-control" name="start_date">
                                 <label class="control-label mr-10 text-left">Sampai tanggal</label>
                                 <input type='date' class="form-control" name="end_date">
-                                <button type="submit" class="btn btn-primary zmdi zmdi-search pa-5" value="Submit"></button>
+                                <button type="submit" class="btn btn-primary pa-5 btn-sm" value="Submit"><i class="zmdi zmdi-search"></i></button>
                                 <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
                             </div>
                         
@@ -95,7 +95,7 @@
                                 <input type='date' class="form-control" name="start_date">
                                 <label class="control-label mr-10 text-left">Sampai tanggal</label>
                                 <input type='date' class="form-control" name="end_date">
-                            <button type="submit" class="btn btn-primary zmdi zmdi-search pa-5" value="Submit"></button>
+                            <button type="submit" class="btn btn-primary pa-5" value="Submit"><i class="zmdi zmdi-search"></i></button>
                             <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
 
                             </form>
@@ -165,7 +165,7 @@
                                 <input type='date' class="form-control" name="start_date">
                                 <label class="control-label mr-10 text-left">Sampai tanggal</label>
                                 <input type='date' class="form-control" name="end_date">
-                            <button type="submit" class="btn btn-primary zmdi zmdi-search pa-5" value="Submit"></button>
+                            <button type="submit" class="btn btn-primary pa-5" value="Submit"><i class="zmdi zmdi-search"></i></button>
                             <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
                         </div>
                         

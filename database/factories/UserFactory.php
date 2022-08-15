@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\UserModel;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -17,12 +17,19 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(App\UserModel::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
+        'txtEmployeeName' => Str::random(10),
+        'txtEmail' => $faker->unique()->safeEmail,
+        'txtPassword' => Str::random(10), // password
+        'txtUsername'=>Str::random(10),
+        'txtNik'=>Str::random(10),
+        'txtType'=>Str::random(10),
+        'txtStatus'=>Str::random(10),
+        'txtJobTitle'=>Str::random(10),
+        'txtDepartment'=>Str::random(10),
+        'dtmStartDate'=>$faker->date,
+        'dtmEndDate'=>$faker->date,
+        'txtGender'=>Str::random(10),
     ];
 });

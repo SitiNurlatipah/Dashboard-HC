@@ -8,11 +8,14 @@ use App\UserModel;
 
 class UserController extends Controller
 {
-    public function index(){
-        
-        $data = UserModel::all();
-        return view('pages.management-user.index', [
-            'users' => $data
+    public function index(Request $request){
+        if($request){
+            $data=UserModel::where('txtEmployeeName','like','%'.$request->cari.'%')->paginate(10);
+        }else{
+        $data = UserModel::paginate(10);
+        }
+        return view('pages.management-user.index', compact('request'),[
+            'users' => $data,
         ]);
      }
      public function store(Request $request)

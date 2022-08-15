@@ -20,7 +20,16 @@
             
                 <div class="panel-body">
                     <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
+                    <form action="{{route('user')}}" method="get">
+                    <div class="input-group col-md-2 pt-10">
+                        <input type="text" name="cari" class="form-control" placeholder="Search" value="{{$request->cari}}">
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn  btn-square"><i class="zmdi zmdi-search"></i></button>
+                        </span>
+                    </div>
+                    </form>
                     <div class="table-wrap">
+                    
                         <div class="table-responsive text-center">
                         
                             <table id="tbl_log_history" class="table table-hover display  pb-30 text-center" >
@@ -67,6 +76,7 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                            {{ $users->links() }}
                         </div>
                     </div>
                 </div>
