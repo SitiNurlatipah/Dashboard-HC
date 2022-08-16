@@ -14,8 +14,9 @@ class ToModel extends Model
 	 * @var array
 	 */
 	protected $guarded = ['id'];
+	protected $dates=['dateTglInput'];
 	protected $fillable = [
 		'intTotal', 'intToKaryawan','intToKontrak', 
-        'intToOutsource','txtBulanInput', 'dateTglInput', 
+        'intToOutsource', 'dateTglInput', 
 	];
 }

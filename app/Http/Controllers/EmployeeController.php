@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\EmployeeModel;
 use App\GetoModel;
 use App\ToModel;
+use Redirect,Response;
 use DB;
 use Carbon\Carbon;
 
@@ -15,10 +16,37 @@ class EmployeeController extends Controller
 		$dataEmployee = EmployeeModel::orderBy('dateTglInput', 'DESC')->get();
 		$geto = GetoModel::orderBy('dateTglInput', 'DESC')->get();
 		$to = ToModel::orderBy('dateTglInput', 'DESC')->get();
-		
-        return view('pages.management-employee.index',[
+		$jumlah_employee = EmployeeModel::select(DB::raw("CAST(SUM(intJumlahEmployee) as int) as jumlah_employee"))
+                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->pluck('jumlah_employee');
+        $bulan=EmployeeModel::select(DB::raw("MONTHNAME(dateTglInput) as bulan"))
+					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
+					->pluck('bulan');
+		$total_geto = GetoModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_geto"))
+                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->pluck('total_geto');
+        $bulanGeto=GetoModel::select(DB::raw("MONTHNAME(dateTglInput) as bulanGeto"))
+					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
+					->pluck('bulanGeto');
+		$total_to = ToModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_to"))
+                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->pluck('total_to');
+        $bulanTo=ToModel::select(DB::raw("MONTHNAME(dateTglInput) as bulanTo"))
+					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
+					->pluck('bulanTo');		
+        return view('pages.management-employee.index',compact('jumlah_employee','bulan',
+		'total_geto','bulanGeto','total_to','bulanTo'),[
 		'employees' => $dataEmployee,'getos'=>$geto,'tos'=>$to
 		]);
+	}
+	public function chart(){
+		$jumlah_employee = EmployeeModel::select(DB::raw("CAST(SUM(intJumlahEmployee) as int) as jumlah_employee"))
+                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->pluck('jumlah_employee');
+        $bulan=EmployeeModel::select(DB::raw("MONTHNAME(dateTglInput) as bulan"))
+					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
+					->pluck('bulan');
+		return view('pages.management-employee.chart',compact('jumlah_employee','bulan'));
 	}
 	
     public function filter(Request $request)
@@ -30,7 +58,7 @@ class EmployeeController extends Controller
 	   ->get();
 	   $geto=GetoModel::where('dateTglInput','>=',$start_date)
 	   ->where('dateTglInput','<=',$end_date)
-	   ->get();
+	   ->get(); 
 	   $to=ToModel::where('dateTglInput','>=',$start_date)
 	   ->where('dateTglInput','<=',$end_date)
 	   ->get();
@@ -58,7 +86,7 @@ class EmployeeController extends Controller
 			'intContract'=>$request->intContract,
 			'intOutsource'=>$request->intOutsource,
 			'txtBulanInput'=>$request->txtBulanInput,
-			'dateTglInput'=>$request->dateTglInput,
+			'dateTglInput'=>date('d-m-Y', ($request->dateTglInput)),
 		];
 		EmployeeModel::create($valid);
 		return redirect()->route('employee')->with('message','Data Employee added successfully.');

@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class EmployeeModel extends Model
 {
     protected $table = 'employees';
@@ -14,7 +14,9 @@ class EmployeeModel extends Model
 	 * @var array
 	 */
 	protected $guarded = ['id'];
+	protected $dates=['dateTglInput'];
 	protected $fillable = [
-		'intJumlahEmployee', 'intKaryawan','intContract', 'intOutsource', 'dateTglInput','txtBulanInput',
+		'intJumlahEmployee', 'intKaryawan','intContract', 'intOutsource', 'dateTglInput',
 	];
+	
 }

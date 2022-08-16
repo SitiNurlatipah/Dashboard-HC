@@ -13,16 +13,20 @@
 	<script src="{{ asset('droopy/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 	
 	<!-- Flot Charts JavaScript -->
-	<script src="{{ asset('droopy/vendors/bower_components/Flot/excanvas.min.js') }}"></script>
+	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/excanvas.min.js') }}"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.pie.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.resize.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.time.js') }}"></script>
+	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.pie.js') }}"></script> -->
+	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.resize.js') }}"></script> -->
+	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.time.js') }}"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.stack.js') }}"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.crosshair.js') }}"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
-	<script src="{{ asset('droopy/dist/js/flot-data.js') }}"></script>
-	
+	<script src="{{ asset('droopy/dist/js/flot-data.js') }}"></script> --> -->
+	<!-- Charts js -->
+	<script src="{{ asset('droopy/vendors/charts/accessibility.js') }}"></script>
+	<script src="{{ asset('droopy/vendors/charts/highcharts.js') }}"></script>
+	<script src="{{ asset('droopy/vendors/charts/exporting.js') }}"></script>
+	<script src="{{ asset('droopy/vendors/charts/export-data.js') }}"></script>
 	<!-- Slimscroll JavaScript -->
 	<script src="{{ asset('droopy/dist/js/jquery.slimscroll.js') }}"></script>
 	

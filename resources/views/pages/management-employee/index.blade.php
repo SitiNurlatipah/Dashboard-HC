@@ -22,11 +22,18 @@
                             <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">ALL</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">GETO</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">TO</a></li>
+                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Grafik</a></li>
                             
                         </ul>
                 <div class="tab-content" id="myTabContent_15">
+                <div  id="profile_17" class="tab-pane fade" role="tabpanel">
+                <div id="employee"></div>
+                <div id="geto"></div>
+                <div id="to"></div>
+                </div>
+
                     <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-                    <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Employee</span></button>
+                    <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Employee</span></button>
                     <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
                     @csrf
                             <div class="form-group row">  
@@ -45,11 +52,11 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">NO</th>
+                                        <th class="text-center">Tanggal Input</th>
+                                        <th class="text-center">Bulan Input</th>
                                         <th class="text-center">Permanen</th>
                                         <th class="text-center">Outsource</th>
                                         <th class="text-center">Contract</th>
-                                        <th class="text-center">Tanggal Input</th>
-                                        <th class="text-center">Bulan Input</th>
                                         <th class="text-center">Jumlah</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -60,11 +67,11 @@
                                 
                                     <tr>
                                         <td>{{$i++}}</td>
+                                        <td>{{ $dataEmployee->dateTglInput->format('d/m/Y') }}</td>
+                                        <td>{{ $dataEmployee->dateTglInput->format('F Y') }}</td>
                                         <td>{{ $dataEmployee->intKaryawan }}</td>
                                         <td>{{ $dataEmployee->intOutsource }}</td>
                                         <td>{{ $dataEmployee->intContract }}</td>
-                                        <td>{{ $dataEmployee->dateTglInput }}</td>
-                                        <td>{{ $dataEmployee->txtBulanInput }}</td>
                                         <td>{{ $dataEmployee->intJumlahEmployee }}</td>
                                         <td>
                                         <form action="{{route('employee.delete', $dataEmployee->id)}}" method="POST">
@@ -132,7 +139,7 @@
                                 
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{ $geto->txtBulanInput }}</td>
+                                        <td>{{ $geto->dateTglInput->format('F Y') }}</td>
                                         <td>{{ $geto->intGetoKaryawan }}</td>
                                         <td>{{ $geto->intGetoOutsource }}</td>
                                         <td>{{ $geto->intGetoKontark }}</td>
@@ -202,7 +209,7 @@
                             $persentseKontrakTo=($to->intToKontrak/$employees[$j]->intContract)*100; ?>
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{ $to->txtBulanInput }}</td>
+                                        <td>{{ $to->dateTglInput->format('F Y') }}</td>
                                         <td>{{ $to->intToKaryawan }}</td>
                                         <td>{{ $to->intToOutsource }}</td>
                                         <td>{{ $to->intToKontrak }}</td>
@@ -227,15 +234,20 @@
                         </table>
                         </div>
                         </div>
+                        
                         </div>
                         </div>
-
+                        
 
                                         
                                         </div>
                                     </div>	
                                 </div>
-                            </div>
+                                </div>
+                                </div>
+                                </div>
+                                
+                            
     <!-- /Row -->
     <!-- modal add data employee -->
     <div class="modal fade" id="add-employee" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
@@ -265,10 +277,7 @@
                             <label for="intOutsource" class="control-label mb-10">Outsource</label>
                             <input type="number" class="form-control" id="intOutsource" name="intOutsource">
                         </div>
-                        <div class="form-group">
-                            <label for="txtBulanInput" class="control-label mb-10">Bulan Input</label>
-                            <input type="month" class="form-control" id="txtBulanInput" name="txtBulanInput">
-                        </div>
+                        
                         <div class="form-group">
                             <label for="dateTglInput" class="control-label mb-10">Tanggal Input</label>
                             <input type="date" class="form-control" id="dateTglInput" name="dateTglInput">
@@ -314,10 +323,7 @@
                             <label for="intOutsource" class="control-label mb-10">Outsource</label>
                             <input type="number" class="form-control" id="intOutsource" name="intOutsource" value="{{$dataEmployee->intOutsource}}">
                         </div>
-                        <div class="form-group">
-                            <label for="txtBulanInput" class="control-label mb-10">Bulan Input</label>
-                            <input type="month" class="form-control" id="txtBulanInput" name="txtBulanInput" value="{{$dataEmployee->txtBulanInput}}">
-                        </div>
+                        
                         <div class="form-group">
                             <label for="dateTglInput" class="control-label mb-10">Tanggal Input</label>
                             <input type="date" class="form-control" id="dateTglInput" name="dateTglInput" value="{{$dataEmployee->dateTglInput}}">
@@ -366,10 +372,7 @@
                             <label for="dateTglInput" class="control-label mb-10">Tanggal Input</label>
                             <input type="date" class="form-control" id="dateTglInput" name="dateTglInput">
                         </div>
-                        <div class="form-group">
-                            <label for="txtBulanInput" class="control-label mb-10">Bulan</label>
-                            <input type="month" class="form-control" id="txtBulanInput" name="txtBulanInput">
-                        </div>
+                        
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add Data Geto Employee</button>
@@ -414,10 +417,7 @@
                             <label for="dateTglInput" class="control-label mb-10">Tanggal Input</label>
                             <input type="date" class="form-control" id="dateTglInput" name="dateTglInput" value="{{$geto->dateTglInput}}">
                         </div>
-                        <div class="form-group">
-                            <label for="txtBulanInput" class="control-label mb-10">Bulan</label>
-                            <input type="month" class="form-control" id="txtBulanInput" name="txtBulanInput" value="{{$geto->txtBulanInput}}">
-                        </div>
+                        
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Update Data Geto Employee</button>
@@ -441,10 +441,7 @@
                 <div class="modal-body">
                 <form action="{{ route('to.post') }}" method="POST">
                 @csrf 
-                        <div class="form-group">
-                            <label for="txtBulanInput" class="control-label mb-10">Bulan</label>
-                            <input type="month" class="form-control" id="txtBulanInput" name="txtBulanInput">
-                        </div>
+                        
                         <div class="form-group">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal">
@@ -489,10 +486,7 @@
                 <form action="/employee/to/{{$to->id}}" method="POST">
                 @csrf 
                 @method('put')
-                        <div class="form-group">
-                            <label for="txtBulanInput" class="control-label mb-10">Bulan</label>
-                            <input type="month" class="form-control" id="txtBulanInput" name="txtBulanInput" value="{{$to->txtBulanInput}}">
-                        </div>
+                        
                         <div class="form-group">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal" value="{{$to->intTotal}}">
@@ -547,5 +541,144 @@
           });
       }); 
   
+    var employees =  <?php echo json_encode($jumlah_employee) ?>;
+    var bulan =  <?php echo json_encode($bulan) ?>;
+    
+    Highcharts.chart('employee', {
+        title: {
+            text: 'Data Karyawan'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulan
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Employee'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            name: 'Jumlah Employee',
+            data: employees
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+});
+    var geto =  <?php echo json_encode($total_geto) ?>;
+    var bulanGeto =  <?php echo json_encode($bulanGeto) ?>;
+    Highcharts.chart('geto', {
+        title: {
+            text: 'Data Karyawan GETO'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulanGeto
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Employee'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            name: 'Jumlah Employee GETO',
+            data: geto
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+});
+var to =  <?php echo json_encode($total_to) ?>;
+    var bulanTo =  <?php echo json_encode($bulanTo) ?>;
+Highcharts.chart('to', {
+        title: {
+            text: 'Data Karyawan TO'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulanTo
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Employee TO'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            name: 'Jumlah Employee TO',
+            data: to
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+});
 </script>
 @endpush

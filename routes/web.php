@@ -23,9 +23,6 @@ Route::group(['middleware' => 'guest'], function () {
     //manajemen employee
     Route::get('/employee', 'EmployeeController@indexEmployee',)->name('employee');
     Route::post('/employee/filter', 'EmployeeController@filter')->name('employee.filter');
-    // Route::post('/employee/filtergeto', 'EmployeeController@employeeFilterGeto')->name('geto.filter');
-    // Route::post('/employee/filterto', 'EmployeeController@employeeFilterTo')->name('to.filter');
-    // Route::get('/employee/to', 'EmployeeController@toFilter',)->name('to');
     Route::post('/employee', 'EmployeeController@store')->name('employee.post');
     Route::post('/employee/geto', 'EmployeeController@storeGeto')->name('geto.post');
     Route::post('/employee/to', 'EmployeeController@storeTo')->name('to.post');
@@ -35,6 +32,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::delete('/employee/{id}', 'EmployeeController@destroy')->name('employee.delete');    
     Route::delete('/employee/geto/{id}', 'EmployeeController@destroyGeto')->name('geto.delete');    
     Route::delete('/employee/to/{id}', 'EmployeeController@destroyTo')->name('to.delete');    
+    //chart manajemen employee
+    Route::get('/employee/chart', 'EmployeeController@chart',)->name('chart');
 
     //locater    
     Route::get('/locater', 'LocaterController@index')->name('locater');
