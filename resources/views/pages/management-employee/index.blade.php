@@ -30,6 +30,7 @@
                 <div id="employee"></div>
                 <div id="geto"></div>
                 <div id="to"></div>
+                
                 </div>
 
                     <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
@@ -542,8 +543,20 @@
       }); 
   
     var employees =  <?php echo json_encode($jumlah_employee) ?>;
+    var karyawan =  <?php echo json_encode($karyawan) ?>;
+    var kontrak =  <?php echo json_encode($kontrak) ?>;
+    var outsource =  <?php echo json_encode($outsource) ?>;
     var bulan =  <?php echo json_encode($bulan) ?>;
-    
+    var geto =  <?php echo json_encode($total_geto) ?>;
+    var getoKaryawan =  <?php echo json_encode($getoKaryawan) ?>;
+    var getoKontrak =  <?php echo json_encode($getoKontrak) ?>;
+    var getoOutsource =  <?php echo json_encode($getoOutsource) ?>;
+    var bulanGeto =  <?php echo json_encode($bulanGeto) ?>;
+    var to =  <?php echo json_encode($total_to) ?>;
+    var bulanTo =  <?php echo json_encode($bulanTo) ?>;
+    var toOutsource =  <?php echo json_encode($toOutsource) ?>;
+    var toKontrak =  <?php echo json_encode($toKontrak) ?>;
+    var toKaryawan =  <?php echo json_encode($toKaryawan) ?>;
     Highcharts.chart('employee', {
         title: {
             text: 'Data Karyawan'
@@ -570,8 +583,22 @@
             }
         },
         series: [{
+            type: 'column',
             name: 'Jumlah Employee',
             data: employees
+        },{
+            type: 'column',
+            name: 'Jumlah Karyawan',
+            data: karyawan
+        },{
+            type: 'column',
+            name: 'Jumlah Outsource',
+            data: outsource
+        },{
+            type: 'column',
+            name: 'Jumlah Kontrak',
+            data: kontrak
+
         }],
         responsive: {
             rules: [{
@@ -588,8 +615,7 @@
             }]
         }
 });
-    var geto =  <?php echo json_encode($total_geto) ?>;
-    var bulanGeto =  <?php echo json_encode($bulanGeto) ?>;
+    
     Highcharts.chart('geto', {
         title: {
             text: 'Data Karyawan GETO'
@@ -616,8 +642,22 @@
             }
         },
         series: [{
+            type: 'column',
             name: 'Jumlah Employee GETO',
             data: geto
+        },{
+            type: 'column',
+            name: 'Jumlah GETO Karyawan',
+            data: getoKaryawan
+        },{
+            type: 'column',
+            name: 'Jumlah GETO Kontrak',
+            data: getoKontrak
+        },{
+            type: 'column',
+            name: 'Jumlah GETO Outsource',
+            data: getoOutsource
+
         }],
         responsive: {
             rules: [{
@@ -634,8 +674,7 @@
             }]
         }
 });
-var to =  <?php echo json_encode($total_to) ?>;
-    var bulanTo =  <?php echo json_encode($bulanTo) ?>;
+
 Highcharts.chart('to', {
         title: {
             text: 'Data Karyawan TO'
@@ -662,8 +701,23 @@ Highcharts.chart('to', {
             }
         },
         series: [{
+            type: 'column',
             name: 'Jumlah Employee TO',
-            data: to
+            data: to,
+           
+        },{
+            type: 'column',
+            name: 'Jumlah TO Outsource',
+            data: toOutsource,
+        },{
+            type: 'column',
+            name: 'Jumlah TO Kontrak',
+            data: toKontrak,
+        },{
+            type: 'column',
+            name: 'Jumlah TO Karyawan',
+            data: toKaryawan,
+        
         }],
         responsive: {
             rules: [{
@@ -680,5 +734,6 @@ Highcharts.chart('to', {
             }]
         }
 });
+
 </script>
 @endpush
