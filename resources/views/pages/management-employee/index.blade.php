@@ -26,10 +26,16 @@
                             
                         </ul>
                 <div class="tab-content" id="myTabContent_15">
+                
                 <div  id="profile_17" class="tab-pane fade" role="tabpanel">
+                
+                
+                <div class="btn-group btn-group-justified">
+                <a class="btn btn-primary btn-outline fancy-button btn-0" role="button" id="firstBtn">ALL EMPLOYEE</a>
+                <a class="btn btn-success btn-outline fancy-button btn-0"  role="button" id="secondBtn">GETO</a>
+                <a class="btn btn-warning btn-outline fancy-button btn-0" role="button" id="thirdBtn">TO</a>
+                </div>
                 <div id="employee"></div>
-                <div id="geto"></div>
-                <div id="to"></div>
                 
                 </div>
 
@@ -557,6 +563,8 @@
     var toOutsource =  <?php echo json_encode($toOutsource) ?>;
     var toKontrak =  <?php echo json_encode($toKontrak) ?>;
     var toKaryawan =  <?php echo json_encode($toKaryawan) ?>;
+    
+    firstBtn.addEventListener('click', () => {
     Highcharts.chart('employee', {
         title: {
             text: 'Data Karyawan'
@@ -614,9 +622,10 @@
                 }
             }]
         }
-});
-    
-    Highcharts.chart('geto', {
+    });
+    });
+    secondBtn.addEventListener('click', () => {
+    Highcharts.chart('employee', {
         title: {
             text: 'Data Karyawan GETO'
         },
@@ -674,8 +683,9 @@
             }]
         }
 });
-
-Highcharts.chart('to', {
+});
+thirdBtn.addEventListener('click', () => {
+Highcharts.chart('employee', {
         title: {
             text: 'Data Karyawan TO'
         },
@@ -700,6 +710,7 @@ Highcharts.chart('to', {
                 allowPointSelect: true
             }
         },
+        
         series: [{
             type: 'column',
             name: 'Jumlah Employee TO',
@@ -733,6 +744,7 @@ Highcharts.chart('to', {
                 }
             }]
         }
+});
 });
 
 </script>
