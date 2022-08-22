@@ -8,9 +8,7 @@ use App\Models\UserModel;
 Route::get('/',function(){
     return view('pages.dashboard');
 });
-Route::get('/locater',function(){
-        return view('pages.locater.index');
-    });
+
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', 'AuthController@getLogin')->name('login');
@@ -36,7 +34,13 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/employee/chart', 'EmployeeController@chart',)->name('chart');
 
     //locater    
-    Route::get('/locater', 'LocaterController@index')->name('locater');
+    Route::get('/recruitment', 'RecruitmentController@index')->name('recruitment');
+    Route::get('/leadtime', 'AvgLeadtimeController@index')->name('leadtime');
+    Route::get('/productivity', 'ProductivityController@index')->name('productivity');
+    Route::get('/hrga', 'HrgaIssuesController@index')->name('hrga');
+    Route::get('/training', 'TrainingPermonthController@index')->name('training');
+    Route::get('/realization', 'TrainingRealizationController@index')->name('realization');
+    Route::get('/ceo', 'CeoTrainingController@index')->name('ceo');
     
     //user
     Route::get('/user', 'UserController@index')->name('user');
@@ -47,7 +51,7 @@ Route::group(['middleware' => 'guest'], function () {
     
     
     //module
-    Route::get('/module', 'ModuleController@index')->name('module');
+    Route::get('/mppvsreal', 'MppRealController@index')->name('mppreal');
 
     Route::get('/register', 'AuthController@getRegister')->name('register');
     Route::post('/register', 'AuthController@postRegister')->name('register.post');

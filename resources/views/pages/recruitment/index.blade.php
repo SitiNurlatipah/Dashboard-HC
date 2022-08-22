@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Module')
+@section('title', 'Recruitment')
 
 @section('content')
 <div class="row">
@@ -8,28 +8,25 @@
         <div class="panel panel-default card-view">
             <div class="panel-heading">
                 <div class="pull-left">
-                    <h6 class="panel-title txt-dark">PM Module</h6>
+                    <h6 class="panel-title txt-dark">Recruitment Progress</h6>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="panel-wrapper collapse in">
                 <div class="panel-body">
-                    <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
-                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-user" data-whatever="@mdo">Add User</button> --}}
+                    {{-- <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Locater</span></button> --}}
                     <div class="table-wrap">
                         <div class="table-responsive">
-                            <table id="tbl_module" class="table table-hover display  pb-30" >
+                            <table id="tbl_locater" class="table table-hover display  pb-30" >
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>ID PM Module</th>
-                                        <th>Module Name</th>
                                         <th>ID Locater</th>
+                                        <th>Locater Name</th>
                                         <th>Active</th>
                                         <th>Insert By</th>
                                         <th>Update By</th>
                                         <th>Created At</th>
-                                        <th>Updated At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -82,58 +79,3 @@
 @endsection
 
 
-@push('script')
-<script type="text/javascript">
-    var dtJson = $('#tbl_module').DataTable({
-       
-        autoWidth: false,
-        serverSide: true,
-        processing: true,
-        // aSorting: [
-        //     [0, "desc"]
-        // ],
-        searching: true,
-        displayLength: 10,
-        lengthMenu: [10, 25, 50, 100],
-        language: {
-            paginate: {
-                previous: '&nbsp;',
-                next: '&nbsp;'
-            }
-        },
-        columns: [
-            {
-                data: 'DT_RowIndex', name: 'DT_RowIndex'
-            },
-            {
-                data: 'id_pmmodule'
-            },
-            {
-                data: 'txtModuleName'
-            },
-            {
-                data: 'id_locater'
-            },
-            {
-                data: 'bitActive'
-            },
-            {
-                data: 'txtInsertedBy'
-            },
-            {
-                data: 'txtUpdatedBy'
-            },
-            {
-                data: 'created_at'
-            },
-            {
-                data: 'updated_at'
-            },
-            {
-                data: 'action'
-            }
-        ],
-    });
-
-</script>
-@endpush

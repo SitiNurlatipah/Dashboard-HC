@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LocaterController extends Controller
+class RecruitmentController extends Controller
 {
     public function index(){
-        return view('pages.locater.index');
+        return view('pages.recruitment.index');
      }
 }

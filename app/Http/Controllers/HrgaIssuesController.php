@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+class HrgaIssuesController extends Controller
 {
     public function index(){
-        return view('pages.module.index');
+        return view('pages.hrga-issues.index');
      }
 }
