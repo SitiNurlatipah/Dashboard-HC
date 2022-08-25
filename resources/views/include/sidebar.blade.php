@@ -17,7 +17,7 @@
                 
             </li>
             <li>
-                <a href=""><div class="pull-left"><i class="fa fa-bookmark mr-20"></i><span class="right-nav-text">Data Trend Employee</span></div><div class="clearfix"></div></a>
+                <a href="{{ route('total') }}"><div class="pull-left"><i class="fa fa-bookmark mr-20"></i><span class="right-nav-text">Data Trend Employee</span></div><div class="clearfix"></div></a>
                 
             </li>
             <li>

@@ -121,7 +121,7 @@ class EmployeeController extends Controller
 			'intContract' => 'required',
 			'intOutsource' => 'required',
 			'dateTglInput' => 'required',			
-			'txtBulanInput' => 'required',			
+					
 		]);
 
 		$valid = [
@@ -129,7 +129,7 @@ class EmployeeController extends Controller
 			'intKaryawan'=>$request->intKaryawan,
 			'intContract'=>$request->intContract,
 			'intOutsource'=>$request->intOutsource,
-			'txtBulanInput'=>$request->txtBulanInput,
+			
 			'dateTglInput'=>date('d-m-Y', ($request->dateTglInput)),
 		];
 		EmployeeModel::create($valid);
@@ -140,7 +140,7 @@ class EmployeeController extends Controller
         $dataEmployee->intJumlahEmployee = $request->intJumlahEmployee;
         $dataEmployee->intKaryawan = $request->intKaryawan;
         $dataEmployee->intContract = $request->intContract;
-        $dataEmployee->txtBulanInput = $request->txtBulanInput;
+        
         $dataEmployee->dateTglInput = $request->dateTglInput;
         $dataEmployee->save();
         return redirect()->route('employee')->with('message','Data updated successfully.');
@@ -174,7 +174,7 @@ class EmployeeController extends Controller
 		'intGetoKontark' => 'required',
 		'intGetoOutsource' => 'required',
 		'dateTglInput' => 'required',			
-		'txtBulanInput' => 'required',			
+				
 	]);
 	$validation = [
 		'intTotal'=>$request->intTotal,
@@ -182,7 +182,7 @@ class EmployeeController extends Controller
 		'intGetoKontark'=>$request->intGetoKontark,
 		'intGetoOutsource'=>$request->intGetoOutsource,
 		'dateTglInput'=>$request->dateTglInput,
-		'txtBulanInput'=>$request->txtBulanInput,
+		
 	];
 	GetoModel::create($validation);
 	return redirect()->route('employee')->with('message','Data GETO Employee added successfully.');
@@ -194,7 +194,7 @@ class EmployeeController extends Controller
         $geto->intGetoKaryawan = $request->intGetoKaryawan;
         $geto->intGetoOutsource = $request->intGetoOutsource;
         $geto->intGetoKontark = $request->intGetoKontark;
-        $geto->txtBulanInput = $request->txtBulanInput;
+        
         $geto->dateTglInput = $request->dateTglInput;
         $geto->save();
         return redirect()->route('employee')->with('message','Data GETO Employee updated successfully.');
@@ -228,7 +228,7 @@ class EmployeeController extends Controller
 		'intToKontrak' => 'required',
 		'intToOutsource' => 'required',
 		'dateTglInput' => 'required',			
-		'txtBulanInput' => 'required',			
+			
 	]);
 	$confirm = [
 		'intTotal'=>$request->intTotal,
@@ -236,7 +236,7 @@ class EmployeeController extends Controller
 		'intToKontrak'=>$request->intToKontrak,
 		'intToOutsource'=>$request->intToOutsource,
 		'dateTglInput'=>$request->dateTglInput,
-		'txtBulanInput'=>$request->txtBulanInput,
+		
 	];
 	ToModel::create($confirm);
 	return redirect()->route('employee')->with('message','Data GETO Employee added successfully.');
@@ -248,7 +248,7 @@ class EmployeeController extends Controller
         $to->intToKaryawan = $request->intToKaryawan;
         $to->intToOutsource = $request->intToOutsource;
         $to->intToKontrak = $request->intToKontrak;
-        $to->txtBulanInput = $request->txtBulanInput;
+        
         $to->dateTglInput = $request->dateTglInput;
         $to->save();
         return redirect()->route('employee')->with('message','Data TO Employee updated successfully.');

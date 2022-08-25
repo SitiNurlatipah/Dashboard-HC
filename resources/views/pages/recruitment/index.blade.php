@@ -31,6 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -38,41 +39,6 @@
                 </div>
             </div>
         </div>	
-    </div>
-</div>
-<!-- /Row -->
-
-<div class="modal fade" id="add-user" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h5 class="modal-title" id="add-userLabel1">New message</h5>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="txtfullname" class="control-label mb-10">Name</label>
-                        <input type="text" class="form-control" id="txtfullname" name="txtfullname">
-                    </div>
-                    <div class="form-group">
-                        <label for="txtusername" class="control-label mb-10">Username</label>
-                        <input type="text" class="form-control" id="txtusername" name="txtusername">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="control-label mb-10">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="bitActive" class="control-label mb-10">Active</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
-            </div>
-        </div>
     </div>
 </div>
 

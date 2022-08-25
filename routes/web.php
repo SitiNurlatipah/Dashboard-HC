@@ -33,7 +33,7 @@ Route::group(['middleware' => 'guest'], function () {
     //chart manajemen employee
     Route::get('/employee/chart', 'EmployeeController@chart',)->name('chart');
 
-    //locater    
+      
     Route::get('/recruitment', 'RecruitmentController@index')->name('recruitment');
     Route::get('/leadtime', 'AvgLeadtimeController@index')->name('leadtime');
     Route::get('/productivity', 'ProductivityController@index')->name('productivity');
@@ -41,7 +41,11 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/training', 'TrainingPermonthController@index')->name('training');
     Route::get('/realization', 'TrainingRealizationController@index')->name('realization');
     Route::get('/ceo', 'CeoTrainingController@index')->name('ceo');
-    
+    Route::get('/totalemployee', 'DataTotalEmployeeController@index')->name('total');
+    Route::post('/totalemployee', 'DataTotalEmployeeController@store')->name('total.post');
+    Route::put('/totalemployee/{dataTotalEmployee}', 'DataTotalEmployeeController@update');
+    Route::delete('/totalemployee/{id}', 'DataTotalEmployeeController@destroy')->name('total.delete');    
+
     //user
     Route::get('/user', 'UserController@index')->name('user');
     Route::post('/user', 'UserController@store')->name('user.post');
