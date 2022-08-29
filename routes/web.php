@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductivityController;
 use App\Models\UserModel;
 
 Route::get('/',function(){
@@ -36,7 +37,16 @@ Route::group(['middleware' => 'guest'], function () {
       
     Route::get('/recruitment', 'RecruitmentController@index')->name('recruitment');
     Route::get('/leadtime', 'AvgLeadtimeController@index')->name('leadtime');
+    
+    //Productivity
     Route::get('/productivity', 'ProductivityController@index')->name('productivity');
+    Route::post('/productivity', 'ProductivityController@store')->name('productivity.post');
+    Route::put('/productivity/{Productivity}', 'ProductivityController@update');
+    Route::delete('/productivity/{id}', 'ProductivityController@destroy')->name('productivity.delete');    
+    Route::post('/productivity/humancost', 'ProductivityController@storeHumancost')->name('humancost.post');
+    Route::put('/productivity/humancost/{HumanCost}', 'ProductivityController@updateHumancost');
+    Route::delete('/productivity/humancost/{id}', 'ProductivityController@destroyHumancost')->name('humancost.delete');    
+    
     Route::get('/hrga', 'HrgaIssuesController@index')->name('hrga');
     Route::get('/training', 'TrainingPermonthController@index')->name('training');
     Route::get('/realization', 'TrainingRealizationController@index')->name('realization');
@@ -45,6 +55,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/totalemployee', 'DataTotalEmployeeController@store')->name('total.post');
     Route::put('/totalemployee/{dataTotalEmployee}', 'DataTotalEmployeeController@update');
     Route::delete('/totalemployee/{id}', 'DataTotalEmployeeController@destroy')->name('total.delete');    
+    Route::post('/totalemployee/filter', 'DataTotalEmployeeController@filter')->name('total.filter');
 
     //user
     Route::get('/user', 'UserController@index')->name('user');

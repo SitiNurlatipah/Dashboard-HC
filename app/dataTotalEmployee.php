@@ -14,7 +14,7 @@ class dataTotalEmployee extends Model
 	 * @var array
 	 */
 	protected $guarded = ['id'];
-	
+	protected $dates=['dateBulan'];
 	protected $fillable = [
 	
 	];

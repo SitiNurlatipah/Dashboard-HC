@@ -65,7 +65,6 @@
 	<script src="{{ asset('droopy/dist/js/init.js') }}"></script>
 	<script src="{{ asset('droopy/dist/js/dashboard2-data.js') }}"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js" type="text/javascript"></script>
 
 	{{-- DASHBOARD PAGE --}}
 	<script type="text/javascript" src="{{ asset('droopy/vendors/bower_components/moment/min/moment-with-locales.min.js')}}"></script>
@@ -85,6 +84,7 @@
 	{{-- CDN MQTT PAHO --}}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
 	<!-- delete -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js" type="text/javascript"></script>
+	<script src="{{asset('droopy/vendors/sweetalert.min.js')}}" type="text/javascript"></script>
+ 
 	@stack('script')
 		

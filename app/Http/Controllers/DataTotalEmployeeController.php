@@ -9,7 +9,9 @@ use DB;
 class DataTotalEmployeeController extends Controller
 {
     public function index(){
+        
         $totalEmployee=dataTotalEmployee::orderBy('dateBulan', 'DESC')->get();
+        
         $total = dataTotalEmployee::select(DB::raw("CAST(SUM(intTotal) as int) as total"))
                     ->GroupBy(DB::raw("Month(dateBulan)"))
 					->orderBy('dateBulan', 'ASC')
@@ -44,13 +46,13 @@ class DataTotalEmployeeController extends Controller
              'dateBulan' => 'required',			
              			
          ]);
- 
+         
          $valid = [
              'intTotal'=>$request->intTotal,
              'intPermanen'=>$request->intPermanen,
              'intContract'=>$request->intContract,
              'intJobSupply'=>$request->intJobSupply,
-             'txtBulanInput'=>$request->txtBulanInput,
+             'txtBulanInput'=>date('F Y', strtotime($request->txtBulanInput)),
              'dateBulan'=>$request->dateBulan,
          ];
          dataTotalEmployee::create($valid);
@@ -71,5 +73,37 @@ class DataTotalEmployeeController extends Controller
         dataTotalEmployee::find($id)->delete();
         // $data->delete();
         return redirect()->route('total')->with('message','Data deleted successfully');
+    }
+    public function filter(Request $request)
+    {
+       $start_date = $request->input('startDate');
+       $end_date = $request->input('endDate');
+	   $totalEmployee=dataTotalEmployee::where('dateBulan','>=',$start_date)
+	   ->where('dateBulan','<=',$end_date)
+	   ->get();
+       $total = dataTotalEmployee::select(DB::raw("CAST(SUM(intTotal) as int) as total"))
+                    ->GroupBy(DB::raw("Month(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('total');
+		$permanent = dataTotalEmployee::select(DB::raw("CAST(SUM(intPermanen) as int) as permanent"))
+                    ->GroupBy(DB::raw("Month(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('permanent');
+		$contract = dataTotalEmployee::select(DB::raw("CAST(SUM(intContract) as int) as contract"))
+                    ->GroupBy(DB::raw("Month(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('contract');
+		$jobsupply = dataTotalEmployee::select(DB::raw("CAST(SUM(intJobSupply) as int) as jobsupply"))
+                    ->GroupBy(DB::raw("Month(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('jobsupply');
+        $bulan=dataTotalEmployee::select(DB::raw("MONTHNAME(dateBulan) as bulan"))
+					->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+					->pluck('bulan');
+       return view('pages.data-trend-total-employees.index', compact('total','permanent',
+        'contract','jobsupply','bulan'),
+        ['data_total_employee'=>$totalEmployee]);
+
     }
 }

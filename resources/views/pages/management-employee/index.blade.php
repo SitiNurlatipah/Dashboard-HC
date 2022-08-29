@@ -112,7 +112,7 @@
                             <button type="submit" class="btn btn-primary pa-5" value="Submit"><i class="zmdi zmdi-search"></i></button>
                             <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
 
-                            </form>
+                            
                         </div>
                         
                         </form>   

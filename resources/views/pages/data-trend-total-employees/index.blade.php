@@ -28,17 +28,30 @@
             <div class="tab-content" id="myTabContent_15">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
             <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Total Employee</span></button>
-                <div class="table-wrap">
+            <form action="{{ route('total.filter') }}" method="POST" class="form-inline mb-30 mt-30">
+                    @csrf
+                            <div class="form-group row">  
+                                <label class="control-label mr-10 text-left">Dari tanggal</label>
+                                <input type='date' class="form-control" name="startDate">
+                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
+                                <input type='date' class="form-control" name="endDate">
+                                <button type="submit" class="btn btn-primary pa-5 btn-sm" value="Submit"><i class="zmdi zmdi-search"></i></button>
+                                <a class="btn btn-primary pa-5 btn-sm" href="{{ route('total') }}"><i class="fa fa-undo"></i></a>
+                            </div>
+                        
+            </form>    
+            <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="datable_1" class="table table-hover display  pb-30" >
+                        <table id="datable_1" class="table table-hover display  pb-30 text-center" >
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Bulan</th>
-                                    <th>Permanent</th>
-                                    <th>Contract</th>
-                                    <th>Job Supply</th>
-                                    <th>Action</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Bulan</th>
+                                    <th class="text-center">Permanent</th>
+                                    <th class="text-center">Contract</th>
+                                    <th class="text-center">Job Supply</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,10 +59,11 @@
                             $i=1; foreach($data_total_employee as $totalEmployee): ?>
                                 <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{ $totalEmployee->dateBulan }}</td>
+                                <td>{{ $totalEmployee->dateBulan->format('F Y') }}</td>
                                 <td>{{ $totalEmployee->intPermanen }}</td>
                                 <td>{{ $totalEmployee->intContract }}</td>
                                 <td>{{ $totalEmployee->intJobSupply }}</td>
+                                <td>{{ $totalEmployee->intTotal }}</td>
                                 <td>
                                 <form action="{{route('total.delete',$totalEmployee->id)}}" method="POST">
                                 @csrf
@@ -148,7 +162,7 @@
                             <input type="number" class="form-control" id="intContract" name="intContract" value="{{$totalEmployee->intContract}}">
                         </div>
                         <div class="form-group">
-                            <label for="intJobSupply" class="control-label mb-10">Outsource</label>
+                            <label for="intJobSupply" class="control-label mb-10">Job Supply</label>
                             <input type="number" class="form-control" id="intJobSupply" name="intJobSupply" value="{{$totalEmployee->intJobSupply}}">
                         </div>
                         
