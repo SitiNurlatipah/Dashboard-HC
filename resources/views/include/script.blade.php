@@ -3,7 +3,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('droopy/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    
 	<!-- Vector Maps JavaScript -->
     <script src="{{ asset('droopy/vendors/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('droopy/vendors/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
@@ -11,7 +10,8 @@
 	
 	<!-- Data table JavaScript -->
 	<script src="{{ asset('droopy/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-	
+	<script src="{{asset('droopy/dist/js/dataTables-data.js')}}"></script>
+
 	<!-- Flot Charts JavaScript -->
 	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/excanvas.min.js') }}"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.js') }}"></script>

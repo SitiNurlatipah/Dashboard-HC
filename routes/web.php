@@ -46,7 +46,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/productivity/humancost', 'ProductivityController@storeHumancost')->name('humancost.post');
     Route::put('/productivity/humancost/{HumanCost}', 'ProductivityController@updateHumancost');
     Route::delete('/productivity/humancost/{id}', 'ProductivityController@destroyHumancost')->name('humancost.delete');    
-    
+    Route::post('/productivity/growth', 'ProductivityController@storeGrowth')->name('growth.post');
+
     Route::get('/hrga', 'HrgaIssuesController@index')->name('hrga');
     Route::get('/training', 'TrainingPermonthController@index')->name('training');
     Route::get('/realization', 'TrainingRealizationController@index')->name('realization');

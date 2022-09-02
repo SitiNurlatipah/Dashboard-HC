@@ -3,43 +3,86 @@
 @section('title', 'Management Employee')
 
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default card-view">
-                <div class="panel-heading">
-                    <div class="pull-left">
-                        <h6 class="panel-title txt-dark">Management Employee</h6>
-                    </div>
-                    <div class="clearfix"></div>
-                    @if(session()->has('message'))
-                    <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
-                    @endif
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default card-view">
+            <div class="panel-heading">
+                <div class="pull-left">
+                    <h6 class="panel-title txt-dark">Management Employee</h6>
+                </div>
+                <div class="clearfix"></div>
+                @if(session()->has('message'))
+                <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
+                @endif
                 </div>
                 <div class="panel-wrapper collapse in">
                 <div class="panel-body">
-                    <div  class="tab-struct custom-tab-2 mt-5">
-                        <ul role="tablist" class="nav nav-tabs" id="myTabs_15">
+                    <div  class="tab-struct custom-tab-1 mt-0">
+                        <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                             <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">ALL</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">GETO</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">TO</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Grafik</a></li>
                             
                         </ul>
-                <div class="tab-content" id="myTabContent_15">
-                
-                <div  id="profile_17" class="tab-pane fade" role="tabpanel">
-                
-                
-                <div class="btn-group btn-group-justified">
-                <a class="btn btn-primary btn-outline fancy-button btn-0" role="button" id="firstBtn">ALL EMPLOYEE</a>
-                <a class="btn btn-success btn-outline fancy-button btn-0"  role="button" id="secondBtn">GETO</a>
-                <a class="btn btn-warning btn-outline fancy-button btn-0" role="button" id="thirdBtn">TO</a>
+        <div class="tab-content" id="myTabContent_7">
+            <div  id="profile_17" class="tab-pane fade" role="tabpanel">
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                    <div class="panel panel-default card-view panel-refresh relative">
+                        <div class="refresh-container">
+                            <div class="la-anim-1"></div>
+                        </div>
+                        <div class="panel-heading">
+                            <div class="pull-left">
+                                <h6 class="panel-title txt-dark">Total</h6>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-wrapper collapse in">
+                            <div class="panel-body">
+                                <div id="total" class="" style="height:367px;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="employee"></div>
-                
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                    <div class="panel panel-default card-view panel-refresh relative">
+                        <div class="refresh-container">
+                            <div class="la-anim-1"></div>
+                        </div>
+                        <div class="panel-heading">
+                            <div class="pull-left">
+                                <h6 class="panel-title txt-dark">Geto</h6>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-wrapper collapse in">
+                            <div class="panel-body">
+                                <div id="geto" class="" style="height:367px;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                    <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                    <div class="panel panel-default card-view panel-refresh relative">
+                        <div class="refresh-container">
+                            <div class="la-anim-1"></div>
+                        </div>
+                        <div class="panel-heading">
+                            <div class="pull-left">
+                                <h6 class="panel-title txt-dark">To</h6>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-wrapper collapse in">
+                            <div class="panel-body">
+                                <div id="to" class="" style="height:367px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
                     <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Employee</span></button>
                     <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
                     @csrf
@@ -564,8 +607,8 @@
     var toKontrak =  <?php echo json_encode($toKontrak) ?>;
     var toKaryawan =  <?php echo json_encode($toKaryawan) ?>;
     
-    firstBtn.addEventListener('click', () => {
-    Highcharts.chart('employee', {
+    // firstBtn.addEventListener('click', () => {
+    Highcharts.chart('total', {
         title: {
             text: 'Data Karyawan'
         },
@@ -623,9 +666,9 @@
             }]
         }
     });
-    });
-    secondBtn.addEventListener('click', () => {
-    Highcharts.chart('employee', {
+    
+    // secondBtn.addEventListener('click', () => {
+    Highcharts.chart('geto', {
         title: {
             text: 'Data Karyawan GETO'
         },
@@ -683,9 +726,8 @@
             }]
         }
 });
-});
-thirdBtn.addEventListener('click', () => {
-Highcharts.chart('employee', {
+// thirdBtn.addEventListener('click', () => {
+Highcharts.chart('to', {
         title: {
             text: 'Data Karyawan TO'
         },
@@ -744,7 +786,6 @@ Highcharts.chart('employee', {
                 }
             }]
         }
-});
 });
 
 </script>

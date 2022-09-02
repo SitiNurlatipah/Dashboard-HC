@@ -11,21 +11,23 @@
                     <h6 class="panel-title txt-dark">Data Trend Total Employee</h6>
                 </div>
                 <div class="clearfix"></div>
-                
             </div>
             
             <div class="panel-wrapper collapse in">
             <div class="panel-body">
-            <div  class="tab-struct custom-tab-2 mt-5">
-                        <ul role="tablist" class="nav nav-tabs" id="myTabs_15">
+            <div  class="tab-struct custom-tab-1 mt-0">
+                        <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                             <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Productivity</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Human Cost</a></li>
+                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">Growth All</a></li>
+                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Grafik</a></li>
                             
                         </ul>
             @if(session()->has('message'))
             <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
             @endif
-            <div class="tab-content" id="myTabContent_15">
+           
+            <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
             <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-productivity" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Total Employee</span></button>
             <form action="" method="POST" class="form-inline mb-30 mt-30">
@@ -42,7 +44,7 @@
             </form>    
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="datable_1" class="table table-hover display  pb-30 text-center" >
+                        <table id="power" class="table table-hover display  pb-30 text-center" >
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -61,7 +63,7 @@
                             <tbody>
                             <?php
                             $i=1; 
-                            foreach($productivity_manpower as $productivity): 
+                            foreach($productivity_manpowers as $productivity): 
                             $productivityKg=($productivity->intOutputActual*1000);
                             $productivityPermanen=(($productivity->intOutputActual/$productivity->intPermanen)*1000);
                             $productivityTotal=(($productivity->intOutputActual/$productivity->intTotal)*1000);
@@ -110,7 +112,7 @@
             </form>    
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="datable_1" class="table table-hover display  pb-30 text-center" >
+                        <table id="cost" class="table table-hover display  pb-30 text-center" >
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -128,21 +130,22 @@
                             <tbody>
                             <?php
                             $i=1; $j=0;
-                            foreach($productivity_humancost as $humancost): 
+                            foreach($productivity_humancosts as $humancost): 
                             $costMilion=($humancost->intCostActual/1000000);
-                            $outputPlan=$productivity_manpower[$j]->intOutputPlan;
-                            $outputActual=$productivity_manpower[$j]->intOutputActual;
-                            $productivityPlan=($humancost->intCostPlan/$productivity_manpower[$j]->intOutputPlan)*1000;
-                            $productivityActual=($humancost->intCostActual/$productivity_manpower[$j]->intOutputActual)*1000;
+                            $productivityPlan=$humancost->intCostPlan/($humancost->intOutputPlan*1000);
+                            $productivityActual=$humancost->intCostActual/($humancost->intOutputActual*1000);
+                            
                             ?>
+                            
+
                                 <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{ $humancost->dateBulan->format ('F Y')}}</td>
                                 <td>{{ $humancost->intCostPlan }}</td>
                                 <td>{{ $humancost->intCostActual }}</td>
                                 <td>{{ $costMilion }}</td>
-                                <td>{{ $outputPlan }}</td>
-                                <td>{{ $outputActual }}</td>
+                                <td>{{ $humancost->intOutputPlan}}</td>
+                                <td>{{ $humancost->intOutputActual }}</td>
                                 <td>{{ number_format($productivityPlan,0) }}</td>
                                 <td>{{ number_format($productivityActual,0) }}</td>
                                 <td>
@@ -162,11 +165,180 @@
                     </div>
                 </div>
             </div>
+            <div  id="profile_16" class="tab-pane fade" role="tabpanel">
+            <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-growth" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button>        
+            <div class="table-wrap">
+                        <div class="table-responsive">
+                            <table id="datable_3" class="table table-hover display mb-30 text-center" >
+                                <thead> 
+                                    <tr>
+                                        
+                                        <th class="text-center">Bulan</th>
+                                        <th class="text-center">Man Power Permanent</th>
+                                        <th class="text-center">Man Power Contract</th>
+                                        <th class="text-center">Man Power All</th>
+                                        <th class="text-center">Growth Man Power</th>
+                                        <th class="text-center">Output</th>
+                                        <th class="text-center">Growth Output</th>
+                                        <th class="text-center">Productivity</th>
+                                        <th class="text-center">Growth Productivity</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $i=1;
+                                foreach($productivity_growths as $growth):
+                                    $j=1;$j++;
+                                    $productivityaAll=(($growth->intOutputActual/$growth->intTotal)*1000);
+                                    // $growthManpower=($growth->intTotal-$productivity_growths[$j-1]->intTotal)/$productivity_growths[$j-1]->intTotal;
+                                    // $growthOutput=($growth->intOutputActual-$productivity_growths[$j-1]->intOutputActual)/$productivity_growths[$j-1]->intOutputActual;
+                                    
+                                    // $growthProductivity=($growth->productivityaAll-$productivity_growths[$j-1]->productivityaAll)/$productivity_growths[$j-1]->productivityaAll;
+                                    
+                                    // dd($growth);
+                                    ?>
+                                    <tr>
+                                        
+                                        <td>{{ $growth->dateBulan1->format('F Y') }}</td>
+                                        <td>{{ $growth->intPermanen }}</td>
+                                        <td>{{ $growth->intContract }}</td>
+                                        <td>{{ $growth->intTotal }}</td>
+                                        <td></td>
+                                        <td>{{ $growth->intOutputActual }}</td>
+                                        <td></td>
+                                        <td>{{ $productivityaAll }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>	
+								
             </div>
-            </div>
-            </div>
-            </div>
+            <div  id="profile_17" class="tab-pane fade" role="tabpanel">
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="productChart" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="powerChart" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="outputChart" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="costChart" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="costMillionChart" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="growChart" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                  
+            
+                
+            
+        
+        	
         </div>	
+        </div>	
+        </div>	
+        </div>	
+        </div>	
+        	
     </div>
 </div>
 <!-- add data total -->
@@ -216,7 +388,7 @@
     </div>
     </div>
 <!-- end add data -->
-@foreach($productivity_manpower as $productivity)
+@foreach($productivity_manpowers as $productivity)
     <div class="modal fade" id="updateManpower{{$productivity->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -277,11 +449,19 @@
                         
                         <div class="form-group">
                             <label for="intCostPlan" class="control-label mb-10">Cost Plan</label>
-                            <input type="number" class="form-control" id="intCostPlan" name="intCostPlan">
+                            <input type="text" class="form-control" id="intCostPlan" name="intCostPlan">
                         </div>
                         <div class="form-group">
                             <label for="intCostActual" class="control-label mb-10">Cost Actual</label>
-                            <input type="number" class="form-control" id="intCostActual" name="intCostActual">
+                            <input type="text" class="form-control" id="intCostActual" name="intCostActual">
+                        </div>
+                        <div class="form-group">
+                            <label for="intCostActual" class="control-label mb-10">Output Plan</label>
+                            <input type="text" class="form-control" id="intOutputPlan" name="intOutputPlan">
+                        </div>
+                        <div class="form-group">
+                            <label for="intCostActual" class="control-label mb-10">Output Actual</label>
+                            <input type="text" class="form-control" id="intOutputActual" name="intOutputActual">
                         </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
@@ -298,7 +478,7 @@
     </div>
     </div>
 <!-- end add data -->
-@foreach($productivity_humancost as $humancost)
+@foreach($productivity_humancosts as $humancost)
     <div class="modal fade" id="updateHumancost{{$humancost->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -319,6 +499,14 @@
                             <input type="number" class="form-control" id="intCostPlan" name="intCostActual" value="{{$humancost->intCostActual}}">
                         </div>
                         <div class="form-group">
+                            <label for="intCostPlan" class="control-label mb-10">Output Plan</label>
+                            <input type="number" class="form-control" id="intOutputPlan" name="intOutputPlan" value="{{$humancost->intOutputPlan}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="intCostPlan" class="control-label mb-10">Output Actual</label>
+                            <input type="number" class="form-control" id="intOutputActual" name="intOutputActual" value="{{$humancost->intOutputActual}}">
+                        </div>
+                        <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
                             <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$humancost->dateBulan}}">
                         </div>
@@ -334,7 +522,31 @@
     </div>
     @endforeach
 
-
+    <div class="modal fade" id="add-growth" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Growth Productivity</h5>
+                </div>
+                <div class="modal-body">
+                <form action="{{ route('growth.post') }}" method="POST">
+                @csrf 
+                        <div class="form-group">
+                            <label for="dateBulan" class="control-label mb-10">Bulan</label>
+                            <input type="date" class="form-control" id="dateBulan1" name="dateBulan1">
+                        </div>
+                        
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+    </div>
+<!-- end add data -->
 @endsection
 @push('script')
 
@@ -356,6 +568,308 @@
             }
           });
       });
-      
+    var productivity =  <?php echo json_encode($productiv) ?>;
+    var bulan =  <?php echo json_encode($bulan) ?>;
+    var bulanCost =  <?php echo json_encode($bulanCost) ?>;
+    var manpower =  <?php echo json_encode($manpower) ?>;
+    var costActual =  <?php echo json_encode($costActual) ?>;
+    var actual =  <?php echo json_encode($actual) ?>;
+    var costProduct =  <?php echo json_encode($costProduct) ?>;
+    var coba =  <?php echo json_encode($coba) ?>;
+    // first.addEventListener('click', () => {  
+    Highcharts.chart('productChart', {
+        title: {
+            text: 'Productivity (Kg/Man)'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulan
+        },
+        yAxis: {
+            title: {
+                text: 'Kilogram'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'productivity',
+            data: productivity
+
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+    Highcharts.chart('powerChart', {
+        title: {
+            text: 'Man Power'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulan
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Employee'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Permanen & Contract',
+            data: manpower
+
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+    Highcharts.chart('outputChart', {
+        title: {
+            text: 'Output (Kg)'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulan
+        },
+        yAxis: {
+            title: {
+                text: 'Kilogram'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Output actual',
+            data: actual
+
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+    
+    // });
+    // humancost.addEventListener('click', () => {  
+    Highcharts.chart('costChart', {
+        title: {
+            text: 'Human Cost Productivity (Kg/Man)'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulanCost
+        },
+        yAxis: {
+            title: {
+                text: 'Kilogram'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Cos Product',
+            data: costProduct
+
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+    Highcharts.chart('costMillionChart', {
+        title: {
+            text: 'Human Cost Actual (Million)'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulanCost
+        },
+        yAxis: {
+            title: {
+                text: 'Million'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Cos Actual',
+            data: costActual
+
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+    
+    
+    Highcharts.chart('growChart', {
+        title: {
+            text: 'Nyobain'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulan
+        },
+        yAxis: {
+            title: {
+                text: 'Kilogram'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'output',
+            data: coba
+
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+
+    // });
+    
+    $('#power').dataTable( {
+    paging: true,
+    searching: true
+    } );
+    $('#cost').dataTable( {
+        paging: true
+    } );
+    $('#datable_3').dataTable( {
+        paging: true
+    } );
 </script>
 @endpush

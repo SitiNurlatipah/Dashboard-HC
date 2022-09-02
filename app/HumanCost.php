@@ -3,12 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Productivity;
+
 
 class HumanCost extends Model
 {
-    protected $table = 'productivity_humancost';
+    protected $table = 'productivity_humancosts';
 	public $timestamps = true;
 	/**
 	 * The attributes that are mass assignable.
@@ -20,9 +19,9 @@ class HumanCost extends Model
 	// protected $fillable = [
 	// 'dateBulan','intCostPlan','intCost'
 	// ];
-	// public function productiv()
+	// public function productivity()
 	// {
-	// 	return $this->hasOne(Productivity::class,'dateBulan');
+	// 	return $this->belongsTo('App\Productivity');
 	// 	// return $this->belongsTo(Productivity::class,'dateBulan');
 	// }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductivityHumancostTable extends Migration
+class CreateProductivityGrowthsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateProductivityHumancostTable extends Migration
      */
     public function up()
     {
-        Schema::create('productivity_humancost', function (Blueprint $table) {
+        Schema::create('productivity_growths', function (Blueprint $table) {
             $table->id();
-            $table->date('dateBulan');
-            $table->integer('intCostPlan');
-            $table->integer('intCostActual');
+            $table->date('dateBulan1');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateProductivityHumancostTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('productivity_humancost');
+        Schema::dropIfExists('productivity_growths');
     }
 }
