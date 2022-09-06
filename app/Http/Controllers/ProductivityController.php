@@ -15,7 +15,7 @@ class ProductivityController extends Controller
         $humancost=HumanCost::orderBy('dateBulan', 'DESC')->get();
         $growth=Growth::
         leftJoin('productivity_manpowers','productivity_growths.dateBulan1','=','productivity_manpowers.dateBulan')
-        ->orderBy('dateBulan1', 'ASC')
+        ->orderBy('dateBulan', 'ASC')
         ->get();
         
         $productiv = Productivity::select(DB::raw("CAST(SUM((intOutputActual/intTotal)*1000) as int) as productiv"))
@@ -144,6 +144,12 @@ class ProductivityController extends Controller
     public function destroyHumancost($id)
     {
         HumanCost::find($id)->delete();
+        // $data->delete();
+        return redirect()->route('productivity')->with('message','Data deleted successfully');
+    }
+    public function destroyGrowth($id)
+    {
+        Growth::find($id)->delete();
         // $data->delete();
         return redirect()->route('productivity')->with('message','Data deleted successfully');
     }

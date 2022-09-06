@@ -15,7 +15,7 @@ class MppVsRealModel extends Model
 	 */
 	protected $guarded = ['id'];
 	protected $dates=['dateBulan'];
-	protected $fillable = [
-		'intTotal' 
-	];
+	
+	
+	
 }

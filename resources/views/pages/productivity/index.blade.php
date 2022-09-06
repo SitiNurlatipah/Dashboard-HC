@@ -141,9 +141,9 @@
                                 <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{ $humancost->dateBulan->format ('F Y')}}</td>
-                                <td>{{ $humancost->intCostPlan }}</td>
-                                <td>{{ $humancost->intCostActual }}</td>
-                                <td>{{ $costMilion }}</td>
+                                <td>Rp{{ number_format($humancost->intCostPlan,0,',','.') }}</td>
+                                <td>Rp{{ number_format($humancost->intCostActual,0,',','.') }}</td>
+                                <td>Rp{{ number_format($costMilion,0,',','.') }}M</td>
                                 <td>{{ $humancost->intOutputPlan}}</td>
                                 <td>{{ $humancost->intOutputActual }}</td>
                                 <td>{{ number_format($productivityPlan,0) }}</td>
@@ -188,15 +188,18 @@
                                 <tbody>
                                 <?php
                                 $i=1;
+                                
                                 foreach($productivity_growths as $growth):
-                                    $j=1;$j++;
-                                    $productivityaAll=(($growth->intOutputActual/$growth->intTotal)*1000);
+                                    $j=1;
+                                    $j++;
+                                    // $productivityaAll=(($growth->intOutputActual/$growth->intTotal)*1000);
                                     // $growthManpower=($growth->intTotal-$productivity_growths[$j-1]->intTotal)/$productivity_growths[$j-1]->intTotal;
                                     // $growthOutput=($growth->intOutputActual-$productivity_growths[$j-1]->intOutputActual)/$productivity_growths[$j-1]->intOutputActual;
-                                    
+                                    // dd($j);
                                     // $growthProductivity=($growth->productivityaAll-$productivity_growths[$j-1]->productivityaAll)/$productivity_growths[$j-1]->productivityaAll;
                                     
-                                    // dd($growth);
+                                    
+                                
                                     ?>
                                     <tr>
                                         
@@ -207,10 +210,20 @@
                                         <td></td>
                                         <td>{{ $growth->intOutputActual }}</td>
                                         <td></td>
-                                        <td>{{ $productivityaAll }}</td>
                                         <td></td>
                                         <td></td>
+                                        <td>
+                                        <form action="{{route('growth.delete',$growth->id)}}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateHumancost{{$humancost->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                        </form>
+                                        </td>
                                     </tr>
+                                    
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -226,7 +239,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Total</h6>
+                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -244,7 +257,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Total</h6>
+                                    <h6 class="panel-title txt-dark">Man Power Total</h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -262,7 +275,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Total</h6>
+                                    <h6 class="panel-title txt-dark">Output Actual</h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -280,7 +293,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Total</h6>
+                                    <h6 class="panel-title txt-dark">Human Cost</h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -298,7 +311,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Total</h6>
+                                    <h6 class="panel-title txt-dark">Human Cost Million</h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -316,7 +329,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Total</h6>
+                                    <h6 class="panel-title txt-dark">Growth</h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -549,9 +562,8 @@
 <!-- end add data -->
 @endsection
 @push('script')
-
 <script type="text/javascript">
-     $('.delete').click(function(event) {
+    $('.delete').click(function(event) {
           var form =  $(this).closest("form");
           var name = $(this).data("name");
           event.preventDefault();

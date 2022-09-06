@@ -47,7 +47,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::put('/productivity/humancost/{HumanCost}', 'ProductivityController@updateHumancost');
     Route::delete('/productivity/humancost/{id}', 'ProductivityController@destroyHumancost')->name('humancost.delete');    
     Route::post('/productivity/growth', 'ProductivityController@storeGrowth')->name('growth.post');
-
+    Route::put('/productivity/growth/{Growth}', 'ProductivityController@updateGrowth');
+    Route::delete('/productivity/growth/{id}', 'ProductivityController@destroyGrowth')->name('growth.delete');    
+    
     Route::get('/hrga', 'HrgaIssuesController@index')->name('hrga');
     Route::get('/training', 'TrainingPermonthController@index')->name('training');
     Route::get('/realization', 'TrainingRealizationController@index')->name('realization');
@@ -66,8 +68,11 @@ Route::group(['middleware' => 'guest'], function () {
     Route::delete('/user/{id}', 'UserController@destroy')->name('user.delete');    
     
     
-    //module
+    //mpp
     Route::get('/mppvsreal', 'MppRealController@index')->name('mppreal');
-
+    Route::post('/mppvsreal', 'MppRealController@store')->name('mppreal.post');
+    Route::put('/mppvsreal/{MppVsRealModel}', 'MppRealController@update');
+    Route::delete('/mppvsreal/{id}', 'MppRealController@destroy')->name('mppreal.delete');    
+    
     Route::get('/register', 'AuthController@getRegister')->name('register');
     Route::post('/register', 'AuthController@postRegister')->name('register.post');
