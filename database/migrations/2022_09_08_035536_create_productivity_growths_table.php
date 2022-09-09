@@ -14,8 +14,11 @@ class CreateProductivityGrowthsTable extends Migration
     public function up()
     {
         Schema::create('productivity_growths', function (Blueprint $table) {
-            $table->id();
-            $table->date('dateBulan1');
+            $table->increments('idGrowth'); 
+            $table->date('dateBulanGrowth');
+            $table->unsignedBigInteger('manpower_id')->unsigned();
+            $table->foreign('manpower_id')
+                  ->references('id')->on('productivity_manpowers')->onDelete('cascade');
             $table->timestamps();
         });
     }

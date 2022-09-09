@@ -13,8 +13,8 @@ class Growth extends Model
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id'];
-	protected $dates=['dateBulan1'];
+	protected $guarded = ['idGrowth'];
+	protected $dates=['dateBulanGrowth'];
 	// protected $fillable = [
 	// 'dateBulan','intCostPlan','intCost'
 	// ];

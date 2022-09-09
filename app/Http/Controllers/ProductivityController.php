@@ -14,7 +14,7 @@ class ProductivityController extends Controller
         $productivity=Productivity::orderBy('dateBulan', 'DESC')->get();
         $humancost=HumanCost::orderBy('dateBulan', 'DESC')->get();
         $growth=Growth::
-        leftJoin('productivity_manpowers','productivity_growths.dateBulan1','=','productivity_manpowers.dateBulan')
+        leftJoin('productivity_manpowers','productivity_growths.manpower_id','=','productivity_manpowers.id')
         ->orderBy('dateBulan', 'ASC')
         ->get();
         
@@ -38,9 +38,9 @@ class ProductivityController extends Controller
                     ->GroupBy(DB::raw("Month(dateBulan)"))
 					->orderBy('dateBulan', 'ASC')
                     ->pluck('costActual');
-        $coba = Growth::leftJoin('productivity_manpowers','productivity_growths.dateBulan1','=','productivity_manpowers.dateBulan')
+        $coba = Growth::leftJoin('productivity_manpowers','productivity_growths.manpower_id','=','productivity_manpowers.id')
                     ->select(DB::raw("CAST(SUM(intOutputActual) as int) as coba"))
-                    ->GroupBy(DB::raw("Month(dateBulan1)"))
+                    ->GroupBy(DB::raw("Month(dateBulanGrowth)"))
 					->orderBy('dateBulan', 'ASC')
                     ->pluck('coba');
         $bulan=Productivity::select(DB::raw("MONTHNAME(dateBulan) as bulan"))
@@ -81,12 +81,14 @@ class ProductivityController extends Controller
     }
     public function storeGrowth(Request $request){
         $request->validate( [
-            'dateBulan1' => 'required',			
-                        
+            'dateBulanGrowth' => 'required',			
+              'manpower_id'=>'required'          
         ]);
         
         $valid = [
-            'dateBulan1'=>$request->dateBulan1,
+            'dateBulanGrowth'=>$request->dateBulanGrowth,
+            'manpower_id'=>$request->manpower_id,
+
         ];
         Growth::create($valid);
             

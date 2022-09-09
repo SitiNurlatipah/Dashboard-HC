@@ -28,7 +28,7 @@
                 <a href="{{ route('recruitment') }}"><div class="pull-left"><i class="fa fa-bar-chart-o mr-20"></i><span class="right-nav-text">Recruitment Progress</span></div><div class="clearfix"></div></a>
             </li>
             <li>
-                <a href="{{ route('leadtime') }}"><div class="pull-left"><i class="fa fa-bolt mr-20"></i><span class="right-nav-text">Leadtime Recruitment</span></div><div class="clearfix"></div></a>
+                <a href="{{ route('avg') }}"><div class="pull-left"><i class="fa fa-bolt mr-20"></i><span class="right-nav-text">Leadtime Recruitment</span></div><div class="clearfix"></div></a>
             </li>
             <li>
                 <a href="{{ route('mppreal') }}"><div class="pull-left"><i class="fa fa-tasks mr-20"></i><span class="right-nav-text">MPP VS Realization </span></div><div class="clearfix"></div></a>

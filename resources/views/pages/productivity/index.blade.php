@@ -193,30 +193,30 @@
                                     $j=1;
                                     $j++;
                                     // $productivityaAll=(($growth->intOutputActual/$growth->intTotal)*1000);
-                                    // $growthManpower=($growth->intTotal-$productivity_growths[$j-1]->intTotal)/$productivity_growths[$j-1]->intTotal;
-                                    // $growthOutput=($growth->intOutputActual-$productivity_growths[$j-1]->intOutputActual)/$productivity_growths[$j-1]->intOutputActual;
+                                    $growthManpower=($growth->intTotal-$productivity_growths[$j-1]->intTotal)/$productivity_growths[$j-1]->intTotal;
+                                    $growthOutput=($growth->intOutputActual-$productivity_growths[$j-1]->intOutputActual)/$productivity_growths[$j-1]->intOutputActual;
                                     // dd($j);
-                                    // $growthProductivity=($growth->productivityaAll-$productivity_growths[$j-1]->productivityaAll)/$productivity_growths[$j-1]->productivityaAll;
+                                    // $growthProductivity=($growth->productivityAll-$productivity_growths[$j-1]->productivityAll)/$productivity_growths[$j-1]->productivityAll;
                                     
                                     
                                 
                                     ?>
                                     <tr>
                                         
-                                        <td>{{ $growth->dateBulan1->format('F Y') }}</td>
+                                        <td>{{ $growth->dateBulanGrowth->format('F Y') }}</td>
                                         <td>{{ $growth->intPermanen }}</td>
                                         <td>{{ $growth->intContract }}</td>
                                         <td>{{ $growth->intTotal }}</td>
-                                        <td></td>
+                                        <td>{{number_format($growthManpower*100,2)}}%</td>
                                         <td>{{ $growth->intOutputActual }}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$growthOutput}}</td>
+                                        <td>{{ $growth->dateBulan }}</td>
                                         <td></td>
                                         <td>
                                         <form action="{{route('growth.delete',$growth->id)}}" method="POST">
                                         @csrf
                                         @method('put')
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateHumancost{{$humancost->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         @csrf 
                                         @method("delete")
                                             <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
@@ -535,30 +535,35 @@
     </div>
     @endforeach
 
-    <div class="modal fade" id="add-growth" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title" id="add-userLabel1">Growth Productivity</h5>
-                </div>
-                <div class="modal-body">
-                <form action="{{ route('growth.post') }}" method="POST">
-                @csrf 
-                        <div class="form-group">
-                            <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan1" name="dateBulan1">
-                        </div>
-                        
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
-                </form>
-            </div>       
-        </div>
+<div class="modal fade" id="add-growth" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title" id="add-userLabel1">Growth Productivity</h5>
+            </div>
+            <div class="modal-body">
+            <form action="{{ route('growth.post') }}" method="POST">
+            @csrf 
+                    <div class="form-group">
+                        <label for="dateBulan" class="control-label mb-10">Bulan</label>
+                        <input type="date" class="form-control" id="dateBulanGrowth" name="dateBulanGrowth">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateBulan" class="control-label mb-10">Id Manpower</label>
+                        <input type="number" class="form-control" id="manpower_id" name="manpower_id">
+                    </div>
+                    
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+            </form>
+        </div>       
     </div>
-    </div>
+</div>
+</div>
 <!-- end add data -->
 @endsection
 @push('script')
@@ -575,7 +580,7 @@
               dangerMode: true,
           })
           .then((willDelete) => {
-            if (willDelete) {
+            if (willDelete) { 
               form.submit();
             }
           });

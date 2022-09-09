@@ -36,7 +36,12 @@ Route::group(['middleware' => 'guest'], function () {
 
       
     Route::get('/recruitment', 'RecruitmentController@index')->name('recruitment');
-    Route::get('/leadtime', 'AvgLeadtimeController@index')->name('leadtime');
+    
+    //leadtime
+    Route::get('/leadtime', 'AvgLeadtimeController@index')->name('avg');
+    Route::post('/leadtime', 'AvgLeadtimeController@store')->name('avg.post');
+    Route::put('/leadtime/{AvdLeadtimeRecruitment}', 'AvgLeadtimeController@update');
+    Route::delete('/leadtime/{idAvg}', 'AvgLeadtimeController@destroy')->name('avg.delete');    
     
     //Productivity
     Route::get('/productivity', 'ProductivityController@index')->name('productivity');
@@ -52,7 +57,14 @@ Route::group(['middleware' => 'guest'], function () {
     
     Route::get('/hrga', 'HrgaIssuesController@index')->name('hrga');
     Route::get('/training', 'TrainingPermonthController@index')->name('training');
+    
+    //training realisasi
     Route::get('/realization', 'TrainingRealizationController@index')->name('realization');
+    Route::post('/realization', 'TrainingRealizationController@store')->name('realization.post');
+    Route::put('/realization/{TrainingRealization}', 'TrainingRealizationController@update');
+    Route::delete('/realization/{id}', 'TrainingRealizationController@destroy')->name('realization.delete');    
+ 
+    
     Route::get('/ceo', 'CeoTrainingController@index')->name('ceo');
     Route::get('/totalemployee', 'DataTotalEmployeeController@index')->name('total');
     Route::post('/totalemployee', 'DataTotalEmployeeController@store')->name('total.post');
