@@ -26,7 +26,279 @@
                             
                         </ul>
         <div class="tab-content" id="myTabContent_7">
-            <div  id="profile_17" class="tab-pane fade" role="tabpanel">
+            
+            <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
+            <div class="row">
+			<div class="col-sm-12">
+            <div class="form-horizontal form-group">
+                <form action="{{ route('employee.filter') }}" method="POST" class="form-inline">
+                    @csrf
+                    <div class="form-group row col-sm-11">
+                        <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
+                        <input type='date' class="form-control input-sm col-sm-3" name="start_date">
+                        <label class="col-form-label text-right col-sm-1">Sampai</label>
+                        <input type='date' class="form-control input-sm col-sm-3 mr-20" name="end_date">
+                        <button  type="submit" class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
+                        <a class="btn btn-warning btn-anim btn-xs" href="{{ route('employee') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
+                    </div>
+                        
+                </form>
+                <div class="col-sm-1 ml-30">
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                </div>    
+            </div>
+            </div>
+            </div>
+                    <!-- <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button>
+                    <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
+                    @csrf
+                            <div class="form-group row">  
+                                <label class="control-label mr-10 text-left">Dari tanggal</label>
+                                <input type='date' class="form-control" name="start_date">
+                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
+                                <input type='date' class="form-control" name="end_date">
+                                <button type="submit" class="btn btn-primary pa-5 btn-sm" value="Submit"><i class="zmdi zmdi-search"></i></button>
+                                <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
+                            </div>
+                        
+                        </form> -->
+                        <div class="table-wrap">
+                        <div class="table-responsive">
+                            <table id="tbl_employee" class="table table-hover mt-10 font-11 display pb-30 text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">NO</th>
+                                        <th class="text-center">Tanggal Input</th>
+                                        <th class="text-center">Bulan Input</th>
+                                        <th class="text-center">Permanen</th>
+                                        <th class="text-center">Outsource</th>
+                                        <th class="text-center">Contract</th>
+                                        <th class="text-center">Jumlah</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $i=1; foreach($employees as $dataEmployee): ?>
+                                
+                                    <tr>
+                                        <td>{{$i++}}</td>
+                                        <td>{{ $dataEmployee->dateTglInput->format('d/m/Y') }}</td>
+                                        <td>{{ $dataEmployee->dateTglInput->format('F Y') }}</td>
+                                        <td>{{ $dataEmployee->intKaryawan }}</td>
+                                        <td>{{ $dataEmployee->intOutsource }}</td>
+                                        <td>{{ $dataEmployee->intContract }}</td>
+                                        <td>{{ $dataEmployee->intJumlahEmployee }}</td>
+                                        <td>
+                                        <form action="{{route('employee.delete', $dataEmployee->id)}}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateEmployee{{$dataEmployee->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                        </div>
+                        <div  id="profile_15" class="tab-pane fade" role="tabpanel">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <div class="form-horizontal form-group">
+                            <form action="{{ route('employee.filter') }}" method="POST" class="form-inline">
+                                @csrf
+                                        <div class="form-group row col-sm-11">
+                                            <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
+                                            <input type='date' class="form-control input-sm col-sm-3" name="start_date">
+                                            <label class="col-form-label text-right col-sm-1">Sampai</label>
+                                            <input type='date' class="form-control input-sm col-sm-3 mr-20" name="end_date">
+                                            <button  type="submit" class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
+                                            <a class="btn btn-warning btn-anim btn-xs" href="{{ route('employee') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
+                                        </div>
+                                    
+                                    </form>
+                            <div class="col-sm-1 ml-30">
+                            <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-geto" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                            </div>    
+                        </div>
+                        </div>
+                        </div>
+                        
+                        <!-- <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-geto" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Geto</span></button>
+                        
+                        <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
+                        @csrf  
+                        <div class="form-group row">  
+                                <label class="control-label mr-10 text-left">Dari tanggal</label>
+                                <input type='date' class="form-control" name="start_date">
+                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
+                                <input type='date' class="form-control" name="end_date">
+                            <button type="submit" class="btn btn-primary pa-5" value="Submit"><i class="zmdi zmdi-search"></i></button>
+                            <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
+
+                            
+                        </div>
+                        
+                        </form>    -->
+                        <div class="table-wrap">
+                        <div class="table-responsive">
+                        <table id="tblGeto" class="table table-hover table-bordered display mt-10 font-11 pb-30 text-center" width="100%">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" class="text-center">No</th>
+                                    <th rowspan="2" class="text-center">Bulan</th>
+                                    <th colspan="4" class="text-center">Jumlah</th>
+                                    <th colspan="2" class="text-center">Presentase</th>
+                                    <th rowspan="2" class="text-center">Action</th>
+                                </tr>
+                                <tr>
+                                    
+                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Outsource</th>
+                                    <th class="text-center">Contract</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Total</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                
+                                $i=1; $j=0; foreach($getos as $geto):
+                                $persentaseKaryawanGeto=($geto->intGetoKaryawan/$employees[$j]->intKaryawan)*100;
+                                $persentaseTotalGeto=($geto->intTotal/$employees[$j]->intJumlahEmployee)*100; 
+                                ?>
+                                
+                                    <tr>
+                                        <td>{{$i++}}</td>
+                                        <td>{{ $geto->dateTglInput->format('F Y') }}</td>
+                                        <td>{{ $geto->intGetoKaryawan }}</td>
+                                        <td>{{ $geto->intGetoOutsource }}</td>
+                                        <td>{{ $geto->intGetoKontark }}</td>
+                                        <td>{{ $geto->intTotal }}</td>
+                                        <td>{{number_format($persentaseKaryawanGeto,2)}}%</td>
+                                        <td>{{number_format($persentaseTotalGeto,2)}}%</td>
+                                        <td>
+                                        <form action="{{route('geto.delete',$geto->id)}}" method="POST">
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateGeto{{$geto->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    </div>
+                        <div  id="profile_16" class="tab-pane fade" role="tabpanel">
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <div class="form-horizontal form-group">
+                            <form action="{{ route('employee.filter') }}" method="POST" class="form-inline">
+                                @csrf
+                                        <div class="form-group row col-sm-11">
+                                            <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
+                                            <input type='date' class="form-control input-sm col-sm-3" name="start_date">
+                                            <label class="col-form-label text-right col-sm-1">Sampai</label>
+                                            <input type='date' class="form-control input-sm col-sm-3 mr-20" name="end_date">
+                                            <button  type="submit" class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
+                                            <a class="btn btn-warning btn-anim btn-xs" href="{{ route('employee') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
+                                        </div>
+                                    
+                                    </form>
+                            <div class="col-sm-1 ml-30">
+                            <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-to" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                            </div>    
+                        </div>
+                        </div>
+                        </div>
+                        <!-- <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-to" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data TO</span></button>
+
+                        <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
+                        @csrf
+                            <div class="form-group row">  
+                                <label class="control-label mr-10 text-left">Dari tanggal</label>
+                                <input type='date' class="form-control" name="start_date">
+                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
+                                <input type='date' class="form-control" name="end_date">
+                            <button type="submit" class="btn btn-primary pa-5" value="Submit"><i class="zmdi zmdi-search"></i></button>
+                            <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
+                        </div>
+                        
+                        </form> -->
+                        <div class="table-wrap">
+                        <div class="table-responsive">
+                        <table id="tblTo" class="table table-hover table-bordered font-11 mt-5 text-center" width="100%">                        <thead>
+                            <tr>
+                                <th rowspan="2" class="text-center">No</th>
+                                <th rowspan="2" class="text-center">Bulan</th>
+                                <th colspan="5" class="text-center">Jumlah</th>
+                                <th colspan="3" class="text-center">Presentase</th>
+                                <th rowspan="2" class="text-center">Action</th>
+                            </tr>
+                            <tr>
+                                    
+                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Outsource</th>
+                                    <th class="text-center">Contract</th>
+                                    <th class="text-center">PKWTT+PKWT</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Contract</th>
+                                    <th class="text-center">Total</th>
+                                    
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $i=1;$j=0; 
+                            foreach($tos as $to): 
+                            $pkwtt = $to->intToKaryawan + $to->intToKontrak;
+                            $persentaseKaryawan=($to->intToKaryawan/$employees[$j]->intKaryawan)*100;
+                            $persentseTotalTo=($to->intTotal/$employees[$j]->intJumlahEmployee)*100;
+                            $persentseKontrakTo=($to->intToKontrak/$employees[$j]->intContract)*100; ?>
+                                    <tr>
+                                        <td>{{$i++}}</td>
+                                        <td>{{ $to->dateTglInput->format('F Y') }}</td>
+                                        <td>{{ $to->intToKaryawan }}</td>
+                                        <td>{{ $to->intToOutsource }}</td>
+                                        <td>{{ $to->intToKontrak }}</td>
+                                        <td>{{$pkwtt}}</td>
+                                        <td>{{ $to->intTotal }}</td>
+                                        <td>{{number_format($persentaseKaryawan,2)}}</td>
+                                        <td>{{number_format($persentseKontrakTo,2)}}%</td>
+                                        <td>{{number_format($persentseTotalTo,2)}}%</td>
+                                        <td>
+                                        <form action="{{route('to.delete',$to->id)}}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTo{{$to->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                        </tbody>
+                        </table>
+                        </div>
+                        </div>
+                        
+                        </div>
+                        <div  id="profile_17" class="tab-pane fade" role="tabpanel">
                 <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
                     <div class="panel panel-default card-view panel-refresh relative">
                         <div class="refresh-container">
@@ -82,215 +354,11 @@
                     </div>
                 </div>
             </div>
-            <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-                    <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Employee</span></button>
-                    <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
-                    @csrf
-                            <div class="form-group row">  
-                                <label class="control-label mr-10 text-left">Dari tanggal</label>
-                                <input type='date' class="form-control" name="start_date">
-                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
-                                <input type='date' class="form-control" name="end_date">
-                                <button type="submit" class="btn btn-primary pa-5 btn-sm" value="Submit"><i class="zmdi zmdi-search"></i></button>
-                                <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
-                            </div>
-                        
-                        </form>
-                        <div class="table-wrap">
-                        <div class="table-responsive">
-                            <table id="tbl_employee" class="table table-hover display pb-30 text-center">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">NO</th>
-                                        <th class="text-center">Tanggal Input</th>
-                                        <th class="text-center">Bulan Input</th>
-                                        <th class="text-center">Permanen</th>
-                                        <th class="text-center">Outsource</th>
-                                        <th class="text-center">Contract</th>
-                                        <th class="text-center">Jumlah</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                $i=1; foreach($employees as $dataEmployee): ?>
-                                
-                                    <tr>
-                                        <td>{{$i++}}</td>
-                                        <td>{{ $dataEmployee->dateTglInput->format('d/m/Y') }}</td>
-                                        <td>{{ $dataEmployee->dateTglInput->format('F Y') }}</td>
-                                        <td>{{ $dataEmployee->intKaryawan }}</td>
-                                        <td>{{ $dataEmployee->intOutsource }}</td>
-                                        <td>{{ $dataEmployee->intContract }}</td>
-                                        <td>{{ $dataEmployee->intJumlahEmployee }}</td>
-                                        <td>
-                                        <form action="{{route('employee.delete', $dataEmployee->id)}}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateEmployee{{$dataEmployee->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
-                                        @csrf 
-                                        @method("delete")
-                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
-                                        </form>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                        </div>
-                        <div  id="profile_15" class="tab-pane fade" role="tabpanel">
-                        <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-geto" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Geto</span></button>
-                        
-                        <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
-                        @csrf  
-                        <div class="form-group row">  
-                                <label class="control-label mr-10 text-left">Dari tanggal</label>
-                                <input type='date' class="form-control" name="start_date">
-                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
-                                <input type='date' class="form-control" name="end_date">
-                            <button type="submit" class="btn btn-primary pa-5" value="Submit"><i class="zmdi zmdi-search"></i></button>
-                            <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
-
-                            
-                        </div>
-                        
-                        </form>   
-                        <div class="table-wrap">
-                        <div class="table-responsive">
-                        <table id="tbl_user" class="table table-hover display pb-30 text-center">
-                            <thead>
-                                <tr>
-                                    <th colspan="5" class="text-center">Jumlah</th>
-                                    <th colspan="2" class="text-center">Presentase</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Bulan</th>
-                                    <th class="text-center">Permanen</th>
-                                    <th class="text-center">Outsource</th>
-                                    <th class="text-center">Contract</th>
-                                    <th class="text-center">Total</th>
-                                    <th class="text-center">%Permanen</th>
-                                    <th class="text-center">%Total</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                                
-                                $i=1; $j=0; foreach($getos as $geto):
-                                $persentaseKaryawanGeto=($geto->intGetoKaryawan/$employees[$j]->intKaryawan)*100;
-                                $persentaseTotalGeto=($geto->intTotal/$employees[$j]->intJumlahEmployee)*100; 
-                                ?>
-                                
-                                    <tr>
-                                        <td>{{$i++}}</td>
-                                        <td>{{ $geto->dateTglInput->format('F Y') }}</td>
-                                        <td>{{ $geto->intGetoKaryawan }}</td>
-                                        <td>{{ $geto->intGetoOutsource }}</td>
-                                        <td>{{ $geto->intGetoKontark }}</td>
-                                        <td>{{ $geto->intTotal }}</td>
-                                        <td>{{number_format($persentaseKaryawanGeto,2)}}%</td>
-                                        <td>{{number_format($persentaseTotalGeto,2)}}%</td>
-                                        <td>
-                                        <form action="{{route('geto.delete',$geto->id)}}" method="POST">
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateGeto{{$geto->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
-                                        @csrf 
-                                        @method("delete")
-                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
-                                        </form>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                            </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    </div>
-                        <div  id="profile_16" class="tab-pane fade" role="tabpanel">
-                        <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-to" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data TO</span></button>
-
-                        <form action="{{ route('employee.filter') }}" method="POST" class="form-inline mb-30 mt-30">
-                        @csrf
-                            <div class="form-group row">  
-                                <label class="control-label mr-10 text-left">Dari tanggal</label>
-                                <input type='date' class="form-control" name="start_date">
-                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
-                                <input type='date' class="form-control" name="end_date">
-                            <button type="submit" class="btn btn-primary pa-5" value="Submit"><i class="zmdi zmdi-search"></i></button>
-                            <a class="btn btn-primary pa-5 btn-sm" href="{{ route('employee') }}"><i class="fa fa-undo"></i></a>
-                        </div>
-                        
-                        </form>
-                        <div class="table-wrap">
-                        <div class="table-responsive">
-                        <table id="tbl_user" class="table table-hover display pb-30 text-center">
-                        <thead>
-                            <tr>
-                                <th colspan="6" class="text-center">Jumlah</th>
-                                <th colspan="3" class="text-center">Presentase</th>
-                            </tr>
-                            <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Bulan</th>
-                                    <th class="text-center">Permanen</th>
-                                    <th class="text-center">Outsource</th>
-                                    <th class="text-center">Contract</th>
-                                    <th class="text-center">PKWTT+PKWT</th>
-                                    <th class="text-center">Total</th>
-                                    <th class="text-center">%Permanen</th>
-                                    <th class="text-center">%Contract</th>
-                                    <th class="text-center">%Total</th>
-                                    <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                            $i=1;$j=0; 
-                            foreach($tos as $to): 
-                            $pkwtt = $to->intToKaryawan + $to->intToKontrak;
-                            $persentaseKaryawan=($to->intToKaryawan/$employees[$j]->intKaryawan)*100;
-                            $persentseTotalTo=($to->intTotal/$employees[$j]->intJumlahEmployee)*100;
-                            $persentseKontrakTo=($to->intToKontrak/$employees[$j]->intContract)*100; ?>
-                                    <tr>
-                                        <td>{{$i++}}</td>
-                                        <td>{{ $to->dateTglInput->format('F Y') }}</td>
-                                        <td>{{ $to->intToKaryawan }}</td>
-                                        <td>{{ $to->intToOutsource }}</td>
-                                        <td>{{ $to->intToKontrak }}</td>
-                                        <td>{{$pkwtt}}</td>
-                                        <td>{{ $to->intTotal }}</td>
-                                        <td>{{number_format($persentaseKaryawan,2)}}</td>
-                                        <td>{{number_format($persentseKontrakTo,2)}}%</td>
-                                        <td>{{number_format($persentseTotalTo,2)}}%</td>
-                                        <td>
-                                        <form action="{{route('to.delete',$to->id)}}" method="POST">
-                                        @csrf
-                                        @method('put')
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTo{{$to->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
-                                        @csrf 
-                                        @method("delete")
-                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
-                                        </form>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                        </tbody>
-                        </table>
-                        </div>
-                        </div>
-                        
-                        </div>
                         </div>
                         
 
                                         
-                                        </div>
+                                       
                                     </div>	
                                 </div>
                                 </div>
@@ -573,6 +641,18 @@
 
 @push('script')
 <script type="text/javascript">
+    $('#tblTo').dataTable( {
+    paging: true,
+    searching: true
+    } );
+    $('#tblGeto').dataTable( {
+    paging: true,
+    searching: true
+    } );
+    $('#tbl_employee').dataTable( {
+    paging: true,
+    searching: true
+    } );
      $('.show_confirm').click(function(event) {
           var form =  $(this).closest("form");
           var name = $(this).data("name");

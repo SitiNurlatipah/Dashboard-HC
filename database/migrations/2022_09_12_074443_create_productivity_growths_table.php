@@ -19,6 +19,9 @@ class CreateProductivityGrowthsTable extends Migration
             $table->unsignedBigInteger('manpower_id')->unsigned();
             $table->foreign('manpower_id')
                   ->references('id')->on('productivity_manpowers')->onDelete('cascade');
+            $table->unsignedBigInteger('humancost_id')->unsigned();
+            $table->foreign('humancost_id')
+                  ->references('id')->on('productivity_humancosts')->onDelete('cascade');
             $table->timestamps();
         });
     }

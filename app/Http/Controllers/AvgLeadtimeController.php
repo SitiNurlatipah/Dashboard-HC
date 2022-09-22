@@ -4,12 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AvdLeadtimeRecruitment;
-
+use DB;
 class AvgLeadtimeController extends Controller
 {
     public function index(){
         $avg = AvdLeadtimeRecruitment::all();
-        return view('pages.avg-leadtime-recruitment.index',
+        $rataPermanent = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intPermanent1+intPermanent2+intPermanent3+intPermanent4+intPermanent5) as float) as rataPermanent"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataPermanent');
+        $rataContract = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intContract) as float) as rataContract"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataContract');
+        $rataJobSupply = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intJobSupply) as float) as rataJobSupply"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataJobSupply');
+        $rataInternship = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intInternship) as float) as rataInternship"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataInternship');
+        $tahun=AvdLeadtimeRecruitment::select(DB::raw("year(dateBulanAvg) as tahun"))
+        ->GroupBy(DB::raw("year(dateBulanAvg)"))
+        ->orderBy('dateBulanAvg', 'ASC')
+        ->pluck('tahun');
+        return view('pages.avg-leadtime-recruitment.index', compact('rataPermanent','rataContract','rataJobSupply','rataInternship','tahun'),
         ['avg_recruitments'=>$avg]
         );
      }
@@ -54,7 +74,7 @@ class AvgLeadtimeController extends Controller
     }
     public function update(Request $request, $idAvg){
         $avg = AvdLeadtimeRecruitment::find($idAvg);
-        $avg->intStdPermanent = $request->intMppPermanent;
+        $avg->intStdPermanent = $request->intStdPermanent;
         $avg->intPermanent1 = $request->intPermanent1;
         $avg->intPermanent1 = $request->intPermanent2;
         $avg->intPermanent3 = $request->intPermanent3;
@@ -66,7 +86,7 @@ class AvgLeadtimeController extends Controller
         $avg->intJobSupply = $request->intJobSupply;
         $avg->intStdInternship = $request->intStdInternship;
         $avg->intInternship = $request->intInternship;
-        $avg->dateBulan = $request->dateBulan;
+        $avg->dateBulanAvg = $request->dateBulanAvg;
         $avg->save();
         return redirect()->route('avg')->with('message','Data updated successfully.');
 	}

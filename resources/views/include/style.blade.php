@@ -25,6 +25,7 @@
 
 	<!-- Custom CSS -->
 	<link href="{{ asset('droopy/dist/css/style.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('droopy/dist/css/daterangepicker.css') }}" rel="stylesheet" type="text/css">
 
 	@stack('style')
 

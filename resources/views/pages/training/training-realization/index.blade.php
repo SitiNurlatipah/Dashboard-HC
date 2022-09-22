@@ -103,9 +103,13 @@
                 <div class="modal-body">
                 <form action="{{ route('realization.post') }}" method="POST">
                 @csrf 
-                        
-                        <div class="form-group">
-                            <label for="txtPelaksanaan" class="control-label mb-10">Online/Offline</label>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="dateTanggal" class="control-label mb-5">Tanggal Implementasi</label>
+                            <input type="date" class="form-control" name="dateTanggal">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="txtPelaksanaan" class="control-label mb-5">Online/Offline</label>
                             <select name="txtPelaksanaan" class="form-control">
                             <option value="">--Pilih Pelaksanaan Training--</option>
                             <option value="Online">Online</option>
@@ -113,28 +117,39 @@
                             <option value="Blended">Blended</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="txtMedia" class="control-label mb-10">Media</label>
+                        <div class="col-sm-4">
+                            <label for="txtMedia" class="control-label mb-5">Media</label>
                             <input type="text" class="form-control" name="txtMedia">
                         </div>
-                        <div class="form-group">
-                            <label for="intTrainingName" class="control-label mb-10">Nama Training</label>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="intTrainingName" class="control-label mb-5">Nama Training</label>
                             <input type="text" class="form-control" name="txtTrainingName">
                         </div>
-                        <div class="form-group">
-                            <label for="txtTrainee" class="control-label mb-10">Trainee</label>
+                        <div class="col-sm-6">
+                            <label for="txtTrainer" class="control-label mb-5">Trainer</label>
+                            <input type="text" class="form-control"  name="txtTrainer">
+                        </div>
+                        
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="txtTrainee" class="control-label mb-5">Trainee</label>
                             <input type="text" class="form-control" name="txtTrainee">
                         </div>
-                        <div class="form-group">
-                            <label for="txtFormUsulan" class="control-label mb-10">Form Usulan</label>
-                            <input type="text" class="form-control"  name="txtFormUsulan">
+                        <div class="col-sm-3">
+                            <label for="intTotalParticipants" class="control-label mb-5">Totap Participants</label>
+                            <input type="number" class="form-control" name="intTotalParticipant">
                         </div>
-                        <div class="form-group">
-                            <label for="dateTanggal" class="control-label mb-10">Tanggal Implementasi</label>
-                            <input type="date" class="form-control" name="dateTanggal">
+                        <div class="col-sm-3">
+                            <label for="intTotalCost" class="control-label mb-5">Total Cost</label>
+                            <input type="number" class="form-control" name="intTotalCost">
                         </div>
-                        <div class="form-group">
-                            <label for="txtTrainingType" class="control-label mb-10">Tipe</label>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="txtTrainingType" class="control-label mb-5">Tipe</label>
                             <select name="txtTrainingType" class="form-control">
                             <option value="">--Pilih Tipe Training--</option>
                             <option value="Internal">Internal</option>
@@ -142,55 +157,58 @@
                             <option value="In House">In House</option>
                             </select>                        
                         </div>
-                        <div class="form-group">
-                            <label for="txtStatus" class="control-label mb-10">Status</label>
+                        <div class="col-sm-4">
+                            <label for="txtStatus" class="control-label mb-5">Status</label>
                             <select name="txtStatus" class="form-control">
                             <option value="">--Pilih Status--</option>
                             <option value="Sesuai RPT">Sesuai RPT</option>
                             <option value="Tidak Sesuai RPT">Tidak Sesuai RPT</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="intTotalParticipants" class="control-label mb-10">Totap Participants</label>
-                            <input type="number" class="form-control" name="intTotalParticipant">
+                        <div class="col-sm-4">
+                            <label for="txtFormUsulan" class="control-label mb-5">Form Usulan</label>
+                            <select name="txtFormUsulan" class="form-control">
+                            <option value="">--Pilih--</option>
+                            <option value="Ada">Internal</option>
+                            <option value="Tidak Ada">External</option>
+                            </select>                        
                         </div>
-                        <div class="form-group">
-                            <label for="intTotalCost" class="control-label mb-10">Total Cost</label>
-                            <input type="number" class="form-control" name="intTotalCost">
-                        </div>
-                        <div class="form-group">
-                            <label for="timeDurationStart" class="control-label mb-10">Jam Mulai</label>
+                    </div>
+                    <div class="row form-group">
+                        
+                        <div class="col-sm-4">
+                            <label for="timeDurationStart" class="control-label mb-5">Jam Mulai</label>
                             <input type="time" class="form-control" name="timeDurationStart">
                         </div>
-                        <div class="form-group">
-                            <label for="timeDurationEnd" class="control-label mb-10">Jam Selesai</label>
+                        <div class="col-sm-4">
+                            <label for="timeDurationEnd" class="control-label mb-5">Jam Selesai</label>
                             <input type="time" class="form-control" name="timeDurationEnd">
                         </div>
-                        <div class="form-group">
-                            <label for="timeDurationTotal" class="control-label mb-10">Total Jam</label>
+                        <div class="col-sm-4">
+                            <label for="timeDurationTotal" class="control-label mb-5">Total Jam</label>
                             <input type="time" class="form-control" name="timeDurationTotal">
                         </div>
-                        <div class="form-group">
-                            <label for="intSumOfSession" class="control-label mb-10">Sum Of Session</label>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="intSumOfSession" class="control-label mb-5">Sum Of Session</label>
                             <input type="text" class="form-control" name="intSumOfSession">
                         </div>
-                        <div class="form-group">
-                            <label for="timeTrainingHour" class="control-label mb-10">Training Hour</label>
+                        <div class="col-sm-6">
+                            <label for="timeTrainingHour" class="control-label mb-5">Training Hour</label>
                             <input type="time" class="form-control"  name="timeTrainingHour">
                         </div>
-                        <div class="form-group">
-                            <label for="txtTrainer" class="control-label mb-10">Trainer</label>
-                            <input type="text" class="form-control"  name="txtTrainer">
-                        </div>
-                        <div class="form-group">
-                            <label for="txtReason" class="control-label mb-10">Reason</label>
+                    </div>
+                        
+                    <div class="form-group">
+                            <label for="txtReason" class="control-label mb-5">Reason</label>
                             <input type="text" class="form-control"  name="txtReason">
                         </div>
                         
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
                 </form>
             </div>       
         </div>

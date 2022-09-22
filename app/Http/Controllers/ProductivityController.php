@@ -12,10 +12,11 @@ class ProductivityController extends Controller
 {
     public function index(){
         $productivity=Productivity::orderBy('dateBulan', 'DESC')->get();
-        $humancost=HumanCost::orderBy('dateBulan', 'DESC')->get();
+        $humancost=HumanCost::orderBy('dateBulanCost', 'DESC')->get();
         $growth=Growth::
         leftJoin('productivity_manpowers','productivity_growths.manpower_id','=','productivity_manpowers.id')
-        ->orderBy('dateBulan', 'ASC')
+        ->leftJoin('productivity_humancosts','productivity_growths.humancost_id','=','productivity_humancosts.id')
+        ->orderBy('dateBulanGrowth', 'ASC')
         ->get();
         
         $productiv = Productivity::select(DB::raw("CAST(SUM((intOutputActual/intTotal)*1000) as int) as productiv"))
@@ -31,12 +32,12 @@ class ProductivityController extends Controller
 					->orderBy('dateBulan', 'ASC')
                     ->pluck('actual');
         $costProduct = HumanCost::select(DB::raw("CAST(SUM(intCostActual/(intOutputActual*1000)) as int) as costProduct"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
-					->orderBy('dateBulan', 'ASC')
+                    ->GroupBy(DB::raw("Month(dateBulanCost)"))
+					->orderBy('dateBulanCost', 'ASC')
                     ->pluck('costProduct');
         $costActual = HumanCost::select(DB::raw("CAST(SUM(intCostActual) as int) as costActual"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
-					->orderBy('dateBulan', 'ASC')
+                    ->GroupBy(DB::raw("Month(dateBulanCost)"))
+					->orderBy('dateBulanCost', 'ASC')
                     ->pluck('costActual');
         $coba = Growth::leftJoin('productivity_manpowers','productivity_growths.manpower_id','=','productivity_manpowers.id')
                     ->select(DB::raw("CAST(SUM(intOutputActual) as int) as coba"))
@@ -47,9 +48,9 @@ class ProductivityController extends Controller
                     ->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
                     ->orderBy('dateBulan', 'ASC')
                     ->pluck('bulan');
-        $bulanCost=HumanCost::select(DB::raw("MONTHNAME(dateBulan) as bulanCost"))
-                    ->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
-                    ->orderBy('dateBulan', 'ASC')
+        $bulanCost=HumanCost::select(DB::raw("MONTHNAME(dateBulanCost) as bulanCost"))
+                    ->GroupBy(DB::raw("MONTHNAME(dateBulanCost)"))
+                    ->orderBy('dateBulanCost', 'ASC')
                     ->pluck('bulanCost');
         
         return view('pages.productivity.index',compact('productiv','bulan','manpower','actual','costProduct','costActual','bulanCost','coba'),[
@@ -82,12 +83,14 @@ class ProductivityController extends Controller
     public function storeGrowth(Request $request){
         $request->validate( [
             'dateBulanGrowth' => 'required',			
-              'manpower_id'=>'required'          
+              'manpower_id'=>'required',         
+              'humancost_id'=>'required'          
         ]);
         
         $valid = [
             'dateBulanGrowth'=>$request->dateBulanGrowth,
             'manpower_id'=>$request->manpower_id,
+            'humancost_id'=>$request->humancost_id
 
         ];
         Growth::create($valid);
@@ -117,7 +120,7 @@ class ProductivityController extends Controller
             'intCostActual' => 'required',
             'intOutputPlan' => 'required',
             'intOutputActual' => 'required',
-            'dateBulan' => 'required',			
+            'dateBulanCost' => 'required',			
                         
         ]);
         
@@ -126,7 +129,7 @@ class ProductivityController extends Controller
             'intCostActual'=>$request->intCostActual,
             'intOutputPlan'=>$request->intOutputPlan,
             'intOutputActual'=>$request->intOutputActual,
-            'dateBulan'=>$request->dateBulan,
+            'dateBulanCost'=>$request->dateBulanCost,
         ];
         
         HumanCost::create($valid);
@@ -139,7 +142,7 @@ class ProductivityController extends Controller
         $humancost->intCostActual = $request->intCostActual;
         $humancost->intOutputPlan = $request->intOutputPlan;
         $humancost->intOutputActual = $request->intOutputActual;
-        $humancost->dateBulan = $request->dateBulan;
+        $humancost->dateBulanCost = $request->dateBulanCost;
         $humancost->save();
         return redirect()->route('productivity')->with('message','Data updated successfully.');
 	}
@@ -149,9 +152,9 @@ class ProductivityController extends Controller
         // $data->delete();
         return redirect()->route('productivity')->with('message','Data deleted successfully');
     }
-    public function destroyGrowth($id)
+    public function destroyGrowth($idGrowth)
     {
-        Growth::find($id)->delete();
+        Growth::find($idGrowth)->delete();
         // $data->delete();
         return redirect()->route('productivity')->with('message','Data deleted successfully');
     }

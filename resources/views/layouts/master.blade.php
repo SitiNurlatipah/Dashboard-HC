@@ -31,9 +31,9 @@
 
 
       <div class="page-wrapper">
-        <div class="container-fluid pt-25">
+        <div class="container-fluid">
           @yield('content')
-          
+          @include('include.style')
         </div>
           @include('include.footer')
       </div>

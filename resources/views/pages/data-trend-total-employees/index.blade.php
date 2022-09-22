@@ -16,16 +16,16 @@
             
             <div class="panel-wrapper collapse in">
             <div class="panel-body">
-            <div  class="tab-struct custom-tab-2 mt-5">
-                        <ul role="tablist" class="nav nav-tabs" id="myTabs_15">
-                            <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Data Total Employee</a></li>
-                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Grafik</a></li>
-                            
-                        </ul>
+            <div  class="tab-struct custom-tab-1 mt-0">
+                <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
+                    <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Data Total Employee</a></li>
+                    <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Grafik</a></li>
+                    
+                </ul>
             @if(session()->has('message'))
             <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
             @endif
-            <div class="tab-content" id="myTabContent_15">
+            <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
             <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Total Employee</span></button>
             <form action="{{ route('total.filter') }}" method="POST" class="form-inline mb-30 mt-30">
@@ -42,7 +42,7 @@
             </form>    
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="datable_1" class="table table-hover display  pb-30 text-center" >
+                        <table id="trendTable" class="table table-hover display  pb-30 text-center" >
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -185,6 +185,10 @@
 @endsection
 @push('script')
 <script type="text/javascript">
+$('#power').dataTable( {
+paging: true,
+searching: true
+} );
      $('.delete').click(function(event) {
           var form =  $(this).closest("form");
           var name = $(this).data("name");

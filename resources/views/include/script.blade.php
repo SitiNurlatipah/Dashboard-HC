@@ -76,7 +76,9 @@
 	<script type="text/javascript" src="{{ asset('droopy/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
 	
 	<!-- Bootstrap Daterangepicker JavaScript -->
-	<script src="{{ asset('droopy/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('droopy/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('droopy/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.min.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('droopy/vendors/bower_components/bootstrap-daterangepicker/moment.min.js')}}"></script>
 	
 	<!-- Form Picker Init JavaScript -->
 	<script src="{{ asset('droopy/dist/js/form-picker-data.js') }}"></script>

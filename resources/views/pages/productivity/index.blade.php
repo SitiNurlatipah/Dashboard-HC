@@ -3,12 +3,13 @@
 @section('title', 'Productivity')
 
 @section('content')
+
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-default card-view">
             <div class="panel-heading">
                 <div class="pull-left">
-                    <h6 class="panel-title txt-dark">Data Trend Total Employee</h6>
+                    <h6 class="panel-title txt-dark">Productivity</h6>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -29,34 +30,43 @@
            
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-            <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-productivity" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Total Employee</span></button>
-            <form action="" method="POST" class="form-inline mb-30 mt-30">
+            <div class="row">
+			<div class="col-sm-12">
+            <div class="form-horizontal form-group">
+                <form action="" method="POST" class="form-inline">
                     @csrf
-                            <div class="form-group row">  
-                                <label class="control-label mr-10 text-left">Dari tanggal</label>
-                                <input type='date' class="form-control" name="startDate">
-                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
-                                <input type='date' class="form-control" name="endDate">
-                                <button type="submit" class="btn btn-primary pa-5 btn-sm" value="Submit"><i class="zmdi zmdi-search"></i></button>
-                                <a class="btn btn-primary pa-5 btn-sm" href=""><i class="fa fa-undo"></i></a>
+                            <div class="form-group row col-sm-11">
+                                <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
+                                <input type='date' class="form-control input-sm col-sm-3" name="start_date" placeholder="Dari tanggal">
+                                <label class="col-form-label text-right col-sm-1">Sampai</label>
+                                <input type='date' class="form-control input-sm col-sm-3 mr-20" name="end_date" value="Sampai tanggal">
+                                <button class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
+                                <button type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href=""><i class="fa fa-undo"></i><span class="btn-text">reset</span></button>
                             </div>
                         
-            </form>    
+                        </form>
+                <div class="col-sm-1 ml-30">
+                <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-productivity" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                </div>    
+            </div>
+            </div>
+            </div>
+                
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="power" class="table table-hover display  pb-30 text-center" >
+                        <table id="power" class="table table-hover font-11 pb-5 text-center">
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Bulan</th>
-                                    <th class="text-center">Man Power(Permanent)</th>
-                                    <th class="text-center">Man Power(Contract)</th>
+                                    <th class="text-center">Permanent</th>
+                                    <th class="text-center">Contract</th>
                                     <th class="text-center">Man Power Total</th>
-                                    <th class="text-center">Output Plan(Tonnage)</th>
-                                    <th class="text-center">Output Actual(Tonnage)</th>
+                                    <th class="text-center">Output Plan(Ton)</th>
+                                    <th class="text-center">Output Actual(Ton)</th>
                                     <th class="text-center">Output Actual(Kg)</th>
-                                    <th class="text-center">Productivity Permanen(Kg/Man)</th>
-                                    <th class="text-center">Productivity Permanen & Contract(Kg/Man)</th>
+                                    <th class="text-center">Productivity P (Kg/Man)</th>
+                                    <th class="text-center">Productivity P & C (Kg/Man)</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -97,22 +107,33 @@
                 </div>
             </div>
             <div  id="profile_15" class="tab-pane fade" role="tabpanel">
-            <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-humancost" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Total Employee</span></button>
-            <form action="" method="POST" class="form-inline mb-30 mt-30">
+            <div class="row">
+			<div class="col-sm-12">
+            <div class="form-horizontal form-group">
+                <form action="" method="POST" class="form-inline">
                     @csrf
-                            <div class="form-group row">  
-                                <label class="control-label mr-10 text-left">Dari tanggal</label>
-                                <input type='date' class="form-control" name="startDate">
-                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
-                                <input type='date' class="form-control" name="endDate">
-                                <button type="submit" class="btn btn-primary pa-5 btn-sm" value="Submit"><i class="zmdi zmdi-search"></i></button>
-                                <a class="btn btn-primary pa-5 btn-sm" href=""><i class="fa fa-undo"></i></a>
+                            <div class="form-group row col-sm-11">
+                                <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
+                                <input type='date' class="form-control input-sm col-sm-3 mr-10 ml-0" name="start_date" placeholder="Dari tanggal">
+                                <label class="col-form-label text-right col-sm-1">Sampai</label>
+                                <input type='date' class="form-control input-sm col-sm-3 mr-20" name="end_date" value="Sampai tanggal">
+                                <button class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
+                                <button type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href=""><i class="fa fa-undo"></i><span class="btn-text">reset</span></button>
                             </div>
                         
-            </form>    
+                        </form>
+                <div class="col-sm-1 ml-30">
+                <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-humancost" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                </div>
+                        
+                
+            </div>
+            </div>
+            </div>
+              
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="cost" class="table table-hover display  pb-30 text-center" >
+                        <table id="cost" class="table table-hover font-12 display  pb-30 text-center" >
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -140,7 +161,7 @@
 
                                 <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{ $humancost->dateBulan->format ('F Y')}}</td>
+                                <td>{{ $humancost->dateBulanCost->format ('F Y')}}</td>
                                 <td>Rp{{ number_format($humancost->intCostPlan,0,',','.') }}</td>
                                 <td>Rp{{ number_format($humancost->intCostActual,0,',','.') }}</td>
                                 <td>Rp{{ number_format($costMilion,0,',','.') }}M</td>
@@ -169,10 +190,11 @@
             <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-growth" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button>        
             <div class="table-wrap">
                         <div class="table-responsive">
-                            <table id="datable_3" class="table table-hover display mb-30 text-center" >
+                            <table id="datable_3" class="table table-hover font-12 display mb-30 text-center" >
                                 <thead> 
                                     <tr>
                                         
+                                        <th class="text-center">No</th>
                                         <th class="text-center">Bulan</th>
                                         <th class="text-center">Man Power Permanent</th>
                                         <th class="text-center">Man Power Contract</th>
@@ -189,36 +211,39 @@
                                 <?php
                                 $i=1;
                                 
-                                foreach($productivity_growths as $growth):
-                                    $j=1;
-                                    $j++;
-                                    // $productivityaAll=(($growth->intOutputActual/$growth->intTotal)*1000);
-                                    $growthManpower=($growth->intTotal-$productivity_growths[$j-1]->intTotal)/$productivity_growths[$j-1]->intTotal;
-                                    $growthOutput=($growth->intOutputActual-$productivity_growths[$j-1]->intOutputActual)/$productivity_growths[$j-1]->intOutputActual;
+                                foreach($productivity_growths as $key => $growth):
+                                    
+                                    $j = $key == 0 ? 0 :$key-1;
+                                    //dd($productivity_growths->toArray(), $productivity_growths[$j-1]->intTotal);
+                                    $productivityAll=$growth->intCostActual/($growth->intOutputActual*1000);
+                                    $growthManpower=($growth->intTotal-$productivity_growths[$j]->intTotal)/$productivity_growths[$j]->intTotal;
+                                    $growthOutput=($growth->intOutputActual-$productivity_growths[$j]->intOutputActual)/$productivity_growths[$j]->intOutputActual;
+                                    $growthProductivity=($productivityAll-($productivity_growths[$j]->intCostActual/($productivity_growths[$j]->intOutputActual*1000)))/($productivity_growths[$j]->intCostActual/($productivity_growths[$j]->intOutputActual*1000));
                                     // dd($j);
                                     // $growthProductivity=($growth->productivityAll-$productivity_growths[$j-1]->productivityAll)/$productivity_growths[$j-1]->productivityAll;
-                                    
                                     
                                 
                                     ?>
                                     <tr>
-                                        
+                                     
+                                        <td>{{$i++}}</td>
                                         <td>{{ $growth->dateBulanGrowth->format('F Y') }}</td>
                                         <td>{{ $growth->intPermanen }}</td>
                                         <td>{{ $growth->intContract }}</td>
                                         <td>{{ $growth->intTotal }}</td>
+                                        
                                         <td>{{number_format($growthManpower*100,2)}}%</td>
                                         <td>{{ $growth->intOutputActual }}</td>
-                                        <td>{{$growthOutput}}</td>
-                                        <td>{{ $growth->dateBulan }}</td>
-                                        <td></td>
+                                        <td>{{number_format($growthOutput*100,2)}}%</td>
+                                        <td>{{number_format($productivityAll,0)}}</td>
+                                        <td>{{number_format($growthProductivity*100,2)}}%</td>
                                         <td>
-                                        <form action="{{route('growth.delete',$growth->id)}}" method="POST">
+                                        <form action="{{route('growth.delete',$growth->idGrowth)}}" method="POST">
                                         @csrf
                                         @method('put')
                                         <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         @csrf 
-                                        @method("delete")
+                                        @method("delete") 
                                             <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
                                         </form>
                                         </td>
@@ -365,35 +390,38 @@
                 <div class="modal-body">
                 <form action="{{ route('productivity.post') }}" method="POST">
                 @csrf 
-                        
-                        <div class="form-group">
+                    <div class="row form-group">
+                        <div class="col-sm-4">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-4">
                             <label for="intPermanen" class="control-label mb-10">Permanen</label>
                             <input type="number" class="form-control" id="intPermanen" name="intPermanen">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-4">
                             <label for="intContract" class="control-label mb-10">Contract</label>
                             <input type="number" class="form-control" id="intContract" name="intContract">
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
                             <label for="intOutputPlan" class="control-label mb-10">Output Plan</label>
                             <input type="text" class="form-control" id="intOutputPlan" name="intOutputPlan">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-6">
                             <label for="intOutputActual" class="control-label mb-10">Output Actual</label>
                             <input type="text" class="form-control" id="intOutputActual" name="intOutputActual">
                         </div>
+                    </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
                             <input type="date" class="form-control" id="dateBulan" name="dateBulan">
                         </div>
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-xs">Add</button>
                         </div>
                 </form>
             </div>       
@@ -413,27 +441,30 @@
                 <form action="/productivity/{{$productivity->id}}" method="POST">
                 @csrf 
                 @method('put')       
-                        <div class="form-group">
+                    <div class="row form-group">
+                        <div class="col-sm-4">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal" value="{{$productivity->intTotal}}">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-4">
                             <label for="intPermanen" class="control-label mb-10">Permanen</label>
                             <input type="number" class="form-control" id="intPermanen" name="intPermanen" value="{{$productivity->intPermanen}}">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-4">
                             <label for="intContract" class="control-label mb-10">Kontrak</label>
                             <input type="number" class="form-control" id="intContract" name="intContract" value="{{$productivity->intContract}}">
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
                             <label for="intJobSupply" class="control-label mb-10">Output Plan</label>
                             <input type="text" class="form-control" id="intOutputPlan" name="intOutputPlan" value="{{$productivity->intOutputPlan}}">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-6">
                             <label for="intJobSupply" class="control-label mb-10">Output Actual</label>
                             <input type="text" class="form-control" id="intOutputActual" name="intOutputActual" value="{{$productivity->intOutputActual}}">
                         </div>
-                        
+                    </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
                             <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$productivity->dateBulan}}">
@@ -454,36 +485,43 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title" id="add-userLabel1">Tambah Productivity Man Power</h5>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Human Cost</h5>
                 </div>
                 <div class="modal-body">
                 <form action="{{ route('humancost.post') }}" method="POST">
                 @csrf 
                         
-                        <div class="form-group">
-                            <label for="intCostPlan" class="control-label mb-10">Cost Plan</label>
-                            <input type="text" class="form-control" id="intCostPlan" name="intCostPlan">
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label for="intCostPlan" class="control-label mb-10">Cost Plan</label>
+                                <input type="text" class="form-control" id="intCostPlan" name="intCostPlan">
+                            </div>
+                         
+                            <div class="col-sm-6">
+                                <label for="intCostActual" class="control-label mb-10">Cost Actual</label>
+                                <input type="text" class="form-control" id="intCostActual" name="intCostActual">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="intCostActual" class="control-label mb-10">Cost Actual</label>
-                            <input type="text" class="form-control" id="intCostActual" name="intCostActual">
-                        </div>
-                        <div class="form-group">
-                            <label for="intCostActual" class="control-label mb-10">Output Plan</label>
-                            <input type="text" class="form-control" id="intOutputPlan" name="intOutputPlan">
-                        </div>
-                        <div class="form-group">
-                            <label for="intCostActual" class="control-label mb-10">Output Actual</label>
-                            <input type="text" class="form-control" id="intOutputActual" name="intOutputActual">
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label for="intCostActual" class="control-label mb-10">Output Plan</label>
+                                <input type="text" class="form-control" id="intOutputPlan" name="intOutputPlan">
+                            </div>
+                        
+                            <div class="col-sm-6">
+                                <label for="intCostActual" class="control-label mb-10">Output Actual</label>
+                                <input type="text" class="form-control" id="intOutputActual" name="intOutputActual">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan">
+                            <input type="date" class="form-control" id="dateBulanCost" name="dateBulan">
                         </div>
                         
+                        
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-xs">Add</button>
                         </div>
                 </form>
             </div>       
@@ -503,31 +541,35 @@
                 <form action="/productivity/humancost/{{$humancost->id}}" method="POST">
                 @csrf 
                 @method('put')       
-                        <div class="form-group">
+                    <div class="row form-group">
+                        <div class="col-sm-6">
                             <label for="intCostPlan" class="control-label mb-10">Human Cost Plan</label>
                             <input type="number" class="form-control" id="intCostPlan" name="intCostPlan" value="{{$humancost->intCostPlan}}">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-6">
                             <label for="intCostPlan" class="control-label mb-10">Human Cost Actual</label>
                             <input type="number" class="form-control" id="intCostPlan" name="intCostActual" value="{{$humancost->intCostActual}}">
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
                             <label for="intCostPlan" class="control-label mb-10">Output Plan</label>
                             <input type="number" class="form-control" id="intOutputPlan" name="intOutputPlan" value="{{$humancost->intOutputPlan}}">
                         </div>
-                        <div class="form-group">
+                        <div class="col-sm-6">
                             <label for="intCostPlan" class="control-label mb-10">Output Actual</label>
                             <input type="number" class="form-control" id="intOutputActual" name="intOutputActual" value="{{$humancost->intOutputActual}}">
                         </div>
-                        <div class="form-group">
-                            <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$humancost->dateBulan}}">
-                        </div>
-                        
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateBulan" class="control-label mb-10">Bulan</label>
+                        <input type="date" class="form-control" id="dateBulan" name="dateBulanCost" value="{{$humancost->dateBulanCost}}">
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
                 </form>
             </div>       
         </div>
@@ -550,8 +592,23 @@
                         <input type="date" class="form-control" id="dateBulanGrowth" name="dateBulanGrowth">
                     </div>
                     <div class="form-group">
-                        <label for="dateBulan" class="control-label mb-10">Id Manpower</label>
-                        <input type="number" class="form-control" id="manpower_id" name="manpower_id">
+                        <label for="manpower_id" class="control-label mb-10">Id Manpower</label>
+                        <select name="manpower_id" id="manpower_id" class="form-control">
+                            <option disable selected>--Pilih bulan productivity--</option>
+                            @foreach($productivity_manpowers as $productivity)
+                            <option value="{{ $productivity->id }}">{{ $productivity->dateBulan->format('F Y')}}</option>
+                            @endforeach
+                        </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="dateBulan" class="control-label mb-10">Id Humancost</label>
+                        <select name="humancost_id" id="humancost_id" class="form-control">
+                            <option disable selected>--Pilih bulan humancost--</option>
+                            @foreach($productivity_humancosts as $humancost)
+                            <option value="{{ $humancost->id }}">{{ $humancost->dateBulanCost->format('F Y')}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     
                     
@@ -564,10 +621,17 @@
     </div>
 </div>
 </div>
+
 <!-- end add data -->
 @endsection
+
 @push('script')
 <script type="text/javascript">
+$('input[name="dateFilter"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+});
     $('.delete').click(function(event) {
           var form =  $(this).closest("form");
           var name = $(this).data("name");
@@ -888,5 +952,6 @@
     $('#datable_3').dataTable( {
         paging: true
     } );
+
 </script>
 @endpush

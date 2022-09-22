@@ -1564,7 +1564,7 @@ button.fc-agendaWeek-button, .fc-prev-button, .fc-next-button, .fc-today-button 
       font-size: 16px;
       height: 100%;
       left: 0;
-      padding-top: 10px;
+      padding-top: 5px;
       position: absolute;
       top: -100%;
       -webkit-transition: all 0.3s ease 0s;
@@ -1865,9 +1865,9 @@ button.fc-agendaWeek-button, .fc-prev-button, .fc-next-button, .fc-today-button 
     .btn.btn-square.btn-sm, .wizard > .actions a.btn-square.btn-sm, .dt-buttons .btn-square.btn-sm.dt-button, .tablesaw-sortable th.tablesaw-sortable-head button.btn-square.btn-sm, .sweet-alert button.btn-square.btn-sm, .owl-theme .owl-nav .btn-square.btn-sm[class*="owl-"], button.btn-square.btn-sm.fc-agendaDay-button.fc-state-default.fc-corner-right,
     button.btn-square.btn-sm.fc-month-button.fc-state-default.fc-corner-left,
     button.btn-square.btn-sm.fc-agendaWeek-button, .btn-square.btn-sm.fc-prev-button, .btn-square.btn-sm.fc-next-button, .btn-square.btn-sm.fc-today-button {
-      height: 35px;
-      width: 35px;
-      padding: 6px !important; }
+      height: 25px;
+      width: 25px;
+      padding: 3px !important; }
   .btn.btn-circle, .wizard > .actions a.btn-circle, .dt-buttons .btn-circle.dt-button, .tablesaw-sortable th.tablesaw-sortable-head button.btn-circle, .sweet-alert button.btn-circle, .owl-theme .owl-nav .btn-circle[class*="owl-"], button.btn-circle.fc-agendaDay-button.fc-state-default.fc-corner-right,
   button.btn-circle.fc-month-button.fc-state-default.fc-corner-left,
   button.btn-circle.fc-agendaWeek-button, .btn-circle.fc-prev-button, .btn-circle.fc-next-button, .btn-circle.fc-today-button {
@@ -3069,7 +3069,7 @@ a#toggle_mobile_nav {
     color: inherit;
     border-radius: 0;
     margin: -15px -15px 0;
-    padding: 20px 15px; }
+    padding: 10px 15px; }
     .card-view.panel > .panel-heading.small-panel-heading {
       padding: 11px 15px; }
     .card-view.panel > .panel-heading .head-overlay {
@@ -3188,7 +3188,7 @@ footer {
   background-color: #fff;
   box-shadow: none;
   color: #212121;
-  height: 42px; }
+  height: 30px; }
   .form-control:focus, .select2-container--default .select2-selection--single .select2-selection__rendered:focus,
   .select2-container--default .select2-selection--single:focus, .select2-selection.select2-selection--multiple:focus, .wizard .content > .body input:focus, .mce-floatpanel .mce-textbox:focus, .mce-floatpanel .mce-btn:focus, .dataTables_wrapper .dataTables_filter input:focus, .dataTables_wrapper .dataTables_length select:focus, .jsgrid-cell input:focus, .jsgrid-cell select:focus, .tablesaw-bar .btn-select select:focus, .dd-handle:focus, .dd3-content:focus, .app-search .form-control:focus, .app-search .jsgrid-cell input:focus, .jsgrid-cell .app-search input:focus, .app-search .jsgrid-cell select:focus, .jsgrid-cell .app-search select:focus, .app-search .dd-handle:focus, .app-search .dd3-content:focus {
     border-color: rgba(33, 33, 33, 0.3);
@@ -3226,7 +3226,13 @@ footer {
     border: 1px solid #dedede; }
 
 .control-label {
-  color: #212121; }
+  color: #212121; 
+}
+.col-form-label {
+  color: #212121; 
+  padding-top: 3px;
+}
+
 
 .input-group-addon {
   background: transparent none repeat scroll 0 0;
@@ -4092,8 +4098,8 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
 .table > thead > tr > th, .jsgrid-table > thead > tr > th, .table > tfoot > tr > th, .jsgrid-table > tfoot > tr > th {
   border-bottom: 2px solid #dedede !important;
   color: #212121;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 9px;
+  font-weight: 450;
   text-transform: uppercase; }
 
 .table > tfoot > tr > th, .jsgrid-table > tfoot > tr > th {

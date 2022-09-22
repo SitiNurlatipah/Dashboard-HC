@@ -19,20 +19,12 @@
             <div class="panel-wrapper collapse in">
             
                 <div class="panel-body">
-                    <button class="btn btn-primary btn-lable-wrap left-label"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
-                    <form action="{{route('user')}}" method="get">
-                    <div class="input-group col-md-2 pt-10">
-                        <input type="text" name="cari" class="form-control" placeholder="Search" value="{{$request->cari}}">
-                        <span class="input-group-btn">
-                        <button type="submit" class="btn  btn-square"><i class="zmdi zmdi-search"></i></button>
-                        </span>
-                    </div>
-                    </form>
+                    <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
                     <div class="table-wrap">
                     
                         <div class="table-responsive text-center">
                         
-                            <table id="tbl_log_history" class="table table-hover display  pb-30 text-center" >
+                            <table id="userTable" class="table table-hover display  font-12 pb-30 text-center" >
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
@@ -65,7 +57,7 @@
                                         <td>{{ $data->dtmStartDate }}</td>
                                         <td>{{ $data->txtGender }}</td>
                                         <td>
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  id="editUser" data-toggle="modal" data-target="#updateUser-{{$data->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  id="editUser" data-toggle="modal" data-target="#updateUser{{$data->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         <form action="{{route('user.delete', $data->id)}}" method="POST">
                                         @csrf 
                                         @method("delete")
@@ -76,7 +68,7 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            {{ $users->links() }}
+                            
                         </div>
                     </div>
                 </div>
@@ -96,74 +88,81 @@
             <div class="modal-body">
                 <form action="{{ route('user.post') }}" method="POST">
                 @csrf 
-                    <div class="form-group">
-                        <label for="txtEmployeeName" class="control-label mb-10">Name</label>
-                        <input type="text" class="form-control" id="txtEmployee_name" name="txtEmployeeName" required>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="txtEmployeeName" class="control-label mb-5">Name</label>
+                            <input type="text" class="form-control" id="txtEmployee_name" name="txtEmployeeName" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="txtNik" class="control-label mb-5">Nomor Induk Karyawan(NIK)</label>
+                            <input type="text" class="form-control" id="txtNik" name="txtNik" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txtUsername" class="control-label mb-10">Username</label>
-                        <input type="text" class="form-control" id="txtUsername" name="txtUsername" required>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="txtUsername" class="control-label mb-5">Username</label>
+                            <input type="text" class="form-control" id="txtUsername" name="txtUsername" required>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="txtEmail" class="control-label mb-5">Email</label>
+                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" required>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="password" class="control-label mb-5">Password</label>
+                            <input type="password" class="form-control" id="password" name="txtPassword" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password" class="control-label mb-10">Password</label>
-                        <input type="password" class="form-control" id="password" name="txtPassword" required>
+                    
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="txtJob_title" class="control-label mb-5">Posisi</label>
+                            <input type="text" class="form-control" id="txtJob_title" name="txtJobTitle" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="txtDepartment" class="control-label mb-5">Department</label>
+                            <input type="text" class="form-control" id="txtDepartment" name="txtDepartment" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txtNik" class="control-label mb-10">Nomor Induk Karyawan(NIK)</label>
-                        <input type="text" class="form-control" id="txtNik" name="txtNik" required>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="txtGender" class="control-label mb-5">Jenis Kelamin</label>
+                            <select name="txtGender" class="form-control">
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>   
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="txtStatus" class="control-label mb-5">Status</label>
+                            <select name="txtStatus" class="form-control">
+                                <option value="Aktif">Aktif</option>
+                                <option value="Resign">Resign</option>
+                            </select>  
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="txtType" class="control-label mb-5">Tipe</label>
+                            <select name="txtType" class="form-control">
+                                <option value="Karyawan Tetap">Karyawan Tetap</option>
+                                <option value="Kontrak">Kontrak</option>
+                                <option value="Outsource">Outsource</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txtJob_title" class="control-label mb-10">Posisi</label>
-                        <input type="text" class="form-control" id="txtJob_title" name="txtJobTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtDepartment" class="control-label mb-10">Department</label>
-                        <input type="text" class="form-control" id="txtDepartment" name="txtDepartment" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtEmail" class="control-label mb-10">Email</label>
-                        <input type="email" class="form-control" id="txtEmail" name="txtEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtStatus" class="control-label mb-10">Status</label>
-                        <select name="txtStatus" class="form-control">
-                            <option value="Aktif">Aktif</option>
-                            <option value="Resign">Resign</option>
-                        </select>  
-                    </div>
-                    <div class="form-group">
-                        <label for="txtType" class="control-label mb-10">Tipe</label>
-                        <select name="txtType" class="form-control">
-                            <option value="Karyawan Tetap">Karyawan Tetap</option>
-                            <option value="Kontrak">Kontrak</option>
-                            <option value="Outsource">Outsource</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtGender" class="control-label mb-10">Jenis Kelamin</label>
-                        <select name="txtGender" class="form-control">
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                            
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="dtmStartDate" class="control-label mb-10">Tanggal Masuk</label>
-                            <input type='date' class="form-control" name="dtmStartDate" required>
-                            
-                    </div>
-                    <div class="form-group">
-                        <label for="dtmEndDate" class="control-label mb-10">Tanggal Keluar</label>
-                            <input type='date' class="form-control" name="dtmEndDate" required>
-                            
-                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="dtmStartDate" class="control-label mb-5">Tanggal Masuk</label>
+                            <input type='date' class="form-control" name="dtmStartDate" required>        
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="dtmEndDate" class="control-label mb-5">Tanggal Keluar</label>
+                            <input type='date' class="form-control" name="dtmEndDate" required>        
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Data Employee</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add Data Employee</button>
                     </div>
                 </form>
-            
+            </div>
         </div>
     </div>
 </div>
@@ -171,7 +170,7 @@
 
 <!-- modal update user -->
 @foreach($users as $data)
-<div class="modal fade" id="updateUser-{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="update-user">
+<div class="modal fade" id="updateUser{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="update-user">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -182,74 +181,80 @@
                 <form action="/user/{{$data->id}}" method="POST">
                 @csrf
                 @method('put')
-                    <div class="form-group">
-                        <label for="txtEmployeeName" class="control-label mb-10">Name</label>
-                        <input type="text" class="form-control" id="txtEmployee_name" name="txtEmployeeName" value="{{$data->txtEmployeeName}}">
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="txtEmployeeName" class="control-label mb-5">Name</label>
+                            <input type="text" class="form-control" id="txtEmployee_name" name="txtEmployeeName" value="{{$data->txtEmployeeName}}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="txtNik" class="control-label mb-5">Nomor Induk Karyawan(NIK)</label>
+                            <input type="text" class="form-control" id="txtNik" name="txtNik" value="{{$data->txtNik}}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txtUsername" class="control-label mb-10">Username</label>
-                        <input type="text" class="form-control"  name="txtUsername" value="{{$data->txtUsername}}">
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="txtEmail" class="control-label mb-5">Email</label>
+                            <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="{{$data->txtEmail}}">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="txtUsername" class="control-label mb-5">Username</label>
+                            <input type="text" class="form-control"  name="txtUsername" value="{{$data->txtUsername}}">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="password" class="control-label mb-5">Password</label>
+                            <input type="password" class="form-control" id="password" name="txtPassword" value="{{$data->txtPassword}}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password" class="control-label mb-10">Password</label>
-                        <input type="password" class="form-control" id="password" name="txtPassword" value="{{$data->txtPassword}}">
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="txtJob_title" class="control-label mb-5">Posisi</label>
+                            <input type="text" class="form-control" id="txtJob_title" name="txtJobTitle" value="{{$data->txtJobTitle}}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="txtDepartment" class="control-label mb-5">Department</label>
+                            <input type="text" class="form-control" id="txtDepartment" name="txtDepartment" value="{{$data->txtDepartment}}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txtNik" class="control-label mb-10">Nomor Induk Karyawan(NIK)</label>
-                        <input type="text" class="form-control" id="txtNik" name="txtNik" value="{{$data->txtNik}}">
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="txtStatus" class="control-label mb-5">Status</label>
+                            <select name="txtStatus" class="form-control" value="{{$data->txtStatus}}">
+                                <!-- <option value="{{$data->txtStatus}}">{{$data->txtStatus}}</option> -->
+                                <option value="Aktif">Aktif</option>
+                                <option value="Resign">Resign</option>
+                            </select>  
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="txtType" class="control-label mb-5">Tipe</label>
+                            <select name="txtType" class="form-control" value="{{$data->txtType}}">
+                                <option value="{{$data->txtType}}">{{$data->txtType}}</option>
+                                <option value="Karyawan Tetap">Karyawan Tetap</option>
+                                <option value="Kontrak">Kontrak</option>
+                                <option value="Outsource">Outsource</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="txtGender" class="control-label mb-5">Jenis Kelamin</label>
+                            <select name="txtGender" class="form-control" value="{{$data->txtGender}}" >
+                                <!-- <option value="{{$data->txtGender}}">{{$data->txtGender}}</option> -->
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txtJob_title" class="control-label mb-10">Posisi</label>
-                        <input type="text" class="form-control" id="txtJob_title" name="txtJobTitle" value="{{$data->txtJobTitle}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="txtDepartment" class="control-label mb-10">Department</label>
-                        <input type="text" class="form-control" id="txtDepartment" name="txtDepartment" value="{{$data->txtDepartment}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="txtEmail" class="control-label mb-10">Email</label>
-                        <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="{{$data->txtEmail}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="txtStatus" class="control-label mb-10">Status</label>
-                        <select name="txtStatus" class="form-control" value="{{$data->txtStatus}}">
-                            <!-- <option value="{{$data->txtStatus}}">{{$data->txtStatus}}</option> -->
-                            <option value="Aktif">Aktif</option>
-                            <option value="Resign">Resign</option>
-                        </select>  
-                    </div>
-                    <div class="form-group">
-                        <label for="txtType" class="control-label mb-10">Tipe</label>
-                        <select name="txtType" class="form-control" value="{{$data->txtType}}">
-                            <option value="{{$data->txtType}}">{{$data->txtType}}</option>
-                            <option value="Karyawan Tetap">Karyawan Tetap</option>
-                            <option value="Kontrak">Kontrak</option>
-                            <option value="Outsource">Outsource</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtGender" class="control-label mb-10">Jenis Kelamin</label>
-                        <select name="txtGender" class="form-control" value="{{$data->txtGender}}" >
-                            <!-- <option value="{{$data->txtGender}}">{{$data->txtGender}}</option> -->
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                            
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="dtmStartDate" class="control-label mb-10">Tanggal Masuk</label>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="dtmStartDate" class="control-label mb-5">Tanggal Masuk</label>
                             <input type='date' class="form-control" name="dtmStartDate" value="{{$data->dtmStartDate}}">
-                            
-                    </div>
-                    <div class="form-group">
-                        <label for="dtmEndDate" class="control-label mb-10">Tanggal Keluar</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="dtmEndDate" class="control-label mb-5">Tanggal Keluar</label>
                             <input type='date' class="form-control" name="dtmEndDate" value="{{$data->dtmEndDate}}">
-                            
-                    </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </div>
                 </form>
             
@@ -282,6 +287,9 @@
             }
           });
       });
-      
+$('#userTable').dataTable( {
+paging: true,
+searching: true
+} );  
 </script>
 @endpush

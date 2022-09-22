@@ -53,7 +53,7 @@
                                     <?php
                                     $i=1; foreach($avg_recruitments as $avg): ?>
                                         <tr>
-                                        <td>{{$avg->dateBulanAvg}}</td>
+                                        <td>{{$avg->dateBulanAvg->format('F Y')}}</td>
                                         <td></td>
                                         <td>{{ $avg->intStdPermanent }}</td>
                                         <td>{{ $avg->intPermanent1 }}</td>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                    <div id="chart" class="" style="height:367px;"></div>
+                                    <div id="chartPermanent" class="" style="height:367px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,43 @@
                             </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                    <div id="coba" class="" style="height:367px;"></div>
+                                    <div id="chartContract" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="chartJobsupply" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="chartInternship" class="" style="height:367px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -268,7 +304,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulanAvg" value="{{$avg->dateBulanAvg}}">
+                            <input type="date" class="form-control" id="dateBulanAvg" name="dateBulanAvg" value="{{$avg->dateBulanAvg}}">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -305,5 +341,191 @@ $('.delete').click(function(event) {
     }
     });
 });
+var rataPermanent =  <?php echo json_encode($rataPermanent) ?>;
+var rataContract =  <?php echo json_encode($rataContract) ?>;
+var rataJobSupply =  <?php echo json_encode($rataJobSupply) ?>;
+var rataInternship =  <?php echo json_encode($rataInternship) ?>;
+var tahun =  <?php echo json_encode($tahun) ?>;
+Highcharts.chart('chartPermanent', {
+        title: {
+            text: 'AVERAGE LEAD TIME RECRUITMENT PERMANENT'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: tahun
+        },
+        yAxis: {
+            title: {
+                text: 'Rata-rata'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Permanent',
+            data: rataPermanent
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+Highcharts.chart('chartContract', {
+        title: {
+            text: 'AVERAGE LEAD TIME RECRUITMENT CONTRACT'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: tahun
+        },
+        yAxis: {
+            title: {
+                text: 'Rata-rata'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Contract',
+            data: rataContract
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+Highcharts.chart('chartJobsupply', {
+        title: {
+            text: 'AVERAGE LEAD TIME RECRUITMENT JOB SUPPLY'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: tahun
+        },
+        yAxis: {
+            title: {
+                text: 'Rata-rata'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Job Supply',
+            data: rataJobSupply
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+Highcharts.chart('chartInternship', {
+        title: {
+            text: 'AVERAGE LEAD TIME RECRUITMENT INTERNSHIP'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: tahun
+        },
+        yAxis: {
+            title: {
+                text: 'Rata-rata'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'Internship',
+            data: rataInternship
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+
 </script>
 @endpush

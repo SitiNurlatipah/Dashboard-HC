@@ -16,22 +16,12 @@
                 <div class="panel-body">
                     <div class="table-wrap">
                         <div class="table-responsive">
-                            <table id="tbl_locater" class="table table-hover display  pb-30" >
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Locater</th>
-                                        <th>Locater Name</th>
-                                        <th>Active</th>
-                                        <th>Insert By</th>
-                                        <th>Update By</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                        <div class="form-group mb-0">
+                            <label class="control-label col-sm-3">Date Range Pick</label>
+                            <div class="col-sm-4">
+                                <input class="form-control input-daterange-datepicker" type="text" name="dateFilter" value="01/01/2016 - 01/31/2016"/>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -40,3 +30,12 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script type="text/javascript">
+$('input[name="dateFilter"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+</script>
+@endpush
