@@ -24,16 +24,20 @@
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Grafik</a></li>
                             
                         </ul>
+            
+            
             @if(session()->has('message'))
-            <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
+            <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
+            </div>
             @endif
-           
+            
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
             <div class="row">
 			<div class="col-sm-12">
             <div class="form-horizontal form-group">
-                <form action="" method="POST" class="form-inline">
+                <form action="{{ route('productivity.filter') }}" method="POST" class="form-inline">
                     @csrf
                             <div class="form-group row col-sm-11">
                                 <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
@@ -41,7 +45,7 @@
                                 <label class="col-form-label text-right col-sm-1">Sampai</label>
                                 <input type='date' class="form-control input-sm col-sm-3 mr-20" name="end_date" value="Sampai tanggal">
                                 <button class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
-                                <button type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href=""><i class="fa fa-undo"></i><span class="btn-text">reset</span></button>
+                                <a type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href="{{ route('productivity') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
                             </div>
                         
                         </form>
@@ -110,7 +114,7 @@
             <div class="row">
 			<div class="col-sm-12">
             <div class="form-horizontal form-group">
-                <form action="" method="POST" class="form-inline">
+                <form action="{{ route('productivity.filter') }}" method="POST" class="form-inline">
                     @csrf
                             <div class="form-group row col-sm-11">
                                 <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
@@ -118,7 +122,7 @@
                                 <label class="col-form-label text-right col-sm-1">Sampai</label>
                                 <input type='date' class="form-control input-sm col-sm-3 mr-20" name="end_date" value="Sampai tanggal">
                                 <button class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
-                                <button type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href=""><i class="fa fa-undo"></i><span class="btn-text">reset</span></button>
+                                <a type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href="{{ route('productivity') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
                             </div>
                         
                         </form>
@@ -393,30 +397,30 @@
                     <div class="row form-group">
                         <div class="col-sm-4">
                             <label for="intTotal" class="control-label mb-10">Total</label>
-                            <input type="number" class="form-control" id="intTotal" name="intTotal">
+                            <input type="number" class="form-control" id="intTotal" name="intTotal" required>
                         </div>
                         <div class="col-sm-4">
                             <label for="intPermanen" class="control-label mb-10">Permanen</label>
-                            <input type="number" class="form-control" id="intPermanen" name="intPermanen">
+                            <input type="number" class="form-control" id="intPermanen" name="intPermanen" required>
                         </div>
                         <div class="col-sm-4">
                             <label for="intContract" class="control-label mb-10">Contract</label>
-                            <input type="number" class="form-control" id="intContract" name="intContract">
+                            <input type="number" class="form-control" id="intContract" name="intContract" required>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-6">
                             <label for="intOutputPlan" class="control-label mb-10">Output Plan</label>
-                            <input type="text" class="form-control" id="intOutputPlan" name="intOutputPlan">
+                            <input type="text" class="form-control" id="intOutputPlan" name="intOutputPlan" required>
                         </div>
                         <div class="col-sm-6">
                             <label for="intOutputActual" class="control-label mb-10">Output Actual</label>
-                            <input type="text" class="form-control" id="intOutputActual" name="intOutputActual">
+                            <input type="text" class="form-control" id="intOutputActual" name="intOutputActual" required>
                         </div>
                     </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan">
+                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" required>
                         </div>
                         
                         <div class="modal-footer">

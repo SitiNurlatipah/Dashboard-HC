@@ -21,11 +21,33 @@
                     
                 </ul>
             @if(session()->has('message'))
-            <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
+            <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
+            </div>
             @endif
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-            <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-avg" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button>
+            <div class="row">
+			<div class="col-sm-12">
+            <div class="form-horizontal form-group">
+                <form action="{{ route('avg.filter') }}" method="POST" class="form-inline">
+                    @csrf
+                            <div class="form-group row col-sm-11">
+                                <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
+                                <input type='date' class="form-control input-sm col-sm-3 mr-10 ml-0" name="startDate" placeholder="Dari tanggal">
+                                <label class="col-form-label text-right col-sm-1">Sampai</label>
+                                <input type='date' class="form-control input-sm col-sm-3 mr-20" name="endDate" value="Sampai tanggal">
+                                <button class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
+                                <a type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href="{{ route('avg') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
+                            </div>
+                        
+                        </form>
+                <div class="col-sm-1 ml-30">
+                <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-avg" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                </div>
+            </div>
+            </div>
+            </div>
                         <div class="table-wrap">
                             <div class="table-responsive">
                                 <table id="avgTable" class="table table-hover  display mb-30 text-center" >
@@ -176,64 +198,73 @@
                 </div>
                 <div class="modal-body">
                 <form action="{{ route('avg.post') }}" method="POST">
-                @csrf 
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Standar Permanen</label>
+                @csrf
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="intPermanen" class="control-label mb-5">Standar Permanen</label>
                             <input type="number" class="form-control" id="intStdPermanent" name="intStdPermanent">
                         </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 1</label>
+                        <div class="col-sm-4">
+                            <label for="intPermanen" class="control-label mb-5">Permanen 1</label>
                             <input type="number" class="form-control" id="intPermanent1" name="intPermanent1">
                         </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 2</label>
+                        <div class="col-sm-4">
+                            <label for="intPermanen" class="control-label mb-5">Permanen 2</label>
                             <input type="number" class="form-control" id="intPermanent2" name="intPermanent2">
                         </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 3</label>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="intPermanen" class="control-label mb-5">Permanen 3</label>
                             <input type="number" class="form-control" id="intPermanent3" name="intPermanent3">
                         </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 4</label>
+                        <div class="col-sm-4">
+                            <label for="intPermanen" class="control-label mb-5">Permanen 4</label>
                             <input type="number" class="form-control" id="intPermanent4" name="intPermanent4">
                         </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 5</label>
+                        <div class="col-sm-4">
+                            <label for="intPermanen" class="control-label mb-5">Permanen 5</label>
                             <input type="number" class="form-control" id="intPermanent5" name="intPermanent5">
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Contract</label>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="intContract" class="control-label mb-5">Contract</label>
                             <input type="number" class="form-control" id="intContract" name="intContract">
                         </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Standar Contract</label>
+                        <div class="col-sm-6">
+                            <label for="intContract" class="control-label mb-5">Standar Contract</label>
                             <input type="number" class="form-control" id="intStdContract" name="intStdContract">
                         </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Job Supply</label>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="intContract" class="control-label mb-5">Job Supply</label>
                             <input type="number" class="form-control" id="intJobSupply" name="intJobSupply">
                         </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Standar Job Supply</label>
+                        <div class="col-sm-6">
+                            <label for="intContract" class="control-label mb-5">Standar Job Supply</label>
                             <input type="number" class="form-control" id="intStdJobSupply" name="intStdJobSupply">
                         </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Internship</label>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="intContract" class="control-label mb-5">Internship</label>
                             <input type="number" class="form-control" id="intInternship" name="intInternship">
                         </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Standar Internship</label>
+                        <div class="col-sm-6">
+                            <label for="intContract" class="control-label mb-5">Standar Internship</label>
                             <input type="number" class="form-control" id="intStdInternship" name="intStdInternship">
                         </div>
+                    </div>
                         <div class="form-group">
-                            <label for="dateBulan" class="control-label mb-10">Bulan</label>
+                            <label for="dateBulan" class="control-label mb-5">Tanggal Input</label>
                             <input type="date" class="form-control" id="dateBulanAvg" name="dateBulanAvg">
                         </div>
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
                         </div>
                 </form>
             </div>       
@@ -252,64 +283,73 @@
                 <div class="modal-body">
                 <form action="/leadtime/{{$avg->idAvg}}" method="POST">
                 @csrf 
-                @method('put')       
-                <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Standar Permanen</label>
-                            <input type="number" class="form-control" id="intPermanent" name="intStdPermanent" value="{{$avg->intStdPermanent}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 1</label>
-                            <input type="number" class="form-control" id="intPermanent" name="intPermanent1" value="{{$avg->intPermanent1}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 2</label>
-                            <input type="number" class="form-control" id="intPermanent" name="intPermanent2" value="{{$avg->intPermanent2}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 3</label>
-                            <input type="number" class="form-control" id="intPermanent" name="intPermanent3" value="{{$avg->intPermanent3}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 4</label>
-                            <input type="number" class="form-control" id="intPermanent" name="intPermanent4" value="{{$avg->intPermanent4}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intPermanen" class="control-label mb-10">Permanen 5</label>
-                            <input type="number" class="form-control" id="intPermanent" name="intPermanent5" value="{{$avg->intPermanent5}}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Contract</label>
-                            <input type="number" class="form-control" id="intContract" name="intContract" value="{{$avg->intContract}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Standar Contract</label>
-                            <input type="number" class="form-control" id="intStdContract" name="intStdContract" value="{{$avg->intStdContract}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Job Supply</label>
-                            <input type="number" class="form-control" id="intJobSupply" name="intJobSupply" value="{{$avg->intJobSupply}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Standar Job Supply</label>
-                            <input type="number" class="form-control" id="intStdJobSupply" name="intStdJobSupply" value="{{$avg->intStdJobSupply}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Internship</label>
-                            <input type="number" class="form-control" id="intInternship" name="intInternship" value="{{$avg->intInternship}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="intContract" class="control-label mb-10">Standar Internship</label>
-                            <input type="number" class="form-control" id="intStdInternship" name="intStdInternship" value="{{$avg->intStdInternship}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulanAvg" name="dateBulanAvg" value="{{$avg->dateBulanAvg}}">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
+                @method('put') 
+                <div class="row form-group">      
+                    <div class="col-sm-4">
+                        <label for="intPermanen" class="control-label mb-5">Standar Permanen</label>
+                        <input type="number" class="form-control" id="intPermanent" name="intStdPermanent" value="{{$avg->intStdPermanent}}">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="intPermanen" class="control-label mb-5">Permanen 1</label>
+                        <input type="number" class="form-control" id="intPermanent" name="intPermanent1" value="{{$avg->intPermanent1}}">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="intPermanen" class="control-label mb-5">Permanen 2</label>
+                        <input type="number" class="form-control" id="intPermanent" name="intPermanent2" value="{{$avg->intPermanent2}}">
+                    </div>
+                </div>
+                <div class="row form-group"> 
+                    <div class="col-sm-4">
+                        <label for="intPermanen" class="control-label mb-5">Permanen 3</label>
+                        <input type="number" class="form-control" id="intPermanent" name="intPermanent3" value="{{$avg->intPermanent3}}">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="intPermanen" class="control-label mb-5">Permanen 4</label>
+                        <input type="number" class="form-control" id="intPermanent" name="intPermanent4" value="{{$avg->intPermanent4}}">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="intPermanen" class="control-label mb-5">Permanen 5</label>
+                        <input type="number" class="form-control" id="intPermanent" name="intPermanent5" value="{{$avg->intPermanent5}}">
+                    </div>
+                </div>
+                <div class="row form-group"> 
+                    <div class="col-sm-6">
+                        <label for="intContract" class="control-label mb-5">Contract</label>
+                        <input type="number" class="form-control" id="intContract" name="intContract" value="{{$avg->intContract}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="intContract" class="control-label mb-5">Standar Contract</label>
+                        <input type="number" class="form-control" id="intStdContract" name="intStdContract" value="{{$avg->intStdContract}}">
+                    </div>
+                </div>
+                <div class="row form-group"> 
+                    <div class="col-sm-6">
+                        <label for="intContract" class="control-label mb-5">Job Supply</label>
+                        <input type="number" class="form-control" id="intJobSupply" name="intJobSupply" value="{{$avg->intJobSupply}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="intContract" class="control-label mb-5">Standar Job Supply</label>
+                        <input type="number" class="form-control" id="intStdJobSupply" name="intStdJobSupply" value="{{$avg->intStdJobSupply}}">
+                    </div>
+                </div>
+                <div class="row form-group"> 
+                    <div class="col-sm-6">
+                        <label for="intContract" class="control-label mb-5">Internship</label>
+                        <input type="number" class="form-control" id="intInternship" name="intInternship" value="{{$avg->intInternship}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="intContract" class="control-label mb-5">Standar Internship</label>
+                        <input type="number" class="form-control" id="intStdInternship" name="intStdInternship" value="{{$avg->intStdInternship}}">
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label for="dateBulan" class="control-label mb-5">Bulan</label>
+                        <input type="date" class="form-control" id="dateBulanAvg" name="dateBulanAvg" value="{{$avg->dateBulanAvg}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                    </div>
                 </form>
             </div>       
         </div>

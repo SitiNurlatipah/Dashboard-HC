@@ -96,4 +96,34 @@ class AvgLeadtimeController extends Controller
         // $data->delete();
         return redirect()->route('avg')->with('message','Data deleted successfully');
     }
+    public function filter(Request $request){
+    $start_date = $request->input('startDate');
+    $end_date = $request->input('endDate');
+        $avg = AvdLeadtimeRecruitment::where('dateBulanAvg','>=',$start_date)
+                ->where('dateBulanAvg','<=',$end_date)
+                ->get();
+        $rataPermanent = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intPermanent1+intPermanent2+intPermanent3+intPermanent4+intPermanent5) as float) as rataPermanent"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataPermanent');
+        $rataContract = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intContract) as float) as rataContract"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataContract');
+        $rataJobSupply = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intJobSupply) as float) as rataJobSupply"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataJobSupply');
+        $rataInternship = AvdLeadtimeRecruitment::select(DB::raw("CAST(avg(intInternship) as float) as rataInternship"))
+                    ->GroupBy(DB::raw("year(dateBulanAvg)"))
+					->orderBy('dateBulanAvg', 'ASC')
+                    ->pluck('rataInternship');
+        $tahun=AvdLeadtimeRecruitment::select(DB::raw("year(dateBulanAvg) as tahun"))
+        ->GroupBy(DB::raw("year(dateBulanAvg)"))
+        ->orderBy('dateBulanAvg', 'ASC')
+        ->pluck('tahun');
+        return view('pages.avg-leadtime-recruitment.index', compact('rataPermanent','rataContract','rataJobSupply','rataInternship','tahun'),
+        ['avg_recruitments'=>$avg]
+        );
+    }
 }

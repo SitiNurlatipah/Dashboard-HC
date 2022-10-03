@@ -23,23 +23,36 @@
                     
                 </ul>
             @if(session()->has('message'))
-            <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
+            <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
+            </div>
             @endif
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-            <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-employee" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data Total Employee</span></button>
-            <form action="{{ route('total.filter') }}" method="POST" class="form-inline mb-30 mt-30">
+            <div class="row">
+			<div class="col-sm-12">
+            <div class="form-horizontal form-group">
+                <form action="{{ route('total.filter') }}" method="POST" class="form-inline">
                     @csrf
-                            <div class="form-group row">  
-                                <label class="control-label mr-10 text-left">Dari tanggal</label>
-                                <input type='date' class="form-control" name="startDate">
-                                <label class="control-label mr-10 text-left">Sampai tanggal</label>
-                                <input type='date' class="form-control" name="endDate">
-                                <button type="submit" class="btn btn-primary pa-5 btn-sm" value="Submit"><i class="zmdi zmdi-search"></i></button>
-                                <a class="btn btn-primary pa-5 btn-sm" href="{{ route('total') }}"><i class="fa fa-undo"></i></a>
+                            <div class="form-group row col-sm-11">
+                                <label for="date" class="col-form-label text-right col-sm-1 pt-3">Dari</label>
+                                <input type='date' class="form-control input-sm col-sm-3 mr-10 ml-0" name="startDate" placeholder="Dari tanggal">
+                                <label class="col-form-label text-right col-sm-1">Sampai</label>
+                                <input type='date' class="form-control input-sm col-sm-3 mr-20" name="endDate" value="Sampai tanggal">
+                                <button class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
+                                <a type="submit" class="btn btn-warning btn-anim btn-xs" value="Submit" href="{{ route('total') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
                             </div>
                         
-            </form>    
+                        </form>
+                <div class="col-sm-1 ml-30">
+                <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-humancost" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                </div>
+                        
+                
+            </div>
+            </div>
+            </div>
+            
             <div class="table-wrap">
                     <div class="table-responsive">
                         <table id="trendTable" class="table table-hover display  pb-30 text-center" >
@@ -107,24 +120,24 @@
                         
                         <div class="form-group">
                             <label for="intJumlahEmployee" class="control-label mb-10">Total Employee</label>
-                            <input type="number" class="form-control" id="intTotal" name="intTotal">
+                            <input type="number" class="form-control" id="intTotal" name="intTotal" required>
                         </div>
                         <div class="form-group">
                             <label for="intKaryawan" class="control-label mb-10">Permanen</label>
-                            <input type="number" class="form-control" id="intPermanen" name="intPermanen">
+                            <input type="number" class="form-control" id="intPermanen" name="intPermanen" required>
                         </div>
                         <div class="form-group">
                             <label for="intContract" class="control-label mb-10">Contract</label>
-                            <input type="number" class="form-control" id="intContract" name="intContract">
+                            <input type="number" class="form-control" id="intContract" name="intContract" required>
                         </div>
                         <div class="form-group">
                             <label for="intOutsource" class="control-label mb-10">Job Supply</label>
-                            <input type="number" class="form-control" id="intJobSupply" name="intJobSupply">
+                            <input type="number" class="form-control" id="intJobSupply" name="intJobSupply" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="dateTglInput" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan">
+                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" required>
                         </div>
                         
                         <div class="modal-footer">
@@ -168,7 +181,7 @@
                         
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Tanggal Input</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$totalEmployee->dateBulan}}">
+                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$totalEmployee->dateBulan}}" required>
                         </div>
                         
                         <div class="modal-footer">
@@ -185,7 +198,7 @@
 @endsection
 @push('script')
 <script type="text/javascript">
-$('#power').dataTable( {
+$('#trendTable').dataTable( {
 paging: true,
 searching: true
 } );

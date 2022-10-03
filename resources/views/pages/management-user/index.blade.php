@@ -13,10 +13,13 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
+            
             @if(session()->has('message'))
-            <p class="btn btn-success btn-block btn-sm custom_message text-left">{{ session()->get('message') }}</p>
+            <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
+            </div>
             @endif
-            <div class="panel-wrapper collapse in">
+            
             
                 <div class="panel-body">
                     <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>

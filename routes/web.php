@@ -42,7 +42,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/leadtime', 'AvgLeadtimeController@store')->name('avg.post');
     Route::put('/leadtime/{AvdLeadtimeRecruitment}', 'AvgLeadtimeController@update');
     Route::delete('/leadtime/{idAvg}', 'AvgLeadtimeController@destroy')->name('avg.delete');    
-    
+    Route::post('/leadtime/filter', 'AvgLeadtimeController@filter')->name('avg.filter');
+
     //Productivity
     Route::get('/productivity', 'ProductivityController@index')->name('productivity');
     Route::post('/productivity', 'ProductivityController@store')->name('productivity.post');
@@ -54,10 +55,18 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/productivity/growth', 'ProductivityController@storeGrowth')->name('growth.post');
     Route::put('/productivity/growth/{Growth}', 'ProductivityController@updateGrowth');
     Route::delete('/productivity/growth/{id}', 'ProductivityController@destroyGrowth')->name('growth.delete');    
-    
+    Route::post('/productivity/filter', 'ProductivityController@filter')->name('productivity.filter');
+
     Route::get('/hrga', 'HrgaIssuesController@index')->name('hrga');
+    Route::post('/hrga/filter', 'HrgaIssuesController@filter')->name('hrga.filter');
+
+    //training total per month
     Route::get('/training', 'TrainingPermonthController@index')->name('training');
-    
+    Route::post('/training', 'TrainingPermonthController@store')->name('training.post');
+    Route::put('/training/{TrainingTotalPerMonth}', 'TrainingPermonthController@update');
+    Route::delete('/training/{idTrainingTotalPerMonth}', 'TrainingPermonthController@destroy')->name('training.delete');    
+    Route::post('/training/filter', 'TrainingPermonthController@filter')->name('training.filter');
+
     //training realisasi
     Route::get('/realization', 'TrainingRealizationController@index')->name('realization');
     Route::post('/realization', 'TrainingRealizationController@store')->name('realization.post');
@@ -83,6 +92,7 @@ Route::group(['middleware' => 'guest'], function () {
     //mpp
     Route::get('/mppvsreal', 'MppRealController@index')->name('mppreal');
     Route::post('/mppvsreal', 'MppRealController@store')->name('mppreal.post');
+    Route::post('/mppvsreal/filter', 'MppRealController@filter')->name('mppreal.filter');
     Route::put('/mppvsreal/{MppVsRealModel}', 'MppRealController@update');
     Route::delete('/mppvsreal/{id}', 'MppRealController@destroy')->name('mppreal.delete');    
     

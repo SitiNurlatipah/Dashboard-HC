@@ -10,40 +10,29 @@ use DB;
 class MppRealController extends Controller
 {
     public function index(){
-        $mppall = MppVsRealModel::whereDate('dateBulan','>=','2019-01-01')
-                   ->whereDate('dateBulan','<=','2019-12-31')
-                   ->get();
-        $tabel2022 = MppVsRealModel::whereDate('dateBulan','>=','2022-01-01')
-                   ->whereDate('dateBulan','<=','2022-12-31')
-                   ->get();
-        $tabel2021 = MppVsRealModel::whereDate('dateBulan','>=','2021-01-01')
-                   ->whereDate('dateBulan','<=','2021-12-31')
-                   ->get();
-        $tabel2020 = MppVsRealModel::whereDate('dateBulan','>=','2020-01-01')
-                   ->whereDate('dateBulan','<=','2020-12-31')
-                   ->get();
+        $mppall = MppVsRealModel::all();
         
         $permanen = MppVsRealModel::select(DB::raw("CAST(SUM(intMppPermanent)as int) as permanen"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
-					->orderBy('dateBulan', 'DESC')
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('permanen');
         $contract = MppVsRealModel::select(DB::raw("CAST(SUM(intMppContract)as int) as contract"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
-					->orderBy('dateBulan', 'DESC')
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'asc')
                     ->pluck('contract');
         $jobsupply = MppVsRealModel::select(DB::raw("CAST(SUM(intMppJobSupply)as int) as jobsupply"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
-					->orderBy('dateBulan', 'DESC')
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'asc')
                     ->pluck('jobsupply');
         $total = MppVsRealModel::select(DB::raw("CAST(SUM(intMppTotal)as int) as total"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
 					->orderBy('dateBulan', 'DESC')
                     ->pluck('total');
-        $bulan=MppVsRealModel::select(DB::raw("MONTHNAME(dateBulan) as bulan"))
-        ->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
-        ->orderBy('dateBulan', 'Desc')
+        $bulan=MppVsRealModel::select(DB::raw("year(dateBulan) as bulan"))
+        ->GroupBy(DB::raw("year(dateBulan)"))
+        ->orderBy('dateBulan', 'asc')
         ->pluck('bulan');
-        return view('pages.mpp-vs-realization.index',compact('bulan','permanen','contract','jobsupply','total','mppall','tabel2022','tabel2021','tabel2020')
+        return view('pages.mpp-vs-realization.index',compact('bulan','permanen','contract','jobsupply','total','mppall')
         // ['mpp_vs_realization' => $mppreal,$mpp2022]
         );
      }
@@ -123,4 +112,30 @@ class MppRealController extends Controller
         // $data->delete();
         return redirect()->route('mppreal')->with('message','Data deleted successfully');
     }
+    public function filter(Request $request){
+            
+        $mppall = MppVsRealModel::whereYear('dateBulan',$request->year)
+               ->get();
+               $permanen = MppVsRealModel::select(DB::raw("CAST(SUM(intMppPermanent)as int) as permanen"))
+               ->GroupBy(DB::raw("year(dateBulan)"))
+               ->orderBy('dateBulan', 'ASC')
+               ->pluck('permanen');
+   $contract = MppVsRealModel::select(DB::raw("CAST(SUM(intMppContract)as int) as contract"))
+               ->GroupBy(DB::raw("year(dateBulan)"))
+               ->orderBy('dateBulan', 'asc')
+               ->pluck('contract');
+   $jobsupply = MppVsRealModel::select(DB::raw("CAST(SUM(intMppJobSupply)as int) as jobsupply"))
+               ->GroupBy(DB::raw("year(dateBulan)"))
+               ->orderBy('dateBulan', 'asc')
+               ->pluck('jobsupply');
+   $total = MppVsRealModel::select(DB::raw("CAST(SUM(intMppTotal)as int) as total"))
+               ->GroupBy(DB::raw("year(dateBulan)"))
+               ->orderBy('dateBulan', 'DESC')
+               ->pluck('total');
+   $bulan=MppVsRealModel::select(DB::raw("year(dateBulan) as bulan"))
+   ->GroupBy(DB::raw("year(dateBulan)"))
+   ->orderBy('dateBulan', 'asc')
+   ->pluck('bulan');
+            return view('pages.mpp-vs-realization.index',compact('bulan','permanen','contract','jobsupply','total','mppall'));
+        }
 }

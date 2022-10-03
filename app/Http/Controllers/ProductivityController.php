@@ -158,4 +158,60 @@ class ProductivityController extends Controller
         // $data->delete();
         return redirect()->route('productivity')->with('message','Data deleted successfully');
     }
+    public function filter(Request $request)
+    {
+       $start_date = $request->input('start_date');
+       $end_date = $request->input('end_date');
+	   
+       $productivity=Productivity::where('dateBulan','>=',$start_date)
+	   ->where('dateBulan','<=',$end_date)
+	   ->get();
+       $humancost=HumanCost::where('dateBulanCost','>=',$start_date)
+	   ->where('dateBulanCost','<=',$end_date)
+	   ->get();
+       $growth=Growth::
+        leftJoin('productivity_manpowers','productivity_growths.manpower_id','=','productivity_manpowers.id')
+        ->leftJoin('productivity_humancosts','productivity_growths.humancost_id','=','productivity_humancosts.id')
+        ->where('dateBulanGrowth','>=',$start_date)
+        ->where('dateBulanGrowth','<=',$end_date)
+        ->orderBy('dateBulanGrowth', 'ASC')
+        ->get();
+        $productiv = Productivity::select(DB::raw("CAST(SUM((intOutputActual/intTotal)*1000) as int) as productiv"))
+                    ->GroupBy(DB::raw("Month(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('productiv');
+        $manpower = Productivity::select(DB::raw("CAST(SUM(intTotal) as int) as manpower"))
+                    ->GroupBy(DB::raw("Month(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('manpower');
+        $actual = Productivity::select(DB::raw("CAST(SUM(intOutputActual*1000) as int) as actual"))
+                    ->GroupBy(DB::raw("Month(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('actual');
+        $costProduct = HumanCost::select(DB::raw("CAST(SUM(intCostActual/(intOutputActual*1000)) as int) as costProduct"))
+                    ->GroupBy(DB::raw("Month(dateBulanCost)"))
+					->orderBy('dateBulanCost', 'ASC')
+                    ->pluck('costProduct');
+        $costActual = HumanCost::select(DB::raw("CAST(SUM(intCostActual) as int) as costActual"))
+                    ->GroupBy(DB::raw("Month(dateBulanCost)"))
+					->orderBy('dateBulanCost', 'ASC')
+                    ->pluck('costActual');
+        $coba = Growth::leftJoin('productivity_manpowers','productivity_growths.manpower_id','=','productivity_manpowers.id')
+                    ->select(DB::raw("CAST(SUM(intOutputActual) as int) as coba"))
+                    ->GroupBy(DB::raw("Month(dateBulanGrowth)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('coba');
+        $bulan=Productivity::select(DB::raw("MONTHNAME(dateBulan) as bulan"))
+                    ->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
+                    ->orderBy('dateBulan', 'ASC')
+                    ->pluck('bulan');
+        $bulanCost=HumanCost::select(DB::raw("MONTHNAME(dateBulanCost) as bulanCost"))
+                    ->GroupBy(DB::raw("MONTHNAME(dateBulanCost)"))
+                    ->orderBy('dateBulanCost', 'ASC')
+                    ->pluck('bulanCost');
+        
+        return view('pages.productivity.index',compact('productiv','bulan','manpower','actual','costProduct','costActual','bulanCost','coba'),[
+            'productivity_manpowers'=>$productivity,'productivity_humancosts'=>$humancost,'productivity_growths'=>$growth
+        ]);
+    }
 }
