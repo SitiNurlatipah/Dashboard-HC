@@ -17,4 +17,9 @@ class UserModel extends Model
 	protected $fillable = [
 		'id','txtNik', 'txtUsername','txtPassword', 'txtEmployeeName','txtJobTitle', 'txtDepartment', 'txtEmail','txtStatus', 'txtType','dtmStartDate','dtmEndDate','txtGender',
 	];
+	public function dos()
+	{
+		// return $this->hasMany(RecruitmentModel::class,'user_id');
+		return $this->hasMany('App\RecruitmentModel','id');
+	}
 }

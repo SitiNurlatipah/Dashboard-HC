@@ -18,7 +18,7 @@ class ProductivityController extends Controller
         ->leftJoin('productivity_humancosts','productivity_growths.humancost_id','=','productivity_humancosts.id')
         ->orderBy('dateBulanGrowth', 'ASC')
         ->get();
-        
+        // $growthProductivity=$coba;
         $productiv = Productivity::select(DB::raw("CAST(SUM((intOutputActual/intTotal)*1000) as int) as productiv"))
                     ->GroupBy(DB::raw("Month(dateBulan)"))
 					->orderBy('dateBulan', 'ASC')

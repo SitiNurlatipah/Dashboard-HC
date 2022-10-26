@@ -10,16 +10,17 @@
                 <div class="pull-left">
                     <h6 class="panel-title txt-dark">Training Total Permonth</h6>
                 </div>
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>Training Total Per Month</span></li>
+                </ol>
+                <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
             </div>
-            @if(session()->has('message'))
-            <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
-            </div>
-            @endif
-            
             <div class="panel-wrapper collapse in">
             <div class="panel-body">
+                
             <div  class="tab-struct custom-tab-1 mt-0">
                         <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                             <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Training Per Month</a></li>
@@ -74,7 +75,7 @@
                                 ?>
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{$total->dateBulan->format('F Y')}}</td>
+                                        <td>{{date('F Y', strtotime($total->dateBulan))}}</td>
                                         <td>{{$total->intInternal}}</td>
                                         <td>{{$total->intExternal}}</td>
                                         <td>{{$total->intInHouse}}</td>
@@ -99,25 +100,43 @@
                 </div>
             </div>
             <div  id="profile_15" class="tab-pane fade" role="tabpanel">
-            <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
-                    <div class="panel panel-default card-view panel-refresh relative">
-                        <div class="refresh-container">
-                            <div class="la-anim-1"></div>
-                        </div>
-                        <div class="panel-heading">
-                            <div class="pull-left">
-                                <h6 class="panel-title txt-dark">Productivity Total</h6>
+                <div class="col-lg-6">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
                             </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-wrapper collapse in">
-                            <div class="panel-body">
-                                <div id="chart" class="" style="height:367px;"></div>
+                            <div class="panel-heading">
+                                <div class="text-center">
+                                    <h6 class="panel-title txt-dark">Training Total Per Year</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="training" class="" style="height:367px;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
-                    </div>
+                <div class="col-lg-6">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="text-center">
+                                    <h6 class="panel-title txt-dark text-center">Training Total Per Year</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="chart" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,7 +251,7 @@ var inhouse =  <?php echo json_encode($inhouse) ?>;
 var tahun =  <?php echo json_encode($tahun) ?>;
 Highcharts.chart('chart', {
         title: {
-            text: 'MPP VS Realization'
+            text: 'Per Training'
         },
         subtitle: {
             text: 'PT. Kalbe Morinaga Indonesia'
@@ -284,6 +303,61 @@ Highcharts.chart('chart', {
             }]
         }
     });
-
+    Highcharts.chart('training', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Akumulasi',
+        align: 'left'
+    },
+    xAxis: {
+        categories: tahun
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Count trophies'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: ( // theme
+                    Highcharts.defaultOptions.title.style &&
+                    Highcharts.defaultOptions.title.style.color
+                ) || 'gray',
+                textOutline: 'none'
+            }
+        }
+    },
+    legend: {
+        layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    series: [{
+        name: 'Internal',
+        data: internal
+    }, {
+        name: 'External',
+        data: external
+    }, {
+        name: 'In House',
+        data: inhouse
+    }]
+});
 </script>
 @endpush

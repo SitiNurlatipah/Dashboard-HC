@@ -10,10 +10,17 @@
                 <div class="pull-left">
                     <h6 class="panel-title txt-dark">Mpp Vs Realization</h6>
                 </div>
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>Mpp Vs Realization</span></li>
+                </ol>
+                <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
             </div>
             <div class="panel-wrapper collapse in">
             <div class="panel-body">
+                
             <div  class="tab-struct custom-tab-1 mt-0">
                 <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                     <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">MPP Vs Real</a></li>
@@ -54,12 +61,12 @@
                             <tr>
                                     <th rowspan="2" class="text-center">Bulan</th>
                                     <th colspan="4" class="text-center">Employee Type</th>
-                                    <th colspan="2" class="text-center">Adjusment MTD</th>
-                                    <th rowspan="2" class="text-center">MTD Adjusment</th>
+                                    <th colspan="2" class="text-center">Adjustment MTD</th>
+                                    <th rowspan="2" class="text-center">MTD Adjustment</th>
                                     <th rowspan="2" class="text-center">Action</th>
                                 </tr>
                                 <tr>
-                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Permanent</th>
                                     <th class="text-center">Contract</th>
                                     <th class="text-center">Job Supply</th>
                                     <th class="text-center">Total</th>
@@ -103,7 +110,7 @@
             
         </div>
         <div  id="profile_15" class="tab-pane fade" role="tabpanel">
-            <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+            <!-- <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
                         <div class="panel panel-default card-view panel-refresh relative">
                             <div class="refresh-container">
                                 <div class="la-anim-1"></div>
@@ -120,15 +127,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-            <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                    </div> -->
+            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                         <div class="panel panel-default card-view panel-refresh relative">
                             <div class="refresh-container">
                                 <div class="la-anim-1"></div>
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
+                                    <h6 class="panel-title txt-dark">MPP VS REALIZATION</h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -298,7 +305,7 @@ $('.delete').click(function(event) {
         dangerMode: true,
     })
     .then((willDelete) => {
-    if (willDelete) {
+    if (willDelete) { 
         form.submit();
     }
     });
@@ -308,69 +315,69 @@ var contract =  <?php echo json_encode($contract) ?>;
 var jobsupply =  <?php echo json_encode($jobsupply) ?>;
 var total =  <?php echo json_encode($total) ?>;
 var bulan =  <?php echo json_encode($bulan) ?>;
-Highcharts.chart('chart', {
-        title: {
-            text: 'MPP VS Realization'
-        },
-        subtitle: {
-            text: 'PT. Kalbe Morinaga Indonesia'
-        },
-         xAxis: {
-            categories: bulan
-        },
-        yAxis: {
-            title: {
-                text: 'Jumlah'
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-        },
-        plotOptions: {
-            series: {
-                allowPointSelect: true
-            }
-        },
-        series: [{
-            type: 'column',
-            name: 'Permanent',
-            data: permanen
-        },{
-            type: 'column',
-            name: 'Contract',
-            data: contract
-        },{
-            type: 'column',
-            name: 'Job Supply',
-            data: jobsupply
-        },{
-            type: 'column',
-            name: 'Total Employee',
-            data: total
-        }],
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500
-                },
-                chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
-                }
-            }]
-        }
-    });
+// Highcharts.chart('chart', {
+//         title: {
+//             text: 'MPP VS Realization'
+//         },
+//         subtitle: {
+//             text: 'PT. Kalbe Morinaga Indonesia'
+//         },
+//          xAxis: {
+//             categories: bulan
+//         },
+//         yAxis: {
+//             title: {
+//                 text: 'Jumlah'
+//             }
+//         },
+//         legend: {
+//             layout: 'vertical',
+//             align: 'right',
+//             verticalAlign: 'middle'
+//         },
+//         plotOptions: {
+//             series: {
+//                 allowPointSelect: true
+//             }
+//         },
+//         series: [{
+//             type: 'column',
+//             name: 'Permanent',
+//             data: permanen
+//         },{
+//             type: 'column',
+//             name: 'Contract',
+//             data: contract
+//         },{
+//             type: 'column',
+//             name: 'Job Supply',
+//             data: jobsupply
+//         },{
+//             type: 'column',
+//             name: 'Total Employee',
+//             data: total
+//         }],
+//         responsive: {
+//             rules: [{
+//                 condition: {
+//                     maxWidth: 500
+//                 },
+//                 chartOptions: {
+//                     legend: {
+//                         layout: 'horizontal',
+//                         align: 'center',
+//                         verticalAlign: 'bottom'
+//                     }
+//                 }
+//             }]
+//         }
+//     });
     Highcharts.chart('coba', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Total Employee',
+        text: 'Total',
         align: 'left'
     },
     xAxis: {
@@ -411,13 +418,13 @@ Highcharts.chart('chart', {
         }
     },
     series: [{
-        name: 'Permanen',
+        name: 'Permanent',
         data: permanen
     }, {
         name: 'Contract',
         data: contract
     }, {
-        name: 'Job',
+        name: 'Job Supply',
         data: jobsupply
     }]
 });

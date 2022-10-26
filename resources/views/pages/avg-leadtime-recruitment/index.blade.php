@@ -10,10 +10,17 @@
                 <div class="pull-left">
                     <h6 class="panel-title txt-dark">Average Leadtime Recruitment</h6>
                 </div>
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>Average Lead Time Recruitment</span></li>
+                    </ol>
+                <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
             </div>
             <div class="panel-wrapper collapse in">
             <div class="panel-body">
+                
             <div  class="tab-struct custom-tab-1 mt-0">
                 <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                     <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Average Recruitment</a></li>
@@ -73,10 +80,12 @@
                                     
                                     <tbody>
                                     <?php
-                                    $i=1; foreach($avg_recruitments as $avg): ?>
+                                    $i=1; foreach($avg_recruitments as $avg): 
+                                    $permanen=$avg->intPermanent1+$avg->intPermanent2+$avg->intPermanent3+$avg->intPermanent4+$avg->intPermanent5;
+                                    ?>
                                         <tr>
-                                        <td>{{$avg->dateBulanAvg->format('F Y')}}</td>
-                                        <td></td>
+                                        <td>{{date('F Y', strtotime($avg->dateBulanAvg))}}</td>
+                                        <td>{{$permanen}}</td>
                                         <td>{{ $avg->intStdPermanent }}</td>
                                         <td>{{ $avg->intPermanent1 }}</td>
                                         <td>{{ $avg->intPermanent2}}</td>
@@ -188,7 +197,7 @@
             </div>
         </div>	
     </div>
-</div>
+<!-- </div> -->
 <div class="modal fade" id="add-avg" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

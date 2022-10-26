@@ -14,4 +14,9 @@ class TrainingRealization extends Model
 	 * @var array
 	 */
 	protected $guarded = ['id'];
+
+	// public function pesertas()
+	// {
+	// 	return $this->hasMany(DataTraineeModel::class,'training_id');
+	// }
 }

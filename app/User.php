@@ -19,4 +19,5 @@ class User extends Authenticatable
      protected $fillable = [
         'txtUsername', 'password',
     ];
+    
 }

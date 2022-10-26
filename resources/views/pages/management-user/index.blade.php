@@ -11,6 +11,12 @@
                 <div class="pull-left">
                     <h6 class="panel-title txt-dark">Manajemen User</h6>
                 </div>
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>Management User</span></li>
+                </ol>
+                <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
             </div>
             
@@ -22,6 +28,12 @@
             
             
                 <div class="panel-body">
+                    <!-- Breadcrumb -->
+                    <ol class="breadcrumb text-right">
+                        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                        <li class="active"><span>Management User</span></li>
+                        </ol>
+                    <!-- /Breadcrumb -->
                     <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
                     <div class="table-wrap">
                     
@@ -77,8 +89,8 @@
                 </div>
             </div>
         </div>	
-    </div>
-</div>
+    <!-- </div> -->
+<!-- </div> -->
 <!-- /Row -->
 <!-- modal add user -->
 <div class="modal fade" id="add-user" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
@@ -261,17 +273,16 @@
                     </div>
                 </form>
             
+            </div>
         </div>
     </div>
 </div>
 @endforeach
 <!-- end modal update user -->
-
 @endsection
 
 
 @push('script')
-
 <script type="text/javascript">
      $('.show_confirm').click(function(event) {
           var form =  $(this).closest("form");

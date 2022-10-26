@@ -14,7 +14,7 @@ class GetoModel extends Model
 	 * @var array
 	 */
 	protected $guarded = ['id'];
-	protected $dates=['dateTglInput'];
+	// protected $dates=['dateTglInput'];
 	protected $fillable = [
 		'intTotal', 'intGetoKaryawan','intGetoKontark', 
         'intGetoOutsource', 'dateTglInput', 

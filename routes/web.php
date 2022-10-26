@@ -36,7 +36,9 @@ Route::group(['middleware' => 'guest'], function () {
 
       
     Route::get('/recruitment', 'RecruitmentController@index')->name('recruitment');
-    
+    Route::post('/recruitment', 'RecruitmentController@store')->name('recruitment.post');
+    Route::put('/recruitment/{RecruitmentModel}', 'RecruitmentController@update');
+    Route::delete('/recruitment/{idRecruitment }', 'RecruitmentController@destroy')->name('recruitment.delete');
     //leadtime
     Route::get('/leadtime', 'AvgLeadtimeController@index')->name('avg');
     Route::post('/leadtime', 'AvgLeadtimeController@store')->name('avg.post');
@@ -58,8 +60,17 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/productivity/filter', 'ProductivityController@filter')->name('productivity.filter');
 
     Route::get('/hrga', 'HrgaIssuesController@index')->name('hrga');
-    Route::post('/hrga/filter', 'HrgaIssuesController@filter')->name('hrga.filter');
-
+    Route::post('/hrga', 'HrgaIssuesController@store')->name('hrga.post');
+    Route::put('/hrga/{id}', 'HrgaIssuesController@update');
+    // Route::post('/hrga/filter', 'HrgaIssuesController@filter')->name('hrga.filter');
+    Route::post('/hrgaadd', 'HrgaIssuesController@store');
+    
+    //data trainee
+    Route::get('/training/trainee', 'DataTraineeController@index')->name('trainee');
+    Route::post('/training/trainee', 'DataTraineeController@store')->name('trainee.post');
+    Route::put('/training/trainee/{DataTraineeModel}', 'DataTraineeController@update');
+    Route::delete('/training/trainee/{idTrainee}', 'DataTraineeController@destroy')->name('trainee.delete');    
+ 
     //training total per month
     Route::get('/training', 'TrainingPermonthController@index')->name('training');
     Route::post('/training', 'TrainingPermonthController@store')->name('training.post');

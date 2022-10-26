@@ -8,13 +8,25 @@
         <div class="panel panel-default card-view">
             <div class="panel-heading">
                 <div class="pull-left">
-                    <h6 class="panel-title txt-dark">Management Employee</h6>
+                    <h6 class="panel-title txt-dark">GETO & Turn Over</h6>
                 </div>
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>GETO & Turn Over</span></li>
+                </ol>
+                <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
                 
                 </div>
                 <div class="panel-wrapper collapse in">
                 <div class="panel-body">
+                    <!-- Breadcrumb -->
+                    <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>GETO dan Turn Over</span></li>
+                    </ol>
+                    <!-- /Breadcrumb -->
                     <div  class="tab-struct custom-tab-1 mt-0">
                         <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                             <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">ALL</a></li>
@@ -86,8 +98,8 @@
                                 
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{ $dataEmployee->dateTglInput->format('d/m/Y') }}</td>
-                                        <td>{{ $dataEmployee->dateTglInput->format('F Y') }}</td>
+                                        <td></td>
+                                        <td>{{ date('F Y', strtotime($dataEmployee->dateTglInput))}}</td>
                                         <td>{{ $dataEmployee->intKaryawan }}</td>
                                         <td>{{ $dataEmployee->intOutsource }}</td>
                                         <td>{{ $dataEmployee->intContract }}</td>
@@ -182,7 +194,7 @@
                                 
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{ $geto->dateTglInput->format('F Y') }}</td>
+                                        <td>{{ date('F Y', strtotime($geto->dateTglInput))}}</td>
                                         <td>{{ $geto->intGetoKaryawan }}</td>
                                         <td>{{ $geto->intGetoOutsource }}</td>
                                         <td>{{ $geto->intGetoKontark }}</td>
@@ -274,7 +286,7 @@
                             $persentseKontrakTo=($to->intToKontrak/$employees[$j]->intContract)*100; ?>
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{ $to->dateTglInput->format('F Y') }}</td>
+                                        <td>{{ date('F Y', strtotime($to->dateTglInput)) }}</td>
                                         <td>{{ $to->intToKaryawan }}</td>
                                         <td>{{ $to->intToOutsource }}</td>
                                         <td>{{ $to->intToKontrak }}</td>
@@ -302,7 +314,7 @@
                         
                         </div>
                         <div  id="profile_17" class="tab-pane fade" role="tabpanel">
-                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                <!-- <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
                     <div class="panel panel-default card-view panel-refresh relative">
                         <div class="refresh-container">
                             <div class="la-anim-1"></div>
@@ -319,7 +331,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
                     <div class="panel panel-default card-view panel-refresh relative">
                         <div class="refresh-container">
@@ -362,11 +374,11 @@
 
                                         
                                        
-                                    </div>	
-                                </div>
-                                </div>
-                                </div>
-                                </div>
+    </div>	
+</div>
+</div>
+</div>
+</div>
                                 
                             
     <!-- /Row -->
@@ -691,64 +703,67 @@
     var toKaryawan =  <?php echo json_encode($toKaryawan) ?>;
     
     // firstBtn.addEventListener('click', () => {
-    Highcharts.chart('total', {
-        title: {
-            text: 'Data Karyawan'
-        },
-        subtitle: {
-            text: 'PT. Kalbe Morinaga Indonesia'
-        },
-         xAxis: {
-            categories: bulan
-        },
-        yAxis: {
-            title: {
-                text: 'Jumlah Employee'
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-        },
-        plotOptions: {
-            series: {
-                allowPointSelect: true
-            }
-        },
-        series: [{
-            type: 'column',
-            name: 'Jumlah Employee',
-            data: employees
-        },{
-            type: 'column',
-            name: 'Jumlah Karyawan',
-            data: karyawan
-        },{
-            type: 'column',
-            name: 'Jumlah Outsource',
-            data: outsource
-        },{
-            type: 'column',
-            name: 'Jumlah Kontrak',
-            data: kontrak
+    // Highcharts.chart('total', {
+    //     title: {
+    //         text: 'Data Karyawan'
+    //     },
+    //     subtitle: {
+    //         text: 'PT. Kalbe Morinaga Indonesia'
+    //     },
+    //      xAxis: {
+    //         categories: bulan
+    //     },
+    //     yAxis: {
+    //         title: {
+    //             text: 'Jumlah Employee'
+    //         }
+    //     },
+    //     legend: {
+    //         layout: 'vertical',
+    //         align: 'right',
+    //         verticalAlign: 'middle'
+    //     },
+    //     plotOptions: {
+    //         series: {
+    //             allowPointSelect: true,
+    //             dataLabels: {
+    //                 enabled: true
+    //             }
+    //         }
+    //     },
+    //     series: [{
+    //         type: 'column',
+    //         name: 'Total Employee',
+    //         data: employees
+    //     },{
+    //         type: 'column',
+    //         name: 'Permanent',
+    //         data: karyawan
+    //     },{
+    //         type: 'column',
+    //         name: 'Outsource',
+    //         data: outsource
+    //     },{
+    //         type: 'column',
+    //         name: 'Contract',
+    //         data: kontrak
 
-        }],
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500
-                },
-                chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
-                }
-            }]
-        }
-    });
+    //     }],
+    //     responsive: {
+    //         rules: [{
+    //             condition: {
+    //                 maxWidth: 500
+    //             },
+    //             chartOptions: {
+    //                 legend: {
+    //                     layout: 'horizontal',
+    //                     align: 'center',
+    //                     verticalAlign: 'bottom'
+    //                 }
+    //             }
+    //         }]
+    //     }
+    // });
     
     // secondBtn.addEventListener('click', () => {
     Highcharts.chart('geto', {
@@ -773,26 +788,17 @@
         },
         plotOptions: {
             series: {
-                allowPointSelect: true
+                allowPointSelect: true,
+                dataLabels: {
+                    enabled: true
+                }
             }
         },
         series: [{
             type: 'column',
-            name: 'Jumlah Employee GETO',
-            data: geto
-        },{
-            type: 'column',
-            name: 'Jumlah GETO Karyawan',
+            name: 'GETO Permanent',
             data: getoKaryawan
-        },{
-            type: 'column',
-            name: 'Jumlah GETO Kontrak',
-            data: getoKontrak
-        },{
-            type: 'column',
-            name: 'Jumlah GETO Outsource',
-            data: getoOutsource
-
+        
         }],
         responsive: {
             rules: [{
@@ -832,27 +838,23 @@ Highcharts.chart('to', {
         },
         plotOptions: {
             series: {
-                allowPointSelect: true
-            }
+                allowPointSelect: true,
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            
         },
         
         series: [{
+            
             type: 'column',
-            name: 'Jumlah Employee TO',
-            data: to,
-           
-        },{
-            type: 'column',
-            name: 'Jumlah TO Outsource',
+            name: 'TO Outsource',
             data: toOutsource,
         },{
             type: 'column',
-            name: 'Jumlah TO Kontrak',
+            name: 'TO Contract',
             data: toKontrak,
-        },{
-            type: 'column',
-            name: 'Jumlah TO Karyawan',
-            data: toKaryawan,
         
         }],
         responsive: {

@@ -1,65 +1,110 @@
 <!-- Left Sidebar Menu -->
-    <div class="fixed-sidebar-left">
-        <ul class="nav navbar-nav side-nav nicescroll-bar">
-            <li class="navigation-header">
-                <span>Main</span> 
-                <i class="zmdi zmdi-more"></i>
-            </li>
-            <li>
-                <a href="{{ route('dashboard') }}"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Dasboard</span></div><div class="clearfix"></div></a>
-                
-            </li>
-            <li>
-                <a href="{{ route('user') }}"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">Management User</span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href="{{ route('employee') }}"><div class="pull-left"><i class="fa fa-group mr-20"></i><span class="right-nav-text">Management Employee</span></div><div class="clearfix"></div></a>
-                
-            </li>
-            <li>
-                <a href="{{ route('total') }}"><div class="pull-left"><i class="fa fa-bookmark mr-20"></i><span class="right-nav-text">Data Trend Employee</span></div><div class="clearfix"></div></a>
-                
-            </li>
-            <li>
-                <a href="{{ route('productivity') }}"><div class="pull-left"><i class="fa fa-dollar mr-20"></i><span class="right-nav-text">Productivity</span></div><div class="clearfix"></div></a>
-                
-            </li>
-            <li>
-                <a href="{{ route('recruitment') }}"><div class="pull-left"><i class="fa fa-bar-chart-o mr-20"></i><span class="right-nav-text">Recruitment Progress</span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href="{{ route('avg') }}"><div class="pull-left"><i class="fa fa-bolt mr-20"></i><span class="right-nav-text">Leadtime Recruitment</span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href="{{ route('mppreal') }}"><div class="pull-left"><i class="fa fa-tasks mr-20"></i><span class="right-nav-text">MPP VS Realization </span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href="{{ route('training') }}"><div class="pull-left"><i class="fa fa-pencil-square-o mr-20"></i><span class="right-nav-text">Training Total</span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href="{{ route('realization') }}"><div class="pull-left"><i class="fa fa-check-circle-o mr-20"></i><span class="right-nav-text">Training Realization</span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href="{{ route('ceo') }}"><div class="pull-left"><i class="fa fa-calendar mr-20"></i><span class="right-nav-text">CEO Training</span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href=""><div class="pull-left"><i class="fa fa-sliders mr-20"></i><span class="right-nav-text">Success Rate FPTK</span></div><div class="clearfix"></div></a>
-            </li>
-            <li>
-                <a href="{{ route('hrga') }}"><div class="pull-left"><i class="fa fa-bullhorn mr-20"></i><span class="right-nav-text">HR-GA Issues</span></div><div class="clearfix"></div></a>
-            </li>
+<div class="fixed-sidebar-left">
+    <ul class="nav navbar-nav side-nav nicescroll-bar">
+        <li class="navigation-header">
+            <span>Main</span> 
+            <i class="zmdi zmdi-more"></i>
+        </li>
+        <li>
+            <a class="active" href="{{ route('dashboard') }}"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Dashboard</span></div><div class="pull-right"></div><div class="clearfix"></div></a>  
+        </li>
+        <!-- <li>
+            <a href="{{ route('dashboard') }}"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Dasboard</span></div><div class="clearfix"></div></a>
             
-            <li><hr class="light-grey-hr mb-10"/></li>
-            {{-- <li class="navigation-header">
-                <span>compo</span> 
-                <i class="zmdi zmdi-more"></i>
-            </li> --}}
-            {{-- <li><hr class="light-grey-hr mb-10"/></li>
-            <li class="navigation-header">
-                <span>featured</span> 
-                <i class="zmdi zmdi-more"></i>
-            </li> --}}
-        </ul>
-    </div>
+        </li> -->
+        <li>
+            <a href="{{ route('user') }}"><div class="pull-left"><i class="fa fa-group mr-20"></i><span class="right-nav-text">Management User</span></div><div class="clearfix"></div></a>
+        </li>
+        <li>
+            <a href="{{ route('employee') }}"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">GETO & Turn Over</span></div><div class="clearfix"></div></a>
+            
+        </li>
+        <li>
+            <a href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><div class="pull-left"><i class="fa fa-bar-chart-o mr-20"></i><span class="right-nav-text">Recruitment</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+                <ul id="ecom_dr" class="collapse collapse-level-1">
+                <!-- <a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Dashboard</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+                <ul id="ecom_dr" class="collapse collapse-level-1"> -->
+                    <li>
+                        <a class="" href="{{ route('total') }}">Data Trend Employee</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('avg') }}">Avg Recruitment</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mppreal') }}">MPP VS Realization</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('recruitment') }}">Recruitment Progress</a>
+                    </li>
+                    <li>
+                        <a href="#">Success Rate FPTK</a>
+                    </li>
+                </ul>
+        </li>
+        <!-- <li>
+            <a href="{{ route('total') }}"><div class="pull-left"><i class="fa fa-bookmark mr-20"></i><span class="right-nav-text">Data Trend Employee</span></div><div class="clearfix"></div></a>
+            
+        </li> -->
+        <li>
+            <a href="{{ route('productivity') }}"><div class="pull-left"><i class="fa fa-dollar mr-20"></i><span class="right-nav-text">Productivity</span></div><div class="clearfix"></div></a>
+            
+        </li>
+        <!-- <li>
+            <a href="{{ route('recruitment') }}"><div class="pull-left"><i class="fa fa-bar-chart-o mr-20"></i><span class="right-nav-text">Recruitment Progress</span></div><div class="clearfix"></div></a>
+        </li>
+        <li>
+            <a href="{{ route('avg') }}"><div class="pull-left"><i class="fa fa-bolt mr-20"></i><span class="right-nav-text">Leadtime Recruitment</span></div><div class="clearfix"></div></a>
+        </li>
+        <li>
+            <a href="{{ route('mppreal') }}"><div class="pull-left"><i class="fa fa-tasks mr-20"></i><span class="right-nav-text">MPP VS Realization </span></div><div class="clearfix"></div></a>
+        </li> -->
+        <li>
+            <a href="javascript:void(0);" data-toggle="collapse" data-target="#training_side"><div class="pull-left"><i class="zmdi zmdi-smartphone-setup mr-20"></i><span class="right-nav-text">Training</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+                <ul id="training_side" class="collapse collapse-level-1">
+                <!-- <a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Dashboard</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+                <ul id="ecom_dr" class="collapse collapse-level-1"> -->
+                    
+                    <li>
+                        <a class="" href="{{ route('realization') }}">Data Training</a>
+                    </li>
+                    <!-- <li>
+                        <a href="{{ route('trainee') }}">Data Trainee</a>
+                    </li> -->
+                    <li>
+                        <a href="{{ route('ceo') }}">CEO Training</a>
+                    </li>
+                    <li>
+                        <a  href="{{ route('training') }}">Report Training</a>
+                    </li>
+                </ul>
+        </li>
+        <!-- <li>
+            <a href="{{ route('training') }}"><div class="pull-left"><i class="fa fa-pencil-square-o mr-20"></i><span class="right-nav-text">Training Total</span></div><div class="clearfix"></div></a>
+        </li>
+        <li>
+            <a href="{{ route('realization') }}"><div class="pull-left"><i class="fa fa-check-circle-o mr-20"></i><span class="right-nav-text">Training Realization</span></div><div class="clearfix"></div></a>
+        </li>
+        <li>
+            <a href="{{ route('ceo') }}"><div class="pull-left"><i class="fa fa-calendar mr-20"></i><span class="right-nav-text">CEO Training</span></div><div class="clearfix"></div></a>
+        </li> -->
+        <!-- <li>
+            <a href=""><div class="pull-left"><i class="fa fa-sliders mr-20"></i><span class="right-nav-text">Success Rate FPTK</span></div><div class="clearfix"></div></a>
+        </li> -->
+        <li>
+            <a href="{{ route('hrga') }}"><div class="pull-left"><i class="fa fa-bullhorn mr-20"></i><span class="right-nav-text">HR-GA Issues</span></div><div class="clearfix"></div></a>
+        </li>
+        
+        <!-- <li><hr class="light-grey-hr mb-10"/></li>
+        {{-- <li class="navigation-header">
+            <span>compo</span> 
+            <i class="zmdi zmdi-more"></i>
+        </li> --}}
+        {{-- <li><hr class="light-grey-hr mb-10"/></li>
+        <li class="navigation-header">
+            <span>featured</span> 
+            <i class="zmdi zmdi-more"></i>
+        </li> --}} -->
+    </ul>
+</div>
     <!-- /Left Sidebar Menu -->
 

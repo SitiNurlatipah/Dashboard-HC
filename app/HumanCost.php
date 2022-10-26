@@ -15,7 +15,7 @@ class HumanCost extends Model
 	 * @var array
 	 */
 	protected $guarded = ['id'];
-	protected $dates=['dateBulanCost'];
+	// protected $dates=['dateBulanCost'];
 	// protected $fillable = [
 	// 'dateBulan','intCostPlan','intCost'
 	// ];

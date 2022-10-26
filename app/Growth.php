@@ -15,7 +15,7 @@ class Growth extends Model
 	 */
 	protected $guarded = ['idGrowth'];
 	protected $primaryKey = 'idGrowth';
-	protected $dates=['dateBulanGrowth'];
+	// protected $dates=['dateBulanGrowth'];
 	// protected $fillable = [
 	// 'dateBulan','intCostPlan','intCost'
 	// ];

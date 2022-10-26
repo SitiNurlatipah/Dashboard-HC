@@ -10,12 +10,19 @@
                 <div class="pull-left">
                     <h6 class="panel-title txt-dark">Data Trend Total Employee</h6>
                 </div>
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>Data Trend Total Employee</span></li>
+                </ol>
+                <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
                 
             </div>
             
             <div class="panel-wrapper collapse in">
             <div class="panel-body">
+                
             <div  class="tab-struct custom-tab-1 mt-0">
                 <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                     <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Data Total Employee</a></li>
@@ -72,7 +79,7 @@
                             $i=1; foreach($data_total_employee as $totalEmployee): ?>
                                 <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{ $totalEmployee->dateBulan->format('F Y') }}</td>
+                                <td>{{ date('F Y', strtotime($totalEmployee->dateBulan)) }}</td>
                                 <td>{{ $totalEmployee->intPermanen }}</td>
                                 <td>{{ $totalEmployee->intContract }}</td>
                                 <td>{{ $totalEmployee->intJobSupply }}</td>
@@ -95,9 +102,63 @@
                 </div>
             </div>
             <div  id="profile_15" class="tab-pane fade" role="tabpanel">
-            <div id="totalvspermanen"></div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark"></h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="totalvspermanen" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark"></h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="total" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark"></h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="permanen" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            <!-- <div id="totalvspermanen"></div>
             <div id="total"></div>
-            <div id="permanen"></div>
+            <div id="permanen"></div> -->
 
             </div>
             </div>

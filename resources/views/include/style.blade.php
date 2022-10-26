@@ -5,8 +5,9 @@
 	<link href="{{asset('droopy/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css') }}" rel="stylesheet" type="text/css">
 	
 	<!-- bootstrap-select CSS -->
-	<link href="{{asset('droopy/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css"/>	
-		
+	<link href="{{asset('droopy/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css">
+	<!-- <link href="{{asset('front/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css">	 -->
+
 	<!-- switchery CSS -->
 	<link href="{{asset('droopy/vendors/bower_components/switchery/dist/switchery.min.css') }}" rel="stylesheet" type="text/css"/>
 	
@@ -26,6 +27,7 @@
 	<!-- Custom CSS -->
 	<link href="{{ asset('droopy/dist/css/style.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('droopy/dist/css/daterangepicker.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('css/progress.css') }}" rel="stylesheet" type="text/css">
 
 	@stack('style')
 

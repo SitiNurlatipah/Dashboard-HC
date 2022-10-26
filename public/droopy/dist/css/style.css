@@ -582,7 +582,21 @@ code {
   overflow: hidden;
   clear: both;
   float: none; }
-
+.ada{
+  background: #ffee37;
+  display: block;
+  text-align: center !important;
+  
+}
+.color-thead{
+  color: #76b6e1;
+}
+.tidak-ada{
+  background: #ff2200;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .preloader-it {
   background: #fff;
   position: fixed;
@@ -590,7 +604,9 @@ code {
   height: 100%;
   width: 100%;
   overflow: hidden; }
-
+  .aa{
+    color:#8ee8fa;
+  }
 .text-right {
   text-align: right !important; }
 
@@ -898,9 +914,9 @@ ul.uo-list {
 button.fc-month-button.fc-state-default.fc-corner-left,
 button.fc-agendaWeek-button, .fc-prev-button, .fc-next-button, .fc-today-button {
   color: #fff;
-  padding: 10px 25px;
+  padding: 5px 5px;
   text-transform: capitalize;
-  border-radius: 2px;
+  border-radius: 1px;
   outline: none;
   box-shadow: none;
   border: none;
@@ -4094,19 +4110,19 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
   padding: 5px;
   border-top: 1px solid #dedede;
   vertical-align: middle; }
-
+  
 .table > thead > tr > th, .jsgrid-table > thead > tr > th, .table > tfoot > tr > th, .jsgrid-table > tfoot > tr > th {
   border-bottom: 2px solid #dedede !important;
   color: #212121;
-  font-size: 9px;
-  font-weight: 450;
+  font-size: 10px;
+  font-weight: 500;
   text-transform: uppercase; }
 
 .table > tfoot > tr > th, .jsgrid-table > tfoot > tr > th {
   border-bottom: 1px solid #dedede !important; }
 
 .table-hover > tbody > tr:hover {
-  background-color: rgba(33, 33, 33, 0.05) !important; }
+  background-color: rgba(33, 33, 33, 0.2) !important; }
 
 .table-bordered {
   border: 1px solid #dedede; }
@@ -4115,14 +4131,15 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
   border: 1px solid #dedede; }
 
 .table-striped > tbody > tr:nth-of-type(2n+1) {
-  background-color: rgba(33, 33, 33, 0.05); }
+  background-color: rgba(33, 33, 33, 0.09); }
 
 .color-bg-table .table > caption + thead > tr:first-child > td, .color-bg-table .jsgrid-table > caption + thead > tr:first-child > td, .color-bg-table .table >
 caption + thead > tr:first-child > th, .color-bg-table .jsgrid-table >
 caption + thead > tr:first-child > th, .color-bg-table .table > colgroup + thead > tr:first-child > td, .color-bg-table .jsgrid-table > colgroup + thead > tr:first-child > td, .color-bg-table .table > colgroup + thead > tr:first-child > th, .color-bg-table .jsgrid-table > colgroup + thead > tr:first-child > th, .color-bg-table .table > thead:first-child > tr:first-child > td, .color-bg-table .jsgrid-table > thead:first-child > tr:first-child > td, .color-bg-table .table > thead:first-child > tr:first-child > th, .color-bg-table .jsgrid-table > thead:first-child > tr:first-child > th {
   background: #8BC34A; }
 .color-bg-table .table > thead > tr > th, .color-bg-table .jsgrid-table > thead > tr > th {
-  color: #fff; }
+  color: #76b6e1; }
+
 
 .bootstrap-table .fixed-table-container {
   border: 1px solid #dedede;
@@ -5918,6 +5935,29 @@ a.compose-mail {
     width: 33.33%;
     float: left;
     font-size: 18px; }
+.baris {
+  margin-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px; 
+  display: flex;
+  font-size: 15px;
+}
+  .baris .kiri {
+    
+    
+    width: 33.33%;
+    float: left;
+    
+     }
+    .baris .tengah {
+    width: 33.33%;
+    float: left;
+    text-align: center;
+     }
+    .baris .kanan {
+    width: 33.33%;
+    float: left;
+     }
 
 .chat-list-wrap .chat-body > a {
   border-bottom: 1px solid #dedede;

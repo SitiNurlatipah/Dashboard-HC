@@ -8,7 +8,7 @@ class TrainingTotalPerMonth extends Model
 {
     protected $table = 'training_total_per_month';
 	public $timestamps = true;
-	protected $dates=['dateBulan'];
+	// protected $dates=['dateBulan'];
 
 	/**
 	 * The attributes that are mass assignable.

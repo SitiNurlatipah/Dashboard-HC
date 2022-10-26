@@ -26,13 +26,15 @@
     @include('include.sidebar')
     
 		<!-- Right Sidebar Backdrop -->
-		<div class="right-sidebar-backdrop"></div>
+		<div class="right-sidebar-backdrop">
+    </div>
 		<!-- /Right Sidebar Backdrop -->
 
 
       <div class="page-wrapper">
         <div class="container-fluid">
           @yield('content')
+          
           @include('include.style')
         </div>
           @include('include.footer')

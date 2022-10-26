@@ -11,11 +11,18 @@
                 <div class="pull-left">
                     <h6 class="panel-title txt-dark">Productivity</h6>
                 </div>
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb text-right">
+                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="active"><span>Productivity</span></li>
+                </ol>
+                <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
             </div>
             
             <div class="panel-wrapper collapse in">
             <div class="panel-body">
+                
             <div  class="tab-struct custom-tab-1 mt-0">
                         <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                             <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Productivity</a></li>
@@ -84,7 +91,7 @@
                             ?>
                                 <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{ $productivity->dateBulan->format ('F Y')}}</td>
+                                <td>{{ date('F Y', strtotime($productivity->dateBulan))}}</td>
                                 <td>{{ $productivity->intPermanen }}</td>
                                 <td>{{ $productivity->intContract }}</td>
                                 <td>{{ $productivity->intTotal }}</td>
@@ -165,7 +172,7 @@
 
                                 <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{ $humancost->dateBulanCost->format ('F Y')}}</td>
+                                <td>{{ date('F Y', strtotime($humancost->dateBulanCost))}}</td>
                                 <td>Rp{{ number_format($humancost->intCostPlan,0,',','.') }}</td>
                                 <td>Rp{{ number_format($humancost->intCostActual,0,',','.') }}</td>
                                 <td>Rp{{ number_format($costMilion,0,',','.') }}M</td>
@@ -231,7 +238,7 @@
                                     <tr>
                                      
                                         <td>{{$i++}}</td>
-                                        <td>{{ $growth->dateBulanGrowth->format('F Y') }}</td>
+                                        <td>{{ date('F Y', strtotime($growth->dateBulanGrowth)) }}</td>
                                         <td>{{ $growth->intPermanen }}</td>
                                         <td>{{ $growth->intContract }}</td>
                                         <td>{{ $growth->intTotal }}</td>
@@ -600,7 +607,7 @@
                         <select name="manpower_id" id="manpower_id" class="form-control">
                             <option disable selected>--Pilih bulan productivity--</option>
                             @foreach($productivity_manpowers as $productivity)
-                            <option value="{{ $productivity->id }}">{{ $productivity->dateBulan->format('F Y')}}</option>
+                            <option value="{{ $productivity->id }}">{{ date('F Y', strtotime($productivity->dateBulan))}}</option>
                             @endforeach
                         </select>
                         
@@ -610,7 +617,7 @@
                         <select name="humancost_id" id="humancost_id" class="form-control">
                             <option disable selected>--Pilih bulan humancost--</option>
                             @foreach($productivity_humancosts as $humancost)
-                            <option value="{{ $humancost->id }}">{{ $humancost->dateBulanCost->format('F Y')}}</option>
+                            <option value="{{ $humancost->id }}">{{ date('F Y', strtotime($humancost->dateBulanCost))}}</option>
                             @endforeach
                         </select>
                     </div>

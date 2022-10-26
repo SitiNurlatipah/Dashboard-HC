@@ -1,5 +1,6 @@
     <!-- jQuery -->
     <script src="{{ asset('droopy/vendors/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('droopy/vendors/jqueryy.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('droopy/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -10,23 +11,16 @@
 	
 	<!-- Data table JavaScript -->
 	<script src="{{ asset('droopy/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
 	<script src="{{asset('droopy/dist/js/dataTables-data.js')}}"></script>
 
 	<!-- Flot Charts JavaScript -->
-	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/excanvas.min.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.js') }}"></script>
-	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.pie.js') }}"></script> -->
-	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.resize.js') }}"></script> -->
-	<!-- <script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.time.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.stack.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/Flot/jquery.flot.crosshair.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
-	<script src="{{ asset('droopy/dist/js/flot-data.js') }}"></script> --> -->
+	
 	<!-- Charts js -->
-	<script src="{{ asset('droopy/vendors/charts/accessibility.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/charts/highcharts.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/charts/exporting.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/charts/export-data.js') }}"></script>
+	<script src="{{ asset('droopy/vendors/charts/accessibility.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/charts/highcharts.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/charts/exporting.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/charts/export-data.js') }}" type="text/javascript"></script>
 	<!-- Slimscroll JavaScript -->
 	<script src="{{ asset('droopy/dist/js/jquery.slimscroll.js') }}"></script>
 	
@@ -43,7 +37,7 @@
 	<script src="{{ asset('droopy/dist/js/dropdown-bootstrap-extended.js') }}"></script>
 	
 	<!-- Sparkline JavaScript -->
-	<script src="{{ asset('droopy/vendors/jquery.sparkline/dist/jquery.sparkline.min.js') }}"></script>
+	<!-- <script src="{{ asset('droopy/vendors/jquery.sparkline/dist/jquery.sparkline.min.js') }}"></script> -->
 	
 	<!-- Owl JavaScript -->
 	<script src="{{ asset('droopy/vendors/bower_components/owl.carousel/dist/owl.carousel.min.js') }}"></script>
@@ -59,7 +53,11 @@
 	<script src="{{ asset('droopy/vendors/bower_components/switchery/dist/switchery.min.js') }}"></script>
 	
 	<!-- Bootstrap Select JavaScript -->
-	<script src="{{ asset('droopy/vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+	<!-- <script src="{{ asset('droopy/vendors/bower_components/multiselect/js/jquery.multi-select.js')}}"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js')}}"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/multiselect/js/jquery.multi-select.js')}}"></script> -->
+	<!-- <script type="text/javascript" src="{{ asset('front/js/bootstrap-select.min.js') }}"></script> -->
 	
 	<!-- Init JavaScript -->
 	<script src="{{ asset('droopy/dist/js/init.js') }}"></script>
@@ -84,9 +82,12 @@
 	<script src="{{ asset('droopy/dist/js/form-picker-data.js') }}"></script>
 	
 	{{-- CDN MQTT PAHO --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script> -->
+	<!-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" type="text/javascript"></script> -->
 	<!-- delete -->
 	<script src="{{asset('droopy/vendors/sweetalert.min.js')}}" type="text/javascript"></script>
- 
+	<script type="text/javascript" src="{{ asset('droopy/vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+
 	@stack('script')
 		
