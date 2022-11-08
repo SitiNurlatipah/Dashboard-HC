@@ -20,23 +20,23 @@ class ProductivityController extends Controller
         ->get();
         // $growthProductivity=$coba;
         $productiv = Productivity::select(DB::raw("CAST(SUM((intOutputActual/intTotal)*1000) as int) as productiv"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
+                    ->GroupBy(DB::raw("(dateBulan)"))
 					->orderBy('dateBulan', 'ASC')
                     ->pluck('productiv');
         $manpower = Productivity::select(DB::raw("CAST(SUM(intTotal) as int) as manpower"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
+                    ->GroupBy(DB::raw("(dateBulan)"))
 					->orderBy('dateBulan', 'ASC')
                     ->pluck('manpower');
         $actual = Productivity::select(DB::raw("CAST(SUM(intOutputActual*1000) as int) as actual"))
-                    ->GroupBy(DB::raw("Month(dateBulan)"))
+                    ->GroupBy(DB::raw("(dateBulan)"))
 					->orderBy('dateBulan', 'ASC')
                     ->pluck('actual');
         $costProduct = HumanCost::select(DB::raw("CAST(SUM(intCostActual/(intOutputActual*1000)) as int) as costProduct"))
-                    ->GroupBy(DB::raw("Month(dateBulanCost)"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateBulanCost,'%M-%Y'))"))
 					->orderBy('dateBulanCost', 'ASC')
                     ->pluck('costProduct');
         $costActual = HumanCost::select(DB::raw("CAST(SUM(intCostActual) as int) as costActual"))
-                    ->GroupBy(DB::raw("Month(dateBulanCost)"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateBulanCost,'%M-%Y'))"))
 					->orderBy('dateBulanCost', 'ASC')
                     ->pluck('costActual');
         $coba = Growth::leftJoin('productivity_manpowers','productivity_growths.manpower_id','=','productivity_manpowers.id')
@@ -44,12 +44,12 @@ class ProductivityController extends Controller
                     ->GroupBy(DB::raw("Month(dateBulanGrowth)"))
 					->orderBy('dateBulan', 'ASC')
                     ->pluck('coba');
-        $bulan=Productivity::select(DB::raw("MONTHNAME(dateBulan) as bulan"))
-                    ->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
+        $bulan=Productivity::select(DB::raw("(DATE_FORMAT(dateBulan,'%M-%Y')) as bulan"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateBulan,'%M-%Y'))"))
                     ->orderBy('dateBulan', 'ASC')
                     ->pluck('bulan');
-        $bulanCost=HumanCost::select(DB::raw("MONTHNAME(dateBulanCost) as bulanCost"))
-                    ->GroupBy(DB::raw("MONTHNAME(dateBulanCost)"))
+        $bulanCost=HumanCost::select(DB::raw("(DATE_FORMAT(dateBulanCost,'%M-%Y')) as bulanCost"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateBulanCost,'%M-%Y'))"))
                     ->orderBy('dateBulanCost', 'ASC')
                     ->pluck('bulanCost');
         

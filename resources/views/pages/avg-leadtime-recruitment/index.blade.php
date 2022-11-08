@@ -61,13 +61,13 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">Bulan</th>
-                                            <th class="text-center">Permanen</th>
-                                            <th class="text-center">Std Permanen</th>
-                                            <th class="text-center">Permanen 1</th>
-                                            <th class="text-center">Permanen 2</th>
-                                            <th class="text-center">Permanen 3</th>
-                                            <th class="text-center">Permanen 4</th>
-                                            <th class="text-center">Permanen 5</th>
+                                            <th class="text-center">Permanent</th>
+                                            <th class="text-center">Std Permanent</th>
+                                            <th class="text-center">Permanent 1</th>
+                                            <th class="text-center">Permanent 2</th>
+                                            <th class="text-center">Permanent 3</th>
+                                            <th class="text-center">Permanent 4</th>
+                                            <th class="text-center">Permanent 5</th>
                                             <th class="text-center">Contract</th>
                                             <th class="text-center">Std Contract</th>
                                             <th class="text-center">Job Supply</th>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\TrainingRealization;
 use App\DataTraineeModel;
 use App\UserModel;
+use App\KasbonModel;
+use App\CostCenterModel;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,30 +28,18 @@ class TrainingRealizationController extends Controller
         ->orderBy('post_test', 'desc')
         ->get();
         
-        
         $rata = DataTraineeModel::leftjoin('training_realizations','training_realizations.id','=','data_trainees.training_id')
-                     ->selectRaw('data_trainees.training_id, avg(evaluasi_1+evaluasi_2) as rata2')
-                     
+                     ->selectRaw('data_trainees.training_id,training_realizations.txtTrainingName, avg(evaluasi_1+evaluasi_2+evaluasi_3+evaluasi_4+evaluasi_5+evaluasi_6+evaluasi_7+evaluasi_8) as rata2')
                      ->groupBy('training_id')
+                     ->orderBy('training_id', 'desc')
                      ->get();
-        // dd($rata);
-        // $rata = DB::table('data_trainees')
-        //              ->select(DB::raw('AVG(evaluasi_1+evaluasi_2+evaluasi_3) as rata2, training_id'))
-        //              ->join('training_realizations','data_trainees.training_id','=','id')
-        //              ->groupBy('id')
-        //              ->orderBy('id')
-        //              ->get();
         $users=UserModel::all();
-        // $data = TrainingRealization::leftJoin('data_trainees','training_realizations.id','=','data_trainees.training_id')
-        // ->where('training_realizations.id','data_trainees.training_id')
-        // ->select(DB::raw("CAST(AVG(evaluasi_1+evaluasi_1) as int) as data"))
-        // ->GroupBy(DB::raw("training_id"))
-        // ->get();
-        // dd($data);
-        
-        // $response = compact('tasks');
+        $kasbon=KasbonModel::join('cost_centers','cost_centers.id','=','costcenter_kasbon.costcenter_id')
+                            ->orderBy('costcenter_id', 'asc')
+                            ->get();
+        $costcenter=CostCenterModel::all();
         return view('pages.training.training-realization.index',
-        compact('training_realizations','trainees','users','rata'));
+        compact('training_realizations','trainees','users','rata','kasbon','costcenter'));
         // return view('pages.training.training-realization.index',
         // ['training_realizations'=>$realisasi]);
      }

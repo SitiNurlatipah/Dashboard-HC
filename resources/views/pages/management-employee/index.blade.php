@@ -85,7 +85,7 @@
                                         <th class="text-center">NO</th>
                                         <th class="text-center">Tanggal Input</th>
                                         <th class="text-center">Bulan Input</th>
-                                        <th class="text-center">Permanen</th>
+                                        <th class="text-center">Permanent</th>
                                         <th class="text-center">Outsource</th>
                                         <th class="text-center">Contract</th>
                                         <th class="text-center">Jumlah</th>
@@ -175,11 +175,11 @@
                                 </tr>
                                 <tr>
                                     
-                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Permanent</th>
                                     <th class="text-center">Outsource</th>
                                     <th class="text-center">Contract</th>
                                     <th class="text-center">Total</th>
-                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Permanent</th>
                                     <th class="text-center">Total</th>
                                     
                                 </tr>
@@ -265,12 +265,12 @@
                             </tr>
                             <tr>
                                     
-                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Permanent</th>
                                     <th class="text-center">Outsource</th>
                                     <th class="text-center">Contract</th>
                                     <th class="text-center">PKWTT+PKWT</th>
                                     <th class="text-center">Total</th>
-                                    <th class="text-center">Permanen</th>
+                                    <th class="text-center">Permanent</th>
                                     <th class="text-center">Contract</th>
                                     <th class="text-center">Total</th>
                                     

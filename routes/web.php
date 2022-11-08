@@ -83,8 +83,11 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/realization', 'TrainingRealizationController@store')->name('realization.post');
     Route::put('/realization/{TrainingRealization}', 'TrainingRealizationController@update');
     Route::delete('/realization/{id}', 'TrainingRealizationController@destroy')->name('realization.delete');    
- 
-    
+    //costcenter
+    Route::post('/training/kasbon', 'KasbonController@store')->name('kasbon.post');
+    Route::put('/training/kasbon/{KasbonModel}', 'KasbonController@update');
+    Route::delete('/training/kasbon/{idKasbon}', 'KasbonController@destroy')->name('kasbon.delete');    
+
     Route::get('/ceo', 'CeoTrainingController@index')->name('ceo');
     Route::get('/totalemployee', 'DataTotalEmployeeController@index')->name('total');
     Route::post('/totalemployee', 'DataTotalEmployeeController@store')->name('total.post');
@@ -100,12 +103,16 @@ Route::group(['middleware' => 'guest'], function () {
     Route::delete('/user/{id}', 'UserController@destroy')->name('user.delete');    
     
     
-    //mpp
+    //real
     Route::get('/mppvsreal', 'MppRealController@index')->name('mppreal');
     Route::post('/mppvsreal', 'MppRealController@store')->name('mppreal.post');
     Route::post('/mppvsreal/filter', 'MppRealController@filter')->name('mppreal.filter');
-    Route::put('/mppvsreal/{MppVsRealModel}', 'MppRealController@update');
-    Route::delete('/mppvsreal/{id}', 'MppRealController@destroy')->name('mppreal.delete');    
+    Route::put('/mppvsreal/{RealModel}', 'MppRealController@update');
+    Route::delete('/mppvsreal/{idReal}', 'MppRealController@destroy')->name('mppreal.delete');
+    //mpp    
+    Route::post('/mppvsreal/mpp', 'MppRealController@storeMpp')->name('mpp.post');
+    Route::put('/mppvsreal/mpp/{MppModel}', 'MppRealController@updateMpp');
+    Route::delete('/mppvsreal/mpp/{id}', 'MppRealController@destroyMpp')->name('mpp.delete');    
     
     Route::get('/register', 'AuthController@getRegister')->name('register');
     Route::post('/register', 'AuthController@postRegister')->name('register.post');

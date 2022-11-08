@@ -23,7 +23,8 @@
                 
             <div  class="tab-struct custom-tab-1 mt-0">
                 <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
-                    <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">MPP Vs Real</a></li>
+                    <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Realisasi</a></li>
+                    <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_16" aria-expanded="false">MPP</a></li>
                     <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Grafik</a></li>
                     
                 </ul>
@@ -79,21 +80,21 @@
                             
                             <tbody>
                             <?php
-                            $i=1; foreach($mppall as $mppreal): ?>
+                            $i=1; foreach($real as $mppreal): ?>
                                 <tr>
-                                <td>{{$mppreal->dateBulan->format('F Y')}}</td>
-                                <td>{{ $mppreal->intMppPermanent }}</td>
-                                <td>{{ $mppreal->intMppContract }}</td>
-                                <td>{{ $mppreal->intMppJobSupply }}</td>
-                                <td>{{ $mppreal->intMppTotal }}</td>
+                                <td>{{ \Carbon\Carbon::parse($mppreal->dateBulan)->format('F Y')}}</td>
+                                <td>{{ $mppreal->realPermanent }}</td>
+                                <td>{{ $mppreal->realContract }}</td>
+                                <td>{{ $mppreal->realJobSupply }}</td>
+                                <td>{{ $mppreal->realTotal }}</td>
                                 <td>{{ $mppreal->intAdd }}</td>
                                 <td>{{ $mppreal->intReduce }}</td>
                                 <td>{{ $mppreal->txtMtdAdjusment }}</td>
                                 <td>
-                                <form action="{{route('mppreal.delete',$mppreal->id)}}" method="POST">
+                                <form action="{{route('mppreal.delete',$mppreal->idReal)}}" method="POST">
                                 @csrf
                                 @method('put')
-                                <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$mppreal->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$mppreal->idReal}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                 @csrf 
                                 @method("delete")
                                     <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
@@ -109,8 +110,54 @@
                         
             
         </div>
+        <div  id="profile_16" class="tab-pane fade" role="tabpanel">
+            <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#addmpp" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                <div class="table-wrap">
+                    <div class="table-responsive">
+                        <table id="mppTable" class="table table-striped table-hover font-11 table-bordered display mb-30 text-center" >
+                            <thead>
+                            <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Tahun</th>
+                                    <th class="text-center">Permanent</th>
+                                    <th class="text-center">Contract</th>
+                                    <th class="text-center">Job Supply</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                            <?php
+                            $i=1; foreach($mpp_employee as $index=>$mpp): ?>
+                                <tr>
+                                <td>{{$index+1}}</td>
+                                <td>{{$mpp->tahun}}</td>
+                                <td>{{ $mpp->mppPermanent }}</td>
+                                <td>{{ $mpp->mppContract }}</td>
+                                <td>{{ $mpp->mppJobsupply }}</td>
+                                <td>{{ $mpp->mppTotal }}</td>
+                                <td>
+                                <form action="" method="POST">
+                                @csrf
+                                @method('put')
+                                <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$mppreal->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                @csrf 
+                                @method("delete")
+                                    <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                </form>
+                                </td>
+                                </tr>
+                                
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                        
+                
+        </div>
         <div  id="profile_15" class="tab-pane fade" role="tabpanel">
-            <!-- <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+            <div class="col-lg-12 col-md-6 col-sm-7 col-xs-12">
                         <div class="panel panel-default card-view panel-refresh relative">
                             <div class="refresh-container">
                                 <div class="la-anim-1"></div>
@@ -123,12 +170,12 @@
                             </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                    <div id="chart" class="" style="height:367px;"></div>
+                                    <div id="totalchart" class="" style="height:367px;"></div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+                    </div>
+            <div class="col-lg-12 col-md-6 col-sm-7 col-xs-12">
                         <div class="panel panel-default card-view panel-refresh relative">
                             <div class="refresh-container">
                                 <div class="la-anim-1"></div>
@@ -154,6 +201,49 @@
 </div>
 </div>
 <!-- /Row -->
+<div class="modal fade" id="addmpp" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
+                </div>
+                <div class="modal-body">
+                <form action="{{ route('mpp.post') }}" method="POST">
+                @csrf 
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label for="mppTotal" class="control-label mb-10">Total</label>
+                                <input type="number" class="form-control" id="mppTotal" name="mppTotal" required>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="mppPermanent" class="control-label mb-10">Permanen</label>
+                                <input type="number" class="form-control" id="mppPermanent" name="mppPermanent" required>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="mppContract" class="control-label mb-10">Contract</label>
+                                <input type="number" class="form-control" id="mppContract" name="mppContract" required>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="mppJobsupply" class="control-label mb-10">Job Supply</label>
+                                <input type="number" class="form-control" id="mppJobsupply" name="mppJobsupply" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateBulan" class="control-label mb-10">Tahun</label>
+                            <input type="text" class="form-control" id="tahun" name="tahun" required>
+                        </div>
+                        
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                        </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+    </div>
+<!-- end add data -->
 <div class="modal fade" id="add-mppreal" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -164,37 +254,45 @@
                 <div class="modal-body">
                 <form action="{{ route('mppreal.post') }}" method="POST">
                 @csrf 
+                        <div class="form-group">
+                            <label class="control-label mb-5">Tahun</label>
+                                <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" title="Pilih tahun" data-live-search="false" name="mpp_tahun" id="mpp_tahun">
+                                    @foreach($mpp_employee as $mpp)
+                                    <option value="{{$mpp->id}}">{{$mpp->tahun}}</option>
+                                    @endforeach
+                                </select>        
+                        </div>
                         <div class="row form-group">
                             <div class="col-sm-3">
                                 <label for="intTotal" class="control-label mb-10">Total</label>
-                                <input type="number" class="form-control" id="intMppTotal" name="intMppTotal" required>
+                                <input type="number" class="form-control" id="realTotal" name="realTotal" required>
                             </div>
                             <div class="col-sm-3">
                                 <label for="intPermanen" class="control-label mb-10">Permanen</label>
-                                <input type="number" class="form-control" id="intMppPermanent" name="intMppPermanent" required>
+                                <input type="number" class="form-control" id="realPermanent" name="realPermanent" required>
                             </div>
                             <div class="col-sm-3">
                                 <label for="intContract" class="control-label mb-10">Contract</label>
-                                <input type="number" class="form-control" id="intMppContract" name="intMppContract" required>
+                                <input type="number" class="form-control" id="realContract" name="realContract" required>
                             </div>
                             <div class="col-sm-3">
                                 <label for="intContract" class="control-label mb-10">Job Supply</label>
-                                <input type="number" class="form-control" id="intMppJobSupply" name="intMppJobSupply" required>
+                                <input type="number" class="form-control" id="realJobSupply" name="realJobSupply" required>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-6">
                                 <label for="intContract" class="control-label mb-10">Add</label>
-                                <input type="number" class="form-control" id="intAdd" name="intAdd" required>
+                                <input type="number" class="form-control" id="intAdd" name="intAdd">
                             </div>
                             <div class="col-sm-6">
                                 <label for="intContract" class="control-label mb-10">Reduce</label>
-                                <input type="number" class="form-control" id="intReduce" name="intReduce" required>
+                                <input type="number" class="form-control" id="intReduce" name="intReduce">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="intContract" class="control-label mb-10">MTD Adjusment</label>
-                            <input type="text" class="form-control" id="txtMtdAdjusment" name="txtMtdAdjusment" required>
+                            <input type="text" class="form-control" id="txtMtdAdjusment" name="txtMtdAdjusment">
                         </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
@@ -211,8 +309,8 @@
     </div>
     </div>
 <!-- end add data -->
-@foreach($mppall as $mppreal)
-    <div class="modal fade" id="update{{$mppreal->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+@foreach($real as $mppreal)
+    <div class="modal fade" id="update{{$mppreal->idReal}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -220,25 +318,34 @@
                     <h5 class="modal-title" id="add-userLabel1">Update Data Productivity</h5>
                 </div>
                 <div class="modal-body">
-                <form action="/mppvsreal/{{$mppreal->id}}" method="POST">
+                <form action="/mppvsreal/{{$mppreal->idReal}}" method="POST">
                 @csrf 
-                @method('put')       
+                @method('put')
                     <div class="form-group">
-                        <label for="intMppTotal" class="control-label mb-10">Total</label>
-                        <input type="number" class="form-control" id="intMppTotal" name="intMppTotal" value="{{$mppreal->intMppTotal}}">
+                        <label class="control-label mb-5">Tahun</label>
+                        <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" data-live-search="false" name="mpp_tahun" id="mpp_tahun">
+                            <option value="{{$mppreal->mpp_tahun}}">{{$mppreal->tahun}}</option>
+                            @foreach($mpp_employee as $mpp)
+                            <option value="{{$mpp->id}}">{{$mpp->tahun}}</option>
+                            @endforeach
+                        </select>        
+                    </div>       
+                    <div class="form-group">
+                        <label for="realTotal" class="control-label mb-10">Total</label>
+                        <input type="number" class="form-control" id="realTotal" name="realTotal" value="{{$mppreal->realTotal}}">
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-4">
-                            <label for="intMppPermanent" class="control-label mb-10">Permanen</label>
-                            <input type="number" class="form-control" id="intMppPermanent" name="intMppPermanent" value="{{$mppreal->intMppPermanent}}">
+                            <label for="realPermanent" class="control-label mb-10">Permanent</label>
+                            <input type="number" class="form-control" id="realPermanent" name="realPermanent" value="{{$mppreal->realPermanent}}">
                         </div>
                         <div class="col-sm-4">
-                            <label for="intMppContract" class="control-label mb-10">Contract</label>
-                            <input type="number" class="form-control" id="intMppContract" name="intMppContract" value="{{$mppreal->intMppContract}}">
+                            <label for="realContract" class="control-label mb-10">Contract</label>
+                            <input type="number" class="form-control" id="realContract" name="realContract" value="{{$mppreal->realContract}}">
                         </div>
                         <div class="col-sm-4">
-                            <label for="intMppJobSupply" class="control-label mb-10">Job Supply</label>
-                            <input type="number" class="form-control" id="intMppJobSupply" name="intMppJobSupply" value="{{$mppreal->intMppJobSupply}}">
+                            <label for="realJobSupply" class="control-label mb-10">Job Supply</label>
+                            <input type="number" class="form-control" id="realJobSupply" name="realJobSupply" value="{{$mppreal->realJobSupply}}">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -257,7 +364,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$mppreal->dateBulan->format('d/m/Y')}}" required>
+                        <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$mppreal->dateBulan}}" required>
                     </div>
                         
                     <div class="modal-footer">
@@ -278,6 +385,10 @@
 @push('script')
 <script type="text/javascript">
 $('#mpprealTable').dataTable( {
+    paging: true,
+    searching: true
+} );
+$('#mppTable').dataTable( {
     paging: true,
     searching: true
 } );
@@ -314,71 +425,20 @@ var permanen =  <?php echo json_encode($permanen) ?>;
 var contract =  <?php echo json_encode($contract) ?>;
 var jobsupply =  <?php echo json_encode($jobsupply) ?>;
 var total =  <?php echo json_encode($total) ?>;
+var permanenMpp =  <?php echo json_encode($permanenMpp) ?>;
+var contractMpp =  <?php echo json_encode($contractMpp) ?>;
+var jobsupplyMpp =  <?php echo json_encode($jobsupplyMpp) ?>;
+var totalMpp =  <?php echo json_encode($totalMpp) ?>;
 var bulan =  <?php echo json_encode($bulan) ?>;
-// Highcharts.chart('chart', {
-//         title: {
-//             text: 'MPP VS Realization'
-//         },
-//         subtitle: {
-//             text: 'PT. Kalbe Morinaga Indonesia'
-//         },
-//          xAxis: {
-//             categories: bulan
-//         },
-//         yAxis: {
-//             title: {
-//                 text: 'Jumlah'
-//             }
-//         },
-//         legend: {
-//             layout: 'vertical',
-//             align: 'right',
-//             verticalAlign: 'middle'
-//         },
-//         plotOptions: {
-//             series: {
-//                 allowPointSelect: true
-//             }
-//         },
-//         series: [{
-//             type: 'column',
-//             name: 'Permanent',
-//             data: permanen
-//         },{
-//             type: 'column',
-//             name: 'Contract',
-//             data: contract
-//         },{
-//             type: 'column',
-//             name: 'Job Supply',
-//             data: jobsupply
-//         },{
-//             type: 'column',
-//             name: 'Total Employee',
-//             data: total
-//         }],
-//         responsive: {
-//             rules: [{
-//                 condition: {
-//                     maxWidth: 500
-//                 },
-//                 chartOptions: {
-//                     legend: {
-//                         layout: 'horizontal',
-//                         align: 'center',
-//                         verticalAlign: 'bottom'
-//                     }
-//                 }
-//             }]
-//         }
-//     });
     Highcharts.chart('coba', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Total',
-        align: 'left'
+            text: 'Realization Employee'
+        },
+    subtitle: {
+        text: 'PT. Kalbe Morinaga Indonesia'
     },
     xAxis: {
         categories: bulan
@@ -386,7 +446,7 @@ var bulan =  <?php echo json_encode($bulan) ?>;
     yAxis: {
         min: 0,
         title: {
-            text: 'Count trophies'
+            text: 'Employee'
         },
         stackLabels: {
             enabled: true,
@@ -428,5 +488,58 @@ var bulan =  <?php echo json_encode($bulan) ?>;
         data: jobsupply
     }]
 });
+Highcharts.chart('totalchart', {
+        title: {
+            text: 'MPP VS Real Employee'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulan
+        },
+        yAxis: {
+            title: {
+                text: 'Employee'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true,
+                dataLabels: {
+                enabled: true
+            }
+            }
+        },
+        series: [{
+            type: 'column',
+            name: 'MPP Total Employee',
+            data: totalMpp
+        },{
+            type: 'column',
+            name: 'Real Total Employee',
+            data: total
+        
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
 </script>
 @endpush

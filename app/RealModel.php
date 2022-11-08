@@ -4,17 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MppVsRealModel extends Model
+class RealModel extends Model
 {
-    protected $table = 'mpp_vs_realization';
+    protected $table = 'real_employees';
 	public $timestamps = true;
+	protected $primaryKey = 'idReal';
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id'];
-	protected $dates=['dateBulan'];
+	protected $guarded = ['idReal'];
+	
 	
 	
 	

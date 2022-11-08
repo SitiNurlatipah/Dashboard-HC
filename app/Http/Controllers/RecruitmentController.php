@@ -16,15 +16,21 @@ class RecruitmentController extends Controller
         $request->validate([
             'nama' => 'required',
             'recruitmentStatus' => 'required',
+            'jobtitle' => 'required',
             ]);
             $validated = [
                 'nama' => $request->nama,
                 'recruitmentStatus' => $request->recruitmentStatus,
+                'jobtitle' => $request->jobtitle,
                 'fptkStatus' => $request->fptkStatus,
+                'progressrecruitment' => $request->progressrecruitment,
                 'interviewHrStatus' => $request->interviewHrStatus,
                 'interviewUser1Status' => $request->interviewUser1Status,
                 'interviewUser2Status' => $request->interviewUser2Status,
                 'interviewUser3Status' => $request->interviewUser3Status,
+                'user1' => $request->user1,
+                'user2' => $request->user2,
+                'user3' => $request->user3,
                 'psikotesStatus' => $request->psikotesStatus,
                 'mcuStatus' => $request->mcuStatus,
                 'ttdStatus' => $request->ttdStatus,
@@ -54,11 +60,16 @@ class RecruitmentController extends Controller
         $p = RecruitmentModel::find($idRecruitment);
         $p->nama = $request->nama;
         $p->recruitmentStatus = $request->recruitmentStatus;
+        $p->progressrecruitment = $request->progressrecruitment;
+        $p->jobtitle = $request->jobtitle;
         $p->fptkStatus = $request->fptkStatus;
         $p->interviewHrStatus = $request->interviewHrStatus;
         $p->interviewUser1Status = $request->interviewUser1Status;
         $p->interviewUser2Status = $request->interviewUser2Status;
         $p->interviewUser3Status = $request->interviewUser3Status;
+        $p->user1 = $request->user1;
+        $p->user2 = $request->user2;
+        $p->user3 = $request->user3;
         $p->psikotesStatus = $request->psikotesStatus;
         $p->mcuStatus = $request->mcuStatus;
         $p->ttdStatus = $request->ttdStatus;

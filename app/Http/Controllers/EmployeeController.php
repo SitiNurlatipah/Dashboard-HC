@@ -18,63 +18,63 @@ class EmployeeController extends Controller
 		$geto = GetoModel::orderBy('dateTglInput', 'DESC')->get();
 		$to = ToModel::orderBy('dateTglInput', 'DESC')->get();
 		$jumlah_employee = EmployeeModel::select(DB::raw("CAST(SUM(intJumlahEmployee) as int) as jumlah_employee"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('jumlah_employee');
 		$karyawan = EmployeeModel::select(DB::raw("CAST(SUM(intKaryawan) as int) as karyawan"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('karyawan');
 		$outsource = EmployeeModel::select(DB::raw("CAST(SUM(intOutsource) as int) as outsource"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('outsource');
 		$kontrak = EmployeeModel::select(DB::raw("CAST(SUM(intContract) as int) as kontrak"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('kontrak');
-        $bulan=EmployeeModel::select(DB::raw("MONTHNAME(dateTglInput) as bulan"))
-					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
+        $bulan=EmployeeModel::select(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y')) as bulan"))
+					->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
 					->orderBy('dateTglInput', 'ASC')
 					->pluck('bulan');
 		$total_geto = GetoModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_geto"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('total_geto');
 		$getoKaryawan = GetoModel::select(DB::raw("CAST(SUM(intGetoKaryawan) as int) as getoKaryawan"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('getoKaryawan');
 		$getoKontrak = GetoModel::select(DB::raw("CAST(SUM(intGetoKontark) as int) as getoKontrak"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('getoKontrak');
 		$getoOutsource = GetoModel::select(DB::raw("CAST(SUM(intGetoOutsource) as int) as getoOutsource"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('getoOutsource');
-        $bulanGeto=GetoModel::select(DB::raw("MONTHNAME(dateTglInput) as bulanGeto"))
-					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
+        $bulanGeto=GetoModel::select(DB::raw("year(dateTglInput) as bulanGeto"))
+					->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
 					->pluck('bulanGeto');
 		$total_to = ToModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_to"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('total_to');
-        $bulanTo=ToModel::select(DB::raw("MONTHNAME(dateTglInput) as bulanTo"))
-					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
+        $bulanTo=ToModel::select(DB::raw("year(dateTglInput) as bulanTo"))
+					->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
 					->pluck('bulanTo');		
 		$toOutsource = ToModel::select(DB::raw("CAST(SUM(intToOutsource) as int) as toEmployee"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)")) 
+                    ->GroupBy(DB::raw("year(dateTglInput)")) 
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('toEmployee');
 		$toKontrak = ToModel::select(DB::raw("CAST(SUM(intToKontrak) as int) as toKontrak"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('toKontrak');
 		$toKaryawan = ToModel::select(DB::raw("CAST(SUM(intToKaryawan) as int) as toKaryawan"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
+                    ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('toKaryawan');
         	

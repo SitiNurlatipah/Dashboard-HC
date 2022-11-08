@@ -141,6 +141,7 @@
                                         <form action="{{route('realization.delete',$realisasi->id)}}" method="POST">
                                         @csrf
                                         @method('put')
+                                        <a class="btn btn-warning btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#searchTrainee" data-whatever="@mdo"><i class="fa fa-search"></i></a>
                                         <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$realisasi->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         @csrf 
                                         @method("delete")
@@ -247,7 +248,7 @@
                                         <td>{{$trainee->assesment_target}}</td>
                                         <td>{{$trainee->assesment_actual}}</td>
                                         <td>
-                                            <form action="{{route('trainee.delete',$trainee->idTrainee)}}" method="POST">
+                                            <form action="" method="POST">
                                             @csrf
                                             @method('put')
                                             <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTrainee{{$trainee->idTrainee}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
@@ -264,6 +265,47 @@
                         </div>
                     </div>
                     <div  id="profile_16" class="tab-pane fade" role="tabpanel">
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-kasbon" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                        <!-- </div> -->
+                        <div class="table-wrap">
+                            <div class="table-responsive">
+                                <table id="kasbonTable" class="table table-striped table-hover displayx table-bordered font-11 mt-10" width="100%">
+                                    <thead bgcolor="#8ee8fa">
+                                        <tr>
+                                            <th rowspan="2" class="text-center">No</th>
+                                            <th rowspan="2" class="text-center">Cost Center</th>
+                                            <th rowspan="2" class="text-center">Cost Center Departement</th>
+                                            <th rowspan="2" class="text-center">Cost Center Group</th>
+                                            <th rowspan="2" class="text-center">Total</th>
+                                            <th rowspan="2" class="text-center">Action (Update/Delete)</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    <tbody>
+                                    @foreach($kasbon as $index=>$k)
+                                    <tr>
+                                        <td class="text-center">{{$index+1}}</td>
+                                        <td>{{$k->costcenter}}</td>
+                                        <td>{{$k->costcenter_dept}}</td>
+                                        <td>{{$k->costcenter_group}}</td>
+                                        <td>Rp{{number_format($k->total,0,',','.')}}</td>
+                                        
+                                        <td class="text-center">
+                                            <form action="{{route('kasbon.delete',$k->idKasbon)}}" method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatekasbon{{$k->idKasbon}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                            @csrf 
+                                            @method("delete")
+                                                <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>  
+                                    @endforeach 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 </div>
@@ -700,6 +742,114 @@
     </div>
 </div>
 @endforeach
+<div class="modal fade" id="add-kasbon" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
+                </div>
+                <div class="modal-body form-wrap">
+                <form action="{{ route('kasbon.post') }}" method="POST">
+                @csrf 
+                    <div class="form-group">
+                        <label class="control-label mb-5">Cost Center</label>
+                            <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" title="Choose Cost Center..." name="costcenter_id" id="costcenter_id">
+                                @foreach($costcenter as $c)
+                                <option value="{{$c->id}}">{{$c->costcenter}}</option>
+                                @endforeach
+                            </select>        
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Total</label>
+                        <input type="text" class="form-control" name="total">
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+</div>
+@foreach($kasbon as $k)
+<div class="modal fade" id="updatekasbon{{$k->idKasbon}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
+                </div>
+                <div class="modal-body form-wrap">
+                <form action="/training/kasbon/{{$k->idKasbon}}" method="POST">
+                @csrf 
+                @method('put') 
+                    <div class="form-group">
+                        <label class="control-label mb-5">Cost Center</label>
+                            <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" name="costcenter_id" id="costcenter_id">
+                                <option value="{{$k->costcenter_id}}">{{$k->costcenter}}</option>
+                                @foreach($costcenter as $c)
+                                <option value="{{$c->id}}">{{$c->costcenter}}</option>
+                                @endforeach
+                            </select>        
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Total</label>
+                        <input type="text" class="form-control" name="total" value="{{$k->total}}">
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+</div>
+@endforeach
+<div class="modal fade" id="searchTrainee" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Rata-rata Nilai</h5>
+                </div>
+                <div class="modal-body">
+                <div class="table-wrap">
+                    <div class="table-responsive">
+                        <table id="dtable" class="table table-hover font-11 table-bordered display mb-30 text-center" >
+                            <thead>
+                            <tr>
+                               
+                                
+                                <th class="text-center">Training ID</th>
+                                <th class="text-center">Judul Training</th>    
+                                <th class="text-center">Rata-rata</th>    
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($rata as $i)
+                            <tr>
+                                
+                                <td class="col-md-2">{{ $i->training_id }}</td>
+                                <td class="col-md-2">{{ $i->txtTrainingName }}</td>
+                                <td class="col-md-2">{{ number_format($i->rata2,0) }}</td>
+                                
+                            </tr>
+                                
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>       
+        </div>
+    </div>
+</div>
+
 <!-- end update modal -->
 
 @endsection
@@ -712,6 +862,10 @@ $('#realizationTable').dataTable( {
     searching: true
 } );
 $('#ratatable').dataTable( {
+    paging: true,
+    searching: true
+} );
+$('#dtable').dataTable( {
     paging: true,
     searching: true
 } );
@@ -733,6 +887,10 @@ $('.delete').click(function(event) {
     });
 });
 $('#traineeTable').dataTable( {
+    paging: true,
+    searching: true
+} );
+$('#kasbonTable').dataTable( {
     paging: true,
     searching: true
 } );

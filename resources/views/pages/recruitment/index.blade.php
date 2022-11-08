@@ -60,6 +60,7 @@
                     @foreach($progress as $p)
                     
                     <div class="baris">
+                    <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                         <span class="baris kiri">{{$p->nama}}</span>
                         @if($p->tanggalFptk==null)
                         <span class="baris kanan">{{$p->tanggalFptk}}</span>
@@ -77,6 +78,7 @@
                         @foreach($progress as $p)
                         @if($p->fptkStatus=='pass')
                         <div class="baris">
+                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                             <span class="baris kiri">{{$p->nama}}</span>
                             @if($p->tanggalInterviewHr==null)
                             {{$p->tanggalInterviewHr}}
@@ -93,11 +95,14 @@
                         @foreach($progress as $p)
                         @if($p->interviewHrStatus=='pass')
                         <div class="baris">
+                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                             <span class="baris kiri">{{$p->nama}}</span>
                             @if($p->tanggalInterviewUser1==null)
                             {{$p->tanggalInterviewUser1}}
                             @else
                             <span class="baris kanan">{{date('d-m-Y', strtotime($p->tanggalInterviewUser1))}}</span>
+                            <span class="baris kanan">{{$p->user1}}</span>
+
                             @endif
                         </div>
                         @endif
@@ -106,11 +111,15 @@
                         @foreach($progress as $p)
                         @if($p->interviewUser1Status=='pass')
                         <div class="baris">
+                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+
                             <span class="baris kiri">{{$p->nama}}</span>
                             @if($p->tanggalInterviewUser2==null)
                             {{$p->tanggalInterviewUser2}}
                             @else
                             <span class="baris kanan">{{date('d-m-Y', strtotime($p->tanggalInterviewUser2))}}</span>
+                            <span class="baris kanan">{{$p->user2}}</span>
+
                             @endif
                         </div>
                         @endif
@@ -119,11 +128,14 @@
                         @foreach($progress as $p)
                         @if($p->interviewUser2Status=='pass')
                         <div class="baris">
+                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+
                             <span class="baris kiri">{{$p->nama}}</span>
                             @if($p->tanggalInterviewUser3==null)
                             {{$p->tanggalInterviewUser3}}
                             @else
                             <span class="baris kanan">{{date('d-m-Y', strtotime($p->tanggalInterviewUser3))}}</span>
+                            <span class="baris kanan">{{$p->user3}}</span>
                             @endif
                         </div>
                         @endif
@@ -135,6 +147,7 @@
                         @foreach($progress as $p)
                         @if($p->interviewUser3Status=='pass')
                         <div class="baris">
+                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                             <span class="baris kiri">{{$p->nama}}</span>
                             @if($p->tanggalPsikotes==null)
                             {{$p->tanggalPsikotes}}
@@ -151,6 +164,7 @@
                         @foreach($progress as $p)
                         @if($p->mcuStatus=='fit')
                         <div class="baris">
+                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                             <span class="baris kanan" style="margin-right: auto">{{$p->nama}}</span>
                             @if($p->tanggalMcu==null)
                             {{$p->tanggalMcu}}
@@ -160,8 +174,10 @@
                         </div>
                         @elseif($p->mcuStatus=='fitnote')
                         <div class="baris">
-                            <span class="baris kanan" style="margin-right: auto">{{$p->nama}}</span>
-                            <span class="baris tengah label label-warning">{{$p->note}}</span>
+                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                            <span class="baris kiri" style="margin-right: auto">{{$p->nama}}</span>
+                            <span class="baris label label-warning">{{$p->note}}</span>
+                            
                             @if($p->tanggalMcu==null)
                             {{$p->tanggalMcu}}
                             @else
@@ -178,6 +194,7 @@
                         @foreach($progress as $p)
                         @if($p->mcuStatus=='fit')
                         <div class="baris">
+                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                             <span class="baris kiri">{{$p->nama}}</span>
                             @if($p->tanggalTtd==null)
                             {{$p->tanggalTtd}}
@@ -187,6 +204,7 @@
                         </div>
                         @elseif($p->mcuStatus=='fitnote')
                         <div class="baris">
+                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                             <span class="baris kiri">{{$p->nama}}</span>
                             @if($p->tanggalTtd==null)
                             {{$p->tanggalTtd}}
@@ -204,7 +222,7 @@
                         @foreach($progress as $p)
                         @if($p->joinStatus=='yes')
                         <div class="baris">
-                            <span class="baris kanan label label-success" style="margin-right: auto">{{$p->nama}}</span>
+                            <span class="baris label label-success" style="margin-right: auto">{{$p->nama}}</span>
                             @if($p->tanggalJoin==null)
                             {{$p->tanggalJoin}}
                             @else
@@ -231,6 +249,7 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Nama</th>
+                            <th class="text-center">Job Title</th>
                             <th class="text-center">Status Recruitment</th>
                             <th class="text-center">Status Progress</th>
                             <th class="text-center">Leadtime Status</th>
@@ -242,9 +261,43 @@
                         <tr>
                             <td class="text-center">{{$index+1}}</td>
                             <td>{{$p->nama}}</td>
+                            <td>{{$p->jobtitle}}</td>
                             <td>{{$p->recruitmentStatus}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$p->progressrecruitment}}</td>
+                            <td class="text-center">
+                                @if($p->joinStatus=='yes')
+                                    @if($p->recruitmentStatus=='Tetap')
+                                        @if(\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)<='90')
+                                        <span class="label label-success">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInDays($p->tanggalFptk, true)}}</span> 
+                                        @else
+                                        <span class="label label-danger">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInDays($p->tanggalFptk, true)}}</span> 
+                                        @endif
+                                    @endif
+                                    @if($p->recruitmentStatus=='Internship')
+                                        @if(\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)<='14')
+                                        <span class="label label-success">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)}}</span> 
+                                        @else
+                                        <span class="label label-danger">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)}}</span> 
+                                        @endif
+                                    @endif
+                                    @if($p->recruitmentStatus=='PKWT')
+                                        @if(\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)<='30')
+                                        <span class="label label-success">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)}}</span> 
+                                        @else
+                                        <span class="label label-danger">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)}}</span> 
+                                        @endif
+                                    @endif
+                                    @if($p->recruitmentStatus=='OTS')
+                                        @if(\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)<='14')
+                                        <span class="label label-success">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)}}</span> 
+                                        @else
+                                        <span class="label label-danger">{{\Carbon\Carbon::parse($p->tanggalJoin)->diffInWeekdays($p->tanggalFptk, true)}}</span> 
+                                        @endif
+                                    @endif
+                                @else
+                                <span></span>
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <form action="{{route('recruitment.delete',$p->idRecruitment)}}" method="POST">
                                     @csrf
@@ -292,6 +345,27 @@
                             <option value="OTS">OTS</option>
                             <option value="Internship">Internship</option>
                             </select>                        
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label for="nama" class="control-label mb-5">Job Title</label>
+                            <input type="text" class="form-control" name="jobtitle">
+                        </div>
+                        <div class="col-sm-6">
+                        <label for="nama" class="control-label mb-5">Progress Recruitment</label>
+                            <select name="progressrecruitment" class="form-control">
+                                <option value="">--Progress Recruitment--</option>
+                                <option value="FPTK">FPTK</option>
+                                <option value="Interview HR">Interview HR</option>
+                                <option value="Interview User 1">Interview User 1</option>
+                                <option value="Interview User 2">Interview User 2</option>
+                                <option value="Interview User 3">Interview User 3</option>
+                                <option value="MCU">MCU</option>
+                                <option value="Psikotest">Psikotest</option>
+                                <option value="TTD">TTD</option>
+                                <option value="Join">Join</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -436,13 +510,14 @@
     </div>
     </div>
 <!-- end add data -->
+<!-- update -->
 @foreach($progress as $p)
     <div class="modal fade" id="update{{$p->idRecruitment}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title" id="add-userLabel1">Update Data Productivity</h5>
+                    <h5 class="modal-title" id="add-userLabel1">Update</h5>
                 </div>
                 <div class="modal-body">
                 <form action="/recruitment/{{$p->idRecruitment}}" method="POST">
@@ -466,10 +541,31 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-6">
+                        <label for="nama" class="control-label mb-5">Job Title</label>
+                        <input type="text" class="form-control" name="jobtitle" value="{{$p->jobtitle}}">
+                        </div>
+                        <div class="col-sm-6">
+                        <label for="nama" class="control-label mb-5">Progress Recruitment</label>
+                            <select name="progressrecruitment" class="form-control">
+                                <option value="{{$p->progressrecruitment}}">{{$p->progressrecruitment}}</option>
+                                <option value="FPTK">FPTK</option>
+                                <option value="Interview HR">Interview HR</option>
+                                <option value="Interview User 1">Interview User 1</option>
+                                <option value="Interview User 2">Interview User 2</option>
+                                <option value="Interview User 3">Interview User 3</option>
+                                <option value="MCU">MCU</option>
+                                <option value="Psikotest">Psikotest</option>
+                                <option value="TTD">TTD</option>
+                                <option value="Join">Join</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
                             <label for="fptkStatus" class="control-label mb-5">FPTK</label>
                             <select name="fptkStatus" class="form-control">
                                 <option value="{{$p->fptkStatus}}">{{$p->fptkStatus}}</option>
-                                <option value="pass">PASS</option>
+                                <option value="pass">OPEN</option>
                                 <option value="fail">FAIL</option>
                             </select>
                         </div>
@@ -493,7 +589,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="interviewUser1Status" class="control-label mb-5">Interview User 1</label>
                             <select name="interviewUser1Status" class="form-control" >
                                 <option value="{{$p->interviewUser1Status}}">{{$p->interviewUser1Status}}</option>
@@ -501,13 +597,17 @@
                                 <option value="fail">FAIL</option>
                             </select>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="intTotalParticipants" class="control-label mb-5">Tanggal Interview User 1</label>
                             <input type="date" class="form-control" name="tanggalInterviewUser1" value="{{$p->tanggalInterviewUser1}}">
                         </div>
+                        <div class="col-sm-4">
+                            <label for="nama" class="control-label mb-5">Interviewer</label>
+                            <input type="text" class="form-control" name="user1" value="{{$p->user1}}">
+                        </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="interviewUser2Status" class="control-label mb-5">Interview User 2</label>
                             <select name="interviewUser2Status" class="form-control" >
                                 <option value="{{$p->interviewUser2Status}}">{{$p->interviewUser2Status}}</option>
@@ -515,13 +615,17 @@
                                 <option value="fail">FAIL</option>
                             </select>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="intTotalParticipants" class="control-label mb-5">Tanggal Interview User 2</label>
                             <input type="date" class="form-control" name="tanggalInterviewUser2" value="{{$p->tanggalInterviewUser2}}">
                         </div>
+                        <div class="col-sm-4">
+                            <label for="nama" class="control-label mb-5">Interviewer</label>
+                            <input type="text" class="form-control" name="user2" value="{{$p->user2}}">
+                        </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="interviewUser3Status" class="control-label mb-5">Interview User 3</label>
                             <select name="interviewUser3Status" class="form-control" >
                                 <option value="{{$p->interviewUser3Status}}">{{$p->interviewUser3Status}}</option>
@@ -529,9 +633,13 @@
                                 <option value="fail">FAIL</option>
                             </select>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="intTotalParticipants" class="control-label mb-5">Tanggal Interview User 3</label>
                             <input type="date" class="form-control" name="tanggalInterviewUser3" value="{{$p->tanggalInterviewUser3}}">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="nama" class="control-label mb-5">Interviewer</label>
+                            <input type="text" class="form-control" name="user3" value="{{$p->user3}}">
                         </div>
                     </div>
                     <div class="row form-group">
