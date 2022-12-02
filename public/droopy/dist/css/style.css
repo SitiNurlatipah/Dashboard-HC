@@ -5688,6 +5688,11 @@ a.compose-mail {
     background: #f33923; }
   .label.label-warning, .label-warning.jvectormap-tip {
     background: #f8b32d; }
+  .label.label-blue, .label-blue.jvectormap-tip {
+    background: #040AC2; }
+  .label.label-ijotua, .label-blue.jvectormap-tip {
+    background: #00820E; }
+
 
 /*Badge*/
 .badge {

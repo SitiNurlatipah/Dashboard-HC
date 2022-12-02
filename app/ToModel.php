@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class ToModel extends Model
 {
-    protected $table = 'tos';
+    protected $table = 'to_employees';
 	public $timestamps = true;
+	protected $guarded = ['idTo'];
+	protected $primaryKey = 'idTo';
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id'];
+	
 	// protected $dates=['dateTglInput'];
 	protected $fillable = [
-		'intTotal', 'intToKaryawan','intToKontrak', 
-        'intToOutsource', 'dateTglInput', 
 	];
 }

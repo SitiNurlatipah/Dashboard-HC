@@ -65,7 +65,7 @@
                 
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="power" class="table table-hover font-11 pb-5 text-center">
+                        <table id="power" class="table table-hover display font-11 pb-5 text-center">
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -358,30 +358,7 @@
                             </div>
                         </div>
                     </div>
-                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
-                        <div class="panel panel-default card-view panel-refresh relative">
-                            <div class="refresh-container">
-                                <div class="la-anim-1"></div>
-                            </div>
-                            <div class="panel-heading">
-                                <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Growth</h6>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="panel-wrapper collapse in">
-                                <div class="panel-body">
-                                    <div id="growChart" class="" style="height:367px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                  
-            
                 
-            
-        
-        	
         </div>	
         </div>	
         </div>	
@@ -431,17 +408,17 @@
                         </div>
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-xs">Add</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
                         </div>
                 </form>
             </div>       
         </div>
     </div>
-    </div>
+</div>
 <!-- end add data -->
 @foreach($productivity_manpowers as $productivity)
-    <div class="modal fade" id="updateManpower{{$productivity->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+<div class="modal fade" id="updateManpower{{$productivity->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -482,15 +459,15 @@
                         </div>
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                         </div>
                 </form>
             </div>       
         </div>
     </div>
-    </div>
-    @endforeach
+</div>
+@endforeach
 <div class="modal fade" id="add-humancost" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -505,12 +482,12 @@
                         <div class="row form-group">
                             <div class="col-sm-6">
                                 <label for="intCostPlan" class="control-label mb-10">Cost Plan</label>
-                                <input type="text" class="form-control" id="intCostPlan" name="intCostPlan">
+                                <input type="text" class="form-control" id="rupiah1" name="intCostPlan">
                             </div>
                          
                             <div class="col-sm-6">
                                 <label for="intCostActual" class="control-label mb-10">Cost Actual</label>
-                                <input type="text" class="form-control" id="intCostActual" name="intCostActual">
+                                <input type="text" class="form-control" id="rupiah2" name="intCostActual">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -531,17 +508,17 @@
                         
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-xs">Add</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
                         </div>
                 </form>
             </div>       
         </div>
     </div>
-    </div>
+</div>
 <!-- end add data -->
 @foreach($productivity_humancosts as $humancost)
-    <div class="modal fade" id="updateHumancost{{$humancost->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+<div class="modal fade" id="updateHumancost{{$humancost->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -578,15 +555,15 @@
                     </div>
                     
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </div>
                 </form>
             </div>       
         </div>
     </div>
-    </div>
-    @endforeach
+</div>
+@endforeach
 
 <div class="modal fade" id="add-growth" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
     <div class="modal-dialog" role="document">
@@ -624,8 +601,8 @@
                     
                     
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
                     </div>
             </form>
         </div>       
@@ -638,11 +615,6 @@
 
 @push('script')
 <script type="text/javascript">
-$('input[name="dateFilter"]').daterangepicker({
-    opens: 'left'
-  }, function(start, end, label) {
-    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-});
     $('.delete').click(function(event) {
           var form =  $(this).closest("form");
           var name = $(this).data("name");
@@ -696,7 +668,7 @@ $('input[name="dateFilter"]').daterangepicker({
         },
         series: [{
             type: 'column',
-            name: 'productivity',
+            name: 'Productivity',
             data: productivity
 
         }],
@@ -742,7 +714,7 @@ $('input[name="dateFilter"]').daterangepicker({
         },
         series: [{
             type: 'column',
-            name: 'Permanen & Contract',
+            name: 'Permanent & Contract',
             data: manpower
 
         }],
@@ -788,7 +760,7 @@ $('input[name="dateFilter"]').daterangepicker({
         },
         series: [{
             type: 'column',
-            name: 'Output actual',
+            name: 'Output Actual',
             data: actual
 
         }],
@@ -837,7 +809,7 @@ $('input[name="dateFilter"]').daterangepicker({
         },
         series: [{
             type: 'column',
-            name: 'Cos Product',
+            name: 'Cost Product',
             data: costProduct
 
         }],
@@ -883,7 +855,7 @@ $('input[name="dateFilter"]').daterangepicker({
         },
         series: [{
             type: 'column',
-            name: 'Cos Actual',
+            name: 'Cost Actual',
             data: costActual
 
         }],
@@ -904,65 +876,52 @@ $('input[name="dateFilter"]').daterangepicker({
     });
     
     
-    Highcharts.chart('growChart', {
-        title: {
-            text: 'Nyobain'
-        },
-        subtitle: {
-            text: 'PT. Kalbe Morinaga Indonesia'
-        },
-         xAxis: {
-            categories: bulan
-        },
-        yAxis: {
-            title: {
-                text: 'Kilogram'
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-        },
-        plotOptions: {
-            series: {
-                allowPointSelect: true
-            }
-        },
-        series: [{
-            type: 'column',
-            name: 'output',
-            data: coba
-
-        }],
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500
-                },
-                chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
-                }
-            }]
-        }
-    });
+    
 
     // });
     
-    $('#power').dataTable( {
-    paging: true,
-    searching: true
-    } );
-    $('#cost').dataTable( {
-        paging: true
-    } );
-    $('#datable_3').dataTable( {
-        paging: true
-    } );
+    // $('#power').dataTable( {
+    // paging: true,
+    // searching: true
+    // } );
+    // $('#cost').dataTable( {
+    //     paging: true
+    // } );
+    // $('#datable_3').dataTable( {
+    //     paging: true
+    // } );
+    $(document).ready(function () {
+    $('table.display').DataTable();
+    });
+    var rupiah2 = document.getElementById('rupiah2');
+		rupiah2.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat ketik nominal di form kolom input
+			// gunakan fungsi formatRupiah() untuk mengubah nominal angka yang di ketik menjadi format angka
+			rupiah2.value = formatRupiah(this.value, 'Rp. ');
+	});
+    var rupiah1 = document.getElementById('rupiah1');
+		rupiah1.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat ketik nominal di form kolom input
+			// gunakan fungsi formatRupiah() untuk mengubah nominal angka yang di ketik menjadi format angka
+			rupiah1.value = formatRupiah(this.value, 'Rp. ');
+	});
+		/* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka satuan ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
 
 </script>
 @endpush

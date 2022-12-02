@@ -22,15 +22,12 @@
                 <div class="panel-wrapper collapse in">
                 <div class="panel-body">
                     <!-- Breadcrumb -->
-                    <ol class="breadcrumb text-right">
-                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="active"><span>GETO dan Turn Over</span></li>
-                    </ol>
+                    
                     <!-- /Breadcrumb -->
                     <div  class="tab-struct custom-tab-1 mt-0">
                         <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
-                            <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">ALL</a></li>
-                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">GETO</a></li>
+                            <!-- <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">ALL</a></li> -->
+                            <li role="presentation" class="active"><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">GETO</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">TO</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Grafik</a></li>
                             
@@ -42,7 +39,7 @@
             @endif
         <div class="tab-content" id="myTabContent_7">
             
-            <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
+            <div  id="home_15" class="tab-pane fade " role="tabpanel">
             <div class="row">
 			<div class="col-sm-12">
             <div class="form-horizontal form-group">
@@ -123,7 +120,7 @@
                     </div>
 
                         </div>
-                        <div  id="profile_15" class="tab-pane fade" role="tabpanel">
+                        <div  id="profile_15" class="tab-pane fade active in" role="tabpanel">
                         <div class="row">
                         <div class="col-sm-12">
                         <div class="form-horizontal form-group">
@@ -164,7 +161,7 @@
                         </form>    -->
                         <div class="table-wrap">
                         <div class="table-responsive">
-                        <table id="tblGeto" class="table table-hover table-bordered display mt-10 font-11 pb-30 text-center" width="100%">
+                        <table id="tblGeto" class="table table-hover table-bordered display mt-10 font-11 text-center" width="100%">
                             <thead>
                                 <tr>
                                     <th rowspan="2" class="text-center">No</th>
@@ -188,8 +185,8 @@
                             <?php
                                 
                                 $i=1; $j=0; foreach($getos as $geto):
-                                $persentaseKaryawanGeto=($geto->intGetoKaryawan/$employees[$j]->intKaryawan)*100;
-                                $persentaseTotalGeto=($geto->intTotal/$employees[$j]->intJumlahEmployee)*100; 
+                                $persentaseKaryawanGeto=($geto->intGetoKaryawan/$geto->realTotal)*100;
+                                $persentaseTotalGeto=($geto->intTotal/$geto->realTotal)*100; 
                                 ?>
                                 
                                     <tr>
@@ -197,13 +194,13 @@
                                         <td>{{ date('F Y', strtotime($geto->dateTglInput))}}</td>
                                         <td>{{ $geto->intGetoKaryawan }}</td>
                                         <td>{{ $geto->intGetoOutsource }}</td>
-                                        <td>{{ $geto->intGetoKontark }}</td>
+                                        <td>{{ $geto->intGetoKontrak }}</td>
                                         <td>{{ $geto->intTotal }}</td>
                                         <td>{{number_format($persentaseKaryawanGeto,2)}}%</td>
                                         <td>{{number_format($persentaseTotalGeto,2)}}%</td>
                                         <td>
-                                        <form action="{{route('geto.delete',$geto->id)}}" method="POST">
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateGeto{{$geto->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        <form action="{{route('geto.delete',$geto->idGeto)}}" method="POST">
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateGeto{{$geto->idGeto}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         @csrf 
                                         @method("delete")
                                             <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
@@ -296,10 +293,10 @@
                                         <td>{{number_format($persentseKontrakTo,2)}}%</td>
                                         <td>{{number_format($persentseTotalTo,2)}}%</td>
                                         <td>
-                                        <form action="{{route('to.delete',$to->id)}}" method="POST">
+                                        <form action="{{route('to.delete',$to->idTo)}}" method="POST">
                                         @csrf
                                         @method('put')
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTo{{$to->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTo{{$to->idTo}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         @csrf 
                                         @method("delete")
                                             <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
@@ -332,14 +329,14 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                     <div class="panel panel-default card-view panel-refresh relative">
                         <div class="refresh-container">
                             <div class="la-anim-1"></div>
                         </div>
                         <div class="panel-heading">
                             <div class="pull-left">
-                                <h6 class="panel-title txt-dark">Geto</h6>
+                                <h6 class="panel-title txt-dark"></h6>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -350,14 +347,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                     <div class="panel panel-default card-view panel-refresh relative">
                         <div class="refresh-container">
                             <div class="la-anim-1"></div>
                         </div>
                         <div class="panel-heading">
                             <div class="pull-left">
-                                <h6 class="panel-title txt-dark">To</h6>
+                                <h6 class="panel-title txt-dark"></h6>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -417,8 +414,8 @@
                         </div>
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Data Employee</button>
+                        <button type="button" class="btn btn-default btn-sm font-10" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm font-10">Add</button>
                         </div>
                 </form>
             </div>       
@@ -486,6 +483,14 @@
                 <form action="{{ route('geto.post') }}" method="POST">
                 @csrf 
                         <div class="form-group">
+                            <label for="realemployee" class="control-label mb-10">Bulan</label>
+                            <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" title="Pilih Bulan..." data-live-search="true" name="realemployee" id="realemployee" required/>
+                                @foreach($real as $r)
+                                <option value="{{$r->idReal}}">{{\Carbon\Carbon::parse($r->dateBulan)->format('F Y')}}</option>
+                                @endforeach
+                            </select>    
+                        </div>
+                        <div class="form-group">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal">
                         </div>
@@ -494,8 +499,8 @@
                             <input type="number" class="form-control" id="intGetoKaryawan" name="intGetoKaryawan">
                         </div>
                         <div class="form-group">
-                            <label for="intGetoKontark" class="control-label mb-10">Kontrak</label>
-                            <input type="number" class="form-control" id="intGetoKontark" name="intGetoKontark">
+                            <label for="intGetoKontrak" class="control-label mb-10">Kontrak</label>
+                            <input type="number" class="form-control" id="intGetoKontrak" name="intGetoKontrak">
                         </div>
                         <div class="form-group">
                             <label for="intGetoOutsource" class="control-label mb-10">Outsource</label>
@@ -503,12 +508,12 @@
                         </div>
                         <div class="form-group">
                             <label for="dateTglInput" class="control-label mb-10">Tanggal Input</label>
-                            <input type="date" class="form-control" id="dateTglInput" name="dateTglInput">
+                            <input type="date" class="form-control" id="dateTglInput" name="dateTglInput" required/>
                         </div>
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Data Geto Employee</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
                         </div>
                 </form>
             </div>       
@@ -519,7 +524,7 @@
 
     <!-- modal update data geto employee -->
     @foreach($getos as $geto)
-    <div class="modal fade" id="updateGeto{{$geto->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+    <div class="modal fade" id="updateGeto{{$geto->idGeto}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -527,9 +532,18 @@
                     <h5 class="modal-title" id="add-userLabel1">Update Data GETO Employee</h5>
                 </div>
                 <div class="modal-body">
-                <form action="/employee/geto/{{$geto->id}}" method="POST">
+                <form action="/employee/geto/{{$geto->idGeto}}" method="POST">
                 @csrf 
                 @method('put')
+                        <div class="form-group">
+                            <label for="intTotal" class="control-label mb-10">Bulan</label>
+                            <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" data-live-search="true" name="realemployee" id="realemployee">
+                                <option value="{{$geto->realemployee}}">{{\Carbon\Carbon::parse($geto->dateBulan)->format('F Y')}}</option>
+                                @foreach($real as $r)
+                                <option value="{{$r->idReal}}">{{\Carbon\Carbon::parse($r->dateBulan)->format('F Y')}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal" value="{{$geto->intTotal}}">
@@ -539,8 +553,8 @@
                             <input type="number" class="form-control" id="intGetoKaryawan" name="intGetoKaryawan" value="{{$geto->intGetoKaryawan}}">
                         </div>
                         <div class="form-group">
-                            <label for="intGetoKontark" class="control-label mb-10">Kontrak</label>
-                            <input type="number" class="form-control" id="intGetoKontark" name="intGetoKontark" value="{{$geto->intGetoKontark}}">
+                            <label for="intGetoKontrak" class="control-label mb-10">Kontrak</label>
+                            <input type="number" class="form-control" id="intGetoKontrak" name="intGetoKontrak" value="{{$geto->intGetoKontrak}}">
                         </div>
                         <div class="form-group">
                             <label for="intGetoOutsource" class="control-label mb-10">Outsource</label>
@@ -574,7 +588,14 @@
                 <div class="modal-body">
                 <form action="{{ route('to.post') }}" method="POST">
                 @csrf 
-                        
+                        <div class="form-group">
+                            <label for="realemployee" class="control-label mb-10">Bulan</label>
+                            <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" title="Pilih Bulan..." data-live-search="true" name="realemployee_id" id="realemployee_id" required="true">
+                                @foreach($real as $r)
+                                <option value="{{$r->idReal}}">{{\Carbon\Carbon::parse($r->dateBulan)->format('F Y')}}</option>
+                                @endforeach
+                            </select>    
+                        </div>
                         <div class="form-group">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal">
@@ -593,7 +614,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dateTglInput" class="control-label mb-10">Tanggal Input</label>
-                            <input type="date" class="form-control" id="dateTglInput" name="dateTglInput">
+                            <input type="date" class="form-control" id="dateTglInput" name="dateTglInput" required="true">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -608,7 +629,7 @@
 
     <!-- modal update to employee -->
     @foreach($tos as $to)
-    <div class="modal fade" id="updateTo{{$to->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+    <div class="modal fade" id="updateTo{{$to->idTo}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -616,10 +637,18 @@
                     <h5 class="modal-title" id="add-userLabel1">Update Data TO</h5>
                 </div>
                 <div class="modal-body">
-                <form action="/employee/to/{{$to->id}}" method="POST">
+                <form action="/employee/to/{{$to->idTo}}" method="POST">
                 @csrf 
                 @method('put')
-                        
+                        <div class="form-group">
+                            <label for="realemployee_id" class="control-label mb-10">Bulan</label>
+                            <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" data-live-search="true" name="realemployee_id" id="realemployee_id">
+                                <option value="{{$to->realemployee_id}}">{{\Carbon\Carbon::parse($to->dateBulan)->format('F Y')}}</option>
+                                @foreach($real as $r)
+                                <option value="{{$r->idReal}}">{{\Carbon\Carbon::parse($r->dateBulan)->format('F Y')}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="intTotal" class="control-label mb-10">Total</label>
                             <input type="number" class="form-control" id="intTotal" name="intTotal" value="{{$to->intTotal}}">
@@ -638,7 +667,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dateTglInput" class="control-label mb-10">Tanggal Input</label>
-                            <input type="date" class="form-control" id="dateTglInput" name="dateTglInput" value="{{$to->dateTglInput}}">
+                            <input type="date" class="form-control" id="dateTglInput" name="dateTglInput" value="{{$to->dateTglInput}}" required="true">
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -777,10 +806,14 @@
             categories: bulanGeto
         },
         yAxis: {
+            labels: {
+            format: '{value}%'
+            },
             title: {
-                text: 'Jumlah Employee'
+            enabled: false
             }
         },
+        
         legend: {
             layout: 'vertical',
             align: 'right',
@@ -791,13 +824,17 @@
                 allowPointSelect: true,
                 dataLabels: {
                     enabled: true
+                    
                 }
-            }
+            },
+            
         },
+        
         series: [{
             type: 'column',
             name: 'GETO Permanent',
-            data: getoKaryawan
+            data: getoKaryawan,
+            
         
         }],
         responsive: {
@@ -828,7 +865,7 @@ Highcharts.chart('to', {
         },
         yAxis: {
             title: {
-                text: 'Jumlah Employee TO'
+            enabled: false
             }
         },
         legend: {

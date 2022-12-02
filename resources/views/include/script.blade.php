@@ -10,15 +10,24 @@
 	<script src="{{ asset('droopy/dist/js/vectormap-data.js') }}"></script>
 	
 	<!-- Data table JavaScript -->
-	<script src="{{ asset('droopy/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-	<script src="{{asset('droopy/dist/js/dataTables-data.js')}}"></script>
-
+	<script src="{{ asset('droopy/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+	<script src="{{asset('droopy/dist/js/dataTables-data.js')}}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/jszip/dist/jszip.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/pdfmake/build/pdfmake.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/pdfmake/build/vfs_fonts.js') }}" type="text/javascript"></script>
+	<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 	<!-- Flot Charts JavaScript -->
 	
 	<!-- Charts js -->
 	<script src="{{ asset('droopy/vendors/charts/accessibility.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('droopy/vendors/charts/highcharts.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/charts/highcharts-more.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('droopy/vendors/charts/exporting.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('droopy/vendors/charts/export-data.js') }}" type="text/javascript"></script>
 	<!-- Slimscroll JavaScript -->

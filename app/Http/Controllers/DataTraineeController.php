@@ -8,16 +8,7 @@ use App\TrainingRealization;
 
 class DataTraineeController extends Controller
 {
-    public function index(){
-        $trainees=DataTraineeModel::leftJoin('training_realizations','training_realizations.id','=','data_trainees.training_id')
-        ->leftJoin('users','users.txtNik','=','data_trainees.user_id')
-        ->groupBy('post_test', 'desc')
-        ->get();
-        $training_realizations = TrainingRealization::all();
-        
-        return view('pages.training.data-trainee',compact('trainees','training_realizations','average'));
-
-    }
+    
     public function store(Request $request){
         // $request->validate( [	       
         //     'user_id' => 'required',	       

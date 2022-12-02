@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\EmployeeModel;
 use App\GetoModel;
 use App\ToModel;
+use App\RealModel;
 use Redirect,Response;
 use DB;
 use Carbon\Carbon;
@@ -13,9 +14,11 @@ use Carbon\Carbon;
 class EmployeeController extends Controller
 {
     public function indexEmployee(){
-		
+		$real=RealModel::all();
 		$dataEmployee = EmployeeModel::orderBy('dateTglInput', 'DESC')->get();
-		$geto = GetoModel::orderBy('dateTglInput', 'DESC')->get();
+		$geto = GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+				->orderBy('dateTglInput', 'DESC')
+				->get();
 		$to = ToModel::orderBy('dateTglInput', 'DESC')->get();
 		$jumlah_employee = EmployeeModel::select(DB::raw("CAST(SUM(intJumlahEmployee) as int) as jumlah_employee"))
                     ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
@@ -41,11 +44,12 @@ class EmployeeController extends Controller
                     ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('total_geto');
-		$getoKaryawan = GetoModel::select(DB::raw("CAST(SUM(intGetoKaryawan) as int) as getoKaryawan"))
+		$getoKaryawan = GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("CAST(AVG((intGetoKaryawan/realTotal)*100) as int) as getoKaryawan"))
                     ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('getoKaryawan');
-		$getoKontrak = GetoModel::select(DB::raw("CAST(SUM(intGetoKontark) as int) as getoKontrak"))
+		$getoKontrak = GetoModel::select(DB::raw("CAST(SUM(intGetoKontrak) as int) as getoKontrak"))
                     ->GroupBy(DB::raw("year(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('getoKontrak');
@@ -80,7 +84,7 @@ class EmployeeController extends Controller
         	
         return view('pages.management-employee.index',compact('jumlah_employee','bulan',
 		'total_geto','bulanGeto','total_to','bulanTo','toKaryawan',
-		'toKontrak','toOutsource','getoKaryawan','getoKontrak','getoOutsource','karyawan','kontrak','outsource'),[
+		'toKontrak','toOutsource','getoKaryawan','getoKontrak','getoOutsource','karyawan','kontrak','outsource','real'),[
 		'employees' => $dataEmployee,'getos'=>$geto,'tos'=>$to
 		]);
 	}
@@ -135,7 +139,7 @@ class EmployeeController extends Controller
                     ->GroupBy(DB::raw("Month(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('getoKaryawan');
-		$getoKontrak = GetoModel::select(DB::raw("CAST(SUM(intGetoKontark) as int) as getoKontrak"))
+		$getoKontrak = GetoModel::select(DB::raw("CAST(SUM(intGetoKontrak) as int) as getoKontrak"))
                     ->GroupBy(DB::raw("Month(dateTglInput)"))
 					->orderBy('dateTglInput', 'ASC')
                     ->pluck('getoKontrak');
@@ -234,37 +238,42 @@ class EmployeeController extends Controller
     $request->validate( [
 		'intTotal' => 'required',
 		'intGetoKaryawan' => 'required',
-		'intGetoKontark' => 'required',
+		'intGetoKontrak' => 'required',
 		'intGetoOutsource' => 'required',
-		'dateTglInput' => 'required',			
+		'dateTglInput' => 'required',
+		'realemployee' => 'required',
+		// 'dateTglInput' => 'required',			
 				
 	]);
 	$validation = [
 		'intTotal'=>$request->intTotal,
 		'intGetoKaryawan'=>$request->intGetoKaryawan,
-		'intGetoKontark'=>$request->intGetoKontark,
+		'intGetoKontrak'=>$request->intGetoKontrak,
 		'intGetoOutsource'=>$request->intGetoOutsource,
 		'dateTglInput'=>$request->dateTglInput,
+		'realemployee'=>$request->realemployee,
+		// 'dateTglInput'=>$request->dateTglInput,
 		
 	];
 	GetoModel::create($validation);
 	return redirect()->route('employee')->with('message','Data GETO Employee added successfully.');
 	
 	}
-	public function updateGeto(Request $request, $id){
-        $geto = GetoModel::find($id);
+	public function updateGeto(Request $request, $idGeto){
+        $geto = GetoModel::find($idGeto);
         $geto->intTotal = $request->intTotal;
         $geto->intGetoKaryawan = $request->intGetoKaryawan;
         $geto->intGetoOutsource = $request->intGetoOutsource;
-        $geto->intGetoKontark = $request->intGetoKontark;
+        $geto->intGetoKontrak = $request->intGetoKontrak;
+        $geto->realemployee = $request->realemployee;
         
         $geto->dateTglInput = $request->dateTglInput;
         $geto->save();
         return redirect()->route('employee')->with('message','Data GETO Employee updated successfully.');
 	}
-	public function destroyGeto($id)
+	public function destroyGeto($idGeto)
     {
-        GetoModel::find($id)->delete();
+        GetoModel::find($idGeto)->delete();
         // $data->delete();
         return redirect()->route('employee')->with('message','Data deleted successfully');
     }
@@ -291,6 +300,7 @@ class EmployeeController extends Controller
 		'intToKontrak' => 'required',
 		'intToOutsource' => 'required',
 		'dateTglInput' => 'required',			
+		'realemployee_id' => 'required',			
 			
 	]);
 	$confirm = [
@@ -299,26 +309,28 @@ class EmployeeController extends Controller
 		'intToKontrak'=>$request->intToKontrak,
 		'intToOutsource'=>$request->intToOutsource,
 		'dateTglInput'=>$request->dateTglInput,
+		'realemployee_id'=>$request->realemployee_id,
 		
 	];
 	ToModel::create($confirm);
-	return redirect()->route('employee')->with('message','Data GETO Employee added successfully.');
+	return redirect()->route('employee')->with('message','Data added successfully.');
 	
 	}
-	public function updateTo(Request $request, $id){
-        $to = ToModel::find($id);
+	public function updateTo(Request $request, $idTo){
+        $to = ToModel::find($idTo);
         $to->intTotal = $request->intTotal;
         $to->intToKaryawan = $request->intToKaryawan;
         $to->intToOutsource = $request->intToOutsource;
         $to->intToKontrak = $request->intToKontrak;
+        $to->realemployee_id = $request->realemployee_id;
         
         $to->dateTglInput = $request->dateTglInput;
         $to->save();
-        return redirect()->route('employee')->with('message','Data TO Employee updated successfully.');
+        return redirect()->route('employee')->with('message','Data updated successfully.');
 	}
-	public function destroyTo($id)
+	public function destroyTo($idTo)
     {
-        ToModel::find($id)->delete();
+        ToModel::find($idTo)->delete();
         // $data->delete();
         return redirect()->route('employee')->with('message','Data deleted successfully');
     }

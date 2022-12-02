@@ -29,8 +29,8 @@ Route::group(['middleware' => 'guest'], function () {
     Route::put('/employee/geto/{GetoModel}', 'EmployeeController@updateGeto');
     Route::put('/employee/to/{ToModel}', 'EmployeeController@updateTo');
     Route::delete('/employee/{id}', 'EmployeeController@destroy')->name('employee.delete');    
-    Route::delete('/employee/geto/{id}', 'EmployeeController@destroyGeto')->name('geto.delete');    
-    Route::delete('/employee/to/{id}', 'EmployeeController@destroyTo')->name('to.delete');    
+    Route::delete('/employee/geto/{idGeto}', 'EmployeeController@destroyGeto')->name('geto.delete');    
+    Route::delete('/employee/to/{idTo}', 'EmployeeController@destroyTo')->name('to.delete');    
     //chart manajemen employee
     Route::get('/employee/chart', 'EmployeeController@chart',)->name('chart');
 
@@ -87,6 +87,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/training/kasbon', 'KasbonController@store')->name('kasbon.post');
     Route::put('/training/kasbon/{KasbonModel}', 'KasbonController@update');
     Route::delete('/training/kasbon/{idKasbon}', 'KasbonController@destroy')->name('kasbon.delete');    
+    //ikatan dinas
+    Route::post('/training/ikatandinas', 'IkatanDinasController@store')->name('dinas.post');
+    Route::put('/training/ikatandinas/{IkatanDinasModel}', 'IkatanDinasController@update');
+    Route::delete('/training/ikatandinas/{idIkatanDinas}', 'IkatanDinasController@destroy')->name('dinas.delete');    
 
     Route::get('/ceo', 'CeoTrainingController@index')->name('ceo');
     Route::get('/totalemployee', 'DataTotalEmployeeController@index')->name('total');
@@ -102,6 +106,19 @@ Route::group(['middleware' => 'guest'], function () {
     // Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
     Route::delete('/user/{id}', 'UserController@destroy')->name('user.delete');    
     
+    //Blanace Scorecard
+    Route::get('/balacescorecard', 'BalanceScorecardController@index')->name('balance');
+    
+    //Sales
+    Route::get('/sales', 'SalesController@index')->name('sales');
+    Route::post('/sales', 'SalesController@store')->name('sales.post');
+    Route::put('/sales/{SalesModel}', 'SalesController@update');
+    Route::delete('/sales/{idMtd}', 'SalesController@destroy')->name('sales.delete');
+    //sales ytd
+    Route::post('/sales/ytd', 'SalesYtdController@store')->name('salesytd.post');
+    Route::put('/sales/ytd/{SalesYtdModel}', 'SalesYtdController@update');
+    Route::delete('/sales/ytd/{idYtd}', 'SalesYtdController@destroy')->name('salesytd.delete');
+
     
     //real
     Route::get('/mppvsreal', 'MppRealController@index')->name('mppreal');

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'MppVsReal')
+@section('title', 'MPP Real Employee')
 
 @section('content')
 <div class="row">
@@ -8,12 +8,12 @@
         <div class="panel panel-default card-view">
             <div class="panel-heading">
                 <div class="pull-left">
-                    <h6 class="panel-title txt-dark">Mpp Vs Realization</h6>
+                    <h6 class="panel-title txt-dark">MPP & REALIZATION EMPLOYEE</h6>
                 </div>
                 <!-- Breadcrumb -->
                 <ol class="breadcrumb text-right">
                     <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="active"><span>Mpp Vs Realization</span></li>
+                    <li class="active"><span>MPP & Real Employee</span></li>
                 </ol>
                 <!-- /Breadcrumb -->
                 <div class="clearfix"></div>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
+                                    <h6 class="panel-title txt-dark"></h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+            </div>
             <div class="col-lg-12 col-md-6 col-sm-7 col-xs-12">
                         <div class="panel panel-default card-view panel-refresh relative">
                             <div class="refresh-container">
@@ -182,7 +182,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">MPP VS REALIZATION</h6>
+                                    <h6 class="panel-title txt-dark"></h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -192,7 +192,26 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+            </div>
+            <div class="col-lg-12 col-md-6 col-sm-7 col-xs-12">
+                        <div class="panel panel-default card-view panel-refresh relative">
+                            <div class="refresh-container">
+                                <div class="la-anim-1"></div>
+                            </div>
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h6 class="panel-title txt-dark"></h6>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-wrapper collapse in">
+                                <div class="panel-body">
+                                    <div id="allYtdMtd" class="" style="height:367px;"></div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            <!-- endchart -->
         </div>
     </div>
     </div>
@@ -429,8 +448,12 @@ var permanenMpp =  <?php echo json_encode($permanenMpp) ?>;
 var contractMpp =  <?php echo json_encode($contractMpp) ?>;
 var jobsupplyMpp =  <?php echo json_encode($jobsupplyMpp) ?>;
 var totalMpp =  <?php echo json_encode($totalMpp) ?>;
+var ytdPermanent =  <?php echo json_encode($ytdmtdPermanent) ?>;
+var ytdContract =  <?php echo json_encode($ytdmtdContract) ?>;
+var ytdJobsupply =  <?php echo json_encode($ytdmtdJobsupply) ?>;
+var bulanytd =  <?php echo json_encode($bulanytdmtd) ?>;
 var bulan =  <?php echo json_encode($bulan) ?>;
-    Highcharts.chart('coba', {
+Highcharts.chart('coba', {
     chart: {
         type: 'column'
     },
@@ -446,7 +469,7 @@ var bulan =  <?php echo json_encode($bulan) ?>;
     yAxis: {
         min: 0,
         title: {
-            text: 'Employee'
+            enabled: false
         },
         stackLabels: {
             enabled: true,
@@ -500,7 +523,7 @@ Highcharts.chart('totalchart', {
         },
         yAxis: {
             title: {
-                text: 'Employee'
+            enabled: false
             }
         },
         legend: {
@@ -540,6 +563,78 @@ Highcharts.chart('totalchart', {
                 }
             }]
         }
-    });
+});
+Highcharts.chart('allYtdMtd', {
+        title: {
+            text: 'YTD & MTD Employee'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulanytd
+        },
+        yAxis: {
+        min: 0,
+        title: {
+            enabled: false
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: ( // theme
+                    Highcharts.defaultOptions.title.style &&
+                    Highcharts.defaultOptions.title.style.color
+                ) || 'gray',
+                textOutline: 'none'
+            }
+        }
+    },
+    legend: {
+        layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+        series: [{
+            type: 'column',
+            name: 'Permanent',
+            data: ytdPermanent
+        },{
+            type: 'column',
+            name: 'Contract',
+            data: ytdContract
+        },{
+            type: 'column',
+            name: 'Job Supply',
+            data: ytdJobsupply
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+});
 </script>
 @endpush

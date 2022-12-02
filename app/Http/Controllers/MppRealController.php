@@ -17,31 +17,68 @@ class MppRealController extends Controller
                 ->get();
         
         $mpp_employee=MppModel::all();
-
-        // $coba= RealModel::select(DB::raw("CAST(SUM(realPermanent)as int) as coba"))
-        // ->whereYear('dateBulan', '=', Carbon::now())
-        // ->GroupBy(DB::raw("month(dateBulan)"))
-        // ->orderBy('dateBulan', 'ASC')
-        // ->pluck('coba');
-        // $coba2= RealModel::select(DB::raw("CAST(SUM(realPermanent)as int) as coba2"))
-        // ->whereYear('dateBulan', '<', Carbon::now())
-        // ->GroupBy(DB::raw("month(dateBulan)"))
-        // ->orderBy('dateBulan', 'ASC')
-        // ->pluck('coba2')
-        // ->last();
-        // $b=RealModel::select(DB::raw("MONTHNAME(dateBulan) as b"))
-        // ->whereYear('dateBulan', '=', Carbon::now())
-        // ->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
-        // ->orderBy('dateBulan', 'asc')
-        // ->pluck('b');
-        // $b1=RealModel::select(DB::raw("year(dateBulan) as b1"))
-        // ->whereYear('dateBulan', '<', Carbon::now())
-        // ->GroupBy(DB::raw("MONTHNAME(dateBulan)"))
-        // ->orderBy('dateBulan', 'asc')
-        // ->pluck('b1')
-        // ->last();
-        // $gabung= $coba2->merge($coba);
-        // $bu= $b1->merge($b);
+        //total
+        $ytd= RealModel::select(DB::raw("year(dateBulan)as year, max(realTotal) as ytd "))
+        ->whereYear('dateBulan', '<', Carbon::now())
+        ->GroupBy(DB::raw("year(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytd');
+        $mtd= RealModel::select(DB::raw("realTotal as ytd "))
+        ->whereYear('dateBulan', '=', Carbon::now())
+        ->GroupBy(DB::raw("(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytd');
+        $ytdmtd = $ytd->merge($mtd);
+        //permanent
+        $ytdPermanent= RealModel::select(DB::raw("year(dateBulan)as year, max(realPermanent) as ytdPermanent "))
+        ->whereYear('dateBulan', '<', Carbon::now())
+        ->GroupBy(DB::raw("year(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytdPermanent');
+        $mtdPermanent= RealModel::select(DB::raw("realPermanent as ytdPermanent "))
+        ->whereYear('dateBulan', '=', Carbon::now())
+        ->GroupBy(DB::raw("(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytdPermanent');
+        $ytdmtdPermanent = $ytdPermanent->merge($mtdPermanent);
+        //contract
+        $ytdContract= RealModel::select(DB::raw("year(dateBulan)as year, max(realContract) as ytdContract "))
+        ->whereYear('dateBulan', '<', Carbon::now())
+        ->GroupBy(DB::raw("year(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytdContract');
+        $mtdContract= RealModel::select(DB::raw("realContract as ytdContract "))
+        ->whereYear('dateBulan', '=', Carbon::now())
+        ->GroupBy(DB::raw("(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytdContract');
+        $ytdmtdContract = $ytdContract->merge($mtdContract);
+        //jobsupply
+        $ytdJobsupply= RealModel::select(DB::raw("year(dateBulan)as year, max(realJobSupply) as ytdJobsupply "))
+        ->whereYear('dateBulan', '<', Carbon::now())
+        ->GroupBy(DB::raw("year(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytdJobsupply');
+        $mtdJobsupply= RealModel::select(DB::raw("realJobSupply as ytdJobsupply "))
+        ->whereYear('dateBulan', '=', Carbon::now())
+        ->GroupBy(DB::raw("(dateBulan)"))
+        ->orderBy('dateBulan', 'ASC')
+        ->pluck('ytdJobsupply');
+        $ytdmtdJobsupply = $ytdJobsupply->merge($mtdJobsupply);
+        //bulan
+        $bulanMtd=RealModel::select(DB::raw("(DATE_FORMAT(dateBulan,'%M-%Y')) as bulan"))
+        ->GroupBy(DB::raw("(DATE_FORMAT(dateBulan,'%M-%Y'))"))
+        ->whereYear('dateBulan', '=', Carbon::now())
+        ->orderBy('dateBulan', 'asc')
+        ->pluck('bulan');
+        $bulanYtd=RealModel::select(DB::raw("(DATE_FORMAT(dateBulan,'%Y')) as bulan"))
+        ->GroupBy(DB::raw("(DATE_FORMAT(dateBulan,'%Y'))"))
+        ->whereYear('dateBulan', '<', Carbon::now())
+        ->orderBy('dateBulan', 'asc')
+        ->pluck('bulan');
+        $bulanytdmtd = $bulanYtd->merge($bulanMtd);
+        // dd($bulanytdmtd);
+        
         $permanen = RealModel::select(DB::raw("CAST(SUM(realPermanent)as int) as permanen"))
                     ->GroupBy(DB::raw("(dateBulan)"))
 					->orderBy('dateBulan', 'ASC')
@@ -81,7 +118,7 @@ class MppRealController extends Controller
         ->orderBy('dateBulan', 'asc')
         ->pluck('bulan');
         return view('pages.mpp-vs-realization.index',compact('bulan','permanen','contract','jobsupply',
-        'total','real','mpp_employee','permanenMpp','contractMpp','jobsupplyMpp','totalMpp')
+        'total','real','mpp_employee','permanenMpp','contractMpp','jobsupplyMpp','totalMpp','ytdmtd','bulanytdmtd','ytdmtdJobsupply','ytdmtdPermanent','ytdmtdContract')
         // ['mpp_vs_realization' => $mppreal,$mpp2022]
         );
      }

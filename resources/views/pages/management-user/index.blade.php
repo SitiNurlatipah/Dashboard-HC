@@ -28,12 +28,7 @@
             
             
                 <div class="panel-body">
-                    <!-- Breadcrumb -->
-                    <ol class="breadcrumb text-right">
-                        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
-                        <li class="active"><span>Management User</span></li>
-                        </ol>
-                    <!-- /Breadcrumb -->
+                    
                     <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
                     <div class="table-wrap">
                     

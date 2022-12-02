@@ -25,6 +25,7 @@
                         <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
                             <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Training</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Trainee</a></li>
+                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Ikatan Dinas</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">Cost Center</a></li>
                             
                         </ul>
@@ -35,17 +36,17 @@
                 @endif
                 <div class="tab-content" id="myTabContent_7">
                 <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-realisasi" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <button class="btn btn-primary btn-anim btn-xs"  style="text-align:right;" data-toggle="modal" data-target="#add-realisasi" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
 
                     <!-- <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-realisasi" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button> -->
 
                     <div class="table-wrap">
                         <div class="table-responsive">
-                            <table id="realizationTable" class="table table-hover table-striped table-bordered displayx text-center font-11 color-bg-table" >
+                            <table id="realizationTable" class="table table-hover table-striped table-bordered display text-center font-11 color-bg-table" >
                                 <thead bgcolor="#8ee8fa">
                                     <tr>
                                         <th rowspan="2" class="text-center">RPT</th>
-                                        <th rowspan="2" class="text-center color-thead">ID</th>
+                                        <th rowspan="2" class="text-center">ID</th>
                                         <th rowspan="2" class="text-center">Nama Training</th>
                                         <th rowspan="2" class="text-center">Sisa Hari</th>
                                         <th rowspan="2" class="text-center">Tanggal Mulai</th>
@@ -98,7 +99,12 @@
                                             <span class="">{{$realisasi->txtTrainingName}}</span>
                                             @endif 
                                         </td>
-                                        <td>{{\Carbon\Carbon::parse($realisasi->dateTanggalMulai)->diffInDays(now(), false)}}</td>
+                                        <td>
+                                            @if(\Carbon\Carbon::parse($realisasi->dateTanggalMulai)->diffInDays(now(), false)>0)
+                                            <span>-</span>
+                                            @else
+                                            {{\Carbon\Carbon::parse($realisasi->dateTanggalMulai)->diffInDays(now(), false)}}</td>
+                                            @endif
                                         <td>{{date('d-m-Y', strtotime($realisasi->dateTanggalMulai))}}</td>
                                         <td>
                                             @if ($realisasi->tanggalSelesai=="")
@@ -123,7 +129,7 @@
                                             <span class="label label-danger">Rp{{number_format($realisasi->intTotalCost,0,',','.')}}</span>
                                             @endif   
                                         </td>
-                                        <td>{{$realisasi->costSnack}}</td>
+                                        <td>Rp{{number_format($realisasi->costSnack,0,',','.')}}</td>
                                         <td>
                                             @if ($realisasi->sertifikat=="Tidak Ada")
                                             <span class="">{{$realisasi->sertifikat}}</span>
@@ -155,33 +161,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="table-wrap">
-                    <div class="table-responsive">
-                        <table id="ratatable" class="table table-hover font-11 table-bordered display mb-30 text-center" >
-                            <thead>
-                            <tr>
-                               
-                                
-                                <th class="text-center">Training ID</th>
-                                <th class="text-center">Judul Training</th>    
-                                <th class="text-center">Rata-rata</th>    
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($rata as $i)
-                            <tr>
-                                
-                                <td class="col-md-2">{{ $i->training_id }}</td>
-                                <td class="col-md-2">{{ $i->txtTrainingName }}</td>
-                                <td class="col-md-2">{{ number_format($i->rata2,0) }}</td>
-                                
-                            </tr>
-                                
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
                     </div>
                     <div  id="profile_15" class="tab-pane fade" role="tabpanel">
                         <!-- <div class="col card-header text-right"> -->
@@ -189,7 +169,7 @@
                         <!-- </div> -->
                         <div class="table-wrap">
                             <div class="table-responsive">
-                                <table id="traineeTable" class="table table-striped table-hover displayx table-bordered font-11 text-center mt-10" width="100%">
+                                <table id="traineeTable" class="table table-striped table-hover display table-bordered font-11 text-center mt-10" width="100%">
                                     <thead bgcolor="#8ee8fa">
                                         <tr>
                                             <th rowspan="2" class="text-center">ID Training</th>
@@ -265,22 +245,30 @@
                         </div>
                     </div>
                     <div  id="profile_16" class="tab-pane fade" role="tabpanel">
-                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-kasbon" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                        <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-kasbon" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
                         <!-- </div> -->
                         <div class="table-wrap">
                             <div class="table-responsive">
-                                <table id="kasbonTable" class="table table-striped table-hover displayx table-bordered font-11 mt-10" width="100%">
+                                <table id="kasbonTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="100%">
                                     <thead bgcolor="#8ee8fa">
                                         <tr>
-                                            <th rowspan="2" class="text-center">No</th>
-                                            <th rowspan="2" class="text-center">Cost Center</th>
-                                            <th rowspan="2" class="text-center">Cost Center Departement</th>
-                                            <th rowspan="2" class="text-center">Cost Center Group</th>
-                                            <th rowspan="2" class="text-center">Total</th>
-                                            <th rowspan="2" class="text-center">Action (Update/Delete)</th>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Cost Center</th>
+                                            <th class="text-center">Cost Center Departement</th>
+                                            <th class="text-center">Cost Center Group</th>
+                                            <th class="text-center">Total</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4" class="text-center">Total</th>
+                                            <th class="text-right">Rp{{number_format($kasbon->sum('total'),0,',','.')}}</th>
+                                            <th></th>
+
+                                        </tr>
+                                    </tfoot>
                                     <tbody>
                                     @foreach($kasbon as $index=>$k)
                                     <tr>
@@ -288,7 +276,7 @@
                                         <td>{{$k->costcenter}}</td>
                                         <td>{{$k->costcenter_dept}}</td>
                                         <td>{{$k->costcenter_group}}</td>
-                                        <td>Rp{{number_format($k->total,0,',','.')}}</td>
+                                        <td class="text-right">Rp{{number_format($k->total,0,',','.')}}</td>
                                         
                                         <td class="text-center">
                                             <form action="{{route('kasbon.delete',$k->idKasbon)}}" method="POST">
@@ -302,6 +290,53 @@
                                         </td>
                                     </tr>  
                                     @endforeach 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div  id="profile_17" class="tab-pane fade" role="tabpanel">
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-ikatandinas" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                        <div class="table-wrap">
+                            <div class="table-responsive">
+                                <table id="dinasTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="100%">
+                                    <thead bgcolor="#8ee8fa">
+                                        <tr>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Peserta</th>
+                                            <th class="text-center">Training</th>
+                                            <th class="text-center">Tanggal Pelaksanaan</th>
+                                            <th class="text-center">Vendor</th>
+                                            <th class="text-center">Total Biaya</th>
+                                            <th class="text-center">Durasi Ikatan Dinas</th>
+                                            <th class="text-center">Tanggal Berakhir Ikatan Dinas</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    <tbody>
+                                    @foreach($dinas as $index=>$d)
+                                    <tr>
+                                        <td class="text-center">{{$index+1}}</td>
+                                        <td>{{$d->peserta}}</td>
+                                        <td>{{$d->training}}</td>
+                                        <td>{{$d->tglPelaksanaan}}</td>
+                                        <td>{{$d->vendor}}</td>
+                                        <td>Rp{{number_format($d->biaya,0,',','.')}}</td>
+                                        <td>{{$d->durasi}}</td>
+                                        <td>{{$d->tglBerakhir}}</td>
+                                        <td class="text-center">
+                                            <form action="{{route('dinas.delete',$d->idIkatanDinas)}}" method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatedinas{{$d->idIkatanDinas}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                            @csrf 
+                                            @method("delete")
+                                                <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>  
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -384,11 +419,11 @@
                         </div>
                         <div class="col-sm-4">
                             <label for="intTotalCost" class="control-label mb-5">Biaya Pendaftaran</label>
-                            <input type="number" class="form-control" name="intTotalCost">
+                            <input type="text" class="form-control" id="rupiah" name="intTotalCost">
                         </div> 
                         <div class="col-sm-4">
                             <label for="costSnack" class="control-label mb-5">Biaya Snack</label>
-                            <input type="number" class="form-control" name="costSnack">
+                            <input type="text" class="form-control" id="rupiah1" name="costSnack">
                         </div> 
                         
                     </div>
@@ -444,7 +479,7 @@
     </div>
 <!-- end add data -->
 @foreach($training_realizations as $realisasi)
-    <div class="modal fade" id="update{{$realisasi->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+<div class="modal fade" id="update{{$realisasi->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -515,11 +550,11 @@
                         </div>
                         <div class="col-sm-4">
                             <label for="intTotalCost" class="control-label mb-5">Biaya Pendaftaran</label>
-                            <input type="number" class="form-control" name="intTotalCost" value="{{$realisasi->intTotalCost}}">
+                            <input type="number" class="form-control" id="rupiah" name="intTotalCost" value="{{$realisasi->intTotalCost}}">
                         </div> 
                         <div class="col-sm-4">
                             <label for="costSnack" class="control-label mb-5">Biaya Snack</label>
-                            <input type="number" class="form-control" name="costSnack" value="{{$realisasi->costSnack}}">
+                            <input type="number" class="form-control" id="rupiah1" name="costSnack" value="{{$realisasi->costSnack}}">
                         </div> 
                         
                     </div>
@@ -562,8 +597,8 @@
                     </div>
                         
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                         </div>
                 </form>
             </div>       
@@ -659,7 +694,7 @@
 <!-- end add modal -->
 <!-- update modal -->
 @foreach($trainees as $trainee)
-    <div class="modal fade" id="updateTrainee{{$trainee->idTrainee}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+<div class="modal fade" id="updateTrainee{{$trainee->idTrainee}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -762,7 +797,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dateTanggal" class="control-label mb-5">Total</label>
-                        <input type="text" class="form-control" name="total">
+                        <input type="text" class="form-control" id="rupiah2" name="total">
                     </div>
                     
                     <div class="modal-footer">
@@ -849,6 +884,109 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="add-ikatandinas" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
+                </div>
+                <div class="modal-body">
+                <form action="{{ route('dinas.post') }}" method="POST">
+                @csrf 
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Nama Peserta</label>
+                        <input type="text" class="form-control" name="peserta" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label mb-5">Nama Training</label>
+                        <input type="text" class="form-control" name="training" required>       
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Tanggal Pelaksanaan</label>
+                            <input type="date" class="form-control" name="tglPelaksanaan" required>                        
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Durasi Ikatan Dinas</label>
+                            <input type="text" class="form-control" name="durasi" required>                        
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Tanggal Berakhir</label>
+                            <input type="date" class="form-control" name="tglBerakhir" required>                        
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Vendor</label>
+                        <input type="text" class="form-control" name="vendor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Total Biaya</label>
+                        <input type="text" class="form-control" id="rupiah3" name="biaya">
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+</div>
+@foreach($dinas as $d)
+<div class="modal fade" id="updatedinas{{$d->idIkatanDinas}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Update Data</h5>
+                </div>
+                <div class="modal-body">
+                <form action="/training/ikatandinas/{{$d->idIkatanDinas}}" method="POST">
+                @csrf 
+                @method('put') 
+                    <div class="form-group">
+                        <label class="control-label mb-5">Nama Peserta</label>
+                        <input type="text" class="form-control" name="peserta" value="{{$d->peserta}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label mb-5">Nama Training</label>
+                        <input type="text" class="form-control" name="training" value="{{$d->training}}" required>       
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Tanggal Pelaksanaan</label>
+                            <input type="date" class="form-control" name="tglPelaksanaan" value="{{$d->tglPelaksanaan}}" required>                        
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Durasi Ikatan Dinas</label>
+                            <input type="text" class="form-control" name="durasi" value="{{$d->durasi}}" required>                        
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Tanggal Berakhir</label>
+                            <input type="date" class="form-control" name="tglBerakhir" value="{{$d->tglBerakhir}}" required>                        
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Vendor</label>
+                        <input type="text" class="form-control" name="vendor" value="{{$d->vendor}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Total Biaya</label>
+                        <input type="text" class="form-control" id="rupiah" name="biaya" value="{{$d->biaya}}">
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+</div>
+@endforeach
 
 <!-- end update modal -->
 
@@ -857,7 +995,29 @@
 @push('script')
 <script type="text/javascript">
 $('.selectpicker').selectpicker();
+
 $('#realizationTable').dataTable( {
+    dom: 'Bfrtip',
+    buttons: [
+        'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+    ]
+} );
+$(document).ready(function() {
+$('#traineeTable').dataTable( {
+    paging: true,
+    searching: true,
+    buttons: [
+        'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+    ]
+} );
+} );
+$('#kasbonTable').dataTable( {
     paging: true,
     searching: true
 } );
@@ -866,6 +1026,10 @@ $('#ratatable').dataTable( {
     searching: true
 } );
 $('#dtable').dataTable( {
+    paging: true,
+    searching: true
+} );
+$('#dinasTable').dataTable( {
     paging: true,
     searching: true
 } );
@@ -886,14 +1050,47 @@ $('.delete').click(function(event) {
     }
     });
 });
-$('#traineeTable').dataTable( {
-    paging: true,
-    searching: true
-} );
-$('#kasbonTable').dataTable( {
-    paging: true,
-    searching: true
-} );
+    var rupiah = document.getElementById('rupiah');
+		rupiah.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat ketik nominal di form kolom input
+			// gunakan fungsi formatRupiah() untuk mengubah nominal angka yang di ketik menjadi format angka
+			rupiah.value = formatRupiah(this.value, 'Rp. ');
+	});
+    var rupiah1 = document.getElementById('rupiah1');
+		rupiah1.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat ketik nominal di form kolom input
+			// gunakan fungsi formatRupiah() untuk mengubah nominal angka yang di ketik menjadi format angka
+			rupiah1.value = formatRupiah(this.value, 'Rp. ');
+	});
+    var rupiah2 = document.getElementById('rupiah2');
+		rupiah2.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat ketik nominal di form kolom input
+			// gunakan fungsi formatRupiah() untuk mengubah nominal angka yang di ketik menjadi format angka
+			rupiah2.value = formatRupiah(this.value, 'Rp. ');
+	});
+    var rupiah3 = document.getElementById('rupiah3');
+		rupiah3.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat ketik nominal di form kolom input
+			// gunakan fungsi formatRupiah() untuk mengubah nominal angka yang di ketik menjadi format angka
+			rupiah3.value = formatRupiah(this.value, 'Rp. ');
+	});
+		/* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka satuan ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
 
 </script>
 @endpush
