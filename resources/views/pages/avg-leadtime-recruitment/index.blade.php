@@ -27,11 +27,7 @@
                     <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Grafik</a></li>
                     
                 </ul>
-            @if(session()->has('message'))
-            <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
-            </div>
-            @endif
+            
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
             <div class="row">
@@ -143,7 +139,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
+                                    <h6 class="panel-title txt-dark"></h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -161,7 +157,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
+                                    <h6 class="panel-title txt-dark"></h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -179,7 +175,7 @@
                             </div>
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Productivity Total</h6>
+                                    <h6 class="panel-title txt-dark"></h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

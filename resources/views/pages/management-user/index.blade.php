@@ -20,21 +20,14 @@
                 <div class="clearfix"></div>
             </div>
             
-            @if(session()->has('message'))
-            <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
-            </div>
-            @endif
-            
-            
                 <div class="panel-body">
-                    
-                    <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button>
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <!-- <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-user" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add User</span></button> -->
                     <div class="table-wrap">
                     
                         <div class="table-responsive text-center">
                         
-                            <table id="userTable" class="table table-hover display  font-12 pb-30 text-center" >
+                            <table id="userTable" class="table table-hover font-11 table-bordered display mb-30 text-center" >
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
@@ -67,12 +60,20 @@
                                         <td>{{ $data->dtmStartDate }}</td>
                                         <td>{{ $data->txtGender }}</td>
                                         <td>
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  id="editUser" data-toggle="modal" data-target="#updateUser{{$data->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                            <form action="{{route('user.delete', $data->id)}}" method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateUser{{$data->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                            @csrf 
+                                            @method("delete")
+                                                <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                            </form>
+                                        {{--<a class="btn btn-default btn-icon-anim btn-square btn-sm"  id="editUser" data-toggle="modal" data-target="#updateUser{{$data->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                         <form action="{{route('user.delete', $data->id)}}" method="POST">
                                         @csrf 
                                         @method("delete")
                                             <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm show_confirm" ><i class="icon-trash"></i></button>
-                                        </form>
+                                        </form>--}}
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -109,18 +110,12 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-4">
-                            <label for="txtUsername" class="control-label mb-5">Username</label>
-                            <input type="text" class="form-control" id="txtUsername" name="txtUsername" required>
-                        </div>
+                        
                         <div class="col-sm-4">
                             <label for="txtEmail" class="control-label mb-5">Email</label>
                             <input type="email" class="form-control" id="txtEmail" name="txtEmail" required>
                         </div>
-                        <div class="col-sm-4">
-                            <label for="password" class="control-label mb-5">Password</label>
-                            <input type="password" class="form-control" id="password" name="txtPassword" required>
-                        </div>
+                        
                     </div>
                     
                     <div class="row form-group">
@@ -206,14 +201,8 @@
                             <label for="txtEmail" class="control-label mb-5">Email</label>
                             <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="{{$data->txtEmail}}">
                         </div>
-                        <div class="col-sm-4">
-                            <label for="txtUsername" class="control-label mb-5">Username</label>
-                            <input type="text" class="form-control"  name="txtUsername" value="{{$data->txtUsername}}">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="password" class="control-label mb-5">Password</label>
-                            <input type="password" class="form-control" id="password" name="txtPassword" value="{{$data->txtPassword}}">
-                        </div>
+                        
+                        
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-6">
@@ -279,7 +268,7 @@
 
 @push('script')
 <script type="text/javascript">
-     $('.show_confirm').click(function(event) {
+     $('.delete').click(function(event) {
           var form =  $(this).closest("form");
           var name = $(this).data("name");
           event.preventDefault();
@@ -299,6 +288,9 @@
 $('#userTable').dataTable( {
 paging: true,
 searching: true
-} );  
+} ); 
+$(".alert-dismissable").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissable").alert('close');
+}); 
 </script>
 @endpush

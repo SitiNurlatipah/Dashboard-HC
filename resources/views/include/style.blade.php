@@ -2,7 +2,7 @@
 	<link href="{{asset('droopy/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css"/>
 	
 	<!-- Toast CSS -->
-	<link href="{{asset('droopy/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{asset('droopy/vendors/bower_components/jquery-toast-plugin/dist/toastr.min.css') }}" rel="stylesheet" type="text/css">
 	
 	<!-- bootstrap-select CSS -->
 	<link href="{{asset('droopy/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css">
@@ -22,8 +22,8 @@
 	
 	<!-- Bootstrap Daterangepicker CSS -->
 	<link href="{{asset('droopy/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css"/>
-
-
+	<!-- font-awesome -->
+	<link href="{{ asset('droopy/dist/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
 	<!-- Custom CSS -->
 	<link href="{{ asset('droopy/dist/css/style.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('droopy/dist/css/daterangepicker.css') }}" rel="stylesheet" type="text/css">

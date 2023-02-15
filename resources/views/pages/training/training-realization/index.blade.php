@@ -29,20 +29,20 @@
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">Cost Center</a></li>
                             
                         </ul>
-                @if(session()->has('message'))
+                {{--@if(session()->has('message'))
                 <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
                 </div>
-                @endif
+                @endif--}}
                 <div class="tab-content" id="myTabContent_7">
                 <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
-                    <button class="btn btn-primary btn-anim btn-xs"  style="text-align:right;" data-toggle="modal" data-target="#add-realisasi" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <button class="btn btn-primary btn-anim btn-xs" data-toggle="modal" data-target="#add-realisasi" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
 
                     <!-- <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-realisasi" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button> -->
 
                     <div class="table-wrap">
                         <div class="table-responsive">
-                            <table id="realizationTable" class="table table-hover table-striped table-bordered display text-center font-11 color-bg-table" >
+                            <table id="realizationTable" class="table table-hover table-striped table-bordered display text-center font-11 color-bg-table" width="99%">
                                 <thead bgcolor="#8ee8fa">
                                     <tr>
                                         <th rowspan="2" class="text-center">RPT</th>
@@ -169,7 +169,7 @@
                         <!-- </div> -->
                         <div class="table-wrap">
                             <div class="table-responsive">
-                                <table id="traineeTable" class="table table-striped table-hover display table-bordered font-11 text-center mt-10" width="100%">
+                                <table id="traineeTable" class="table table-striped table-hover display table-bordered font-11 text-center mt-10" width="99%">
                                     <thead bgcolor="#8ee8fa">
                                         <tr>
                                             <th rowspan="2" class="text-center">ID Training</th>
@@ -249,7 +249,7 @@
                         <!-- </div> -->
                         <div class="table-wrap">
                             <div class="table-responsive">
-                                <table id="kasbonTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="100%">
+                                <table id="kasbonTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="99%">
                                     <thead bgcolor="#8ee8fa">
                                         <tr>
                                             <th class="text-center">No</th>
@@ -299,7 +299,7 @@
                     <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-ikatandinas" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
                         <div class="table-wrap">
                             <div class="table-responsive">
-                                <table id="dinasTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="100%">
+                                <table id="dinasTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="99%">
                                     <thead bgcolor="#8ee8fa">
                                         <tr>
                                             <th class="text-center">No</th>
@@ -997,24 +997,12 @@
 $('.selectpicker').selectpicker();
 
 $('#realizationTable').dataTable( {
-    dom: 'Bfrtip',
-    buttons: [
-        'copyHtml5',
-        'excelHtml5',
-        'csvHtml5',
-        'pdfHtml5'
-    ]
+    
 } );
 $(document).ready(function() {
 $('#traineeTable').dataTable( {
     paging: true,
     searching: true,
-    buttons: [
-        'copyHtml5',
-        'excelHtml5',
-        'csvHtml5',
-        'pdfHtml5'
-    ]
 } );
 } );
 $('#kasbonTable').dataTable( {
@@ -1091,6 +1079,8 @@ $('.delete').click(function(event) {
 			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
 			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
 		}
-
+$(".alert-dismissable").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissable").alert('close');
+});
 </script>
 @endpush

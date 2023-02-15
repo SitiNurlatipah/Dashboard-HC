@@ -9,14 +9,14 @@
     <meta name="description" content="Management Power Energy is aplication web base" />
     <meta name="keywords" content="admin, admin dashboard" />
     <meta name="author" content="hencework"/>
-    
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/kalbe.png')}}">
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <!-- vector map CSS -->
     <link href="{{ asset('droopy/vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-    
+    <link href="{{asset('droopy/vendors/bower_components/jquery-toast-plugin/dist/toastr.min.css') }}" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
     <link href="{{ asset('droopy/dist/css/style.css') }}" rel="stylesheet" type="text/css">
 </head>
@@ -59,15 +59,27 @@
                                         <h3 class="text-center txt-dark mb-10">Sign in to Dashboard HC</h3>
                                     </div>	
                                     <div class="form-wrap">
-                                        @if ($message = Session::get('failed'))
+                                    @if(session()->has('gagal'))
+                                    <div class="alert alert-danger alert-dismissable mt-10 pb-5 pt-5">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('gagal') }} 
+                                    </div>
+                                    @endif
+                                    @if(session()->has('logout'))
+                                    <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('logout') }} 
+                                    </div>
+                                    @endif
+                                    
+
+                                    {{--@if ($message = Session::get('failed'))
                                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                 <h4 class="alert-heading">Perhatian !</h4>
                                                 <div class="alert-body">
-                                                    {{ $message }}
+                                                    {{ $failed }}
                                                 </div>
                                                 <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
                                             </div>
-                                        @endif
+                                        @endif--}}
                                         <form action="{{ route('login.post') }}" method="POST">
                                             @csrf
                                             <div class="form-group">
@@ -79,6 +91,8 @@
                                                 {{-- <a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="{{ route('register') }}">Cannot Have Account ?</a>
                                                 <div class="clearfix"></div> --}}
                                                 <input type="password" class="form-control" required="" name="txtPassword" id="txtPassword" placeholder="Enter Password">
+                                                <label for="password-checkbox">Show Password</label>
+                                                <input type="checkbox" id="password-checkbox">
                                             </div>
                                             {{-- <div class="form-group">
                                                 <div class="checkbox checkbox-primary pr-10 pull-left">
@@ -120,7 +134,29 @@
     
     <!-- Init JavaScript -->
     <script src="{{ asset('droopy/dist/js/init.js') }}"></script>
+    <script src="{{ asset('droopy/vendors/bower_components/jquery-toast-plugin/dist/toastr.min.js') }}"></script>
 </body>
 <!-- END: Body-->
+
+<script type="text/javascript">
+{{--@if(Session::has('logout'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true,
+    "positionClass": "toast-bottom-left",
+  }
+  		toastr.success("{{ session('logout') }}");
+@endif
+document.getElementById("password-checkbox").addEventListener("change", function() {
+  var x = document.getElementById("txtPassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+});
+--}}
+</script>
 
 </html>

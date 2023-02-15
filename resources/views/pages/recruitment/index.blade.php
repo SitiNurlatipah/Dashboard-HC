@@ -27,11 +27,11 @@
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Recruitment Data</a></li>
                             
                         </ul>
-                @if(session()->has('message'))
+                {{--@if(session()->has('message'))
                 <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
                 </div>
-                @endif
+                @endif--}}
                 <div class="tab-content" id="myTabContent_7">
                 <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
                 <div class="row">
@@ -58,7 +58,9 @@
                 
                     <div class="section-content fptk active">
                     @foreach($progress as $p)
-                    
+                    @if($p->joinStatus=='yes')
+                        <span></span>
+                    @else
                     <div class="baris">
                     <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateFPTK{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                         <span class="baris kiri">{{$p->nama}}</span>
@@ -69,7 +71,7 @@
                         <span class="baris kanan">{{date('d-m-Y', strtotime($p->tanggalFptk))}}</span>
                         @endif
                     </div>    
-                        
+                    @endif
                         
                     @endforeach
                     </div>
@@ -80,13 +82,19 @@
                         @if($p->fptkStatus=='PASS')
                         <div class="baris">
                         <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateHR{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                            @if($p->interviewHrStatus=='PASS')
+                            <span class="baris kiri text-success">{{$p->nama}}</span>
+                            @elseif($p->interviewHrStatus=='FAIL')
+                            <span class="baris kiri text-danger">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri">{{$p->nama}}</span>
-                            
+                            @endif
                             @if($p->tanggalInterviewHr==null)
                             {{$p->tanggalInterviewHr}}
                             @else
                             <span class="baris kanan">{{date('d-m-Y', strtotime($p->tanggalInterviewHr))}}</span>
                             @endif
+                            
                         </div>
                         @endif
                     @endforeach
@@ -98,7 +106,13 @@
                         @if($p->interviewHrStatus=='PASS')
                         <div class="baris">
                             <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateUser1{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                            @if($p->interviewUser1Status=='PASS')
+                            <span class="baris kiri text-success">{{$p->nama}}</span>
+                            @elseif($p->interviewUser1Status=='FAIL')
+                            <span class="baris kiri text-danger">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri">{{$p->nama}}</span>
+                            @endif
                             
                             @if($p->tanggalInterviewUser1==null)
                             {{$p->tanggalInterviewUser1}}
@@ -116,7 +130,13 @@
                         <div class="baris">
                             <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateUser2{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
 
+                            @if($p->interviewUser2Status=='PASS')
+                            <span class="baris kiri text-success">{{$p->nama}}</span>
+                            @elseif($p->interviewUser2Status=='FAIL')
+                            <span class="baris kiri text-danger">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri">{{$p->nama}}</span>
+                            @endif
                             
                             @if($p->tanggalInterviewUser2==null)
                             {{$p->tanggalInterviewUser2}}
@@ -134,7 +154,13 @@
                         <div class="baris">
                             <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateUser3{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
 
+                            @if($p->interviewUser3Status=='PASS')
+                            <span class="baris kiri text-success">{{$p->nama}}</span>
+                            @elseif($p->interviewUser3Status=='FAIL')
+                            <span class="baris kiri text-danger">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri">{{$p->nama}}</span>
+                            @endif
                             
                             @if($p->tanggalInterviewUser3==null)
                             {{$p->tanggalInterviewUser3}}
@@ -153,7 +179,13 @@
                         @if($p->interviewUser3Status=='PASS')
                         <div class="baris">
                             <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatePsiko{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                            @if($p->psikotesStatus=='PASS')
+                            <span class="baris kiri text-success">{{$p->nama}}</span>
+                            @elseif($p->psikotesStatus=='FAIL')
+                            <span class="baris kiri text-danger">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri">{{$p->nama}}</span>
+                            @endif
                             
                             @if($p->tanggalPsikotes==null)
                             {{$p->tanggalPsikotes}}
@@ -172,10 +204,16 @@
                         @if($p->interviewUser1Status=='PASS')
                         <div class="baris">
                             <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateMcu{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                            @if($p->mcuStatus=='fit' || $p->mcuStatus=='fitnote' )
+                            <span class="baris kiri text-success" style="margin-right: auto">{{$p->nama}}</span>
+                            @elseif($p->mcuStatus=='unfit')
+                            <span class="baris kiri text-danger" style="margin-right: auto">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri" style="margin-right: auto">{{$p->nama}}</span>
+                            @endif
                             
                             @if($p->mcuStatus=='fitnote')
-                            <span class="baris label label-warning">{{$p->note}}</span>
+                            <span class="baris kiri text-warning">{{$p->note}}</span>
                             @if($p->tanggalMcu==null)
                             {{$p->tanggalMcu}}
                             @else
@@ -195,10 +233,17 @@
                         @if($p->psikotesStatus=='PASS')
                         <div class="baris">
                             <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateMcu{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                            <!-- <span class="baris kiri" style="margin-right: auto">{{$p->nama}}</span> -->
+                            @if($p->mcuStatus=='fit' || $p->mcuStatus=='fitnote' )
+                            <span class="baris kiri text-success" style="margin-right: auto">{{$p->nama}}</span>
+                            @elseif($p->mcuStatus=='unfit')
+                            <span class="baris kiri text-danger" style="margin-right: auto">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri" style="margin-right: auto">{{$p->nama}}</span>
-                            
+                            @endif
+
                             @if($p->mcuStatus=='fitnote')
-                            <span class="baris label label-warning">{{$p->note}}</span>
+                            <span class="baris kiri text-warning">{{$p->note}}</span>
                             @if($p->tanggalMcu==null)
                             {{$p->tanggalMcu}}
                             @else
@@ -225,7 +270,13 @@
                         @if($p->mcuStatus=='fit')
                         <div class="baris">
                         <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTtd{{$p->idRecruitment}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                            @if($p->ttdStatus=='PASS')
+                            <span class="baris kiri text-success">{{$p->nama}}</span>
+                            @elseif($p->ttdStatus=='FAIL')
+                            <span class="baris kiri text-danger">{{$p->nama}}</span>
+                            @else
                             <span class="baris kiri">{{$p->nama}}</span>
+                            @endif
                             
                             @if($p->tanggalTtd==null)
                             {{$p->tanggalTtd}}
@@ -302,7 +353,7 @@
                         
                 <div class="table-wrap">
                 <div class="table-responsive">
-                <table id="recruitmentTable" class="table table-striped table-hover displayx table-bordered font-11 mt-10">
+                <table id="recruitmentTable" class="table table-striped table-hover displayx table-bordered font-11 mt-10" width="99%">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
@@ -1863,6 +1914,8 @@ $(".step07").click( function() {
 	$("#line-progress").css("width", "100%");
 	$(".join").addClass("active").siblings().removeClass("active");
 });
-
+$(".alert-dismissable").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissable").alert('close');
+});
 </script>
 @endpush

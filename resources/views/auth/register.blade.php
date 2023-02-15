@@ -68,25 +68,37 @@
     <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
 </div>
 @endif
+                                    @if(session()->has('message'))
+                                    <div class="alert alert-danger alert-dismissable mt-10 pb-5 pt-5">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
+                                    </div>
+                                    @endif
                                         <form action="{{ route('register.post') }}" method="POST">
                                             @csrf
                                             <div class="form-group">
                                                 <label class="control-label mb-10" for="exampleInputEmail_2">Fullname</label>
-                                                <input type="text" class="form-control" required="" name="txtFullname" id="txtFullname" placeholder="Enter fullname">
+                                                <input type="text" class="form-control" required="" name="namalengkap" id="txtFullname" placeholder="Enter fullname">
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label mb-10" for="exampleInputEmail_2">Nomor Induk Karyawan (NIK)</label>
-                                                <input type="text" class="form-control" required="" name="txtNik" id="txtNik" placeholder="Enter nik ">
-                                            </div>
+                                            
                                             <div class="form-group">
                                                 <label class="control-label mb-10" for="exampleInputEmail_2">Username</label>
-                                                <input type="text" class="form-control" required="" name="txtUsername" id="txtUsername" placeholder="Enter email">
+                                                <input type="text" class="form-control" required="" name="username" id="txtUsername" placeholder="Enter email">
                                             </div>
                                             <div class="form-group">
                                                 <label class="pull-left control-label mb-10" for="txtPassword">Password</label>
-                                                {{-- <a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="{{ route('login') }}">sudah memiliki akun?</a>
-                                                <div class="clearfix"></div> --}}
-                                                <input type="password" class="form-control" required="" name="txtPassword" id="txtPassword" placeholder="Enter Password">
+                                                
+                                                <input type="password" class="form-control" required="" name="password" id="" placeholder="Enter Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="exampleInputEmail_2">Role</label>
+                                                <select name="role" id="" class="form-control">
+                                                    <option value="Admin">Administrator</option>
+                                                    <option value="HC">Admin HC</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="exampleInputEmail_2">Foto</label>
+                                                <input type="file" class="file-upload upload" required="" name="foto" id="" placeholder="">
                                             </div>
                                             {{-- <div class="form-group">
                                                 <div class="checkbox checkbox-primary pr-10 pull-left">
@@ -95,8 +107,10 @@
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div> --}}
+                                            <a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="{{ route('login') }}">sudah memiliki akun?</a>
+                                                <div class="clearfix"></div>
                                             <div class="form-group text-center">
-                                                <button class="btn btn-success btn-rounded">sign up</button>
+                                                <button class="btn btn-success btn-rounded">Sign Up</button>
                                             </div>
                                         </form>
                                     </div>

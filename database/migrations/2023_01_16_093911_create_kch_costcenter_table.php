@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMppEmployeesTable extends Migration
+class CreateKchCostcenterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateMppEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mpp_employees', function (Blueprint $table) {
-            $table->id();
-            $table->year('tahun');
-            $table->integer('mppPermanent');
-            $table->integer('mppContract');
-            $table->integer('mppJobsupply');
-            $table->integer('mppTotal');
+        Schema::create('kch_costcenter', function (Blueprint $table) {
+            $table->increments('idkchcostcenter');
+            $table->integer('cost');
+            $table->string('costcenter');
+            $table->date('bulan');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateMppEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mpp_employees');
+        Schema::dropIfExists('kch_costcenter');
     }
 }

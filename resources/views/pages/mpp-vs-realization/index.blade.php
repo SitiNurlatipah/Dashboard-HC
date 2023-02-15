@@ -29,11 +29,11 @@
                     
                 </ul>
             
-            @if(session()->has('message'))
+            {{--@if(session()->has('message'))
             <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
             </div>
-            @endif
+            @endif--}}
             
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
@@ -44,7 +44,13 @@
                     @csrf
                     <div class="form-group row col-sm-11">
                         <label for="date" class="col-form-label text-right col-sm-2 pt-3">Masukan Tahun</label>
-                        <input type="text" class="form-control input-sm col-sm-3" name="year" placeholder="ex:2020,2021,2022,etc...">
+                        <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" title="Pilih tahun" data-live-search="false" name="year" id="mpp_tahun">
+                            <option value="}">Pilih Tahun</option>
+                            @foreach($mpp_employee as $mpp)
+                            <option value="{{$mpp->tahun}}">{{$mpp->tahun}}</option>
+                            @endforeach
+                        </select>
+                        <!-- <input type="text" class="form-control input-sm col-sm-3" name="year" placeholder="ex:2020,2021,2022,etc..."> -->
                         <button  type="submit" class="btn btn-success btn-anim btn-xs ml-10"><i class="icon-rocket"></i><span class="btn-text">filter</span></button>
                         <a class="btn btn-warning btn-anim btn-xs" href="{{ route('mppreal') }}"><i class="fa fa-undo"></i><span class="btn-text">reset</span></a>
                     </div>        
@@ -57,7 +63,7 @@
                 </div>
                 <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="mpprealTable" class="table table-hover font-11 table-bordered display mb-30 text-center" >
+                        <table id="mpprealTable" class="table table-hover font-11 table-bordered display mb-30 text-center" width="99%">
                             <thead>
                             <tr>
                                     <th rowspan="2" class="text-center">Bulan</th>
@@ -114,7 +120,7 @@
             <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#addmpp" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
                 <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="mppTable" class="table table-striped table-hover font-11 table-bordered display mb-30 text-center" >
+                        <table id="mppTable" class="table table-striped table-hover font-11 table-bordered display mb-30 text-center" width="99%">
                             <thead>
                             <tr>
                                     <th class="text-center">No</th>
@@ -138,10 +144,10 @@
                                 <td>{{ $mpp->mppJobsupply }}</td>
                                 <td>{{ $mpp->mppTotal }}</td>
                                 <td>
-                                <form action="" method="POST">
+                                <form action="{{route('mpp.delete',$mpp->idmpp)}}" method="POST">
                                 @csrf
                                 @method('put')
-                                <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#update{{$mppreal->id}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatempp{{$mpp->idmpp}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
                                 @csrf 
                                 @method("delete")
                                     <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
@@ -175,24 +181,7 @@
                             </div>
                         </div>
             </div>
-            <div class="col-lg-12 col-md-6 col-sm-7 col-xs-12">
-                        <div class="panel panel-default card-view panel-refresh relative">
-                            <div class="refresh-container">
-                                <div class="la-anim-1"></div>
-                            </div>
-                            <div class="panel-heading">
-                                <div class="pull-left">
-                                    <h6 class="panel-title txt-dark"></h6>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="panel-wrapper collapse in">
-                                <div class="panel-body">
-                                    <div id="coba" class="" style="height:367px;"></div>
-                                </div>
-                            </div>
-                        </div>
-            </div>
+            
             <div class="col-lg-12 col-md-6 col-sm-7 col-xs-12">
                         <div class="panel panel-default card-view panel-refresh relative">
                             <div class="refresh-container">
@@ -277,7 +266,7 @@
                             <label class="control-label mb-5">Tahun</label>
                                 <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" title="Pilih tahun" data-live-search="false" name="mpp_tahun" id="mpp_tahun">
                                     @foreach($mpp_employee as $mpp)
-                                    <option value="{{$mpp->id}}">{{$mpp->tahun}}</option>
+                                    <option value="{{$mpp->idmpp}}">{{$mpp->tahun}}</option>
                                     @endforeach
                                 </select>        
                         </div>
@@ -329,7 +318,7 @@
     </div>
 <!-- end add data -->
 @foreach($real as $mppreal)
-    <div class="modal fade" id="update{{$mppreal->idReal}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+<div class="modal fade" id="update{{$mppreal->idReal}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -345,7 +334,7 @@
                         <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" data-live-search="false" name="mpp_tahun" id="mpp_tahun">
                             <option value="{{$mppreal->mpp_tahun}}">{{$mppreal->tahun}}</option>
                             @foreach($mpp_employee as $mpp)
-                            <option value="{{$mpp->id}}">{{$mpp->tahun}}</option>
+                            <option value="{{$mpp->idmpp}}">{{$mpp->tahun}}</option>
                             @endforeach
                         </select>        
                     </div>       
@@ -387,18 +376,64 @@
                     </div>
                         
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+</div>
+@endforeach
+@foreach($mpp_employee as $mpp)
+<div class="modal fade" id="updatempp{{$mpp->idmpp}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Update MPP Employee</h5>
+                </div>
+                <div class="modal-body">
+                <form action="/mppvsreal/mpp/{{$mpp->idmpp}}" method="POST">
+                @csrf 
+                @method('put')
+                    <div class="form-group">
+                        <label for="tahun" class="control-label mb-10">Tahun</label>
+                        <input type="text" class="form-control" id="tahun" name="tahun" value="{{$mpp->tahun}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mppTotal" class="control-label mb-10">Total</label>
+                        <input type="number" class="form-control" id="mppTotal" name="mppTotal" value="{{$mpp->mppTotal}}">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="mppPermanent" class="control-label mb-10">Permanent</label>
+                            <input type="number" class="form-control" id="mppPermanent" name="mppPermanent" value="{{$mpp->mppPermanent}}">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="mppContract" class="control-label mb-10">Contract</label>
+                            <input type="number" class="form-control" id="mppContract" name="mppContract" value="{{$mpp->mppContract}}">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="mppJobSupply" class="control-label mb-10">Job Supply</label>
+                            <input type="number" class="form-control" id="mppJobSupply" name="mppJobsupply" value="{{$mpp->mppJobsupply}}">
+                        </div>
+                    </div>
+                    
+                        
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </div>
                 </form>
             </div>       
         </div>
     </div>
     </div>
-    @endforeach
+@endforeach
 
 
-    @endsection
+@endsection
 
 
 @push('script')
@@ -448,72 +483,16 @@ var permanenMpp =  <?php echo json_encode($permanenMpp) ?>;
 var contractMpp =  <?php echo json_encode($contractMpp) ?>;
 var jobsupplyMpp =  <?php echo json_encode($jobsupplyMpp) ?>;
 var totalMpp =  <?php echo json_encode($totalMpp) ?>;
+var ytdmtd =  <?php echo json_encode($ytdmtd) ?>;
 var ytdPermanent =  <?php echo json_encode($ytdmtdPermanent) ?>;
 var ytdContract =  <?php echo json_encode($ytdmtdContract) ?>;
 var ytdJobsupply =  <?php echo json_encode($ytdmtdJobsupply) ?>;
 var bulanytd =  <?php echo json_encode($bulanytdmtd) ?>;
 var bulan =  <?php echo json_encode($bulan) ?>;
-Highcharts.chart('coba', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-            text: 'Realization Employee'
-        },
-    subtitle: {
-        text: 'PT. Kalbe Morinaga Indonesia'
-    },
-    xAxis: {
-        categories: bulan
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            enabled: false
-        },
-        stackLabels: {
-            enabled: true,
-            style: {
-                fontWeight: 'bold',
-                color: ( // theme
-                    Highcharts.defaultOptions.title.style &&
-                    Highcharts.defaultOptions.title.style.color
-                ) || 'gray',
-                textOutline: 'none'
-            }
-        }
-    },
-    legend: {
-        layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-    },
-    tooltip: {
-        headerFormat: '<b>{point.x}</b><br/>',
-        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-    },
-    plotOptions: {
-        column: {
-            stacking: 'normal',
-            dataLabels: {
-                enabled: true
-            }
-        }
-    },
-    series: [{
-        name: 'Permanent',
-        data: permanen
-    }, {
-        name: 'Contract',
-        data: contract
-    }, {
-        name: 'Job Supply',
-        data: jobsupply
-    }]
-});
+
 Highcharts.chart('totalchart', {
         title: {
-            text: 'MPP VS Real Employee'
+            text: 'MPP & Real Employee'
         },
         subtitle: {
             text: 'PT. Kalbe Morinaga Indonesia'
@@ -635,6 +614,9 @@ Highcharts.chart('allYtdMtd', {
                 }
             }]
         }
+});
+$(".alert-dismissable").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissable").alert('close');
 });
 </script>
 @endpush

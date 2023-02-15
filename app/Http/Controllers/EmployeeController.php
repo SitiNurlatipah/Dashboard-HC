@@ -15,217 +15,109 @@ class EmployeeController extends Controller
 {
     public function indexEmployee(){
 		$real=RealModel::all();
-		$dataEmployee = EmployeeModel::orderBy('dateTglInput', 'DESC')->get();
 		$geto = GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
-				->orderBy('dateTglInput', 'DESC')
+				->orderBy('dateBulan', 'DESC')
 				->get();
-		$to = ToModel::orderBy('dateTglInput', 'DESC')->get();
-		$jumlah_employee = EmployeeModel::select(DB::raw("CAST(SUM(intJumlahEmployee) as int) as jumlah_employee"))
-                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('jumlah_employee');
-		$karyawan = EmployeeModel::select(DB::raw("CAST(SUM(intKaryawan) as int) as karyawan"))
-                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('karyawan');
-		$outsource = EmployeeModel::select(DB::raw("CAST(SUM(intOutsource) as int) as outsource"))
-                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('outsource');
-		$kontrak = EmployeeModel::select(DB::raw("CAST(SUM(intContract) as int) as kontrak"))
-                    ->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('kontrak');
-        $bulan=EmployeeModel::select(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y')) as bulan"))
-					->GroupBy(DB::raw("(DATE_FORMAT(dateTglInput,'%M-%Y'))"))
-					->orderBy('dateTglInput', 'ASC')
-					->pluck('bulan');
-		$total_geto = GetoModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_geto"))
-                    ->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('total_geto');
+		$to = ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+				->orderBy('dateBulan', 'DESC')
+				->get();
+		
 		$getoKaryawan = GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
 					->select(DB::raw("CAST(AVG((intGetoKaryawan/realTotal)*100) as int) as getoKaryawan"))
-                    ->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('getoKaryawan');
-		$getoKontrak = GetoModel::select(DB::raw("CAST(SUM(intGetoKontrak) as int) as getoKontrak"))
-                    ->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('getoKontrak');
-		$getoOutsource = GetoModel::select(DB::raw("CAST(SUM(intGetoOutsource) as int) as getoOutsource"))
-                    ->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('getoOutsource');
-        $bulanGeto=GetoModel::select(DB::raw("year(dateTglInput) as bulanGeto"))
-					->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+        $bulanGeto=GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("year(dateBulan) as bulanGeto"))
+					->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
 					->pluck('bulanGeto');
-		$total_to = ToModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_to"))
-                    ->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+        $total_to = ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("CAST(SUM(intTotal) as int) as total_to"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('total_to');
-        $bulanTo=ToModel::select(DB::raw("year(dateTglInput) as bulanTo"))
-					->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+        $bulanTo=ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("year(dateBulan) as bulanTo"))
+					->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
 					->pluck('bulanTo');		
-		$toOutsource = ToModel::select(DB::raw("CAST(SUM(intToOutsource) as int) as toEmployee"))
-                    ->GroupBy(DB::raw("year(dateTglInput)")) 
-					->orderBy('dateTglInput', 'ASC')
+		$toOutsource = ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("CAST(SUM(intToOutsource) as int) as toEmployee"))
+                    ->GroupBy(DB::raw("year(dateBulan)")) 
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('toEmployee');
-		$toKontrak = ToModel::select(DB::raw("CAST(SUM(intToKontrak) as int) as toKontrak"))
-                    ->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+		$toKontrak = ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("CAST(SUM(intToKontrak) as int) as toKontrak"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('toKontrak');
-		$toKaryawan = ToModel::select(DB::raw("CAST(SUM(intToKaryawan) as int) as toKaryawan"))
-                    ->GroupBy(DB::raw("year(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('toKaryawan');
+		
         	
-        return view('pages.management-employee.index',compact('jumlah_employee','bulan',
-		'total_geto','bulanGeto','total_to','bulanTo','toKaryawan',
-		'toKontrak','toOutsource','getoKaryawan','getoKontrak','getoOutsource','karyawan','kontrak','outsource','real'),[
-		'employees' => $dataEmployee,'getos'=>$geto,'tos'=>$to
+        return view('pages.management-employee.index',compact(
+		'bulanGeto','bulanTo', 'toKontrak','toOutsource','getoKaryawan','real'),[
+		'getos'=>$geto,'tos'=>$to
 		]);
 	}
-	public function chart(){
-		$jumlah_employee = EmployeeModel::select(DB::raw("CAST(SUM(intJumlahEmployee) as int) as jumlah_employee"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-                    ->pluck('jumlah_employee');
-        $bulan=EmployeeModel::select(DB::raw("MONTHNAME(dateTglInput) as bulan"))
-					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
-					->pluck('bulan');
-		return view('pages.management-employee.chart',compact('jumlah_employee','bulan'));
-	}
+	
 	
     public function filter(Request $request)
     {
+	   $real=RealModel::all();
        $start_date = $request->input('start_date');
        $end_date = $request->input('end_date');
-	   $dataEmployee=EmployeeModel::where('dateTglInput','>=',$start_date)
-	   ->where('dateTglInput','<=',$end_date)
-	   ->get();
-	   $geto=GetoModel::where('dateTglInput','>=',$start_date)
-	   ->where('dateTglInput','<=',$end_date)
+	   $geto=GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+	   ->where('dateBulan','>=',$start_date)
+	   ->where('dateBulan','<=',$end_date)
 	   ->get(); 
-	   $to=ToModel::where('dateTglInput','>=',$start_date)
-	   ->where('dateTglInput','<=',$end_date)
+	   $to=ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+	   ->where('dateBulan','>=',$start_date)
+	   ->where('dateBulan','<=',$end_date)
 	   ->get();
-	   $jumlah_employee = EmployeeModel::select(DB::raw("CAST(SUM(intJumlahEmployee) as int) as jumlah_employee"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('jumlah_employee');
-		$karyawan = EmployeeModel::select(DB::raw("CAST(SUM(intKaryawan) as int) as karyawan"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('karyawan');
-		$outsource = EmployeeModel::select(DB::raw("CAST(SUM(intOutsource) as int) as outsource"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('outsource');
-		$kontrak = EmployeeModel::select(DB::raw("CAST(SUM(intContract) as int) as kontrak"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('kontrak');
-        $bulan=EmployeeModel::select(DB::raw("MONTHNAME(dateTglInput) as bulan"))
-					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-					->pluck('bulan');
-		$total_geto = GetoModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_geto"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('total_geto');
-		$getoKaryawan = GetoModel::select(DB::raw("CAST(SUM(intGetoKaryawan) as int) as getoKaryawan"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+	   $getoKaryawan = GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("CAST(AVG((intGetoKaryawan/realTotal)*100) as int) as getoKaryawan"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('getoKaryawan');
-		$getoKontrak = GetoModel::select(DB::raw("CAST(SUM(intGetoKontrak) as int) as getoKontrak"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('getoKontrak');
-		$getoOutsource = GetoModel::select(DB::raw("CAST(SUM(intGetoOutsource) as int) as getoOutsource"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('getoOutsource');
-        $bulanGeto=GetoModel::select(DB::raw("MONTHNAME(dateTglInput) as bulanGeto"))
-					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+        $bulanGeto=GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("year(dateBulan) as bulanGeto"))
+					->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
 					->pluck('bulanGeto');
-		$total_to = ToModel::select(DB::raw("CAST(SUM(intTotal) as int) as total_to"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+        $total_to = ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("CAST(SUM(intTotal) as int) as total_to"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('total_to');
-        $bulanTo=ToModel::select(DB::raw("MONTHNAME(dateTglInput) as bulanTo"))
-					->GroupBy(DB::raw("MONTHNAME(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+        $bulanTo=ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("year(dateBulan) as bulanTo"))
+					->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
 					->pluck('bulanTo');		
-		$toOutsource = ToModel::select(DB::raw("CAST(SUM(intToOutsource) as int) as toEmployee"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)")) 
-					->orderBy('dateTglInput', 'ASC')
+		$toOutsource = ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("CAST(SUM(intToOutsource) as int) as toEmployee"))
+                    ->GroupBy(DB::raw("year(dateBulan)")) 
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('toEmployee');
-		$toKontrak = ToModel::select(DB::raw("CAST(SUM(intToKontrak) as int) as toKontrak"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
+		$toKontrak = ToModel::join('real_employees','real_employees.idReal','=','to_employees.realemployee_id')
+					->select(DB::raw("CAST(SUM(intToKontrak) as int) as toKontrak"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
                     ->pluck('toKontrak');
-		$toKaryawan = ToModel::select(DB::raw("CAST(SUM(intToKaryawan) as int) as toKaryawan"))
-                    ->GroupBy(DB::raw("Month(dateTglInput)"))
-					->orderBy('dateTglInput', 'ASC')
-                    ->pluck('toKaryawan');
-	   return view('pages.management-employee.index',compact('jumlah_employee','bulan',
-	   'total_geto','bulanGeto','total_to','bulanTo','toKaryawan',
-	   'toKontrak','toOutsource','getoKaryawan','getoKontrak','getoOutsource','karyawan','kontrak','outsource'),[
-		'employees' => $dataEmployee,'getos'=>$geto,'tos'=>$to
-		]);
-    //    return EmployeeModel::whereBetween('dateTglInp',[$start_date,$end_date])->get();
-
-    }   
-    public function store(Request $request)
-	{
 		
-        $request->validate( [
-			'intJumlahEmployee' => 'required',
-			'intKaryawan' => 'required',
-			'intContract' => 'required',
-			'intOutsource' => 'required',
-			'dateTglInput' => 'required',			
-					
+        return view('pages.management-employee.index',compact(
+		'bulanGeto','bulanTo', 'toKontrak','toOutsource','getoKaryawan','real'),[
+		'getos'=>$geto,'tos'=>$to
 		]);
-
-		$valid = [
-			'intJumlahEmployee'=>$request->intJumlahEmployee,
-			'intKaryawan'=>$request->intKaryawan,
-			'intContract'=>$request->intContract,
-			'intOutsource'=>$request->intOutsource,
-			
-			'dateTglInput'=>date('d-m-Y', ($request->dateTglInput)),
-		];
-		EmployeeModel::create($valid);
-		return redirect()->route('employee')->with('message','Data Employee added successfully.');
-	}
-	public function update(Request $request, $id){
-        $dataEmployee = EmployeeModel::find($id);
-        $dataEmployee->intJumlahEmployee = $request->intJumlahEmployee;
-        $dataEmployee->intKaryawan = $request->intKaryawan;
-        $dataEmployee->intContract = $request->intContract;
-        
-        $dataEmployee->dateTglInput = $request->dateTglInput;
-        $dataEmployee->save();
-        return redirect()->route('employee')->with('message','Data updated successfully.');
-	}
-	public function destroy($id)
-    {
-        EmployeeModel::find($id)->delete();
-        // $data->delete();
-        return redirect()->route('employee')->with('message','Data deleted successfully');
-    }
-
+    }   
+    
 	//geto 
 	public function employeeFilterGeto(Request $request)
     {
        $start_date = $request->input('start_date');
        $end_date = $request->input('end_date');
-	   $query=GetoModel::where('dateTglInput','>=',$start_date)
-	   ->where('dateTglInput','<=',$end_date)
+	   $query=GetoModel::where('dateBulan','>=',$start_date)
+	   ->where('dateBulan','<=',$end_date)
 	   ->get();
 	   dd($query);
 	//    return redirect()->route('employee');
@@ -240,9 +132,8 @@ class EmployeeController extends Controller
 		'intGetoKaryawan' => 'required',
 		'intGetoKontrak' => 'required',
 		'intGetoOutsource' => 'required',
-		'dateTglInput' => 'required',
 		'realemployee' => 'required',
-		// 'dateTglInput' => 'required',			
+		// 'dateBulan' => 'required',			
 				
 	]);
 	$validation = [
@@ -250,13 +141,12 @@ class EmployeeController extends Controller
 		'intGetoKaryawan'=>$request->intGetoKaryawan,
 		'intGetoKontrak'=>$request->intGetoKontrak,
 		'intGetoOutsource'=>$request->intGetoOutsource,
-		'dateTglInput'=>$request->dateTglInput,
 		'realemployee'=>$request->realemployee,
-		// 'dateTglInput'=>$request->dateTglInput,
+		// 'dateBulan'=>$request->dateBulan,
 		
 	];
 	GetoModel::create($validation);
-	return redirect()->route('employee')->with('message','Data GETO Employee added successfully.');
+	return redirect()->route('employee')->with('message','Data added successfully.');
 	
 	}
 	public function updateGeto(Request $request, $idGeto){
@@ -266,10 +156,8 @@ class EmployeeController extends Controller
         $geto->intGetoOutsource = $request->intGetoOutsource;
         $geto->intGetoKontrak = $request->intGetoKontrak;
         $geto->realemployee = $request->realemployee;
-        
-        $geto->dateTglInput = $request->dateTglInput;
         $geto->save();
-        return redirect()->route('employee')->with('message','Data GETO Employee updated successfully.');
+        return redirect()->route('employee')->with('message','Data updated successfully.');
 	}
 	public function destroyGeto($idGeto)
     {
@@ -283,8 +171,8 @@ class EmployeeController extends Controller
     {
        $start_date = $request->input('start_date');
        $end_date = $request->input('end_date');
-	   $query=ToModel::where('dateTglInput','>=',$start_date)
-	   ->where('dateTglInput','<=',$end_date)
+	   $query=ToModel::where('dateBulan','>=',$start_date)
+	   ->where('dateBulan','<=',$end_date)
 	   ->get();
 	   dd($query);
 	//    return redirect()->route('employee');
@@ -299,7 +187,6 @@ class EmployeeController extends Controller
 		'intToKaryawan' => 'required',
 		'intToKontrak' => 'required',
 		'intToOutsource' => 'required',
-		'dateTglInput' => 'required',			
 		'realemployee_id' => 'required',			
 			
 	]);
@@ -308,7 +195,6 @@ class EmployeeController extends Controller
 		'intToKaryawan'=>$request->intToKaryawan,
 		'intToKontrak'=>$request->intToKontrak,
 		'intToOutsource'=>$request->intToOutsource,
-		'dateTglInput'=>$request->dateTglInput,
 		'realemployee_id'=>$request->realemployee_id,
 		
 	];
@@ -323,8 +209,6 @@ class EmployeeController extends Controller
         $to->intToOutsource = $request->intToOutsource;
         $to->intToKontrak = $request->intToKontrak;
         $to->realemployee_id = $request->realemployee_id;
-        
-        $to->dateTglInput = $request->dateTglInput;
         $to->save();
         return redirect()->route('employee')->with('message','Data updated successfully.');
 	}

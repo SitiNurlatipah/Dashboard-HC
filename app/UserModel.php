@@ -15,7 +15,6 @@ class UserModel extends Model
 	 */
 	protected $guarded = ['id'];
 	protected $fillable = [
-		'id','txtNik', 'txtUsername','txtPassword', 'txtEmployeeName','txtJobTitle', 'txtDepartment', 'txtEmail','txtStatus', 'txtType','dtmStartDate','dtmEndDate','txtGender',
 	];
 	public function dos()
 	{

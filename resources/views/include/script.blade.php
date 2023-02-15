@@ -1,5 +1,6 @@
     <!-- jQuery -->
-    <script src="{{ asset('droopy/vendors/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <!-- <script src="{{ asset('droopy/vendors/bower_components/jquery/dist/jquery.min.js') }}"></script> -->
+    <!-- <script src="{{ asset('droopy/vendors/bower_components/jquery/dist/jquery.js') }}"></script> -->
     <script src="{{ asset('droopy/vendors/jqueryy.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -16,12 +17,16 @@
 	<script src="{{ asset('droopy/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/jszip/dist/jszip.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('droopy/vendors/bower_components/pdfmake/build/pdfmake.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/pdf/pdfmake/build/pdfmake.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('droopy/vendors/bower_components/pdfmake/build/vfs_fonts.js') }}" type="text/javascript"></script>
-	<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script src="{{ asset('droopy/dist/css/font-awesome.min.css') }}" type="text/javascript"></script>
+	<script src="{{asset('droopy/vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+	<script src="{{asset('droopy/vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+	<script src="{{asset('droopy/dist/js/export-table-data.js')}}"></script>
+	<!-- <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> -->
 	<!-- Flot Charts JavaScript -->
 	
 	<!-- Charts js -->
@@ -51,12 +56,9 @@
 	<!-- Owl JavaScript -->
 	<script src="{{ asset('droopy/vendors/bower_components/owl.carousel/dist/owl.carousel.min.js') }}"></script>
 	
-	<!-- EChartJS JavaScript -->
-	<script src="{{ asset('droopy/vendors/bower_components/echarts/dist/echarts-en.min.js') }}"></script>
-	<script src="{{ asset('droopy/vendors/echarts-liquidfill.min.js') }}"></script>
 	
 	<!-- Toast JavaScript -->
-	<script src="{{ asset('droopy/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js') }}"></script>
+	<script src="{{ asset('droopy/vendors/bower_components/jquery-toast-plugin/dist/toastr.min.js') }}"></script>
 		
 	<!-- Switchery JavaScript -->
 	<script src="{{ asset('droopy/vendors/bower_components/switchery/dist/switchery.min.js') }}"></script>
@@ -70,7 +72,7 @@
 	
 	<!-- Init JavaScript -->
 	<script src="{{ asset('droopy/dist/js/init.js') }}"></script>
-	<script src="{{ asset('droopy/dist/js/dashboard2-data.js') }}"></script>
+	<!-- <script src="{{ asset('droopy/dist/js/dashboard-data.js') }}"></script> -->
 
 
 	{{-- DASHBOARD PAGE --}}

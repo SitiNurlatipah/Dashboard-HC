@@ -168,6 +168,9 @@ button.selected {
 #progress-content-section .section-content.active {
 	display:block;
 }
+#buat-password i {
+    cursor: pointer;
+}
 
 @keyframes FadeInUp {
 	0% {

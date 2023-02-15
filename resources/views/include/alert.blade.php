@@ -27,3 +27,16 @@
     <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
 </div>
 @endif
+@push('script')
+<script>
+    @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true,
+    "positionClass": "toast-top-right",
+  }
+  		toastr.success("{{ session('message') }}");
+    @endif
+</script>
+@endpush

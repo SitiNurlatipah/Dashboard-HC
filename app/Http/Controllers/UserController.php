@@ -10,9 +10,9 @@ class UserController extends Controller
 {
     public function index(Request $request){
         if($request){
-            $data=UserModel::where('txtEmployeeName','like','%'.$request->cari.'%')->paginate(10);
+            $data=UserModel::where('txtEmployeeName','like','%'.$request->cari.'%')->get();
         }else{
-        $data = UserModel::paginate(10);
+        $data = UserModel::all();
         }
         return view('pages.management-user.index', compact('request'),[
             'users' => $data,
@@ -23,8 +23,7 @@ class UserController extends Controller
         // dd($request->all());
        
         $request->validate([
-            'txtUsername' => 'required',
-            'txtPassword' => 'required',
+            
             'txtNik' => 'required',
             'txtEmployeeName' => 'required',
             'txtJobTitle' => 'required',
@@ -37,9 +36,7 @@ class UserController extends Controller
         ]);
     
         $validated = [
-            'txtUsername' => $request->txtUsername,
             'txtNik' => $request->txtNik,
-            'txtPassword' => bcrypt($request->txtPassword),
             'txtEmployeeName' => $request->txtEmployeeName,
             'txtJobTitle' => $request->txtJobTitle,
             'txtDepartment' => $request->txtDepartment,
@@ -64,8 +61,6 @@ class UserController extends Controller
     // }
     public function update(Request $request, $id){
         $data = UserModel::find($id);
-        $data->txtUsername = $request->txtUsername;
-        $data->txtPassword = bcrypt($request->txtPassword);
         $data->txtNik = $request->txtNik;
         $data->txtEmployeeName = $request->txtEmployeeName;
         $data->txtJobTitle = $request->txtJobTitle;
@@ -78,35 +73,7 @@ class UserController extends Controller
         $data->save();
         return redirect()->route('user')->with('message','User updated successfully.');
 
-        // $request->validate([
-        //     'txtUsername' => 'required',
-        //     'txtPassword' => 'required',
-        //     'txtNik' => 'required',
-        //     'txtEmployeeName' => 'required',
-        //     'txtJobTitle' => 'required',
-        //     'txtDepartment' => 'required',
-        //     'txtEmail' => 'required',
-        //     'txtStatus' => 'required',
-        //     'txtType' => 'required',
-        //     'dtmStartDate' => 'required',
-        //     'txtGender' => 'required',
-        // ]);
-        // $validated = [
-        //     'txtUsername' => $request->txtUsername,
-        //     'txtNik' => $request->txtNik,
-        //     'txtPassword' => bcrypt($request->txtPassword),
-        //     'txtEmployeeName' => $request->txtEmployeeName,
-        //     'txtJobTitle' => $request->txtJobTitle,
-        //     'txtDepartment' => $request->txtDepartment,
-        //     'txtEmail' => $request->txtEmail,
-        //     'txtStatus' => $request->txtStatus,
-        //     'txtType' => $request->txtType,
-        //     'dtmStartDate' => $request->dtmStartDate,
-        //     'dtmEndDate' => $request->dtmEndDate,
-        //     'txtGender' => $request->txtGender,
-        // ];
-        // UserModel::update($validated);
-        // UserModel::update($validated);
+       
     }
     public function destroy($id)
     {

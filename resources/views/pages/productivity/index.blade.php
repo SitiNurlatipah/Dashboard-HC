@@ -24,20 +24,20 @@
             <div class="panel-body">
                 
             <div  class="tab-struct custom-tab-1 mt-0">
-                        <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
-                            <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Productivity</a></li>
-                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Human Cost</a></li>
-                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">Growth All</a></li>
-                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Grafik</a></li>
-                            
-                        </ul>
+                <ul role="tablist" class="nav nav-tabs" id="myTabs_7">
+                    <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_15" href="#home_15">Productivity</a></li>
+                    <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Human Cost</a></li>
+                    <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">Growth All</a></li>
+                    <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Grafik</a></li>
+                    
+                </ul>
             
             
-            @if(session()->has('message'))
+            {{--@if(session()->has('message'))
             <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
             </div>
-            @endif
+            @endif--}}
             
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
@@ -144,7 +144,7 @@
               
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="cost" class="table table-hover font-12 display  pb-30 text-center" >
+                        <table id="cost" class="table table-hover font-12 display pt-10 mt-30 text-center" >
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -204,7 +204,6 @@
                             <table id="datable_3" class="table table-hover font-12 display mb-30 text-center" >
                                 <thead> 
                                     <tr>
-                                        
                                         <th class="text-center">No</th>
                                         <th class="text-center">Bulan</th>
                                         <th class="text-center">Man Power Permanent</th>
@@ -221,7 +220,6 @@
                                 <tbody>
                                 <?php
                                 $i=1;
-                                
                                 foreach($productivity_growths as $key => $growth):
                                     
                                     $j = $key == 0 ? 0 :$key-1;
@@ -232,9 +230,7 @@
                                     $growthProductivity=($productivityAll-($productivity_growths[$j]->intCostActual/($productivity_growths[$j]->intOutputActual*1000)))/($productivity_growths[$j]->intCostActual/($productivity_growths[$j]->intOutputActual*1000));
                                     // dd($j);
                                     // $growthProductivity=($growth->productivityAll-$productivity_growths[$j-1]->productivityAll)/$productivity_growths[$j-1]->productivityAll;
-                                    
-                                
-                                    ?>
+                                ?>
                                     <tr>
                                      
                                         <td>{{$i++}}</td>
@@ -252,7 +248,7 @@
                                         <form action="{{route('growth.delete',$growth->idGrowth)}}" method="POST">
                                         @csrf
                                         @method('put')
-                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        <!-- <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="" data-whatever="@mdo"><i class="fa fa-pencil"></i></a> -->
                                         @csrf 
                                         @method("delete") 
                                             <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
@@ -875,24 +871,18 @@
         }
     });
     
-    
-    
-
-    // });
-    
-    // $('#power').dataTable( {
-    // paging: true,
-    // searching: true
-    // } );
-    // $('#cost').dataTable( {
-    //     paging: true
-    // } );
-    // $('#datable_3').dataTable( {
-    //     paging: true
-    // } );
-    $(document).ready(function () {
-    $('table.display').DataTable();
+    $(".alert-dismissable").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissable").alert('close');
     });
+    $('.display').dataTable( {
+    paging: true,
+    searching: true,
+    dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+    
     var rupiah2 = document.getElementById('rupiah2');
 		rupiah2.addEventListener('keyup', function(e){
 			// tambahkan 'Rp.' pada saat ketik nominal di form kolom input

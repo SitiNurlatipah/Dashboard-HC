@@ -190,7 +190,9 @@ code {
 
 ::-webkit-file-upload-button {
   cursor: pointer; }
-
+  .judul{
+    background: #bed0df;
+  }
 /****************************/
 /** Basic **/
 /****************************/
@@ -607,6 +609,9 @@ code {
   .aa{
     color:#8ee8fa;
   }
+  .putih{
+    color:#ffff;
+  }
 .text-right {
   text-align: right !important; }
 
@@ -703,6 +708,8 @@ code {
 
 .txt-light-green {
   color: #AED581 !important; }
+.txt-dark-green {
+  color: #4e8411 !important; }
 
 .txt-danger,
 .text-danger {
@@ -827,7 +834,7 @@ small {
 hr {
   margin-top: 10px;
   margin-bottom: 35px;
-  border-top: 1px solid #8BC34A; }
+  border-top: 3px solid #aeb3aa; }
   hr.light-grey-hr {
     border-top: 1px solid #dedede; }
 
@@ -4774,7 +4781,11 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
     .alert.alert-style-1.alert-warning i {
       color: #f8b32d;
       background: #f7f7f7; }
-
+    .alert-kecil{
+      height: 30px;
+      padding-top: 3px;
+      
+    }
 .alert-dismissable .close, .alert-dismissible .close {
   top: 0; }
 

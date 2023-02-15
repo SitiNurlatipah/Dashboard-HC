@@ -17,7 +17,7 @@ class CreateRealEmployeesTable extends Migration
             $table->increments('idReal');
             $table->unsignedBigInteger('mpp_tahun')->unsigned();
             $table->foreign('mpp_tahun')
-                  ->references('id')->on('mpp_employees')->onDelete('cascade');
+                  ->references('idmpp')->on('mpp_employee')->onDelete('cascade');
             $table->integer('realPermanent');
             $table->integer('realContract');
             $table->integer('realJobSupply');

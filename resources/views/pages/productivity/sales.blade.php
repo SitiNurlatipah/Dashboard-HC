@@ -8,7 +8,7 @@
         <div class="panel panel-default card-view">
             <div class="panel-heading">
                 <div class="pull-left">
-                    <h6 class="panel-title txt-dark">Sales</h6>
+                    <h6 class="panel-title txt-dark">SALES</h6>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -20,11 +20,11 @@
                         <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">YTD</a></li>
                         <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">Grafik</a></li>
                     </ul>
-            @if(session()->has('message'))
+            {{--@if(session()->has('message'))
             <div class="alert alert-success alert-dismissable mt-10 pb-5 pt-5">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{{ session()->get('message') }} 
             </div>
-            @endif
+            @endif--}}
             <div class="tab-content" id="myTabContent_7">
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
                 <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#addmtd" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
@@ -368,6 +368,9 @@ Highcharts.chart('salesChart', {
         name: 'Head Count',
         data: headcount
     }]
+});
+$(".alert-dismissable").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert-dismissable").alert('close');
 });
 </script>
 @endpush

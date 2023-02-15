@@ -8,7 +8,7 @@ use App\RecruitmentModel;
 class RecruitmentController extends Controller
 {
     public function index(){
-        $progress = RecruitmentModel::all();
+        $progress = RecruitmentModel::orderBy('updated_at','desc')->get();
         return view('pages.recruitment.index',compact('progress'));
     }
     public function store(Request $request)
