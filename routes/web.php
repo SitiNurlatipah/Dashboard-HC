@@ -190,6 +190,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/training/ikatandinas', 'IkatanDinasController@store')->name('dinas.post');
     Route::put('/training/ikatandinas/{IkatanDinasModel}', 'IkatanDinasController@update');
     Route::delete('/training/ikatandinas/{idIkatanDinas}', 'IkatanDinasController@destroy')->name('dinas.delete');    
+    //learninghours
+    Route::post('/training/learninghours', 'LearningHoursController@store')->name('learninghours.post');
+    Route::put('/training/learninghours/{LearningHoursTrainingModel}', 'LearningHoursController@update');
+    Route::delete('/training/learninghours/{id_learninghours}', 'LearningHoursController@destroy')->name('learninghours.delete');    
 
     Route::get('/ceo', 'CeoTrainingController@index')->name('ceo');
     Route::get('/totalemployee', 'DataTotalEmployeeController@index')->name('total');

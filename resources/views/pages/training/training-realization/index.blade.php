@@ -346,7 +346,7 @@
                     </div>
                 </div>
                 <div  id="profile_18" class="tab-pane fade" role="tabpanel">
-                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-ikatandinas" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-learninghours" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
                     <div class="table-wrap">
                         <div class="table-responsive">
                             <table id="dinasTable" class="table table-striped table-hover display table-bordered font-11 mt-10 text-center" width="99%">
@@ -716,6 +716,86 @@
                     <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+</div> 
+<div class="modal fade" id="add-learninghours" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
+                </div>
+                <div class="modal-body">
+                <form action="{{ route('dinas.post') }}" method="POST">
+                @csrf 
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Bulan</label>
+                        <input type="month" class="form-control" name="bulan" required>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Durasi Gol 1</label>
+                            <input type="text" class="form-control" name="durasigol_1" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Peserta Gol 1</label>
+                            <input type="text" class="form-control" name="pesertagol_1" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Durasi Gol 2</label>
+                            <input type="text" class="form-control" name="durasigol_2" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Peserta Gol 2</label>
+                            <input type="text" class="form-control" name="pesertagol_2" required>       
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Durasi Gol 3</label>
+                            <input type="text" class="form-control" name="durasigol_3" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Peserta Gol 3</label>
+                            <input type="text" class="form-control" name="pesertagol_3" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Durasi Gol 4</label>
+                            <input type="text" class="form-control" name="durasigol_4" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Peserta Gol 4</label>
+                            <input type="text" class="form-control" name="pesertagol_4" required>       
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Durasi Gol 5</label>
+                            <input type="text" class="form-control" name="durasigol_5" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Peserta Gol 5</label>
+                            <input type="text" class="form-control" name="pesertagol_5" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Durasi Gol 6</label>
+                            <input type="text" class="form-control" name="durasigol_6" required>       
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label mb-5">Peserta Gol 6</label>
+                            <input type="text" class="form-control" name="pesertagol_6" required>       
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
                     </div>
                 </form>
             </div>       
