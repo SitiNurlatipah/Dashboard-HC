@@ -29,7 +29,7 @@
             <div  id="home_15" class="tab-pane fade active in" role="tabpanel">
                 <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#addmtd" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
                 <div class="table-wrap">
-                    <div class="table-responsive">
+                    <div class="">
                         <table id="sales" class="table table-hover font-11 table-bordered display mb-30 text-center" >
                             <thead>
                             <tr>
@@ -145,7 +145,7 @@
                     </div>
                     <div class="form-group">
                         <label for="intContract" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="salesIn" name="bulan" required>
+                        <input type="month" class="form-control" id="salesIn" name="bulan" required>
                     </div>
                     
                         
@@ -275,7 +275,7 @@
                     </div>
                     <div class="form-group">
                         <label for="intContract" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="salesIn" name="bulan" value="{{$sales->bulan}}" required>
+                        <input type="month" class="form-control" id="salesIn" name="bulan" value="{{\Carbon\Carbon::parse($sales->bulan)->format('Y-m')}}" required>
                     </div>
                     
                         

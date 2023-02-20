@@ -10,19 +10,32 @@ class KasbonController extends Controller
         $request->validate( [
             'costcenter_id' => 'required',	  
         ]);
-        
-        $valid = [
-            'costcenter_id' => $request->costcenter_id,
-            'total' => $request->total,
-            
-        ];
-        KasbonModel::create($valid);
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
+        $data = [];
+        for ($i = 0; $i < count($request->costcenter_id); $i++) {
+            $data[] = [
+                'bulan' => $bulan,
+                'costcenter_id' => $request->costcenter_id[$i],
+                'total' => $request->total[$i],
+            ];
+        }
+        KasbonModel::insert($data);
             
         return redirect()->route('realization')->with('message','Data added successfully.'); 
     }
     public function update(Request $request, $idKasbon){
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $k = KasbonModel::find($idKasbon);
         $k->costcenter_id = $request->costcenter_id;
+        $k->bulan = $bulan;
         $k->total = $request->total;
         $k->save();
         return redirect()->route('realization')->with('message','Data updated successfully.');

@@ -19,14 +19,12 @@ class TrainingPermonthController extends Controller
         ->GroupBy('txtTrainingType')  
         ->whereYear('dateTanggalMulai', '<', Carbon::now())
         ->orderBy('dateTanggalMulai', 'asc')
-        // ->get();      
         ->pluck('internal','year');
         $internalBulan = TrainingRealization::select(DB::raw("month(dateTanggalMulai) as month,year(dateTanggalMulai) as year"),DB::raw('count(IF(txtTrainingType = "Internal",1,NULL)) as internal'))
         ->GroupBy('month','year')
         ->whereYear('dateTanggalMulai', '=', Carbon::now())
         ->orderBy('dateTanggalMulai', 'asc')
         ->pluck('internal','month','year');
-        // dd($internalBulan);
         $internalTraining = $internalTahun->merge($internalBulan);
         
 

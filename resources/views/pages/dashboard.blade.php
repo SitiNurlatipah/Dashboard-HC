@@ -72,6 +72,52 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default card-view panel-refresh relative">
+                <div class="refresh-container">
+                    <div class="la-anim-1"></div>
+                </div>
+                <div class="panel-heading">
+                    <div class="pull-left">
+                        <h6 class="panel-title txt-dark">Training</h6>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body col-lg-4">
+                            <div class="btn-group ml-10" role="group" aria-label="Basic example">
+                            <button id="plain1" class="btn btn-primary autocompare">Column</button>
+                            <button id="plain2" class="btn btn-primary autocompare">Stacked</button>
+                            </div>
+                            <div id="training" class="" style="height:367px;"></div>
+                        </div>
+                        <div class="panel-body col-lg-4">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                            <button id="pelaksanaan1" class="btn btn-primary autocompare">Column</button>
+                            <button id="pelaksanaan2" class="btn btn-primary autocompare">Stacked</button>
+                            </div>
+                            <div id="pelaksanaan" class="" style="height:367px;"></div>
+                        </div>
+                        <div class="panel-body col-lg-4">
+                            <div id="biaya" class="" style="height:367px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body col-lg-6">
+                            <div id="plan_unplantraining" class="" style="height:367px;"></div>
+                        </div>
+                        <div class="panel-body col-lg-6">
+                            <div id="" class="" style="height:367px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--<div class="row">
         <div class="col-lg-4">
             <div class="panel panel-default card-view panel-refresh relative">
                 <div class="refresh-container">
@@ -134,6 +180,55 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="panel-wrapper collapse in">
+                
+                <div class="panel-body col-lg-6">
+                    <div id="plan_unplantraining" class="" style="height:367px;"></div>
+                </div>
+                <div class="panel-body col-lg-6">
+                    <div id="" class="" style="height:367px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>--}}
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+            <div class="panel panel-default card-view panel-refresh relative">
+                <div class="refresh-container">
+                    <div class="la-anim-1"></div>
+                </div>
+                <div class="panel-heading">
+                    <div class="pull-left">
+                        <h6 class="panel-title txt-dark"></h6>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div id="geto" class="" style="height:367px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+            <div class="panel panel-default card-view panel-refresh relative">
+                <div class="refresh-container">
+                    <div class="la-anim-1"></div>
+                </div>
+                <div class="panel-heading">
+                    <div class="pull-left">
+                        <h6 class="panel-title txt-dark"></h6>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div id="salesChart" class="" style="height:367px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-4">
@@ -188,6 +283,35 @@
                 <div class="panel-wrapper collapse in">
                     <div class="panel-body">
                         <div id="costMillionChart" class="" style="height:367px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        
+            <div class="panel panel-default card-view pt-0">
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body pa-0">
+                        <div class="form-wrap">
+                        <!-- <form id="filter-form">
+                            <label>Tanggal Awal:</label>
+                            <input type="date" id="start_date" name="start_date" value="">
+                            <label>Tanggal Akhir:</label>
+                            <input type="date" id="end_date" name="end_date" value="">
+                            <button type="submit">Filter</button>
+                        </form> -->
+                            <form action="{{ route('dashboard.filter') }}" method="POST" id="filter-form" class="form-inline mb-30 mt-30">
+                                @csrf
+                                <div class="form-group mr-15">
+                                    <label class="control-label mr-10 text-left">Filter Bulan</label>
+                                    <input type='month' id="start_date" name="bulan" class="form-control" value="{{Request::input('bulan')}}"/>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">Filter</span></button>
+                                <a class="btn btn-warning btn-anim btn-xs" href="{{ route('dashboard') }}"><i class="fa fa-undo"></i><span class="btn-text">Reset</span></a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -618,35 +742,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-        
-            <div class="panel panel-default card-view pt-0">
-                <div class="panel-wrapper collapse in">
-                    <div class="panel-body pa-0">
-                        <div class="form-wrap">
-                        <!-- <form id="filter-form">
-                            <label>Tanggal Awal:</label>
-                            <input type="date" id="start_date" name="start_date" value="">
-                            <label>Tanggal Akhir:</label>
-                            <input type="date" id="end_date" name="end_date" value="">
-                            <button type="submit">Filter</button>
-                        </form> -->
-                            <form action="{{ route('dashboard.filter') }}" method="POST" id="filter-form" class="form-inline mb-30 mt-30">
-                                @csrf
-                                <div class="form-group mr-15">
-                                    <label class="control-label mr-10 text-left">Filter Bulan</label>
-                                    <input type='month' id="start_date" name="bulan" class="form-control" value="{{Request::input('bulan')}}"/>
-                                </div>
-                                <button type="submit" class="btn btn-success btn-anim btn-xs"><i class="icon-rocket"></i><span class="btn-text">Filter</span></button>
-                                <a class="btn btn-warning btn-anim btn-xs" href="{{ route('dashboard') }}"><i class="fa fa-undo"></i><span class="btn-text">Reset</span></a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default card-view panel-refresh relative">
@@ -1546,7 +1642,9 @@ var offline =  <?php echo json_encode($OfflineTraining) ?>;
 var blended =  <?php echo json_encode($BlendedTraining) ?>;
 var daftar =  <?php echo json_encode($pendaftaranTraining) ?>;
 var snack =  <?php echo json_encode($snackTraining) ?>;
-var tahunx =  <?php echo json_encode($bulan) ?>;
+var plan =  <?php echo json_encode($PlanTraining) ?>;
+var unplan =  <?php echo json_encode($UnplanTraining) ?>;
+var tahunx =  <?php echo json_encode($bulantraining) ?>;
 
 const chart = Highcharts.chart('training', {
     chart: {
@@ -1846,6 +1944,62 @@ Highcharts.chart('biaya', {
         tooltip: {
         valuePrefix: 'Rp'
         },
+    }]
+});
+Highcharts.chart('plan_unplantraining', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Plan & Unplan Training',
+    },
+    xAxis: {
+        categories: tahunx
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            enabled: false
+        },
+        stackLabels: {
+            enabled: false,
+            style: {
+                fontWeight: 'bold',
+                color: ( // theme
+                    Highcharts.defaultOptions.title.style &&
+                    Highcharts.defaultOptions.title.style.color
+                ) || 'gray',
+                textOutline: 'none'
+            }
+        }
+    },
+    legend: {
+        verticalAlign: 'bottom'
+    },
+    credits: {
+        enabled: false
+    },
+    
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: false,
+            dataLabels: {
+                enabled: true
+            }
+    }
+    },
+    series: [{
+        name: 'Plan',
+        data: plan,
+        
+    }, {
+        name: 'Unplan',
+        data: unplan,
+        
     }]
 });
     var productivity =  <?php echo json_encode($productiv) ?>;
@@ -2386,7 +2540,7 @@ var bulancode =  <?php echo json_encode($monthcode) ?>;
 var itemcode =  <?php echo json_encode($jmlcode) ?>;
 Highcharts.chart('codechart', {
     title: {
-        text: 'Jumlah Item Code'
+        text: 'Total Item Code'
     },
     xAxis: {
     categories: bulancode
@@ -2423,7 +2577,7 @@ Highcharts.chart('codechart', {
     
     series: [{
         type: 'column',
-        name: 'Jumlah Item Code',
+        name: 'Total Item Code',
         data: itemcode
     }],
     responsive: {
@@ -2737,7 +2891,7 @@ var bulancodekch =  <?php echo json_encode($monthcodekch) ?>;
 var itemcodekch =  <?php echo json_encode($jmlcodekch) ?>;
 Highcharts.chart('codekchchart', {
     title: {
-        text: 'Jumlah Item Code'
+        text: 'Total Item Code'
     },
     xAxis: {
     categories: bulancodekch
@@ -2774,7 +2928,7 @@ Highcharts.chart('codekchchart', {
     },
     series: [{
         type: 'column',
-        name: 'Jumlah Item Code',
+        name: 'Total Item Code',
         data: itemcodekch
     }],
     responsive: {
@@ -3584,6 +3738,123 @@ Highcharts.chart('overtimekaryawan', {
                 }
             }]
         }
+});
+var getoKaryawan =  <?php echo json_encode($getoKaryawan) ?>;
+var bulanGeto =  <?php echo json_encode($bulanGeto) ?>;
+Highcharts.chart('geto', {
+        title: {
+            text: 'Data Karyawan GETO'
+        },
+        subtitle: {
+            text: 'PT. Kalbe Morinaga Indonesia'
+        },
+         xAxis: {
+            categories: bulanGeto
+        },
+        yAxis: {
+            labels: {
+            format: '{value}%'
+            },
+            title: {
+            enabled: false
+            }
+        },
+        
+        legend: {
+            
+            verticalAlign: 'bottom'
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}%'
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true,
+                dataLabels: {
+                    enabled: true,
+                    formatter: function() {
+                    return Highcharts.numberFormat(this.y,2)+'%' 
+                    },
+                }
+            },
+            
+        },
+        
+        series: [{
+            type: 'column',
+            name: 'GETO Permanent',
+            data: getoKaryawan,
+            
+        
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+});
+var bulan =  <?php echo json_encode($xvar) ?>;
+var insales =  <?php echo json_encode($in) ?>;
+var outsales =  <?php echo json_encode($out) ?>;
+var hrcost =  <?php echo json_encode($cost) ?>;
+var headcount =  <?php echo json_encode($count) ?>;
+Highcharts.chart('salesChart', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Sales',
+    },
+    xAxis: {
+        categories: bulan
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            enabled: false
+        },
+        stackLabels: {
+            enabled: true
+        }
+        
+    },
+    legend: {
+            verticalAlign: 'bottom'
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+    },
+    plotOptions: {
+        line: {
+            // stacking: 'normal',
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    series: [{
+        name: 'Sales IN',
+        data: insales
+    }, {
+        name: 'Sales OUT',
+        data: outsales
+    }, {
+        name: 'HR Cost',
+        data: hrcost
+    }, {
+        name: 'Head Count',
+        data: headcount
+    }]
 });
 </script>
 @endpush

@@ -25,7 +25,11 @@ class BalanceScorecardController extends Controller
             'kpitype' => 'required',			
                         
         ]);
-        
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'netsales_mtd' => $request->netsales_mtd,
             'hrcost_mtd' => $request->hrcost_mtd,
@@ -47,7 +51,7 @@ class BalanceScorecardController extends Controller
             'employee_ytdtarget' => $request->employee_ytdtarget,
             'gp_ytdtarget' => $request->gp_ytdtarget,
             'op_ytdtarget' => $request->op_ytdtarget,
-            'bulan' => $request->bulan,
+            'bulan' => $bulan,
             'kpitype' => $request->kpitype,
         ];
         BalanceScorecardModel::create($valid);
@@ -55,6 +59,11 @@ class BalanceScorecardController extends Controller
         return redirect()->route('balance')->with('message','Data added successfully.'); 
     }
     public function update(Request $request, $idfinancial){
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $balance = BalanceScorecardModel::find($idfinancial);
         $balance->netsales_mtd = $request->netsales_mtd;
         $balance->netsales_ytd = $request->netsales_ytd;
@@ -76,7 +85,7 @@ class BalanceScorecardController extends Controller
         $balance->gp_ytd = $request->gp_ytd;
         $balance->gp_mtdtarget = $request->gp_mtdtarget;
         $balance->gp_ytdtarget = $request->gp_ytdtarget;
-        $balance->bulan = $request->bulan;
+        $balance->bulan = $bulan;
         $balance->kpitype = $request->kpitype;
         $balance->save();
         return redirect()->route('balance')->with('message','Data updated successfully.');

@@ -30,6 +30,9 @@ use App\PayrollBeritaModel;
 use App\PayrollTerlambatModel;
 use App\PayrollKelahiranModel;
 use App\PayrollDukacitaModel;
+use App\GetoModel;
+use App\SalesModel;
+use App\SalesYtdModel;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -174,7 +177,7 @@ class DashboardController extends Controller
         ->GroupBy('month','year')
         ->orderBy('dateTanggalMulai', 'asc')
         ->pluck('tanggal','month','year');
-        $bulan = $year->merge($month);
+        $bulantraining = $year->merge($month);
         // dd($bulan);
         //Pelaksanaan
         $OnlineTahun = TrainingRealization::select(DB::raw('count(IF(txtPelaksanaan = "Online",1,NULL)) as online, year(dateTanggalMulai) as year'))
@@ -212,6 +215,29 @@ class DashboardController extends Controller
         ->orderBy('dateTanggalMulai', 'asc')
         ->pluck('blended');
         $BlendedTraining = $BlendedTahun->merge($BlendedBulan);
+
+        $PlanTahun = TrainingRealization::select(DB::raw('year(dateTanggalMulai) as year, count(IF(txtStatus = "Plan",1,NULL)) as plan'))
+        ->whereYear('dateTanggalMulai', '<', Carbon::now())
+        ->GroupBy(DB::raw("year(dateTanggalMulai)")) 
+        ->orderBy('dateTanggalMulai', 'asc')       
+        ->pluck('plan');
+        $PlanBulan = TrainingRealization::select(DB::raw('count(IF(txtStatus = "Plan",1,NULL)) as plan,month(dateTanggalMulai) as month'))
+        ->whereYear('dateTanggalMulai', '=', Carbon::now())
+        ->GroupBy(DB::raw("(DATE_FORMAT(dateTanggalMulai,'%M-%Y'))"))
+        ->orderBy('dateTanggalMulai', 'asc')
+        ->pluck('plan');
+        $PlanTraining = $PlanTahun->merge($PlanBulan);
+        $UnplanTahun = TrainingRealization::select(DB::raw('year(dateTanggalMulai) as year, count(IF(txtStatus = "Unplan",1,NULL)) as unplan'))
+        ->whereYear('dateTanggalMulai', '<', Carbon::now())
+        ->GroupBy(DB::raw("year(dateTanggalMulai)")) 
+        ->orderBy('dateTanggalMulai', 'asc')       
+        ->pluck('unplan');
+        $UnunplanBulan = TrainingRealization::select(DB::raw('count(IF(txtStatus = "Unplan",1,NULL)) as unplan,month(dateTanggalMulai) as month'))
+        ->whereYear('dateTanggalMulai', '=', Carbon::now())
+        ->GroupBy(DB::raw("(DATE_FORMAT(dateTanggalMulai,'%M-%Y'))"))
+        ->orderBy('dateTanggalMulai', 'asc')
+        ->pluck('unplan');
+        $UnplanTraining = $UnplanTahun->merge($UnunplanBulan);
         //biaya
         $pendaftaranTahun = TrainingRealization::select(DB::raw("CAST(SUM(intTotalCost) as int) as daftar, year(dateTanggalMulai) as year"))
         ->whereYear('dateTanggalMulai', '<', Carbon::now())
@@ -741,12 +767,77 @@ class DashboardController extends Controller
             $totalovertime = intval($dataovertime);
             $jmlovertime[] = $totalovertime ?: 0;
         }
+        $getoKaryawan = GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("CAST(AVG((intGetoKaryawan/realTotal)*100) as float) as getoKaryawan"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('getoKaryawan');
+        $bulanGeto=GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("year(dateBulan) as bulanGeto"))
+					->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+					->pluck('bulanGeto');
+        $inMtd = SalesModel::select(DB::raw("CAST(SUM(salesIn) as int) as inSales"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('inSales');
+        $inYtd = SalesYtdModel::select(DB::raw("CAST(SUM(salesInYtd) as int) as inSales"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('inSales');
+        $in = $inYtd->merge($inMtd);
+        $outMtd = SalesModel::select(DB::raw("CAST(SUM(salesOut) as int) as outSales"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('outSales');
+        $outYtd = SalesYtdModel::select(DB::raw("CAST(SUM(salesOutYtd) as int) as outSales"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('outSales');
+        $out = $outYtd->merge($outMtd);
+        $costMtd = SalesModel::select(DB::raw("CAST(SUM(hrCost) as int) as costHr"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('costHr');
+        $costYtd = SalesYtdModel::select(DB::raw("CAST(SUM(hrCostYtd) as int) as costHr"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('costHr');
+        $cost = $costYtd->merge($costMtd);
+        $countMtd = SalesModel::select(DB::raw("CAST(SUM(headCount) as int) as headcount"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('headcount');
+        $countYtd = SalesYtdModel::select(DB::raw("CAST(SUM(headCountYtd) as int) as headcount"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('headcount');
+        $count = $countYtd->merge($countMtd);
+        $bulan=SalesModel::select(DB::raw("(DATE_FORMAT(bulan,'%M %Y')) as bulan"))
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->GroupBy(DB::raw("bulan"))
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('bulan');
+        $tahun = SalesYtdModel::select(DB::raw("(DATE_FORMAT(tahun,'%Y')) as bulan"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('bulan');
+        $xvar = $tahun->merge($bulan);
         // dd($jmltelat);
         return view('pages.dashboard',compact('ytdmtd','bulanytdmtd','ytdmtdJobsupply','ytdmtdPermanent','ytdmtdContract',
         'month','internalBulan','externalBulan','inhouseBulan',
         'year','internalTahun','externalTahun','inhouseTahun',
-        'bulan','internalTraining','externalTraining','inhouseTraining',
-        'OnlineTraining','OfflineTraining','BlendedTraining',
+        'bulantraining','internalTraining','externalTraining','inhouseTraining',
+        'OnlineTraining','OfflineTraining','BlendedTraining','PlanTraining','UnplanTraining',
         'pendaftaranTraining','snackTraining','ytdmtdTotalMpp','ytdmtdTotal',
         'bulanProd','actual','costActual','bulanCost','productiv','dataPoints',
         'bulanFsn','fastmov','slowmov','nonmov','deadstock','monthcode','jmlcode','costreceipt','costusage',
@@ -759,7 +850,8 @@ class DashboardController extends Controller
         'inventory','bulaninventory','result','targetsavingkch','panah',
         'kcsinventory', 'targetsavingkcs', 'bulaninventorykcs', 'resultkcs', 'panahkcs','kchdataTopReceipt','kchdataTopIssued',
         'otdepartment','department','beritadepartment','terlambat','detailsterlambat',
-        'kelahiran','detailskelahiran','dukacita','detailsdukacita','jmltelat','jmlkelahiran','jmldukacita','namadept','jmlovertime'
+        'kelahiran','detailskelahiran','dukacita','detailsdukacita','jmltelat','jmlkelahiran','jmldukacita','namadept','jmlovertime',
+        'getoKaryawan','bulanGeto','xvar','in','out','cost','count'
         ));
     
     }
@@ -1471,11 +1563,77 @@ class DashboardController extends Controller
             $totalovertime = intval($dataovertime);
             $jmlovertime[] = $totalovertime ?: 0;
         }
+        $getoKaryawan = GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("CAST(AVG((intGetoKaryawan/realTotal)*100) as float) as getoKaryawan"))
+                    ->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+                    ->pluck('getoKaryawan');
+        $bulanGeto=GetoModel::join('real_employees','real_employees.idReal','=','geto_employees.realemployee')
+					->select(DB::raw("year(dateBulan) as bulanGeto"))
+					->GroupBy(DB::raw("year(dateBulan)"))
+					->orderBy('dateBulan', 'ASC')
+					->pluck('bulanGeto');
+        $inMtd = SalesModel::select(DB::raw("CAST(SUM(salesIn) as int) as inSales"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('inSales');
+        $inYtd = SalesYtdModel::select(DB::raw("CAST(SUM(salesInYtd) as int) as inSales"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('inSales');
+        $in = $inYtd->merge($inMtd);
+        $outMtd = SalesModel::select(DB::raw("CAST(SUM(salesOut) as int) as outSales"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('outSales');
+        $outYtd = SalesYtdModel::select(DB::raw("CAST(SUM(salesOutYtd) as int) as outSales"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('outSales');
+        $out = $outYtd->merge($outMtd);
+        $costMtd = SalesModel::select(DB::raw("CAST(SUM(hrCost) as int) as costHr"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('costHr');
+        $costYtd = SalesYtdModel::select(DB::raw("CAST(SUM(hrCostYtd) as int) as costHr"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('costHr');
+        $cost = $costYtd->merge($costMtd);
+        $countMtd = SalesModel::select(DB::raw("CAST(SUM(headCount) as int) as headcount"))
+                    ->GroupBy(DB::raw("bulan"))  
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('headcount');
+        $countYtd = SalesYtdModel::select(DB::raw("CAST(SUM(headCountYtd) as int) as headcount"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('headcount');
+        $count = $countYtd->merge($countMtd);
+        $bulan=SalesModel::select(DB::raw("(DATE_FORMAT(bulan,'%M %Y')) as bulan"))
+                    ->whereYear('bulan', '=', Carbon::now())
+                    ->GroupBy(DB::raw("bulan"))
+                    ->orderBy('bulan', 'asc')
+                    ->pluck('bulan');
+        $tahun = SalesYtdModel::select(DB::raw("(DATE_FORMAT(tahun,'%Y')) as bulan"))
+                    ->GroupBy(DB::raw("tahun"))  
+                    ->whereYear('tahun', '<', Carbon::now())
+                    ->orderBy('tahun', 'asc')
+                    ->pluck('bulan');
+        $xvar = $tahun->merge($bulan);
+            
         // dd($kcsdepartmentname);
         return view('pages.dashboard',compact('ytdmtd','bulanytdmtd','ytdmtdJobsupply','ytdmtdPermanent','ytdmtdContract',
         'month','internalBulan','externalBulan','inhouseBulan',
         'year','internalTahun','externalTahun','inhouseTahun',
-        'bulan','internalTraining','externalTraining','inhouseTraining',
+        'bulantraining','internalTraining','externalTraining','inhouseTraining',
         'OnlineTraining','OfflineTraining','BlendedTraining',
         'pendaftaranTraining','snackTraining','ytdmtdTotalMpp','ytdmtdTotal',
         'bulanProd','actual','costActual','bulanCost','productiv','dataPoints',
@@ -1489,7 +1647,8 @@ class DashboardController extends Controller
         'inventory','bulaninventory','result','targetsavingkch','panah',
         'kcsinventory', 'targetsavingkcs', 'bulaninventorykcs', 'resultkcs', 'panahkcs','kchdataTopReceipt','kchdataTopIssued',
         'department','otdepartment','beritadepartment','terlambat','detailsterlambat',
-        'kelahiran','detailskelahiran','dukacita','detailsdukacita','jmltelat','jmlkelahiran','jmldukacita','namadept','jmlovertime'
+        'kelahiran','detailskelahiran','dukacita','detailsdukacita','jmltelat','jmlkelahiran','jmldukacita','namadept','jmlovertime',
+        'getoKaryawan','bulanGeto','xvar','in','out','cost','count'
         ));
     
     }

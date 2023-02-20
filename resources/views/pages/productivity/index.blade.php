@@ -56,7 +56,7 @@
                             </div>
                         
                         </form>
-                <div class="col-sm-1 ml-30">
+                <div class="col-sm-1 ml-30 mb-10">
                 <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-productivity" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
                 </div>    
             </div>
@@ -133,7 +133,7 @@
                             </div>
                         
                         </form>
-                <div class="col-sm-1 ml-30">
+                <div class="col-sm-1 ml-30 mb-10">
                 <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-humancost" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
                 </div>
                         
@@ -144,7 +144,7 @@
               
             <div class="table-wrap">
                     <div class="table-responsive">
-                        <table id="cost" class="table table-hover font-12 display pt-10 mt-30 text-center" >
+                        <table id="cost" class="table table-hover font-12 display text-center" >
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -198,10 +198,12 @@
                 </div>
             </div>
             <div  id="profile_16" class="tab-pane fade" role="tabpanel">
-            <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-growth" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button>        
+            <!-- <button class="btn btn-primary btn-lable-wrap left-label btn-sm"  data-toggle="modal" data-target="#add-growth" data-whatever="@mdo"> <span class="btn-label"><i class="fa fa-pencil"></i> </span><span class="btn-text">Add Data</span></button>         -->
+            
+            <button class="btn btn-primary btn-anim btn-xs mb-10"  data-toggle="modal" data-target="#add-growth" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
             <div class="table-wrap">
                         <div class="table-responsive">
-                            <table id="datable_3" class="table table-hover font-12 display mb-30 text-center" >
+                            <table id="datable_3" class="table table-hover font-12 display mb-5 text-center" >
                                 <thead> 
                                     <tr>
                                         <th class="text-center">No</th>
@@ -400,7 +402,7 @@
                     </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" required>
+                            <input type="month" class="form-control" id="dateBulan" name="dateBulan" required>
                         </div>
                         
                         <div class="modal-footer">
@@ -451,7 +453,7 @@
                     </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$productivity->dateBulan}}">
+                            <input type="month" class="form-control" id="dateBulan" name="dateBulan" value="{{\Carbon\Carbon::parse($productivity->dateBulan)->format('Y-m')}}">
                         </div>
                         
                         <div class="modal-footer">
@@ -478,12 +480,12 @@
                         <div class="row form-group">
                             <div class="col-sm-6">
                                 <label for="intCostPlan" class="control-label mb-10">Cost Plan</label>
-                                <input type="text" class="form-control" id="rupiah1" name="intCostPlan">
+                                <input type="text" class="form-control" id="" name="intCostPlan">
                             </div>
                          
                             <div class="col-sm-6">
                                 <label for="intCostActual" class="control-label mb-10">Cost Actual</label>
-                                <input type="text" class="form-control" id="rupiah2" name="intCostActual">
+                                <input type="text" class="form-control" id="" name="intCostActual">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -499,7 +501,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulanCost" name="dateBulan">
+                            <input type="month" class="form-control" id="dateBulanCost" name="dateBulanCost">
                         </div>
                         
                         
@@ -547,7 +549,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="dateBulan" name="dateBulanCost" value="{{$humancost->dateBulanCost}}">
+                        <input type="month" class="form-control" id="dateBulan" name="dateBulanCost" value="{{\Carbon\Carbon::parse($humancost->dateBulanCost)->format('Y-m')}}">
                     </div>
                     
                     <div class="modal-footer">

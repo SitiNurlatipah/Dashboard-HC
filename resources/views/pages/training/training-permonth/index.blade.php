@@ -171,60 +171,6 @@ var intraitahun =  <?php echo json_encode($internalTahun) ?>;
 var extraitahun =  <?php echo json_encode($externalTahun) ?>;
 var housetraitahun =  <?php echo json_encode($inhouseTahun) ?>;
 var tahun =  <?php echo json_encode($year) ?>;
-// Highcharts.chart('chart', {
-//         title: {
-//             text: 'Per Training'
-//         },
-//         subtitle: {
-//             text: 'PT. Kalbe Morinaga Indonesia'
-//         },
-//          xAxis: {
-//             categories: tahun
-//         },
-//         yAxis: {
-//             title: {
-//                 text: 'Jumlah'
-//             }
-//         },
-//         legend: {
-//             layout: 'vertical',
-//             align: 'right',
-//             verticalAlign: 'middle'
-//         },
-//         plotOptions: {
-//             series: {
-//                 allowPointSelect: true
-//             }
-//         },
-//         series: [{
-//             type: 'column',
-//             name: 'Internal',
-//             data: internal
-//         },{
-//             type: 'column',
-//             name: 'External',
-//             data: external
-//         },{
-//             type: 'column',
-//             name: 'In House',
-//             data: inhouse
-        
-//         }],
-//         responsive: {
-//             rules: [{
-//                 condition: {
-//                     maxWidth: 500
-//                 },
-//                 chartOptions: {
-//                     legend: {
-//                         layout: 'horizontal',
-//                         align: 'center',
-//                         verticalAlign: 'bottom'
-//                     }
-//                 }
-//             }]
-//         }
-// });
 const chart = Highcharts.chart('training', {
     chart: {
         type: 'column'

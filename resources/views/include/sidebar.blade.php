@@ -95,7 +95,7 @@
             </ul>
         </li>
         <li>
-            <a href="{{ route('payroll') }}"><div class="pull-left"><i class="fa fa-clipboard mr-20"></i><span class="right-nav-text">Payroll</span></div><div class="clearfix"></div></a>
+            <a href="{{ route('payroll') }}"><div class="pull-left"><i class="fa fa-clipboard mr-20"></i><span class="right-nav-text">Personalia</span></div><div class="clearfix"></div></a>
         </li>
         @if(Auth::user()->role=='Admin')
         <li>

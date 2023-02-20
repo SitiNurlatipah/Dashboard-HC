@@ -27,6 +27,7 @@
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_15" role="tab" href="#profile_15" aria-expanded="false">Trainee</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_17" role="tab" href="#profile_17" aria-expanded="false">Ikatan Dinas</a></li>
                             <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_16" role="tab" href="#profile_16" aria-expanded="false">Cost Center</a></li>
+                            <li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_18" role="tab" href="#profile_18" aria-expanded="false">Learning Hours</a></li>
                             
                         </ul>
                 {{--@if(session()->has('message'))
@@ -162,187 +163,258 @@
                         </div>
                     </div>
 
-                    </div>
-                    <div  id="profile_15" class="tab-pane fade" role="tabpanel">
-                        <!-- <div class="col card-header text-right"> -->
-                        <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-trainee" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
-                        <!-- </div> -->
-                        <div class="table-wrap">
-                            <div class="table-responsive">
-                                <table id="traineeTable" class="table table-striped table-hover display table-bordered font-11 text-center mt-10" width="99%">
-                                    <thead bgcolor="#8ee8fa">
-                                        <tr>
-                                            <th rowspan="2" class="text-center">ID Training</th>
-                                            <th rowspan="2" class="text-center">Nama Peserta</th>
-                                            <th rowspan="2" class="text-center">NIK</th>
-                                            <th rowspan="2" class="text-center">Golongan</th>
-                                            <th rowspan="2" class="text-center">Cost Center</th>
-                                            <th rowspan="2" class="text-center">Judul Training</th>
-                                            <th rowspan="2" class="text-center">Bulan</th>
-                                            <th rowspan="2" class="text-center">Total Jam</th>
-                                            <th rowspan="2" class="text-center">Post Test</th>
-                                            <th colspan="8" class="text-center">Evaluasi</th>
-                                            <th rowspan="2" class="text-center">Training Komentar</th>
-                                            <th colspan="3" class="text-center">Assesment Training</th>
-                                            <th rowspan="2" class="text-center">Action (Update/Delete)</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">1</th>
-                                            <th class="text-center">2</th>
-                                            <th class="text-center">3</th>
-                                            <th class="text-center">4</th>
-                                            <th class="text-center">5</th>
-                                            <th class="text-center">6</th>
-                                            <th class="text-center">7</th>
-                                            <th class="text-center">8</th>
-                                            <th class="text-center">Before</th>
-                                            <th class="text-center">Target</th>
-                                            <th class="text-center">Actual</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($trainees as $trainee)
-                                    
-                                    
+                </div>
+                <div  id="profile_15" class="tab-pane fade" role="tabpanel">
+                    <!-- <div class="col card-header text-right"> -->
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-trainee" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <!-- </div> -->
+                    <div class="table-wrap">
+                        <div class="table-responsive">
+                            <table id="traineeTable" class="table table-striped table-hover display table-bordered font-11 text-center mt-10" width="99%">
+                                <thead bgcolor="#8ee8fa">
                                     <tr>
-                                        <td>{{$trainee->training_id}}</td>
-                                        <td>{{$trainee->txtEmployeeName}}</td>
-                                        <td>{{$trainee->txtNik}}</td>
-                                        <td>{{$trainee->golongan}}</td>
-                                        <td>{{$trainee->cost_center}}</td>
-                                        <td>{{$trainee->txtTrainingName}}</td>
-                                        <td>{{date('F Y', strtotime($trainee->dateTanggalMulai))}}</td>
-                                        <td>{{date('h:i', strtotime($trainee->timeDurationTotal))}}</td>
-                                        <td>{{$trainee->post_test}}</td>
-                                        <td>{{$trainee->evaluasi_1}}</td>
-                                        <td>{{$trainee->evaluasi_2}}</td>
-                                        <td>{{$trainee->evaluasi_3}}</td>
-                                        <td>{{$trainee->evaluasi_4}}</td>
-                                        <td>{{$trainee->evaluasi_5}}</td>
-                                        <td>{{$trainee->evaluasi_6}}</td>
-                                        <td>{{$trainee->evaluasi_7}}</td>
-                                        <td>{{$trainee->evaluasi_8}}</td>
-                                        <td>{{$trainee->komentar}}</td>
-                                        <td>{{$trainee->assesment_before}}</td>
-                                        <td>{{$trainee->assesment_target}}</td>
-                                        <td>{{$trainee->assesment_actual}}</td>
-                                        <td>
-                                            <form action="" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTrainee{{$trainee->idTrainee}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
-                                            @csrf 
-                                            @method("delete")
-                                                <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>  
-                                    @endforeach 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div  id="profile_16" class="tab-pane fade" role="tabpanel">
-                        <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-kasbon" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
-                        <!-- </div> -->
-                        <div class="table-wrap">
-                            <div class="table-responsive">
-                                <table id="kasbonTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="99%">
-                                    <thead bgcolor="#8ee8fa">
-                                        <tr>
-                                            <th class="text-center">No</th>
-                                            <th class="text-center">Cost Center</th>
-                                            <th class="text-center">Cost Center Departement</th>
-                                            <th class="text-center">Cost Center Group</th>
-                                            <th class="text-center">Total</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                        
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="4" class="text-center">Total</th>
-                                            <th class="text-right">Rp{{number_format($kasbon->sum('total'),0,',','.')}}</th>
-                                            <th></th>
-
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    @foreach($kasbon as $index=>$k)
+                                        <th rowspan="2" class="text-center">ID Training</th>
+                                        <th rowspan="2" class="text-center">Nama Peserta</th>
+                                        <th rowspan="2" class="text-center">NIK</th>
+                                        <th rowspan="2" class="text-center">Golongan</th>
+                                        <th rowspan="2" class="text-center">Cost Center</th>
+                                        <th rowspan="2" class="text-center">Judul Training</th>
+                                        <th rowspan="2" class="text-center">Bulan</th>
+                                        <th rowspan="2" class="text-center">Total Jam</th>
+                                        <th rowspan="2" class="text-center">Post Test</th>
+                                        <th colspan="8" class="text-center">Evaluasi</th>
+                                        <th rowspan="2" class="text-center">Training Komentar</th>
+                                        <th colspan="3" class="text-center">Assesment Training</th>
+                                        <th rowspan="2" class="text-center">Action (Update/Delete)</th>
+                                    </tr>
                                     <tr>
-                                        <td class="text-center">{{$index+1}}</td>
-                                        <td>{{$k->costcenter}}</td>
-                                        <td>{{$k->costcenter_dept}}</td>
-                                        <td>{{$k->costcenter_group}}</td>
-                                        <td class="text-right">Rp{{number_format($k->total,0,',','.')}}</td>
+                                        <th class="text-center">1</th>
+                                        <th class="text-center">2</th>
+                                        <th class="text-center">3</th>
+                                        <th class="text-center">4</th>
+                                        <th class="text-center">5</th>
+                                        <th class="text-center">6</th>
+                                        <th class="text-center">7</th>
+                                        <th class="text-center">8</th>
+                                        <th class="text-center">Before</th>
+                                        <th class="text-center">Target</th>
+                                        <th class="text-center">Actual</th>
                                         
-                                        <td class="text-center">
-                                            <form action="{{route('kasbon.delete',$k->idKasbon)}}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatekasbon{{$k->idKasbon}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
-                                            @csrf 
-                                            @method("delete")
-                                                <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>  
-                                    @endforeach 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div  id="profile_17" class="tab-pane fade" role="tabpanel">
-                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-ikatandinas" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
-                        <div class="table-wrap">
-                            <div class="table-responsive">
-                                <table id="dinasTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="99%">
-                                    <thead bgcolor="#8ee8fa">
-                                        <tr>
-                                            <th class="text-center">No</th>
-                                            <th class="text-center">Peserta</th>
-                                            <th class="text-center">Training</th>
-                                            <th class="text-center">Tanggal Pelaksanaan</th>
-                                            <th class="text-center">Vendor</th>
-                                            <th class="text-center">Total Biaya</th>
-                                            <th class="text-center">Durasi Ikatan Dinas</th>
-                                            <th class="text-center">Tanggal Berakhir Ikatan Dinas</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                        
-                                    </thead>
-                                    <tbody>
-                                    @foreach($dinas as $index=>$d)
-                                    <tr>
-                                        <td class="text-center">{{$index+1}}</td>
-                                        <td>{{$d->peserta}}</td>
-                                        <td>{{$d->training}}</td>
-                                        <td>{{$d->tglPelaksanaan}}</td>
-                                        <td>{{$d->vendor}}</td>
-                                        <td>Rp{{number_format($d->biaya,0,',','.')}}</td>
-                                        <td>{{$d->durasi}}</td>
-                                        <td>{{$d->tglBerakhir}}</td>
-                                        <td class="text-center">
-                                            <form action="{{route('dinas.delete',$d->idIkatanDinas)}}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatedinas{{$d->idIkatanDinas}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
-                                            @csrf 
-                                            @method("delete")
-                                                <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>  
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($trainees as $trainee)
+                                
+                                
+                                <tr>
+                                    <td>{{$trainee->training_id}}</td>
+                                    <td>{{$trainee->txtEmployeeName}}</td>
+                                    <td>{{$trainee->txtNik}}</td>
+                                    <td>{{$trainee->golongan}}</td>
+                                    <td>{{$trainee->cost_center}}</td>
+                                    <td>{{$trainee->txtTrainingName}}</td>
+                                    <td>{{date('F Y', strtotime($trainee->dateTanggalMulai))}}</td>
+                                    <td>{{date('h:i', strtotime($trainee->timeDurationTotal))}}</td>
+                                    <td>{{$trainee->post_test}}</td>
+                                    <td>{{$trainee->evaluasi_1}}</td>
+                                    <td>{{$trainee->evaluasi_2}}</td>
+                                    <td>{{$trainee->evaluasi_3}}</td>
+                                    <td>{{$trainee->evaluasi_4}}</td>
+                                    <td>{{$trainee->evaluasi_5}}</td>
+                                    <td>{{$trainee->evaluasi_6}}</td>
+                                    <td>{{$trainee->evaluasi_7}}</td>
+                                    <td>{{$trainee->evaluasi_8}}</td>
+                                    <td>{{$trainee->komentar}}</td>
+                                    <td>{{$trainee->assesment_before}}</td>
+                                    <td>{{$trainee->assesment_target}}</td>
+                                    <td>{{$trainee->assesment_actual}}</td>
+                                    <td>
+                                        <form action="" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updateTrainee{{$trainee->idTrainee}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>  
+                                @endforeach 
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+                <div  id="profile_16" class="tab-pane fade" role="tabpanel">
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-kasbon" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <!-- </div> -->
+                    <div class="table-wrap">
+                        <div class="table-responsive">
+                            <table id="kasbonTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="99%">
+                                <thead bgcolor="#8ee8fa">
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Bulan</th>
+                                        <th class="text-center">Cost Center</th>
+                                        <th class="text-center">Cost Center Departement</th>
+                                        <th class="text-center">Cost Center Group</th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                    
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="5" class="text-center">Total</th>
+                                        <th class="text-right">Rp{{number_format($kasbon->sum('total'),0,',','.')}}</th>
+                                        <th></th>
+
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                @foreach($kasbon as $index=>$k)
+                                <tr>
+                                    <td class="text-center">{{$index+1}}</td>
+                                    <td class="text-center">{{date('F Y', strtotime($k->bulan))}}</td>
+                                    <td>{{$k->costcenter}}</td>
+                                    <td>{{$k->costcenter_dept}}</td>
+                                    <td>{{$k->costcenter_group}}</td>
+                                    <td class="text-right">Rp{{number_format($k->total,0,',','.')}}</td>
+                                    
+                                    <td class="text-center">
+                                        <form action="{{route('kasbon.delete',$k->idKasbon)}}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatekasbon{{$k->idKasbon}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>  
+                                @endforeach 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div  id="profile_17" class="tab-pane fade" role="tabpanel">
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-ikatandinas" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <div class="table-wrap">
+                        <div class="table-responsive">
+                            <table id="dinasTable" class="table table-striped table-hover display table-bordered font-11 mt-10" width="99%">
+                                <thead bgcolor="#8ee8fa">
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Peserta</th>
+                                        <th class="text-center">Training</th>
+                                        <th class="text-center">Tanggal Pelaksanaan</th>
+                                        <th class="text-center">Vendor</th>
+                                        <th class="text-center">Total Biaya</th>
+                                        <th class="text-center">Durasi Ikatan Dinas</th>
+                                        <th class="text-center">Tanggal Berakhir Ikatan Dinas</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                    
+                                </thead>
+                                <tbody>
+                                @foreach($dinas as $index=>$d)
+                                <tr>
+                                    <td class="text-center">{{$index+1}}</td>
+                                    <td>{{$d->peserta}}</td>
+                                    <td>{{$d->training}}</td>
+                                    <td>{{$d->tglPelaksanaan}}</td>
+                                    <td>{{$d->vendor}}</td>
+                                    <td>Rp{{number_format($d->biaya,0,',','.')}}</td>
+                                    <td>{{$d->durasi}}</td>
+                                    <td>{{$d->tglBerakhir}}</td>
+                                    <td class="text-center">
+                                        <form action="{{route('dinas.delete',$d->idIkatanDinas)}}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatedinas{{$d->idIkatanDinas}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>  
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div  id="profile_18" class="tab-pane fade" role="tabpanel">
+                    <button class="btn btn-primary btn-anim btn-xs"  data-toggle="modal" data-target="#add-ikatandinas" data-whatever="@mdo"><i class="fa fa-pencil"></i><span class="btn-text">Add</span></button>
+                    <div class="table-wrap">
+                        <div class="table-responsive">
+                            <table id="dinasTable" class="table table-striped table-hover display table-bordered font-11 mt-10 text-center" width="99%">
+                                <thead bgcolor="#8ee8fa">
+                                    <tr>
+                                        <th class="text-center">Bulan</th>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">Golongan 1</th>
+                                        <th class="text-center">Golongan 2</th>
+                                        <th class="text-center">Golongan 3</th>
+                                        <th class="text-center">Golongan 4</th>
+                                        <th class="text-center">Golongan 5</th>
+                                        <th class="text-center">Golongan 6</th>
+                                        <!-- <th class="text-center">NG</th> -->
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($learninghours as $hours)
+                                
+                                <tr>
+                                    <td rowspan="3">{{date('F Y', strtotime($hours->bulan))}}</td>
+                                    <td>Total Durasi Training</td>
+                                    <td>{{$hours->durasigol_1}}</td>
+                                    <td>{{$hours->durasigol_2}}</td>
+                                    <td>{{$hours->durasigol_3}}</td>
+                                    <td>{{$hours->durasigol_4}}</td>
+                                    <td>{{$hours->durasigol_5}}</td>
+                                    <td>{{$hours->durasigol_6}}</td>
+                                    <!-- <td>{{$hours->durasi_ng}}</td> -->
+                                    <td rowspan="3" class="text-center">
+                                        <form action="{{route('dinas.delete',$d->idIkatanDinas)}}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <a class="btn btn-default btn-icon-anim btn-square btn-sm"  data-toggle="modal" data-target="#updatedinas{{$d->idIkatanDinas}}" data-whatever="@mdo"><i class="fa fa-pencil"></i></a>
+                                        @csrf 
+                                        @method("delete")
+                                            <button type="submit"  class="btn btn-info btn-icon-anim btn-square btn-sm delete" ><i class="icon-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total Karyawan Ikut Training(Terhitung 1 orang)</td>
+                                    <td>{{$hours->pesertagol_1}}</td>
+                                    <td>{{$hours->pesertagol_2}}</td>
+                                    <td>{{$hours->pesertagol_3}}</td>
+                                    <td>{{$hours->pesertagol_4}}</td>
+                                    <td>{{$hours->pesertagol_5}}</td>
+                                    <td>{{$hours->pesertagol_6}}</td>
+                                    <!-- <td>{{$hours->peserta_ng}}</td> -->
+                                </tr>  
+                                <tr>
+                                    <td>Average</td>
+                                    <td>{{number_format($hours->durasigol_1/$hours->pesertagol_1,2)}}</td>
+                                    <td>{{number_format($hours->durasigol_2/$hours->pesertagol_2,2)}}</td>
+                                    <td>{{number_format($hours->durasigol_3/$hours->pesertagol_3,2)}}</td>
+                                    <td>{{number_format($hours->durasigol_4/$hours->pesertagol_4,2)}}</td>
+                                    <td>{{number_format($hours->durasigol_5/$hours->pesertagol_5,2)}}</td>
+                                    <td>{{number_format($hours->durasigol_6/$hours->pesertagol_6,2)}}</td>
+                                    <!-- <td>a</td> -->
+                                </tr>  
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 </div>
             </div>
         </div>	
@@ -476,8 +548,181 @@
             </div>       
         </div>
     </div>
+</div>
+<div class="modal fade" id="add-trainee" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
+                </div>
+                <div class="modal-body form-wrap">
+                <form action="{{ route('trainee.post') }}" method="POST">
+                @csrf 
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">ID Training</label>
+                        <input type="text" class="form-control" name="training_id">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label mb-5">Trainee</label>
+                            <select class="selectpicker form-control" multiple data-style="form-control btn-default btn-outline" data-live-search="true" name="user_id[]" id="user_id[]">
+                                @foreach($users as $user)
+                                <option value="{{$user->txtNik}}">{{$user->txtEmployeeName}}</option>
+                                @endforeach
+                            </select>        
+                    </div>
+                    <h8 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Form Evaluasi</h8>
+                    <div class="row form-group">
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_1" placeholder="1">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_2" placeholder="2">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_3" placeholder="3">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_4" placeholder="4">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_5" placeholder="5">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_6" placeholder="6">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_7" placeholder="7">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="evaluasi_8" placeholder="8">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Training Komentar</label>
+                        <input type="text" class="form-control" name="komentar">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Nilai Post Test</label>
+                        <input type="text" class="form-control" name="post_test">
+                    </div>
+                    <h8 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Assesment Training</h8>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="dateTanggal" class="control-label mb-5">Before</label>
+                            <input type="text" class="form-control" name="assesment_before">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="dateTanggal" class="control-label mb-5">Target</label>
+                            <input type="text" class="form-control" name="assesment_target">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="dateTanggal" class="control-label mb-5">Actual</label>
+                            <input type="text" class="form-control" name="assesment_actual">
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
     </div>
-<!-- end add data -->
+</div>
+<div class="modal fade" id="searchTrainee" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Rata-rata Nilai</h5>
+                </div>
+                <div class="modal-body">
+                <div class="table-wrap">
+                    <div class="table-responsive">
+                        <table id="dtable" class="table table-hover font-11 table-bordered display mb-30 text-center" >
+                            <thead>
+                            <tr>
+                               
+                                
+                                <th class="text-center">Training ID</th>
+                                <th class="text-center">Judul Training</th>    
+                                <th class="text-center">Rata-rata</th>    
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($rata as $i)
+                            <tr>
+                                
+                                <td class="col-md-2">{{ $i->training_id }}</td>
+                                <td class="col-md-2">{{ $i->txtTrainingName }}</td>
+                                <td class="col-md-2">{{ number_format($i->rata2,0) }}</td>
+                                
+                            </tr>
+                                
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>       
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-ikatandinas" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
+                </div>
+                <div class="modal-body">
+                <form action="{{ route('dinas.post') }}" method="POST">
+                @csrf 
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Nama Peserta</label>
+                        <input type="text" class="form-control" name="peserta" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label mb-5">Nama Training</label>
+                        <input type="text" class="form-control" name="training" required>       
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Tanggal Pelaksanaan</label>
+                            <input type="date" class="form-control" name="tglPelaksanaan" required>                        
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Durasi Ikatan Dinas</label>
+                            <input type="text" class="form-control" name="durasi" required>                        
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Tanggal Berakhir</label>
+                            <input type="date" class="form-control" name="tglBerakhir" required>                        
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Vendor</label>
+                        <input type="text" class="form-control" name="vendor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Total Biaya</label>
+                        <input type="text" class="form-control" id="rupiah3" name="biaya">
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
+                </form>
+            </div>       
+        </div>
+    </div>
+</div> 
+
 @foreach($training_realizations as $realisasi)
 <div class="modal fade" id="update{{$realisasi->id}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
@@ -606,93 +851,6 @@
     </div>
 </div>
 @endforeach
-<!-- modal add trainee -->
-<div class="modal fade" id="add-trainee" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
-                </div>
-                <div class="modal-body form-wrap">
-                <form action="{{ route('trainee.post') }}" method="POST">
-                @csrf 
-                    <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">ID Training</label>
-                        <input type="text" class="form-control" name="training_id">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-5">Trainee</label>
-                            <select class="selectpicker form-control" multiple data-style="form-control btn-default btn-outline" data-live-search="true" name="user_id[]" id="user_id[]">
-                                @foreach($users as $user)
-                                <option value="{{$user->txtNik}}">{{$user->txtEmployeeName}}</option>
-                                @endforeach
-                            </select>        
-                    </div>
-                    <h8 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Form Evaluasi</h8>
-                    <div class="row form-group">
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_1" placeholder="1">
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_2" placeholder="2">
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_3" placeholder="3">
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_4" placeholder="4">
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_5" placeholder="5">
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_6" placeholder="6">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_7" placeholder="7">
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" name="evaluasi_8" placeholder="8">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">Training Komentar</label>
-                        <input type="text" class="form-control" name="komentar">
-                    </div>
-                    <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">Nilai Post Test</label>
-                        <input type="text" class="form-control" name="post_test">
-                    </div>
-                    <h8 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Assesment Training</h8>
-                    <div class="row form-group">
-                        <div class="col-sm-4">
-                            <label for="dateTanggal" class="control-label mb-5">Before</label>
-                            <input type="text" class="form-control" name="assesment_before">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="dateTanggal" class="control-label mb-5">Target</label>
-                            <input type="text" class="form-control" name="assesment_target">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="dateTanggal" class="control-label mb-5">Actual</label>
-                            <input type="text" class="form-control" name="assesment_actual">
-                        </div>
-                    </div>
-                    
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
-                    </div>
-                </form>
-            </div>       
-        </div>
-    </div>
-</div>
-<!-- end add modal -->
-<!-- update modal -->
 @foreach($trainees as $trainee)
 <div class="modal fade" id="updateTrainee{{$trainee->idTrainee}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
@@ -745,28 +903,29 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">Training Komentar</label>
-                        <input type="text" class="form-control" name="komentar" value="{{$trainee->komentar}}">
-                    </div>
-                    <div class="form-group">
                         <label for="dateTanggal" class="control-label mb-5">Nilai Post Test</label>
                         <input type="text" class="form-control" name="post_test" value="{{$trainee->post_test}}">
                     </div>
-                    <h8 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Assesment Training</h8>
+                    <h8 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Assesment Training (Skala 1 - 4)</h8>
                     <div class="row form-group">
                         <div class="col-sm-4">
-                            <label for="dateTanggal" class="control-label mb-5">Before</label>
+                            <label for="" class="control-label mb-5">Before</label>
                             <input type="text" class="form-control" name="assesment_before" value="{{$trainee->assesment_before}}">
                         </div>
                         <div class="col-sm-4">
-                            <label for="dateTanggal" class="control-label mb-5">Target</label>
+                            <label for="" class="control-label mb-5">Target</label>
                             <input type="text" class="form-control" name="assesment_target" value="{{$trainee->assesment_target}}">
                         </div>
                         <div class="col-sm-4">
-                            <label for="dateTanggal" class="control-label mb-5">Actual</label>
+                            <label for="" class="control-label mb-5">Actual</label>
                             <input type="text" class="form-control" name="assesment_actual" value="{{$trainee->assesment_actual}}">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="dateTanggal" class="control-label mb-5">Training Komentar</label>
+                        <input type="text" class="form-control" name="komentar" value="{{$trainee->komentar}}">
+                    </div>
+                    
                     <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary btn-sm">Add</button>
@@ -788,18 +947,24 @@
                 <form action="{{ route('kasbon.post') }}" method="POST">
                 @csrf 
                     <div class="form-group">
-                        <label class="control-label mb-5">Cost Center</label>
-                            <select class="selectpicker form-control" data-style="form-control btn-default btn-outline" title="Choose Cost Center..." name="costcenter_id" id="costcenter_id">
+                        <label for="dateTanggal" class="control-label mb-5">Bulan</label>
+                        <input type="month" class="form-control" id="" name="bulan">        
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label mb-5">Cost Center</label>
+                            <select class="form-control" data-style="form-control btn-default btn-outline" name="costcenter_id[]" id="costcenter_id[]">
                                 @foreach($costcenter as $c)
                                 <option value="{{$c->id}}">{{$c->costcenter}}</option>
                                 @endforeach
-                            </select>        
+                            </select>
+                        </div>
+                        <div class="col-sm-8">
+                            <label for="dateTanggal" class="control-label mb-5">Total</label>
+                            <input type="text" class="form-control" id="" name="total[]">
+                        </div>       
                     </div>
-                    <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">Total</label>
-                        <input type="text" class="form-control" id="rupiah2" name="total">
-                    </div>
-                    
+                    <button type="button" class="add-form btn btn-primary btn-xs">Add Field</button> 
                     <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary btn-sm">Add</button>
@@ -845,95 +1010,6 @@
     </div>
 </div>
 @endforeach
-<div class="modal fade" id="searchTrainee" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title" id="add-userLabel1">Rata-rata Nilai</h5>
-                </div>
-                <div class="modal-body">
-                <div class="table-wrap">
-                    <div class="table-responsive">
-                        <table id="dtable" class="table table-hover font-11 table-bordered display mb-30 text-center" >
-                            <thead>
-                            <tr>
-                               
-                                
-                                <th class="text-center">Training ID</th>
-                                <th class="text-center">Judul Training</th>    
-                                <th class="text-center">Rata-rata</th>    
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($rata as $i)
-                            <tr>
-                                
-                                <td class="col-md-2">{{ $i->training_id }}</td>
-                                <td class="col-md-2">{{ $i->txtTrainingName }}</td>
-                                <td class="col-md-2">{{ number_format($i->rata2,0) }}</td>
-                                
-                            </tr>
-                                
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>       
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="add-ikatandinas" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title" id="add-userLabel1">Tambah Data</h5>
-                </div>
-                <div class="modal-body">
-                <form action="{{ route('dinas.post') }}" method="POST">
-                @csrf 
-                    <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">Nama Peserta</label>
-                        <input type="text" class="form-control" name="peserta" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-5">Nama Training</label>
-                        <input type="text" class="form-control" name="training" required>       
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-4">
-                            <label class="control-label mb-5">Tanggal Pelaksanaan</label>
-                            <input type="date" class="form-control" name="tglPelaksanaan" required>                        
-                        </div>
-                        <div class="col-sm-4">
-                            <label class="control-label mb-5">Durasi Ikatan Dinas</label>
-                            <input type="text" class="form-control" name="durasi" required>                        
-                        </div>
-                        <div class="col-sm-4">
-                            <label class="control-label mb-5">Tanggal Berakhir</label>
-                            <input type="date" class="form-control" name="tglBerakhir" required>                        
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">Vendor</label>
-                        <input type="text" class="form-control" name="vendor" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dateTanggal" class="control-label mb-5">Total Biaya</label>
-                        <input type="text" class="form-control" id="rupiah3" name="biaya">
-                    </div>
-                    
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
-                    </div>
-                </form>
-            </div>       
-        </div>
-    </div>
-</div>
 @foreach($dinas as $d)
 <div class="modal fade" id="updatedinas{{$d->idIkatanDinas}}" tabindex="-1" role="dialog" aria-labelledby="add-userLabel1">
         <div class="modal-dialog" role="document">
@@ -1000,10 +1076,31 @@ $('#realizationTable').dataTable( {
     
 } );
 $(document).ready(function() {
-$('#traineeTable').dataTable( {
-    paging: true,
-    searching: true,
-} );
+    $('#traineeTable').dataTable( {
+        paging: true,
+        searching: true,
+    } );
+    var formCount = 0;
+    $(".add-form").click(function() {
+        formCount++;
+        var form = `
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label class="control-label mb-5">Cost Center</label>
+                <select class="form-control" data-style="form-control btn-default btn-outline" name="costcenter_id[]" id="costcenter_id" required>
+                    @foreach($costcenter as $c)
+                    <option value="{{$c->id}}">{{$c->costcenter}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-8">
+                <label for="dateTanggal" class="control-label mb-5">Total</label>
+                <input type="text" class="form-control" id="" name="total[]" required>
+            </div> 
+        </div>
+        `;
+        $(this).before(form);
+    });
 } );
 $('#kasbonTable').dataTable( {
     paging: true,

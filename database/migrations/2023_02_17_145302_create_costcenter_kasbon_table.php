@@ -14,11 +14,11 @@ class CreateCostcenterKasbonTable extends Migration
     public function up()
     {
         Schema::create('costcenter_kasbon', function (Blueprint $table) {
-            
             $table->increments('idKasbon');
             $table->unsignedBigInteger('costcenter_id')->unsigned();
             $table->foreign('costcenter_id')
                   ->references('id')->on('cost_centers')->onDelete('cascade');
+            $table->date('bulan');
             $table->timestamps();
         });
     }

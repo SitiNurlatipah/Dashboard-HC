@@ -15,7 +15,7 @@ class MppRealController extends Controller
         $real = RealModel::join('mpp_employee','mpp_employee.idmpp','=','real_employees.mpp_tahun')
                 ->orderBy('dateBulan', 'desc')
                 ->get();
-        
+        // dd($real);
         $mpp_employee=MppModel::all();
         //total
         $ytd= RealModel::select(DB::raw("year(dateBulan)as year, max(dateBulan), realTotal as ytd "))
@@ -133,7 +133,11 @@ class MppRealController extends Controller
             'dateBulan' => 'required',			
                         
         ]);
-        
+        $month = $request->input('dateBulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'realTotal'=> $request->realTotal,
             'mpp_tahun'=> $request->mpp_tahun,
@@ -143,7 +147,7 @@ class MppRealController extends Controller
             'intAdd' => $request->intAdd,
             'intReduce' => $request->intReduce,
             'txtMtdAdjusment' => $request->txtMtdAdjusment,
-            'dateBulan' => $request->dateBulan,
+            'dateBulan' => $bulan,
         ];
         // dd($valid);
         $tambah=RealModel::create($valid);
@@ -155,6 +159,11 @@ class MppRealController extends Controller
 
     }
     public function update(Request $request, $idReal){
+        $month = $request->input('dateBulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $mppreal = RealModel::find($idReal);
         $mppreal->realTotal = $request->realTotal;
         $mppreal->realPermanent = $request->realPermanent;
@@ -163,7 +172,7 @@ class MppRealController extends Controller
         $mppreal->intAdd = $request->intAdd;
         $mppreal->intReduce = $request->intReduce;
         $mppreal->txtMtdAdjusment = $request->txtMtdAdjusment;
-        $mppreal->dateBulan = $request->dateBulan;
+        $mppreal->dateBulan = $bulan;
         $mppreal->save();
         return redirect()->route('mppreal')->with('message','Data updated successfully.');
 	}

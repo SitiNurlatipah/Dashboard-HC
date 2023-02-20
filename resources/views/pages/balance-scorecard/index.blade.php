@@ -486,7 +486,7 @@
                                         @elseif (($business->mtdach2<=95)&&($business->mtdach2>90))
                                         <span class="label label-ijotua">{{$business->mtdach2}}%</span>
                                         @else
-                                        <span class="label label-blue">{{$business->mtdach2}}</span>
+                                        <span class="label label-blue">{{$business->mtdach2}}%</span>
                                         @endif
                                     @elseif($business->mtdach2==null)
                                     <span></span>
@@ -889,7 +889,7 @@
                 @csrf 
                     <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="bulan" required>
+                        <input type="month" class="form-control" id="bulan" name="bulan" required>
                     </div>
                     <div class="form-group">
                             <label for="txtTrainingType" class="control-label mb-5">Tipe</label>
@@ -1016,7 +1016,7 @@
                 @csrf 
                 <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="bulan" required>
+                        <input type="month" class="form-control" id="bulan" name="bulan" required>
                 </div>
                 <div class="table-wrap">
                 <div class="table-responsive">
@@ -1100,7 +1100,7 @@
                 @csrf 
                 <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="c_bulan" required>
+                        <input type="month" class="form-control" id="bulan" name="c_bulan" required>
                 </div>
                 <div class="table-wrap">
                 <div class="table-responsive">
@@ -1201,7 +1201,7 @@
                 @csrf 
                 <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="l_bulan" required>
+                        <input type="month" class="form-control" id="bulan" name="l_bulan" required>
                 </div>
                 <div class="table-wrap">
                 <div class="table-responsive">
@@ -1306,7 +1306,7 @@
                 @method('put') 
                     <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="bulan" value="{{$balance->bulan}}" required>
+                        <input type="month" class="form-control" id="bulan" name="bulan" value="{{\Carbon\Carbon::parse($balance->bulan)->format('Y-m')}}" required>
                     </div>
                     <div class="form-group">
                             <label for="txtTrainingType" class="control-label mb-5">Tipe</label>
@@ -1436,7 +1436,7 @@
                 @method('put')
                 <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="bulan" value="{{$business->bulan}}" required>
+                        <input type="month" class="form-control" id="bulan" name="bulan" value="{{\Carbon\Carbon::parse($business->bulan)->format('Y-m')}}" required>
                 </div>
                 <div class="table-wrap">
                 <div class="table-responsive">
@@ -1525,7 +1525,7 @@
                 @method('put')
                 <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="c_bulan" value="{{$customer->c_bulan}}" required>
+                        <input type="month" class="form-control" id="bulan" name="c_bulan" value="{{\Carbon\Carbon::parse($customer->c_bulan)->format('Y-m')}}" required>
                 </div>
                 <div class="table-wrap">
                 <div class="table-responsive">
@@ -1632,7 +1632,7 @@
                 @method('put')
                 <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="bulan" name="l_bulan" value="{{$learn->l_bulan}}" required>
+                        <input type="month" class="form-control" id="bulan" name="l_bulan" value="{{\Carbon\Carbon::parse($learn->l_bulan)->format('Y-m')}}" required>
                 </div>
                 <div class="table-wrap">
                 <div class="table-responsive">

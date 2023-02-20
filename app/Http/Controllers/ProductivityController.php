@@ -67,14 +67,18 @@ class ProductivityController extends Controller
             'dateBulan' => 'required',			
                         
         ]);
-        
+        $month = $request->input('dateBulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'intTotal'=>$request->intTotal,
             'intPermanen'=>$request->intPermanen,
             'intContract'=>$request->intContract,
             'intOutputPlan'=>$request->intOutputPlan,
             'intOutputActual'=>$request->intOutputActual,
-            'dateBulan'=>$request->dateBulan,
+            'dateBulan'=>$bulan,
         ];
         Productivity::create($valid);
             
@@ -98,13 +102,18 @@ class ProductivityController extends Controller
         return redirect()->route('productivity')->with('message','Data added successfully.'); 
     }
     public function update(Request $request, $id){
+        $month = $request->input('dateBulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $productivity = Productivity::find($id);
         $productivity->intTotal = $request->intTotal;
         $productivity->intPermanen = $request->intPermanen;
         $productivity->intContract = $request->intContract;
         $productivity->intOutputPlan = $request->intOutputPlan;
         $productivity->intOutputActual = $request->intOutputActual;
-        $productivity->dateBulan = $request->dateBulan;
+        $productivity->dateBulan = $bulan;
         $productivity->save();
         return redirect()->route('productivity')->with('message','Data updated successfully.');
 	}
@@ -123,13 +132,17 @@ class ProductivityController extends Controller
             'dateBulanCost' => 'required',			
                         
         ]);
-        
+        $month = $request->input('dateBulanCost');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'intCostPlan'=>$request->intCostPlan,
             'intCostActual'=>$request->intCostActual,
             'intOutputPlan'=>$request->intOutputPlan,
             'intOutputActual'=>$request->intOutputActual,
-            'dateBulanCost'=>$request->dateBulanCost,
+            'dateBulanCost'=>$bulan,
         ];
         
         HumanCost::create($valid);
@@ -137,12 +150,17 @@ class ProductivityController extends Controller
         return redirect()->route('productivity')->with('message','Data added successfully.'); 
     }
     public function updateHumancost(Request $request, $id){
+        $month = $request->input('dateBulanCost');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $humancost = HumanCost::find($id);
         $humancost->intCostPlan = $request->intCostPlan;
         $humancost->intCostActual = $request->intCostActual;
         $humancost->intOutputPlan = $request->intOutputPlan;
         $humancost->intOutputActual = $request->intOutputActual;
-        $humancost->dateBulanCost = $request->dateBulanCost;
+        $humancost->dateBulanCost = $bulan;
         $humancost->save();
         return redirect()->route('productivity')->with('message','Data updated successfully.');
 	}

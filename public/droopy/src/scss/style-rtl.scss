@@ -4361,7 +4361,7 @@ table.dataTable thead .sorting_desc {
 		@extend .btn-primary;
 		display:inline-block;
 		margin-right:10px;
-		margin-bottom:10px;
+		margin-bottom:5px;
 		&:hover {
 			color:$white;
 		}

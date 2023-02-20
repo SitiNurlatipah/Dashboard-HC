@@ -15,7 +15,11 @@ class BalanceCustomerController extends Controller
             'c_kpitype3' => 'required',			
                         
         ]);
-        
+        $month = $request->input('c_bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'c_mtdactual1' => $request->c_mtdactual1,
             'c_mtdtarget1' => $request->c_mtdtarget1,
@@ -35,7 +39,7 @@ class BalanceCustomerController extends Controller
             'c_ytdactual3' => $request->c_ytdactual3,
             'c_ytdtarget3' => $request->c_ytdtarget3,
             'c_ytdach3' => $request->c_ytdach3,
-            'c_bulan' => $request->c_bulan,
+            'c_bulan' => $bulan,
             'c_kpitype1' => $request->c_kpitype1,
             'c_kpitype2' => $request->c_kpitype2,
             'c_kpitype3' => $request->c_kpitype3,
@@ -45,6 +49,11 @@ class BalanceCustomerController extends Controller
         return redirect()->route('balance')->with('message','Data added successfully.'); 
     }
     public function update(Request $request, $idcustomer){
+        $month = $request->input('c_bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $business = BSCCustomerModel::find($idcustomer);
         $business->c_mtdactual1 = $request->c_mtdactual1;
         $business->c_mtdtarget1 = $request->c_mtdtarget1;
@@ -64,7 +73,7 @@ class BalanceCustomerController extends Controller
         $business->c_ytdactual3 = $request->c_ytdactual3;
         $business->c_ytdtarget3 = $request->c_ytdtarget3;
         $business->c_ytdach3 = $request->c_ytdach3;
-        $business->c_bulan = $request->c_bulan;
+        $business->c_bulan = $bulan;
         $business->c_kpitype1 = $request->c_kpitype1;
         $business->c_kpitype2 = $request->c_kpitype2;
         $business->c_kpitype3 = $request->c_kpitype3;

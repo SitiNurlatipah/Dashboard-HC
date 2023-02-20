@@ -14,7 +14,11 @@ class BalanceBusinessController extends Controller
             'kpitype2' => 'required',			
                         
         ]);
-        
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'mtdactual1' => $request->mtdactual1,
             'mtdtarget1' => $request->mtdtarget1,
@@ -28,7 +32,7 @@ class BalanceBusinessController extends Controller
             'ytdactual2' => $request->ytdactual2,
             'ytdtarget2' => $request->ytdtarget2,
             'ytdach2' => $request->ytdach2,
-            'bulan' => $request->bulan,
+            'bulan' => $bulan,
             'kpitype1' => $request->kpitype1,
             'kpitype2' => $request->kpitype2,
         ];
@@ -37,6 +41,11 @@ class BalanceBusinessController extends Controller
         return redirect()->route('balance')->with('message','Data added successfully.'); 
     }
     public function update(Request $request, $idbussiness){
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $business = BSCBusinessModel::find($idbussiness);
         $business->mtdactual1 = $request->mtdactual1;
         $business->mtdtarget1 = $request->mtdtarget1;
@@ -50,7 +59,7 @@ class BalanceBusinessController extends Controller
         $business->ytdactual2 = $request->ytdactual2;
         $business->ytdtarget2 = $request->ytdtarget2;
         $business->ytdach2 = $request->ytdach2;
-        $business->bulan = $request->bulan;
+        $business->bulan = $bulan;
         $business->kpitype1 = $request->kpitype1;
         $business->kpitype2 = $request->kpitype2;
         // dd($business->all());

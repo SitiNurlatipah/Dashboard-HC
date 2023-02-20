@@ -304,7 +304,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                            <input type="date" class="form-control" id="dateBulan" name="dateBulan" required>
+                            <input type="month" class="form-control" id="dateBulan" name="dateBulan" required>
                         </div>
                         
                         <div class="modal-footer">
@@ -372,7 +372,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dateBulan" class="control-label mb-10">Bulan</label>
-                        <input type="date" class="form-control" id="dateBulan" name="dateBulan" value="{{$mppreal->dateBulan}}" required>
+                        <input type="month" class="form-control" id="dateBulan" name="dateBulan" value="{{\Carbon\Carbon::parse($mppreal->dateBulan)->format('Y-m')}}" required>
                     </div>
                         
                     <div class="modal-footer">
@@ -440,7 +440,8 @@
 <script type="text/javascript">
 $('#mpprealTable').dataTable( {
     paging: true,
-    searching: true
+    searching: true,
+    ordering: false
 } );
 $('#mppTable').dataTable( {
     paging: true,

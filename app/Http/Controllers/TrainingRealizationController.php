@@ -9,6 +9,7 @@ use App\UserModel;
 use App\KasbonModel;
 use App\CostCenterModel;
 use App\IkatanDinasModel;
+use App\LearningHoursTrainingModel;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,8 +41,9 @@ class TrainingRealizationController extends Controller
                             ->orderBy('costcenter_id', 'asc')
                             ->get();
         $costcenter=CostCenterModel::all();
+        $learninghours=LearningHoursTrainingModel::all();
         return view('pages.training.training-realization.index',
-        compact('training_realizations','trainees','users','rata','kasbon','costcenter','dinas'));
+        compact('training_realizations','trainees','users','rata','kasbon','costcenter','dinas','learninghours'));
         // return view('pages.training.training-realization.index',
         // ['training_realizations'=>$realisasi]);
      }

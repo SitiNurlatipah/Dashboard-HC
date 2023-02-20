@@ -15,7 +15,11 @@ class BalanceLearnGrowthController extends Controller
             'l_kpitype3' => 'required',			
                         
         ]);
-        
+        $month = $request->input('l_bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'l_mtdactual1' => $request->l_mtdactual1,
             'l_mtdtarget1' => $request->l_mtdtarget1,
@@ -35,7 +39,7 @@ class BalanceLearnGrowthController extends Controller
             'l_ytdactual3' => $request->l_ytdactual3,
             'l_ytdtarget3' => $request->l_ytdtarget3,
             'l_ytdach3' => $request->l_ytdach3,
-            'l_bulan' => $request->l_bulan,
+            'l_bulan' => $bulan,
             'l_kpitype1' => $request->l_kpitype1,
             'l_kpitype2' => $request->l_kpitype2,
             'l_kpitype3' => $request->l_kpitype3,
@@ -45,6 +49,11 @@ class BalanceLearnGrowthController extends Controller
         return redirect()->route('balance')->with('message','Data added successfully.'); 
     }
     public function update(Request $request, $idlearngrowth){
+        $month = $request->input('l_bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $business = BSCLearnGrowthModel::find($idlearngrowth);
         $business->l_mtdactual1 = $request->l_mtdactual1;
         $business->l_mtdtarget1 = $request->l_mtdtarget1;
@@ -64,7 +73,7 @@ class BalanceLearnGrowthController extends Controller
         $business->l_ytdactual3 = $request->l_ytdactual3;
         $business->l_ytdtarget3 = $request->l_ytdtarget3;
         $business->l_ytdach3 = $request->l_ytdach3;
-        $business->l_bulan = $request->l_bulan;
+        $business->l_bulan = $bulan;
         $business->l_kpitype1 = $request->l_kpitype1;
         $business->l_kpitype2 = $request->l_kpitype2;
         $business->l_kpitype3 = $request->l_kpitype3;

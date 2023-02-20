@@ -80,13 +80,11 @@ class PayrollController extends Controller
             'bulan' => 'required',
         ]);
         $month = $request->input('bulan');
-        // Memecah bulan dan tahun dari input form
         $month = date_parse_from_format("Y-m", $month);
         $year = $month["year"];
         $month = $month["month"];
         $bulan = "$year-$month-20";
         
-        // $bulan = $request->input('bulan');
         $id_department = $request->input('id_department');
         $data = [];
         for ($i = 0; $i < count($request->nama); $i++) {

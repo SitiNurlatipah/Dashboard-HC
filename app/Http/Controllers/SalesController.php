@@ -80,25 +80,34 @@ class SalesController extends Controller
             'bulan' => 'required',			
                         
         ]);
-        
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $valid = [
             'salesIn' => $request->salesIn,
             'salesOut' => $request->salesOut,
             'hrCost' => $request->hrCost,
             'headCount' => $request->headCount,
-            'bulan' => $request->bulan,
+            'bulan' => $bulan,
         ];
         SalesModel::create($valid);
             
         return redirect()->route('sales')->with('message','Data added successfully.'); 
     }
     public function update(Request $request, $idMtd){
+        $month = $request->input('bulan');
+        $month = date_parse_from_format("Y-m", $month);
+        $year = $month["year"];
+        $month = $month["month"];
+        $bulan = "$year-$month-20";
         $sales = SalesModel::find($idMtd);
         $sales->salesIn = $request->salesIn;
         $sales->salesOut = $request->salesOut;
         $sales->hrCost = $request->hrCost;
         $sales->headCount = $request->headCount;
-        $sales->bulan = $request->bulan;
+        $sales->bulan = $bulan;
         $sales->save();
         return redirect()->route('sales')->with('message','Data updated successfully.');
 	}
